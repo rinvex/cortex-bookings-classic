@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cortex\Bookings\Models;
 
 use Rinvex\Tenants\Traits\Tenantable;
@@ -7,7 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\Booking as BaseBooking;
 
 /**
- * Cortex\Bookings\Models\Booking
+ * Cortex\Bookings\Models\Booking.
  *
  * @property int                                                                           $id
  * @property int                                                                           $bookable_id
