@@ -65,7 +65,7 @@ class BookingsController extends AuthorizedController
      * Update the given booking in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Tenantarea\BookingFormRequest $request
-     * @param \Rinvex\Bookings\Contracts\BookingContract                  $booking
+     * @param \Rinvex\Bookings\Contracts\BookingContract                   $booking
      *
      * @return \Illuminate\Http\Response
      */

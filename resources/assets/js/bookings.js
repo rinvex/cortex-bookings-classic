@@ -1,5 +1,4 @@
-$(function () {
-
+$(function() {
     $calendar = $('div[data-calendar]');
 
     $calendar.fullCalendarCortal({
@@ -20,7 +19,7 @@ $(function () {
         header: {
             center: 'title',
             left: 'prev,next today',
-            right: 'month,agendaWeek,agendaDay,listYear'
+            right: 'month,agendaWeek,agendaDay,listYear',
         },
         events: {
             url: routes.route('adminarea.bookings.list'),
@@ -45,21 +44,25 @@ $(function () {
         }),
 
         // Create the event using AJAX
-        eventCreate: function ($calendar, calendarEvent) {
+        eventCreate: function($calendar, calendarEvent) {
             var dateFormat = $calendar.fullCalendar('option', 'dateFormat');
             var timeFormat = $calendar.fullCalendar('option', 'timeFormat');
 
             $.ajax({
-                type: "POST",
+                type: 'POST',
                 url: routes.route('adminarea.bookings.store'),
                 data: {
-                    starts_at: calendarEvent.allDay ? calendarEvent.start.format(dateFormat) : calendarEvent.start.format(dateFormat + ' ' + timeFormat),
-                    ends_at: calendarEvent.allDay ? calendarEvent.end.format(dateFormat) : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
+                    starts_at: calendarEvent.allDay
+                        ? calendarEvent.start.format(dateFormat)
+                        : calendarEvent.start.format(dateFormat + ' ' + timeFormat),
+                    ends_at: calendarEvent.allDay
+                        ? calendarEvent.end.format(dateFormat)
+                        : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
                     customer_id: calendarEvent.customerId,
                     resource_id: calendarEvent.resourceId,
                     _token: window.Laravel.csrfToken,
                 },
-            }).done(function (response, status, request) {
+            }).done(function(response, status, request) {
                 // Rebind newly created event: remove old event object
                 $calendar.fullCalendar('removeEvents', calendarEvent.id);
 
@@ -73,21 +76,25 @@ $(function () {
         },
 
         // Update the event using AJAX
-        eventUpdate: function ($calendar, calendarEvent) {
+        eventUpdate: function($calendar, calendarEvent) {
             var dateFormat = $calendar.fullCalendar('option', 'dateFormat');
             var timeFormat = $calendar.fullCalendar('option', 'timeFormat');
 
             $.ajax({
-                type: "PUT",
-                url: routes.route('adminarea.bookings.update', {booking: calendarEvent.id}),
+                type: 'PUT',
+                url: routes.route('adminarea.bookings.update', { booking: calendarEvent.id }),
                 data: {
-                    starts_at: calendarEvent.allDay ? calendarEvent.start.format(dateFormat) : calendarEvent.start.format(dateFormat + ' ' + timeFormat),
-                    ends_at: calendarEvent.allDay ? calendarEvent.end.format(dateFormat) : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
+                    starts_at: calendarEvent.allDay
+                        ? calendarEvent.start.format(dateFormat)
+                        : calendarEvent.start.format(dateFormat + ' ' + timeFormat),
+                    ends_at: calendarEvent.allDay
+                        ? calendarEvent.end.format(dateFormat)
+                        : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
                     customer_id: calendarEvent.customerId,
                     resource_id: calendarEvent.resourceId,
                     _token: window.Laravel.csrfToken,
                 },
-            }).done(function (response, status, request) {
+            }).done(function(response, status, request) {
                 // Rebind newly created event: remove old event object
                 $calendar.fullCalendar('removeEvents', calendarEvent.id);
 
@@ -97,27 +104,26 @@ $(function () {
         },
 
         // Delete the event using AJAX
-        eventDelete: function ($calendar, calendarEvent) {
+        eventDelete: function($calendar, calendarEvent) {
             var dateFormat = $calendar.fullCalendar('option', 'dateFormat');
             var timeFormat = $calendar.fullCalendar('option', 'timeFormat');
 
             $.ajax({
-                type: "DELETE",
-                url: routes.route('adminarea.bookings.delete', {booking: calendarEvent.id}),
+                type: 'DELETE',
+                url: routes.route('adminarea.bookings.delete', { booking: calendarEvent.id }),
                 data: {
                     _token: window.Laravel.csrfToken,
                 },
-            }).done(function (response, status, request) {
+            }).done(function(response, status, request) {
                 // Remove deleted event object
                 $calendar.fullCalendar('removeEvents', calendarEvent.id);
             });
         },
 
-        loading: function (bool) {},
-        eventDrop: function (event, dayDelta, minuteDelta, allDay, revertFunc) {},
-        eventRender: function (event, element) {},
-        viewDisplay: function (view) {},
-        dayClick: function (date, allDay, domEvent, view) {}
+        loading: function(bool) {},
+        eventDrop: function(event, dayDelta, minuteDelta, allDay, revertFunc) {},
+        eventRender: function(event, element) {},
+        viewDisplay: function(view) {},
+        dayClick: function(date, allDay, domEvent, view) {},
     });
-
 });

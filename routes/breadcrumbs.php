@@ -49,7 +49,6 @@ Breadcrumbs::register('adminarea.bookings.logs', function (BreadcrumbsGenerator 
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.bookings.logs', ['booking' => $booking]));
 });
 
-
 // Tenantarea breadcrumbs
 Breadcrumbs::register('tenantarea.resources.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.tenantarea'), route('tenantarea.home'));
