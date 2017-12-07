@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Bookings\Contracts\RoomContract;
+use Rinvex\Bookings\Contracts\BookingContract;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 // Adminarea breadcrumbs
@@ -48,7 +48,6 @@ Breadcrumbs::register('adminarea.bookings.logs', function (BreadcrumbsGenerator 
     $breadcrumbs->push($booking->name, route('adminarea.bookings.edit', ['booking' => $booking]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.bookings.logs', ['booking' => $booking]));
 });
-
 
 // Tenantarea breadcrumbs
 Breadcrumbs::register('tenantarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
