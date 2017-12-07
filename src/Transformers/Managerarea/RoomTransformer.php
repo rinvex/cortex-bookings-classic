@@ -21,6 +21,7 @@ class RoomTransformer extends TransformerAbstract
             'price' => (string) $room->price,
             'unit' => (string) trans('cortex/bookings::common.unit_'.$room->unit),
             'currency' => (string) $room->currency,
+            'sort_order' => (string) $room->sort_order,
             'created_at' => (string) $room->created_at,
             'updated_at' => (string) $room->updated_at,
         ];

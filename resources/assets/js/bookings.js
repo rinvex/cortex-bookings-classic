@@ -22,21 +22,21 @@ $(function() {
             right: 'month,agendaWeek,agendaDay,listYear',
         },
         events: {
-            url: routes.route('adminarea.bookings.list'),
+            url: routes.route(window.Accessarea + '.bookings.list'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
             type: 'POST',
         },
         customers: $.ajax({
-            url: routes.route('adminarea.bookings.customers'),
+            url: routes.route(window.Accessarea + '.bookings.customers'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
             type: 'POST',
         }),
         rooms: $.ajax({
-            url: routes.route('adminarea.bookings.rooms'),
+            url: routes.route(window.Accessarea + '.bookings.rooms'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
@@ -50,7 +50,7 @@ $(function() {
 
             $.ajax({
                 type: 'POST',
-                url: routes.route('adminarea.bookings.store'),
+                url: routes.route(window.Accessarea + '.bookings.store'),
                 data: {
                     starts_at: calendarEvent.allDay
                         ? calendarEvent.start.format(dateFormat)
@@ -82,7 +82,7 @@ $(function() {
 
             $.ajax({
                 type: 'PUT',
-                url: routes.route('adminarea.bookings.update', { booking: calendarEvent.id }),
+                url: routes.route(window.Accessarea + '.bookings.update', { booking: calendarEvent.id }),
                 data: {
                     starts_at: calendarEvent.allDay
                         ? calendarEvent.start.format(dateFormat)
@@ -110,7 +110,7 @@ $(function() {
 
             $.ajax({
                 type: 'DELETE',
-                url: routes.route('adminarea.bookings.delete', { booking: calendarEvent.id }),
+                url: routes.route(window.Accessarea + '.bookings.delete', { booking: calendarEvent.id }),
                 data: {
                     _token: window.Laravel.csrfToken,
                 },
