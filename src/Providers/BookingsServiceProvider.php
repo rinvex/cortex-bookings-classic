@@ -6,8 +6,8 @@ namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Bookings\Contracts\RoomContract;
+use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;

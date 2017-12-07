@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types=1);
+
 namespace Cortex\Bookings\Models;
 
 use Spatie\Sluggable\SlugOptions;

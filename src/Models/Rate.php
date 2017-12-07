@@ -9,7 +9,7 @@ use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\Rate as BaseRate;
 
 /**
- * Cortex\Bookings\Models\Rate
+ * Cortex\Bookings\Models\Rate.
  *
  * @property int                                                                           $id
  * @property int                                                                           $bookable_id
