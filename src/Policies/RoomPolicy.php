@@ -41,8 +41,8 @@ class RoomPolicy
     /**
      * Determine whether the user can update the room.
      *
-     * @param string                                      $ability
-     * @param \Rinvex\Fort\Contracts\UserContract         $user
+     * @param string                                  $ability
+     * @param \Rinvex\Fort\Contracts\UserContract     $user
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
      * @return bool
@@ -55,8 +55,8 @@ class RoomPolicy
     /**
      * Determine whether the user can delete the room.
      *
-     * @param string                                      $ability
-     * @param \Rinvex\Fort\Contracts\UserContract         $user
+     * @param string                                  $ability
+     * @param \Rinvex\Fort\Contracts\UserContract     $user
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
      * @return bool

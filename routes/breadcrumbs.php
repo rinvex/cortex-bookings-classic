@@ -2,8 +2,8 @@
 
 declare(strict_types=1);
 
-use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Bookings\Contracts\RoomContract;
+use Rinvex\Bookings\Contracts\BookingContract;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 // Adminarea breadcrumbs
