@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 return [
 
-    'resource' => [
-        'saved' => 'Congrats! Resource [:slug] saved successfully.',
-        'deleted' => 'Done! Resource [:slug] deleted successfully.',
+    'room' => [
+        'saved' => 'Congrats! Room [:slug] saved successfully.',
+        'deleted' => 'Done! Room [:slug] deleted successfully.',
     ],
 
 ];

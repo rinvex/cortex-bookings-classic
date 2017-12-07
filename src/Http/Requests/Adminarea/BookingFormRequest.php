@@ -29,16 +29,16 @@ class BookingFormRequest extends FormRequest
         $data = $this->all();
 
         // Calculate price
+        $room = app('cortex.bookings.room')->find($this->get('room_id'));
         $endsAt = $this->get('ends_at') ? new Carbon($this->get('ends_at')) : null;
         $startsAt = $this->get('starts_at') ? new Carbon($this->get('starts_at')) : null;
-        $resource = app('cortex.bookings.resource')->find($this->get('resource_id'));
-        list($price, $priceEquation, $currency) = app('rinvex.bookings.booking')->calculatePrice($resource, $startsAt, $endsAt);
+        list($price, $priceEquation, $currency) = app('rinvex.bookings.booking')->calculatePrice($room, $startsAt, $endsAt);
 
         // Fill missing fields
         $data['ends_at'] = $endsAt;
         $data['starts_at'] = $startsAt;
         $data['customer_type'] = 'user';
-        $data['resource_type'] = 'resource';
+        $data['bookable_type'] = 'room';
         $data['price_equation'] = $priceEquation;
         $data['currency'] = $currency;
         $data['price'] = $price;

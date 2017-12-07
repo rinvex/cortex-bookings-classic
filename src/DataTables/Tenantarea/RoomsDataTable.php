@@ -2,23 +2,23 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\DataTables\Adminarea;
+namespace Cortex\Bookings\DataTables\Tenantarea;
 
-use Cortex\Bookings\Contracts\ResourceContract;
+use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Bookings\Transformers\Adminarea\ResourceTransformer;
+use Cortex\Bookings\Transformers\Tenantarea\RoomTransformer;
 
-class ResourcesDataTable extends AbstractDataTable
+class RoomsDataTable extends AbstractDataTable
 {
     /**
      * {@inheritdoc}
      */
-    protected $model = ResourceContract::class;
+    protected $model = RoomContract::class;
 
     /**
      * {@inheritdoc}
      */
-    protected $transformer = ResourceTransformer::class;
+    protected $transformer = RoomTransformer::class;
 
     /**
      * Get the query object to be processed by dataTables.
@@ -55,8 +55,8 @@ class ResourcesDataTable extends AbstractDataTable
     protected function getColumns()
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.resources.edit\', {resource: full.slug, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.resources.edit\', {resource: full.slug})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'tenantarea.rooms.edit\', {room: full.slug, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'tenantarea.rooms.edit\', {room: full.slug})+"\">"+data+"</a>"';
 
         return [
             'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],

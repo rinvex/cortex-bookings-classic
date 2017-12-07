@@ -6,7 +6,7 @@ namespace Cortex\Bookings\Http\Requests\Tenantarea;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class ResourceFormRequest extends FormRequest
+class RoomFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,9 @@ class ResourceFormRequest extends FormRequest
      */
     public function rules()
     {
-        $resource = $this->route('resource') ?? app('cortex.bookings.resource');
-        $resource->updateRulesUniques();
+        $room = $this->route('room') ?? app('cortex.bookings.room');
+        $room->updateRulesUniques();
 
-        return $resource->getRules();
+        return $room->getRules();
     }
 }

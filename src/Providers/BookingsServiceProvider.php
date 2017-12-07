@@ -7,7 +7,7 @@ namespace Cortex\Bookings\Providers;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use Rinvex\Bookings\Contracts\BookingContract;
-use Cortex\Bookings\Contracts\ResourceContract;
+use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
@@ -45,10 +45,10 @@ class BookingsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->registerCommands();
 
         // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.resource', function ($app) {
-            return new $app['config']['cortex.bookings.models.resource']();
+        $this->app->singleton('cortex.bookings.room', function ($app) {
+            return new $app['config']['cortex.bookings.models.room']();
         });
-        $this->app->alias('cortex.bookings.resource', ResourceContract::class);
+        $this->app->alias('cortex.bookings.room', RoomContract::class);
     }
 
     /**
@@ -60,18 +60,18 @@ class BookingsServiceProvider extends ServiceProvider
     {
         // Bind route models and constrains
         $router->pattern('booking', '[0-9]+');
-        $router->pattern('resource', '[0-9a-z\._-]+');
+        $router->pattern('room', '[0-9a-z\._-]+');
+        $router->model('room', RoomContract::class);
         $router->model('booking', BookingContract::class);
-        $router->model('resource', ResourceContract::class);
 
         // Load migrations
         ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
         // Map relations
         Relation::morphMap([
-            'resource' => config('cortex.bookings.models.resource'),
-            'booking' => config('rinvex.bookings.models.booking'),
+            'room' => config('cortex.bookings.models.room'),
             'price' => config('rinvex.bookings.models.price'),
+            'booking' => config('rinvex.bookings.models.booking'),
             'rate' => config('rinvex.bookings.models.rate'),
         ]);
 

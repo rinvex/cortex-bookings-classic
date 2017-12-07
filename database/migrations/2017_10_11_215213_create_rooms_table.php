@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateResourcesTable extends Migration
+class CreateRoomsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateResourcesTable extends Migration
      */
     public function up()
     {
-        Schema::create(config('cortex.bookings.tables.resources'), function (Blueprint $table) {
+        Schema::create(config('cortex.bookings.tables.rooms'), function (Blueprint $table) {
             // Columns
             $table->increments('id');
             $table->string('slug');
@@ -23,7 +23,6 @@ class CreateResourcesTable extends Migration
             $table->decimal('price')->default('0.00');
             $table->char('unit', 1)->default('h');
             $table->string('currency', 3);
-            $table->string('type')->nullable();
             $table->string('style')->nullable();
             $table->mediumInteger('sort_order')->unsigned()->default(0);
             $table->boolean('multiple_bookings_allowed')->default(false);
@@ -50,7 +49,7 @@ class CreateResourcesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists(config('cortex.bookings.tables.resources'));
+        Schema::dropIfExists(config('cortex.bookings.tables.rooms'));
     }
 
     /**

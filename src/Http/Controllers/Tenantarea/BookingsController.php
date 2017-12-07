@@ -24,10 +24,10 @@ class BookingsController extends AuthorizedController
      */
     public function index()
     {
-        $resources = app('cortex.bookings.resource')->all()->pluck('name', 'id');
+        $rooms = app('cortex.bookings.room')->all()->pluck('name', 'id');
         $customers = app('rinvex.fort.user')->role('member')->get()->pluck('username', 'id');
 
-        return view('cortex/bookings::tenantarea.pages.bookings', compact('resources', 'customers'));
+        return view('cortex/bookings::tenantarea.pages.bookings', compact('rooms', 'customers'));
     }
 
     /**

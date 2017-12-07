@@ -11,7 +11,6 @@ return [
     'style' => 'Style',
     'submit' => 'Submit',
     'sort_order' => 'Sort Order',
-    'type' => 'Type',
     'description' => 'Description',
     'unit' => 'Unit',
     'currency' => 'Currency',
@@ -22,9 +21,9 @@ return [
     'unit_d' => 'Day',
     'logs' => 'Logs',
 
-    // Resources
-    'resources' => 'Resources',
-    'create_resource' => 'Create New Resource',
+    // Rooms
+    'rooms' => 'Rooms',
+    'create_room' => 'Create New Room',
 
     // Bookings
     'bookings' => 'Bookings',

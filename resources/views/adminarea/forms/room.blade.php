@@ -1,25 +1,25 @@
 {{-- Master Layout --}}
-@extends('cortex/foundation::tenantarea.layouts.default')
+@extends('cortex/foundation::adminarea.layouts.default')
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.tenantarea') }} » {{ trans('cortex/bookings::common.resources') }} » {{ $resource->exists ? $resource->name : trans('cortex/bookings::common.create_resource') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
 @stop
 
 @push('scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Tenantarea\ResourceFormRequest::class)->selector('#tenantarea-bookings-resources-save') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest::class)->selector('#adminarea-bookings-rooms-save') !!}
 @endpush
 
 {{-- Main Content --}}
 @section('content')
 
-    @if($resource->exists)
-        @include('cortex/foundation::common.partials.confirm-deletion', ['type' => 'resource'])
+    @if($room->exists)
+        @include('cortex/foundation::common.partials.confirm-deletion', ['type' => 'room'])
     @endif
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>{{ $resource->exists ? $resource->name : trans('cortex/bookings::common.create_resource') }}</h1>
+            <h1>{{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}</h1>
             <!-- Breadcrumbs -->
             {{ Breadcrumbs::render() }}
         </section>
@@ -30,18 +30,18 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/bookings::common.details') }}</a></li>
-                    @if($resource->exists) <li><a href="{{ route('tenantarea.resources.logs', ['resource' => $resource]) }}">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
-                    @if($resource->exists && $currentUser->can('delete-resources', $resource)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('tenantarea.resources.delete', ['resource' => $resource]) }}" data-item-name="{{ $resource->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($room->exists) <li><a href="{{ route('adminarea.rooms.logs', ['room' => $room]) }}">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
+                    @if($room->exists && $currentUser->can('delete-rooms', $room)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('adminarea.rooms.delete', ['room' => $room]) }}" data-item-name="{{ $room->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="details-tab">
 
-                        @if ($resource->exists)
-                            {{ Form::model($resource, ['url' => route('tenantarea.resources.update', ['resource' => $resource]), 'method' => 'put', 'id' => 'tenantarea-bookings-resources-save']) }}
+                        @if ($room->exists)
+                            {{ Form::model($room, ['url' => route('adminarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => 'adminarea-bookings-rooms-save']) }}
                         @else
-                            {{ Form::model($resource, ['url' => route('tenantarea.resources.store'), 'id' => 'tenantarea-bookings-resources-save']) }}
+                            {{ Form::model($room, ['url' => route('adminarea.rooms.store'), 'id' => 'adminarea-bookings-rooms-save']) }}
                         @endif
 
                             <div class="row">
@@ -80,6 +80,20 @@
 
                                 <div class="col-md-4">
 
+                                    {{-- Sort Order --}}
+                                    <div class="form-group{{ $errors->has('sort_order') ? ' has-error' : '' }}">
+                                        {{ Form::label('sort_order', trans('cortex/bookings::common.sort_order'), ['class' => 'control-label']) }}
+                                        {{ Form::number('sort_order', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.sort_order')]) }}
+
+                                        @if ($errors->has('sort_order'))
+                                            <span class="help-block">{{ $errors->first('sort_order') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
                                     {{-- Style --}}
                                     <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
                                         {{ Form::label('style', trans('cortex/tags::common.style'), ['class' => 'control-label']) }}
@@ -101,20 +115,6 @@
 
                                         @if ($errors->has('is_active'))
                                             <span class="help-block">{{ $errors->first('is_active') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Sort Order --}}
-                                    <div class="form-group{{ $errors->has('sort_order') ? ' has-error' : '' }}">
-                                        {{ Form::label('sort_order', trans('cortex/bookings::common.sort_order'), ['class' => 'control-label']) }}
-                                        {{ Form::number('sort_order', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.sort_order')]) }}
-
-                                        @if ($errors->has('sort_order'))
-                                            <span class="help-block">{{ $errors->first('sort_order') }}</span>
                                         @endif
                                     </div>
 
@@ -193,7 +193,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::tenantarea.partials.timestamps', ['model' => $resource])
+                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $room])
 
                                 </div>
 

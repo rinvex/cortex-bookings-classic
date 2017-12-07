@@ -1,27 +1,27 @@
 [
     {
         "action": "list",
-        "resource": "resources",
-        "policy": "Cortex\\Bookings\\Policies\\ResourcePolicy@list",
-        "name": "Can List Existing Resources"
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@list",
+        "name": "Can List Existing Rooms"
     },
     {
         "action": "create",
-        "resource": "resources",
-        "policy": "Cortex\\Bookings\\Policies\\ResourcePolicy@create",
-        "name": "Can Create New Resources"
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@create",
+        "name": "Can Create New Rooms"
     },
     {
         "action": "update",
-        "resource": "resources",
-        "policy": "Cortex\\Bookings\\Policies\\ResourcePolicy@update",
-        "name": "Can Update Existing Resources"
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@update",
+        "name": "Can Update Existing Rooms"
     },
     {
         "action": "delete",
-        "resource": "resources",
-        "policy": "Cortex\\Bookings\\Policies\\ResourcePolicy@delete",
-        "name": "Can Delete Existing Resources"
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@delete",
+        "name": "Can Delete Existing Rooms"
     },
     {
         "action": "list",

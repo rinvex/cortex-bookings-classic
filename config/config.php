@@ -6,12 +6,12 @@ return [
 
     // Bookings database tables
     'tables' => [
-        'resources' => 'resources',
+        'rooms' => 'rooms',
     ],
 
     // Bookings models
     'models' => [
-        'resource' => \Cortex\Bookings\Models\Resource::class,
+        'room' => \Cortex\Bookings\Models\Room::class,
     ],
 
 ];
