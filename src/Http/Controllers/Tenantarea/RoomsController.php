@@ -7,9 +7,8 @@ namespace Cortex\Bookings\Http\Controllers\Tenantarea;
 use Illuminate\Http\Request;
 use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
-use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\DataTables\Tenantarea\RoomsDataTable;
-use Cortex\Bookings\Http\Requests\Tenantarea\ResourceFormRequest;
+use Cortex\Foundation\Http\Controllers\AuthorizedController;
 
 class RoomsController extends AuthorizedController
 {
@@ -36,7 +35,7 @@ class RoomsController extends AuthorizedController
     /**
      * Display a listing of the resource logs.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Contracts\RoomContract     $room
      * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
@@ -109,7 +108,7 @@ class RoomsController extends AuthorizedController
     /**
      * Process the form for store/update of the given resource.
      *
-     * @param \Illuminate\Http\Request             $request
+     * @param \Illuminate\Http\Request                $request
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
      * @return \Illuminate\Http\Response
