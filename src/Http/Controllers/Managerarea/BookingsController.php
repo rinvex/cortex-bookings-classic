@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Rinvex\Bookings\Contracts\BookingContract;
-use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest;
 
@@ -24,29 +24,64 @@ class BookingsController extends AuthorizedController
      */
     public function index()
     {
-        $rooms = app('cortex.bookings.room')->all()->pluck('name', 'id');
-        $customers = app('rinvex.fort.user')->role('member')->get()->pluck('username', 'id');
-
-        return view('cortex/bookings::managerarea.pages.bookings', compact('rooms', 'customers'));
+        return view('cortex/bookings::managerarea.pages.bookings');
     }
 
     /**
-     * Display a listing of the booking logs.
+     * List the bookings.
      *
-     * @param \Rinvex\Bookings\Contracts\BookingContract  $booking
-     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
-     *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @return array
      */
-    public function logs(BookingContract $booking, LogsDataTable $logsDataTable)
+    public function list()
     {
-        return $logsDataTable->with([
-            'tab' => 'logs',
-            'type' => 'bookings',
-            'booking' => $booking,
-            'id' => 'cortex-bookings-logs',
-            'phrase' => trans('cortex/bookings::common.bookings'),
-        ])->render('cortex/tenants::managerarea.pages.datatable-tab');
+        $results = [];
+        $rangeEnds = request()->get('end');
+        $rangeStarts = request()->get('start');
+        $bookings = app('rinvex.bookings.booking')->range($rangeStarts, $rangeEnds)->get();
+
+        foreach ($bookings as $booking) {
+            $endTime = $booking->ends_at->toTimeString();
+            $startTime = $booking->starts_at->toTimeString();
+            $endsAt = optional($booking->ends_at)->toDateTimeString();
+            $startsAt = optional($booking->starts_at)->toDateTimeString();
+            $allDay = ($startTime === '00:00:00' && $endTime === '00:00:00' ? true : false);
+
+            $results[] = [
+                'id' => $booking->id,
+                'customerId' => $booking->customer->id,
+                'roomId' => $booking->bookable->id,
+                'className' => $booking->bookable->style,
+                'title' => $booking->customer->name.' ('.$booking->bookable->name.')',
+                'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
+                'end' => $allDay ? $booking->ends_at->toDateString() : $endsAt,
+            ];
+        }
+
+        return $results;
+    }
+
+    /**
+     * List the bookings.
+     *
+     * @return array
+     */
+    public function customers()
+    {
+        $customers = app('rinvex.fort.user')->role('member')->get()->pluck('name', 'id');
+
+        return $customers;
+    }
+
+    /**
+     * List the bookings.
+     *
+     * @return array
+     */
+    public function rooms()
+    {
+        $rooms = app('cortex.bookings.room')->all(['id', DB::raw('JSON_EXTRACT(name, "$.en") as name'), 'style']);
+
+        return $rooms;
     }
 
     /**
@@ -54,7 +89,7 @@ class BookingsController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     public function store(BookingFormRequest $request)
     {
@@ -65,9 +100,9 @@ class BookingsController extends AuthorizedController
      * Update the given booking in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
-     * @param \Rinvex\Bookings\Contracts\BookingContract                    $booking
+     * @param \Rinvex\Bookings\Contracts\BookingContract                  $booking
      *
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     public function update(BookingFormRequest $request, BookingContract $booking)
     {
@@ -79,28 +114,13 @@ class BookingsController extends AuthorizedController
      *
      * @param \Rinvex\Bookings\Contracts\BookingContract $booking
      *
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     public function delete(BookingContract $booking)
     {
         $booking->delete();
 
-        return intend([
-            'url' => route('managerarea.bookings.index'),
-            'with' => ['warning' => trans('cortex/bookings::messages.booking.deleted', ['slug' => $booking->slug])],
-        ]);
-    }
-
-    /**
-     * Show the form for create/update of the given booking.
-     *
-     * @param \Rinvex\Bookings\Contracts\BookingContract $booking
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function form(BookingContract $booking)
-    {
-        return view('cortex/bookings::managerarea.pages.booking', compact('booking'));
+        return $booking->id;
     }
 
     /**
@@ -109,7 +129,7 @@ class BookingsController extends AuthorizedController
      * @param \Illuminate\Http\Request                   $request
      * @param \Rinvex\Bookings\Contracts\BookingContract $booking
      *
-     * @return \Illuminate\Http\Response
+     * @return int
      */
     protected function process(Request $request, BookingContract $booking)
     {
@@ -119,9 +139,6 @@ class BookingsController extends AuthorizedController
         // Save booking
         $booking->fill($data)->save();
 
-        return intend([
-            'url' => route('managerarea.bookings.index'),
-            'with' => ['success' => trans('cortex/bookings::messages.booking.saved', ['slug' => $booking->slug])],
-        ]);
+        return $booking->id;
     }
 }
