@@ -9,10 +9,11 @@ use Illuminate\Support\ServiceProvider;
 use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Bookings\Console\Commands\SeedCommand;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
 use Cortex\Bookings\Console\Commands\PublishCommand;
-use Illuminate\Database\Eloquent\Relations\Relation;
+use Cortex\Bookings\Console\Commands\RollbackCommand;
 
 class BookingsServiceProvider extends ServiceProvider
 {
@@ -22,10 +23,11 @@ class BookingsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
+        SeedCommand::class => 'command.cortex.bookings.seed',
+        InstallCommand::class => 'command.cortex.bookings.install',
         MigrateCommand::class => 'command.cortex.bookings.migrate',
         PublishCommand::class => 'command.cortex.bookings.publish',
-        InstallCommand::class => 'command.cortex.bookings.install',
-        SeedCommand::class => 'command.cortex.bookings.seed',
+        RollbackCommand::class => 'command.cortex.bookings.rollback',
     ];
 
     /**
