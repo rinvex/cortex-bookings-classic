@@ -49,7 +49,6 @@ Breadcrumbs::register('adminarea.bookings.logs', function (BreadcrumbsGenerator 
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.bookings.logs', ['booking' => $booking]));
 });
 
-
 // Managerarea breadcrumbs
 Breadcrumbs::register('managerarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/tenants::common.managerarea'), route('managerarea.home'));
