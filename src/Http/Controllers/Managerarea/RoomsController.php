@@ -103,7 +103,7 @@ class RoomsController extends AuthorizedController
      */
     public function form(RoomContract $room)
     {
-        return view('cortex/bookings::managerarea.forms.room', compact('room'));
+        return view('cortex/bookings::managerarea.pages.room', compact('room'));
     }
 
     /**

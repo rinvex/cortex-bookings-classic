@@ -100,7 +100,7 @@ class BookingsController extends AuthorizedController
      */
     public function form(BookingContract $booking)
     {
-        return view('cortex/bookings::managerarea.forms.booking', compact('booking'));
+        return view('cortex/bookings::managerarea.pages.booking', compact('booking'));
     }
 
     /**
