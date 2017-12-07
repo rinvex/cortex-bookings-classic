@@ -68,7 +68,7 @@ class RoomsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Contracts\RoomContract                   $room
+     * @param \Cortex\Bookings\Contracts\RoomContract                    $room
      *
      * @return \Illuminate\Http\Response
      */
