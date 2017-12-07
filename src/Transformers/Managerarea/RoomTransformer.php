@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\Transformers\Tenantarea;
+namespace Cortex\Bookings\Transformers\Managerarea;
 
 use League\Fractal\TransformerAbstract;
 use Cortex\Bookings\Contracts\RoomContract;

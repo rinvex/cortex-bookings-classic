@@ -1,13 +1,13 @@
 {{-- Master Layout --}}
-@extends('cortex/foundation::tenantarea.layouts.default')
+@extends('cortex/tenants::managerarea.layouts.default')
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.tenantarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
+    {{ config('app.name') }} » {{ trans('cortex/tenants::common.managerarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
 @stop
 
 @push('scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Tenantarea\RoomFormRequest::class)->selector('#tenantarea-bookings-rooms-save') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest::class)->selector('#managerarea-bookings-rooms-save') !!}
 @endpush
 
 {{-- Main Content --}}
@@ -30,8 +30,8 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/bookings::common.details') }}</a></li>
-                    @if($room->exists) <li><a href="{{ route('tenantarea.rooms.logs', ['room' => $room]) }}">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
-                    @if($room->exists && $currentUser->can('delete-rooms', $room)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('tenantarea.rooms.delete', ['room' => $room]) }}" data-item-name="{{ $room->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($room->exists) <li><a href="{{ route('managerarea.rooms.logs', ['room' => $room]) }}">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
+                    @if($room->exists && $currentUser->can('delete-rooms', $room)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('managerarea.rooms.delete', ['room' => $room]) }}" data-item-name="{{ $room->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
@@ -39,9 +39,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($room->exists)
-                            {{ Form::model($room, ['url' => route('tenantarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => 'tenantarea-bookings-rooms-save']) }}
+                            {{ Form::model($room, ['url' => route('managerarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => 'managerarea-bookings-rooms-save']) }}
                         @else
-                            {{ Form::model($room, ['url' => route('tenantarea.rooms.store'), 'id' => 'tenantarea-bookings-rooms-save']) }}
+                            {{ Form::model($room, ['url' => route('managerarea.rooms.store'), 'id' => 'managerarea-bookings-rooms-save']) }}
                         @endif
 
                             <div class="row">
@@ -193,7 +193,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::tenantarea.partials.timestamps', ['model' => $room])
+                                    @include('cortex/tenants::managerarea.partials.timestamps', ['model' => $room])
 
                                 </div>
 

@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\DataTables\Tenantarea;
+namespace Cortex\Bookings\DataTables\Managerarea;
 
 use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Bookings\Transformers\Tenantarea\RoomTransformer;
+use Cortex\Bookings\Transformers\Managerarea\RoomTransformer;
 
 class RoomsDataTable extends AbstractDataTable
 {
@@ -55,8 +55,8 @@ class RoomsDataTable extends AbstractDataTable
     protected function getColumns()
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'tenantarea.rooms.edit\', {room: full.slug, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'tenantarea.rooms.edit\', {room: full.slug})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'managerarea.rooms.edit\', {room: full.slug, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'managerarea.rooms.edit\', {room: full.slug})+"\">"+data+"</a>"';
 
         return [
             'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],

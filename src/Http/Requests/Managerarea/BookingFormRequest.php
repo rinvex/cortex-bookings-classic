@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\Http\Requests\Tenantarea;
+namespace Cortex\Bookings\Http\Requests\Managerarea;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomFormRequest extends FormRequest
+class BookingFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,9 +25,9 @@ class RoomFormRequest extends FormRequest
      */
     public function rules()
     {
-        $room = $this->route('room') ?? app('cortex.bookings.room');
-        $room->updateRulesUniques();
+        $booking = $this->route('booking') ?? app('rinvex.bookings.booking');
+        $booking->updateRulesUniques();
 
-        return $room->getRules();
+        return $booking->getRules();
     }
 }

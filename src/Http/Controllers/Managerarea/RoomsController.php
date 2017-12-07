@@ -2,14 +2,14 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\Http\Controllers\Tenantarea;
+namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
 use Illuminate\Http\Request;
 use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
-use Cortex\Bookings\DataTables\Tenantarea\RoomsDataTable;
+use Cortex\Bookings\DataTables\Managerarea\RoomsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
-use Cortex\Bookings\Http\Requests\Tenantarea\RoomFormRequest;
+use Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest;
 
 class RoomsController extends AuthorizedController
 {
@@ -21,7 +21,7 @@ class RoomsController extends AuthorizedController
     /**
      * Display a listing of the resource.
      *
-     * @param \Cortex\Bookings\DataTables\Tenantarea\RoomsDataTable $roomsDataTable
+     * @param \Cortex\Bookings\DataTables\Managerarea\RoomsDataTable $roomsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
@@ -30,7 +30,7 @@ class RoomsController extends AuthorizedController
         return $roomsDataTable->with([
             'id' => 'cortex-rooms',
             'phrase' => trans('cortex/bookings::common.rooms'),
-        ])->render('cortex/foundation::tenantarea.pages.datatable');
+        ])->render('cortex/tenants::managerarea.pages.datatable');
     }
 
     /**
@@ -49,13 +49,13 @@ class RoomsController extends AuthorizedController
             'resource' => $room,
             'id' => 'cortex-rooms-logs',
             'phrase' => trans('cortex/bookings::common.rooms'),
-        ])->render('cortex/foundation::tenantarea.pages.datatable-tab');
+        ])->render('cortex/tenants::managerarea.pages.datatable-tab');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param \Cortex\Bookings\Http\Requests\Tenantarea\RoomFormRequest $request
+     * @param \Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -67,7 +67,7 @@ class RoomsController extends AuthorizedController
     /**
      * Update the given resource in storage.
      *
-     * @param \Cortex\Bookings\Http\Requests\Tenantarea\RoomFormRequest $request
+     * @param \Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest $request
      * @param \Cortex\Bookings\Contracts\RoomContract                   $room
      *
      * @return \Illuminate\Http\Response
@@ -89,7 +89,7 @@ class RoomsController extends AuthorizedController
         $room->delete();
 
         return intend([
-            'url' => route('tenantarea.rooms.index'),
+            'url' => route('managerarea.rooms.index'),
             'with' => ['warning' => trans('cortex/bookings::messages.room.deleted', ['slug' => $room->slug])],
         ]);
     }
@@ -103,7 +103,7 @@ class RoomsController extends AuthorizedController
      */
     public function form(RoomContract $room)
     {
-        return view('cortex/bookings::tenantarea.forms.room', compact('room'));
+        return view('cortex/bookings::managerarea.forms.room', compact('room'));
     }
 
     /**
@@ -123,7 +123,7 @@ class RoomsController extends AuthorizedController
         $room->fill($data)->save();
 
         return intend([
-            'url' => route('tenantarea.rooms.index'),
+            'url' => route('managerarea.rooms.index'),
             'with' => ['success' => trans('cortex/bookings::messages.room.saved', ['slug' => $room->slug])],
         ]);
     }

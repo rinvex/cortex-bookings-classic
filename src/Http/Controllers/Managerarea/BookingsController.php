@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\Http\Controllers\Tenantarea;
+namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
 use Illuminate\Http\Request;
 use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
-use Cortex\Bookings\Http\Requests\Tenantarea\BookingFormRequest;
+use Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest;
 
 class BookingsController extends AuthorizedController
 {
@@ -27,7 +27,7 @@ class BookingsController extends AuthorizedController
         $rooms = app('cortex.bookings.room')->all()->pluck('name', 'id');
         $customers = app('rinvex.fort.user')->role('member')->get()->pluck('username', 'id');
 
-        return view('cortex/bookings::tenantarea.pages.bookings', compact('rooms', 'customers'));
+        return view('cortex/bookings::managerarea.pages.bookings', compact('rooms', 'customers'));
     }
 
     /**
@@ -46,13 +46,13 @@ class BookingsController extends AuthorizedController
             'booking' => $booking,
             'id' => 'cortex-bookings-logs',
             'phrase' => trans('cortex/bookings::common.bookings'),
-        ])->render('cortex/foundation::tenantarea.pages.datatable-tab');
+        ])->render('cortex/tenants::managerarea.pages.datatable-tab');
     }
 
     /**
      * Store a newly created booking in storage.
      *
-     * @param \Cortex\Bookings\Http\Requests\Tenantarea\BookingFormRequest $request
+     * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -64,7 +64,7 @@ class BookingsController extends AuthorizedController
     /**
      * Update the given booking in storage.
      *
-     * @param \Cortex\Bookings\Http\Requests\Tenantarea\BookingFormRequest $request
+     * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
      * @param \Rinvex\Bookings\Contracts\BookingContract                   $booking
      *
      * @return \Illuminate\Http\Response
@@ -86,7 +86,7 @@ class BookingsController extends AuthorizedController
         $booking->delete();
 
         return intend([
-            'url' => route('tenantarea.bookings.index'),
+            'url' => route('managerarea.bookings.index'),
             'with' => ['warning' => trans('cortex/bookings::messages.booking.deleted', ['slug' => $booking->slug])],
         ]);
     }
@@ -100,7 +100,7 @@ class BookingsController extends AuthorizedController
      */
     public function form(BookingContract $booking)
     {
-        return view('cortex/bookings::tenantarea.forms.booking', compact('booking'));
+        return view('cortex/bookings::managerarea.forms.booking', compact('booking'));
     }
 
     /**
@@ -120,7 +120,7 @@ class BookingsController extends AuthorizedController
         $booking->fill($data)->save();
 
         return intend([
-            'url' => route('tenantarea.bookings.index'),
+            'url' => route('managerarea.bookings.index'),
             'with' => ['success' => trans('cortex/bookings::messages.booking.saved', ['slug' => $booking->slug])],
         ]);
     }

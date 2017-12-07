@@ -50,45 +50,45 @@ Breadcrumbs::register('adminarea.bookings.logs', function (BreadcrumbsGenerator 
 });
 
 
-// Tenantarea breadcrumbs
-Breadcrumbs::register('tenantarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.tenantarea'), route('tenantarea.home'));
-    $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('tenantarea.rooms.index'));
+// Managerarea breadcrumbs
+Breadcrumbs::register('managerarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/tenants::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('managerarea.rooms.index'));
 });
 
-Breadcrumbs::register('tenantarea.rooms.create', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->parent('tenantarea.rooms.index');
-    $breadcrumbs->push(trans('cortex/bookings::common.create_room'), route('tenantarea.rooms.create'));
+Breadcrumbs::register('managerarea.rooms.create', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->parent('managerarea.rooms.index');
+    $breadcrumbs->push(trans('cortex/bookings::common.create_room'), route('managerarea.rooms.create'));
 });
 
-Breadcrumbs::register('tenantarea.rooms.edit', function (BreadcrumbsGenerator $breadcrumbs, RoomContract $room) {
-    $breadcrumbs->parent('tenantarea.rooms.index');
-    $breadcrumbs->push($room->name, route('tenantarea.rooms.edit', ['room' => $room]));
+Breadcrumbs::register('managerarea.rooms.edit', function (BreadcrumbsGenerator $breadcrumbs, RoomContract $room) {
+    $breadcrumbs->parent('managerarea.rooms.index');
+    $breadcrumbs->push($room->name, route('managerarea.rooms.edit', ['room' => $room]));
 });
 
-Breadcrumbs::register('tenantarea.rooms.logs', function (BreadcrumbsGenerator $breadcrumbs, RoomContract $room) {
-    $breadcrumbs->parent('tenantarea.rooms.index');
-    $breadcrumbs->push($room->name, route('tenantarea.rooms.edit', ['room' => $room]));
-    $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('tenantarea.rooms.logs', ['room' => $room]));
+Breadcrumbs::register('managerarea.rooms.logs', function (BreadcrumbsGenerator $breadcrumbs, RoomContract $room) {
+    $breadcrumbs->parent('managerarea.rooms.index');
+    $breadcrumbs->push($room->name, route('managerarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('managerarea.rooms.logs', ['room' => $room]));
 });
 
-Breadcrumbs::register('tenantarea.bookings.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.tenantarea'), route('tenantarea.home'));
-    $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('tenantarea.bookings.index'));
+Breadcrumbs::register('managerarea.bookings.index', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/tenants::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('managerarea.bookings.index'));
 });
 
-Breadcrumbs::register('tenantarea.bookings.create', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->parent('tenantarea.bookings.index');
-    $breadcrumbs->push(trans('cortex/bookings::common.create_booking'), route('tenantarea.bookings.create'));
+Breadcrumbs::register('managerarea.bookings.create', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->parent('managerarea.bookings.index');
+    $breadcrumbs->push(trans('cortex/bookings::common.create_booking'), route('managerarea.bookings.create'));
 });
 
-Breadcrumbs::register('tenantarea.bookings.edit', function (BreadcrumbsGenerator $breadcrumbs, BookingContract $booking) {
-    $breadcrumbs->parent('tenantarea.bookings.index');
-    $breadcrumbs->push($booking->name, route('tenantarea.bookings.edit', ['booking' => $booking]));
+Breadcrumbs::register('managerarea.bookings.edit', function (BreadcrumbsGenerator $breadcrumbs, BookingContract $booking) {
+    $breadcrumbs->parent('managerarea.bookings.index');
+    $breadcrumbs->push($booking->name, route('managerarea.bookings.edit', ['booking' => $booking]));
 });
 
-Breadcrumbs::register('tenantarea.bookings.logs', function (BreadcrumbsGenerator $breadcrumbs, BookingContract $booking) {
-    $breadcrumbs->parent('tenantarea.bookings.index');
-    $breadcrumbs->push($booking->name, route('tenantarea.bookings.edit', ['booking' => $booking]));
-    $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('tenantarea.bookings.logs', ['booking' => $booking]));
+Breadcrumbs::register('managerarea.bookings.logs', function (BreadcrumbsGenerator $breadcrumbs, BookingContract $booking) {
+    $breadcrumbs->parent('managerarea.bookings.index');
+    $breadcrumbs->push($booking->name, route('managerarea.bookings.edit', ['booking' => $booking]));
+    $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('managerarea.bookings.logs', ['booking' => $booking]));
 });
