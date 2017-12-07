@@ -9,10 +9,10 @@ use Illuminate\Support\ServiceProvider;
 use Cortex\Bookings\Contracts\RoomContract;
 use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Bookings\Console\Commands\SeedCommand;
-use Illuminate\Database\Eloquent\Relations\Relation;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
 use Cortex\Bookings\Console\Commands\PublishCommand;
+use Illuminate\Database\Eloquent\Relations\Relation;
 use Cortex\Bookings\Console\Commands\RollbackCommand;
 
 class BookingsServiceProvider extends ServiceProvider
