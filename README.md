@@ -4,8 +4,8 @@
 
 [![Packagist](https://img.shields.io/packagist/v/cortex/bookings.svg?label=Packagist&style=flat-square)](https://packagist.org/packages/cortex/bookings)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/cortex/bookings.svg?label=Scrutinizer&style=flat-square)](https://scrutinizer-ci.com/g/cortex/bookings/)
-[![Code Climate](https://img.shields.io/codeclimate/github/cortex/bookings.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/cortex/bookings)
-[![Travis](https://img.shields.io/travis/cortex/bookings.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/cortex/bookings)
+[![Code Climate](https://img.shields.io/codeclimate/github/rinvex/cortex-bookings.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/cortex-bookings)
+[![Travis](https://img.shields.io/travis/rinvex/cortex-bookings.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/cortex-bookings)
 [![SensioLabs Insight](https://img.shields.io/sensiolabs/i/75d7eb77-e27e-4c6f-942f-78f6a6b0add1.svg?label=SensioLabs&style=flat-square)](https://insight.sensiolabs.com/projects/75d7eb77-e27e-4c6f-942f-78f6a6b0add1)
 [![StyleCI](https://styleci.io/repos/113343781/shield)](https://styleci.io/repos/113343781)
 [![License](https://img.shields.io/packagist/l/cortex/bookings.svg?label=License&style=flat-square)](https://github.com/cortex/bookings/blob/develop/LICENSE)
