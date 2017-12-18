@@ -2,7 +2,19 @@
 
 declare(strict_types=1);
 
-Menu::adminareaSidebar('resources')->routeIfCan('list-rooms', 'adminarea.rooms.index', '<i class="fa fa-cubes"></i> <span>'.trans('cortex/bookings::common.rooms').'</span>');
-Menu::adminareaSidebar('resources')->routeIfCan('list-bookings', 'adminarea.bookings.index', '<i class="fa fa-calendar"></i> <span>'.trans('cortex/bookings::common.bookings').'</span>');
-Menu::managerareaSidebar('resources')->routeIfCan('list-rooms', 'managerarea.rooms.index', '<i class="fa fa-cubes"></i> <span>'.trans('cortex/bookings::common.rooms').'</span>');
-Menu::managerareaSidebar('resources')->routeIfCan('list-bookings', 'managerarea.bookings.index', '<i class="fa fa-calendar"></i> <span>'.trans('cortex/bookings::common.bookings').'</span>');
+use Rinvex\Menus\Models\MenuItem;
+use Rinvex\Menus\Factories\MenuFactory;
+
+Menu::modify('adminarea.sidebar', function(MenuFactory $menu) {
+    $menu->dropdown(function (MenuItem $dropdown) {
+        $dropdown->route(['adminarea.rooms.index'], trans('cortex/bookings::common.rooms'), 10, 'fa fa-cubes')->can('list-rooms');
+        $dropdown->route(['adminarea.bookings.index'], trans('cortex/bookings::common.bookings'), 20, 'fa fa-calendar')->can('list-bookings');
+    }, trans('cortex/bookings::common.space'), 60, 'fa fa-code-fork');
+});
+
+Menu::modify('managerarea.sidebar', function(MenuFactory $menu) {
+    $menu->dropdown(function (MenuItem $dropdown) {
+        $dropdown->route(['managerarea.rooms.index'], trans('cortex/bookings::common.rooms'), 10, 'fa fa-cubes')->can('list-rooms');
+        $dropdown->route(['managerarea.bookings.index'], trans('cortex/bookings::common.bookings'), 20, 'fa fa-calendar')->can('list-bookings');
+    }, trans('cortex/bookings::common.space'), 60, 'fa fa-code-fork');
+});

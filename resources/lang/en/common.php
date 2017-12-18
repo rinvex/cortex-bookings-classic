@@ -29,4 +29,5 @@ return [
     'bookings' => 'Bookings',
     'create_booking' => 'Create New Booking',
 
+    'space' => 'Space Management',
 ];
