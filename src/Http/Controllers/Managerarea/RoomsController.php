@@ -47,6 +47,7 @@ class RoomsController extends AuthorizedController
             'tab' => 'logs',
             'type' => 'rooms',
             'resource' => $room,
+            'title' => $room->name,
             'id' => 'cortex-rooms-logs',
             'phrase' => trans('cortex/bookings::common.rooms'),
         ])->render('cortex/tenants::managerarea.pages.datatable-tab');
