@@ -36,8 +36,6 @@ namespace Cortex\Bookings\Contracts;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Bookings\Models\Rate[]    $rates
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room active()
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room inactive()
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room ordered($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereBookingIntervalLimit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCreatedAt($value)
