@@ -27,7 +27,8 @@ class RoomsDataTable extends AbstractDataTable
      */
     public function query()
     {
-        $query = app($this->model)->query()->orderBy('sort_order', 'ASC');
+        $locale = app()->getLocale();
+        $query = app($this->model)->query()->orderBy('sort_order', 'ASC')->orderBy("name->\${$locale}", 'ASC');
 
         return $this->applyScopes($query);
     }
