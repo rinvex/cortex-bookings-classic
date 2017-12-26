@@ -66,9 +66,6 @@ class BookingsServiceProvider extends ServiceProvider
         $router->model('room', RoomContract::class);
         $router->model('booking', BookingContract::class);
 
-        // Load migrations
-        ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-
         // Map relations
         Relation::morphMap([
             'room' => config('cortex.bookings.models.room'),
@@ -82,6 +79,7 @@ class BookingsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/bookings');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/bookings');
+        ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->app->afterResolving('blade.compiler', function () {
             require __DIR__.'/../../routes/menus.php';
         });
