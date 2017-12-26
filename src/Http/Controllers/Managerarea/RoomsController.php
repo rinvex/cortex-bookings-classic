@@ -34,23 +34,17 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Display a listing of the resource logs.
+     * Get a listing of the resource logs.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract     $room
-     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
+     * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
-     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
      */
-    public function logs(RoomContract $room, LogsDataTable $logsDataTable)
+    public function logs(RoomContract $room)
     {
-        return $logsDataTable->with([
-            'tab' => 'logs',
-            'type' => 'rooms',
-            'resource' => $room,
-            'title' => $room->name,
-            'id' => 'cortex-rooms-logs',
-            'phrase' => trans('cortex/bookings::common.rooms'),
-        ])->render('cortex/tenants::managerarea.pages.datatable-tab');
+        return request()->ajax() && request()->wantsJson()
+            ? app(LogsDataTable::class)->with(['resource' => $room])->ajax()
+            : intend(['url' => route('adminarea.rooms.edit', ['room' => $room]).'#logs-tab']);
     }
 
     /**
@@ -104,7 +98,9 @@ class RoomsController extends AuthorizedController
      */
     public function form(RoomContract $room)
     {
-        return view('cortex/bookings::managerarea.pages.room', compact('room'));
+        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('managerarea.rooms.logs', ['room' => $room]));
+
+        return view('cortex/bookings::managerarea.pages.room', compact('room', 'logs'));
     }
 
     /**
