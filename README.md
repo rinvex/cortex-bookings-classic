@@ -7,7 +7,7 @@
 [![Code Climate](https://img.shields.io/codeclimate/github/rinvex/cortex-bookings.svg?label=CodeClimate&style=flat-square)](https://codeclimate.com/github/rinvex/cortex-bookings)
 [![Travis](https://img.shields.io/travis/rinvex/cortex-bookings.svg?label=TravisCI&style=flat-square)](https://travis-ci.org/rinvex/cortex-bookings)
 [![StyleCI](https://styleci.io/repos/113343781/shield)](https://styleci.io/repos/113343781)
-[![License](https://img.shields.io/packagist/l/cortex/bookings.svg?label=License&style=flat-square)](https://github.com/cortex/bookings/blob/develop/LICENSE)
+[![License](https://img.shields.io/packagist/l/cortex/bookings.svg?label=License&style=flat-square)](https://github.com/rinvex/cortex-bookings/blob/develop/LICENSE)
 
 
 ## Installation and Usage
