@@ -59,6 +59,7 @@
         "rinvex/composer": "dev-develop",
         "rinvex/fort": "dev-develop",
         "rinvex/support": "dev-develop",
+        "rinvex/bookings": "dev-develop",
         "spatie/laravel-activitylog": "^2.0.0",
         "rinvex/menus": "dev-develop",
         "yajra/laravel-datatables-fractal": "^1.0.0",
