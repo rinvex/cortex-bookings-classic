@@ -20,9 +20,7 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>{{ trans('cortex/bookings::common.bookings') }}</h1>
-            <!-- Breadcrumbs -->
-            {{ Breadcrumbs::render() }}
+            <h1>{{ Breadcrumbs::render() }}</h1>
         </section>
 
         <!-- Main content -->
