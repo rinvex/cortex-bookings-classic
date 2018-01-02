@@ -28,6 +28,7 @@
             <div class="nav-tabs-custom">
                 <ul class="nav nav-tabs">
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/bookings::common.details') }}</a></li>
+                    @if($room->exists) <li><a href="#media-tab" data-toggle="tab">{{ trans('cortex/bookings::common.media') }}</a></li> @endif
                     @if($room->exists) <li><a href="#logs-tab" data-toggle="tab">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
                     @if($room->exists && $currentUser->can('delete-rooms', $room)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('managerarea.rooms.delete', ['room' => $room]) }}" data-item-name="{{ $room->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
@@ -203,6 +204,11 @@
 
                     @if($room->exists)
 
+                        <div class="tab-pane" id="media-tab">
+                            {{ Form::open(['url' => route('adminarea.rooms.media.store', ['room' => $room]), 'class' => 'dropzone', 'id' => 'media-dropzone']) }} {{ Form::close() }}
+                            {!! $media->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => 'media-table']) !!}
+                        </div>
+
                         <div class="tab-pane" id="logs-tab">
                             {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => 'logs-table']) !!}
                         </div>
@@ -230,6 +236,7 @@
     @endpush
 
     @push('scripts')
+        {!! $media->scripts() !!}
         {!! $logs->scripts() !!}
     @endpush
 

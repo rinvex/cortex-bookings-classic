@@ -20,6 +20,7 @@ return [
     'unit_h' => 'Hour',
     'unit_d' => 'Day',
     'logs' => 'Logs',
+    'media' => 'Media',
 
     // Rooms
     'rooms' => 'Rooms',

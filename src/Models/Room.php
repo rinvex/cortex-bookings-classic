@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Cortex\Bookings\Contracts\RoomContract;
+use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
  * Cortex\Bookings\Models\Room.
@@ -67,8 +69,10 @@ use Cortex\Bookings\Contracts\RoomContract;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withoutTenants($tenants, $group = null)
  * @mixin \Eloquent
  */
-class Room extends Bookable implements RoomContract
+class Room extends Bookable implements RoomContract, HasMedia
 {
+    use HasMediaTrait;
+
     /**
      * Create a new Eloquent model instance.
      *

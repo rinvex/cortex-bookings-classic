@@ -7,6 +7,7 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 use Illuminate\Http\Request;
 use Cortex\Bookings\Contracts\RoomContract;
 use Cortex\Foundation\DataTables\LogsDataTable;
+use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Bookings\DataTables\Adminarea\RoomsDataTable;
 use Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -99,8 +100,9 @@ class RoomsController extends AuthorizedController
     public function form(RoomContract $room)
     {
         $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.rooms.logs', ['room' => $room]));
+        $media = app(MediaDataTable::class)->with(['id' => 'media-table'])->html()->minifiedAjax(route('adminarea.rooms.media.index', ['room' => $room]));
 
-        return view('cortex/bookings::adminarea.pages.room', compact('room', 'logs'));
+        return view('cortex/bookings::adminarea.pages.room', compact('room', 'logs', 'media'));
     }
 
     /**
