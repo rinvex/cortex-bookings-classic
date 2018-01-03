@@ -49,6 +49,21 @@ class RoomsController extends AuthorizedController
     }
 
     /**
+     * Show the form for create/update of the given resource.
+     *
+     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function form(RoomContract $room)
+    {
+        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.rooms.logs', ['room' => $room]));
+        $media = app(MediaDataTable::class)->with(['id' => 'media-table'])->html()->minifiedAjax(route('adminarea.rooms.media.index', ['room' => $room]));
+
+        return view('cortex/bookings::adminarea.pages.room', compact('room', 'logs', 'media'));
+    }
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
@@ -74,38 +89,6 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Delete the given resource from storage.
-     *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function delete(RoomContract $room)
-    {
-        $room->delete();
-
-        return intend([
-            'url' => route('adminarea.rooms.index'),
-            'with' => ['warning' => trans('cortex/bookings::messages.room.deleted', ['slug' => $room->slug])],
-        ]);
-    }
-
-    /**
-     * Show the form for create/update of the given resource.
-     *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function form(RoomContract $room)
-    {
-        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.rooms.logs', ['room' => $room]));
-        $media = app(MediaDataTable::class)->with(['id' => 'media-table'])->html()->minifiedAjax(route('adminarea.rooms.media.index', ['room' => $room]));
-
-        return view('cortex/bookings::adminarea.pages.room', compact('room', 'logs', 'media'));
-    }
-
-    /**
      * Process the form for store/update of the given resource.
      *
      * @param \Illuminate\Http\Request                $request
@@ -124,6 +107,23 @@ class RoomsController extends AuthorizedController
         return intend([
             'url' => route('adminarea.rooms.index'),
             'with' => ['success' => trans('cortex/bookings::messages.room.saved', ['slug' => $room->slug])],
+        ]);
+    }
+
+    /**
+     * Delete the given resource from storage.
+     *
+     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function delete(RoomContract $room)
+    {
+        $room->delete();
+
+        return intend([
+            'url' => route('adminarea.rooms.index'),
+            'with' => ['warning' => trans('cortex/bookings::messages.room.deleted', ['slug' => $room->slug])],
         ]);
     }
 }

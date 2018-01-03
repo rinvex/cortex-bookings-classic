@@ -110,20 +110,6 @@ class BookingsController extends AuthorizedController
     }
 
     /**
-     * Delete the given booking from storage.
-     *
-     * @param \Rinvex\Bookings\Contracts\BookingContract $booking
-     *
-     * @return int
-     */
-    public function delete(BookingContract $booking)
-    {
-        $booking->delete();
-
-        return $booking->id;
-    }
-
-    /**
      * Process the form for store/update of the given booking.
      *
      * @param \Illuminate\Http\Request                   $request
@@ -138,6 +124,20 @@ class BookingsController extends AuthorizedController
 
         // Save booking
         $booking->fill($data)->save();
+
+        return $booking->id;
+    }
+
+    /**
+     * Delete the given booking from storage.
+     *
+     * @param \Rinvex\Bookings\Contracts\BookingContract $booking
+     *
+     * @return int
+     */
+    public function delete(BookingContract $booking)
+    {
+        $booking->delete();
 
         return $booking->id;
     }
