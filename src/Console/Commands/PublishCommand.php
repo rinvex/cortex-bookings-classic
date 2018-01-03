@@ -31,7 +31,9 @@ class PublishCommand extends BasePublishCommand
     {
         parent::handle();
 
-        $this->call('vendor:publish', ['--tag' => 'cortex-bookings-views', '--force' => $this->option('force')]);
         $this->call('vendor:publish', ['--tag' => 'cortex-bookings-lang', '--force' => $this->option('force')]);
+        $this->call('vendor:publish', ['--tag' => 'cortex-bookings-views', '--force' => $this->option('force')]);
+        $this->call('vendor:publish', ['--tag' => 'cortex-bookings-config', '--force' => $this->option('force')]);
+        $this->call('vendor:publish', ['--tag' => 'cortex-bookings-migrations', '--force' => $this->option('force')]);
     }
 }
