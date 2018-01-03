@@ -51,7 +51,7 @@ class RoomsMediaController extends AuthorizedController
     public function store(ImageFormRequest $request, RoomContract $room)
     {
         $room->addMediaFromRequest('file')
-             ->toMediaCollection();
+             ->toMediaCollection('default', config('cortex.bookings.media.disk'));
     }
 
     /**
