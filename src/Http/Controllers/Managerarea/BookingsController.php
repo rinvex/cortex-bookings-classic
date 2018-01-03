@@ -120,7 +120,7 @@ class BookingsController extends AuthorizedController
     protected function process(Request $request, BookingContract $booking)
     {
         // Prepare required input fields
-        $data = $request->all();
+        $data = $request->validated();
 
         // Save booking
         $booking->fill($data)->save();

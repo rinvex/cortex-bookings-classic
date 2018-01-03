@@ -97,7 +97,7 @@ class RoomsController extends AuthorizedController
     protected function process(Request $request, RoomContract $room)
     {
         // Prepare required input fields
-        $data = $request->all();
+        $data = $request->validated();
 
         // Save room
         $room->fill($data)->save();
