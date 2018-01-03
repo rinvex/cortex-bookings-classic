@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
-use Illuminate\Http\Request;
 use Cortex\Bookings\Contracts\RoomContract;
+use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Bookings\DataTables\Managerarea\RoomsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -89,12 +89,12 @@ class RoomsController extends AuthorizedController
     /**
      * Process the form for store/update of the given resource.
      *
-     * @param \Illuminate\Http\Request                $request
+     * @param \Illuminate\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
      * @return \Illuminate\Http\Response
      */
-    protected function process(Request $request, RoomContract $room)
+    protected function process(FormRequest $request, RoomContract $room)
     {
         // Prepare required input fields
         $data = $request->validated();

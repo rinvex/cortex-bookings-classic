@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Foundation\Http\FormRequest;
 use Rinvex\Bookings\Contracts\BookingContract;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
@@ -112,12 +112,12 @@ class BookingsController extends AuthorizedController
     /**
      * Process the form for store/update of the given booking.
      *
-     * @param \Illuminate\Http\Request                   $request
+     * @param \Illuminate\Foundation\Http\FormRequest    $request
      * @param \Rinvex\Bookings\Contracts\BookingContract $booking
      *
      * @return int
      */
-    protected function process(Request $request, BookingContract $booking)
+    protected function process(FormRequest $request, BookingContract $booking)
     {
         // Prepare required input fields
         $data = $request->validated();
