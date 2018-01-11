@@ -125,7 +125,7 @@ class BookingsController extends AuthorizedController
         // Save booking
         $booking->fill($data)->save();
 
-        return $booking->id;
+        return $booking->getKey();
     }
 
     /**
@@ -139,6 +139,6 @@ class BookingsController extends AuthorizedController
     {
         $booking->delete();
 
-        return $booking->id;
+        return $booking->getKey();
     }
 }

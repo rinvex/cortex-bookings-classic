@@ -67,7 +67,7 @@ class RoomsMediaController extends AuthorizedController
      */
     public function delete(RoomContract $room, Media $media)
     {
-        $room->media()->where('id', $media->id)->first()->delete();
+        $room->media()->where($media->getKeyName(), $media->getKey())->first()->delete();
 
         return intend([
             'url' => route('adminarea.rooms.media.index', ['room' => $room]),
