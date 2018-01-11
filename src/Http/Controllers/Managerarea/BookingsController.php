@@ -67,7 +67,7 @@ class BookingsController extends AuthorizedController
      */
     public function customers()
     {
-        $customers = app('rinvex.fort.user')->role('member')->get()->pluck('name', 'id');
+        $customers = app('rinvex.fort.user')->withAnyRoles(['member'])->get()->pluck('name', 'id');
 
         return $customers;
     }
