@@ -47,9 +47,9 @@ class BookingsController extends AuthorizedController
             $allDay = ($startTime === '00:00:00' && $endTime === '00:00:00' ? true : false);
 
             $results[] = [
-                'id' => $booking->id,
-                'customerId' => $booking->customer->id,
-                'roomId' => $booking->bookable->id,
+                'id' => $booking->getKey(),
+                'customerId' => $booking->customer->getKey(),
+                'roomId' => $booking->bookable->getKey(),
                 'className' => $booking->bookable->style,
                 'title' => $booking->customer->name.' ('.$booking->bookable->name.')',
                 'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
