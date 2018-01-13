@@ -10,7 +10,7 @@
     <link href="{{ mix('css/fullcalendar.css', 'assets') }}" rel="stylesheet">
 @endpush
 
-@push('scripts-vendor')
+@push('vendor-scripts')
     <script src="{{ mix('js/fullcalendar.js', 'assets') }}" type="text/javascript"></script>
     <script src="{{ mix('js/bookings.js', 'assets') }}" type="text/javascript"></script>
 @endpush

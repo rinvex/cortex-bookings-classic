@@ -6,7 +6,7 @@
     {{ config('app.name') }} » {{ trans('cortex/tenants::common.managerarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
 @stop
 
-@push('scripts')
+@push('inline-scripts')
     {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest::class)->selector("#managerarea-rooms-create-form, #managerarea-rooms-{$room->getKey()}-update-form") !!}
 @endpush
 
@@ -231,11 +231,11 @@
         <link href="{{ mix('css/datatables.css', 'assets') }}" rel="stylesheet">
     @endpush
 
-    @push('scripts-vendor')
+    @push('vendor-scripts')
         <script src="{{ mix('js/datatables.js', 'assets') }}" type="text/javascript"></script>
     @endpush
 
-    @push('scripts')
+    @push('inline-scripts')
         {!! $media->scripts() !!}
         {!! $logs->scripts() !!}
     @endpush
