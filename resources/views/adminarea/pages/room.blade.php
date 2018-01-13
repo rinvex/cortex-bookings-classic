@@ -7,7 +7,7 @@
 @stop
 
 @push('scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest::class)->selector('#adminarea-bookings-rooms-save') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest::class)->selector("#adminarea-rooms-create-form, #adminarea-rooms-{$room->getKey()}-update-form") !!}
 @endpush
 
 {{-- Main Content --}}
@@ -38,9 +38,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($room->exists)
-                            {{ Form::model($room, ['url' => route('adminarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => 'adminarea-bookings-rooms-save']) }}
+                            {{ Form::model($room, ['url' => route('adminarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => "adminarea-rooms-{$room->getKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($room, ['url' => route('adminarea.rooms.store'), 'id' => 'adminarea-bookings-rooms-save']) }}
+                            {{ Form::model($room, ['url' => route('adminarea.rooms.store'), 'id' => "adminarea-rooms-create-form"]) }}
                         @endif
 
                             <div class="row">
@@ -206,11 +206,11 @@
 
                         <div class="tab-pane" id="media-tab">
                             {{ Form::open(['url' => route('adminarea.rooms.media.store', ['room' => $room]), 'class' => 'dropzone', 'id' => 'media-dropzone']) }} {{ Form::close() }}
-                            {!! $media->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => 'media-table']) !!}
+                            {!! $media->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => "adminarea-rooms-{$room->getKey()}-media-table"]) !!}
                         </div>
 
                         <div class="tab-pane" id="logs-tab">
-                            {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => 'logs-table']) !!}
+                            {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => "adminarea-rooms-{$room->getKey()}-logs-table"]) !!}
                         </div>
 
                     @endif

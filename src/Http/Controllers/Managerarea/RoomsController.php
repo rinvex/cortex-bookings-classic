@@ -28,7 +28,7 @@ class RoomsController extends AuthorizedController
     public function index(RoomsDataTable $roomsDataTable)
     {
         return $roomsDataTable->with([
-            'id' => 'cortex-rooms',
+            'id' => 'managerarea-rooms-index-table',
             'phrase' => trans('cortex/bookings::common.rooms'),
         ])->render('cortex/tenants::managerarea.pages.datatable');
     }
@@ -56,7 +56,7 @@ class RoomsController extends AuthorizedController
      */
     public function form(RoomContract $room)
     {
-        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('managerarea.rooms.logs', ['room' => $room]));
+        $logs = app(LogsDataTable::class)->with(['id' => "managerarea-rooms-{$room->getKey()}-logs-table"])->html()->minifiedAjax(route('managerarea.rooms.logs', ['room' => $room]));
 
         return view('cortex/bookings::managerarea.pages.room', compact('room', 'logs'));
     }

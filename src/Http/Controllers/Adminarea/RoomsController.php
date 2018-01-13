@@ -29,7 +29,7 @@ class RoomsController extends AuthorizedController
     public function index(RoomsDataTable $roomsDataTable)
     {
         return $roomsDataTable->with([
-            'id' => 'cortex-rooms',
+            'id' => 'adminarea-rooms-index-table',
             'phrase' => trans('cortex/bookings::common.rooms'),
         ])->render('cortex/foundation::adminarea.pages.datatable');
     }
@@ -57,8 +57,8 @@ class RoomsController extends AuthorizedController
      */
     public function form(RoomContract $room)
     {
-        $logs = app(LogsDataTable::class)->with(['id' => 'logs-table'])->html()->minifiedAjax(route('adminarea.rooms.logs', ['room' => $room]));
-        $media = app(MediaDataTable::class)->with(['id' => 'media-table'])->html()->minifiedAjax(route('adminarea.rooms.media.index', ['room' => $room]));
+        $logs = app(LogsDataTable::class)->with(['id' => "adminarea-rooms-{$room->getKey()}-logs-table"])->html()->minifiedAjax(route('adminarea.rooms.logs', ['room' => $room]));
+        $media = app(MediaDataTable::class)->with(['id' => "adminarea-rooms-{$room->getKey()}-media-table"])->html()->minifiedAjax(route('adminarea.rooms.media.index', ['room' => $room]));
 
         return view('cortex/bookings::adminarea.pages.room', compact('room', 'logs', 'media'));
     }
