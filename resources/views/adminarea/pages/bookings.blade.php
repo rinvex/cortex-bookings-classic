@@ -11,8 +11,8 @@
 @endpush
 
 @push('vendor-scripts')
-    <script src="{{ mix('js/fullcalendar.js', 'assets') }}" type="text/javascript"></script>
-    <script src="{{ mix('js/bookings.js', 'assets') }}" type="text/javascript"></script>
+    <script src="{{ mix('js/fullcalendar.js', 'assets') }}" defer></script>
+    <script src="{{ mix('js/bookings.js', 'assets') }}" defer></script>
 @endpush
 
 {{-- Main Content --}}
