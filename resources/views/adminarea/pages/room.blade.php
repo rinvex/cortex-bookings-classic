@@ -14,7 +14,7 @@
 @section('content')
 
     @if($room->exists)
-        @include('cortex/foundation::common.partials.confirm-deletion', ['type' => 'room'])
+        @include('cortex/foundation::common.partials.confirm-deletion')
     @endif
 
     <div class="content-wrapper">
@@ -30,7 +30,7 @@
                     <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/bookings::common.details') }}</a></li>
                     @if($room->exists) <li><a href="#media-tab" data-toggle="tab">{{ trans('cortex/bookings::common.media') }}</a></li> @endif
                     @if($room->exists) <li><a href="#logs-tab" data-toggle="tab">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
-                    @if($room->exists && $currentUser->can('delete-rooms', $room)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-item-href="{{ route('adminarea.rooms.delete', ['room' => $room]) }}" data-item-name="{{ $room->slug }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
+                    @if($room->exists && $currentUser->can('delete-rooms', $room)) <li class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('adminarea.rooms.delete', ['room' => $room]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'room', 'name' => $room->slug]) !!}" title="{{ trans('cortex/foundation::common.delete') }}"><i class="fa fa-trash text-danger"></i></a></li> @endif
                 </ul>
 
                 <div class="tab-content">
