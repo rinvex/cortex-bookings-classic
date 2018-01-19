@@ -4,7 +4,7 @@
 {{-- Page Title --}}
 @section('title')
     {{ config('app.name') }} » {{ trans('cortex/foundation::common.managerarea') }} » {{ trans('cortex/bookings::common.bookings') }}
-@stop
+@endsection
 
 @push('styles')
     <link href="{{ mix('css/fullcalendar.css', 'assets') }}" rel="stylesheet">
