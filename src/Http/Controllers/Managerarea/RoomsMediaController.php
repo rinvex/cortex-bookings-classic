@@ -48,7 +48,7 @@ class RoomsMediaController extends AuthorizedController
      *
      * @return void
      */
-    public function store(ImageFormRequest $request, RoomContract $room)
+    public function store(ImageFormRequest $request, RoomContract $room): void
     {
         $room->addMediaFromRequest('file')
              ->sanitizingFileName(function ($fileName) {
