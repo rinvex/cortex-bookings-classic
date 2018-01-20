@@ -31,7 +31,7 @@ class RoomsMediaController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function index(RoomContract $room)
     {
@@ -63,7 +63,7 @@ class RoomsMediaController extends AuthorizedController
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      * @param \Spatie\MediaLibrary\Models\Media       $media
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function delete(RoomContract $room, Media $media)
     {

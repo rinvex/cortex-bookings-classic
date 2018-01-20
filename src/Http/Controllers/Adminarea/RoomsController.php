@@ -39,7 +39,7 @@ class RoomsController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
-     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Http\JsonResponse
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function logs(RoomContract $room)
     {
@@ -53,7 +53,7 @@ class RoomsController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function form(RoomContract $room)
     {
@@ -68,7 +68,7 @@ class RoomsController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function store(RoomFormRequest $request)
     {
@@ -81,7 +81,7 @@ class RoomsController extends AuthorizedController
      * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
      * @param \Cortex\Bookings\Contracts\RoomContract                  $room
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function update(RoomFormRequest $request, RoomContract $room)
     {
@@ -94,7 +94,7 @@ class RoomsController extends AuthorizedController
      * @param \Illuminate\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     protected function process(FormRequest $request, RoomContract $room)
     {
@@ -115,7 +115,7 @@ class RoomsController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Contracts\RoomContract $room
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function delete(RoomContract $room)
     {
