@@ -12,7 +12,7 @@ class RoomTransformer extends TransformerAbstract
     /**
      * @return array
      */
-    public function transform(RoomContract $room)
+    public function transform(RoomContract $room): array
     {
         return [
             'name' => (string) $room->name,

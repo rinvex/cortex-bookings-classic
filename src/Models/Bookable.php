@@ -225,7 +225,7 @@ abstract class Bookable extends Model implements Sortable
      *
      * @return string
      */
-    public function getRouteKeyName()
+    public function getRouteKeyName(): string
     {
         return 'slug';
     }

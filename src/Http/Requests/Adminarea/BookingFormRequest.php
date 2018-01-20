@@ -14,7 +14,7 @@ class BookingFormRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -51,7 +51,7 @@ class BookingFormRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         $booking = $this->route('booking') ?? app('rinvex.bookings.booking');
         $booking->updateRulesUniques();

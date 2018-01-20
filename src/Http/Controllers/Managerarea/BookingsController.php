@@ -32,7 +32,7 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function list()
+    public function list(): array
     {
         $results = [];
         $rangeEnds = request()->get('end');
@@ -65,7 +65,7 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function customers()
+    public function customers(): array
     {
         $customers = app('rinvex.fort.user')->withAnyRoles(['member'])->get()->pluck('name', 'id');
 
@@ -77,7 +77,7 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function rooms()
+    public function rooms(): array
     {
         $rooms = app('cortex.bookings.room')->all(['id', DB::raw('JSON_EXTRACT(name, "$.en") as name'), 'style']);
 
@@ -91,7 +91,7 @@ class BookingsController extends AuthorizedController
      *
      * @return int
      */
-    public function store(BookingFormRequest $request)
+    public function store(BookingFormRequest $request): int
     {
         return $this->process($request, app('rinvex.bookings.booking'));
     }
@@ -104,7 +104,7 @@ class BookingsController extends AuthorizedController
      *
      * @return int
      */
-    public function update(BookingFormRequest $request, BookingContract $booking)
+    public function update(BookingFormRequest $request, BookingContract $booking): int
     {
         return $this->process($request, $booking);
     }
@@ -117,7 +117,7 @@ class BookingsController extends AuthorizedController
      *
      * @return int
      */
-    protected function process(FormRequest $request, BookingContract $booking)
+    protected function process(FormRequest $request, BookingContract $booking): int
     {
         // Prepare required input fields
         $data = $request->validated();
@@ -135,7 +135,7 @@ class BookingsController extends AuthorizedController
      *
      * @return int
      */
-    public function delete(BookingContract $booking)
+    public function delete(BookingContract $booking): int
     {
         $booking->delete();
 
