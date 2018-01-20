@@ -6,7 +6,7 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Illuminate\Support\Facades\DB;
 use Illuminate\Foundation\Http\FormRequest;
-use Rinvex\Bookings\Contracts\BookingContract;
+use Rinvex\Bookings\Models\Booking;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
 
@@ -100,11 +100,11 @@ class BookingsController extends AuthorizedController
      * Update the given booking in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
-     * @param \Rinvex\Bookings\Contracts\BookingContract                  $booking
+     * @param \Rinvex\Bookings\Models\Booking                  $booking
      *
      * @return int
      */
-    public function update(BookingFormRequest $request, BookingContract $booking): int
+    public function update(BookingFormRequest $request, Booking $booking): int
     {
         return $this->process($request, $booking);
     }
@@ -113,11 +113,11 @@ class BookingsController extends AuthorizedController
      * Process the form for store/update of the given booking.
      *
      * @param \Illuminate\Foundation\Http\FormRequest    $request
-     * @param \Rinvex\Bookings\Contracts\BookingContract $booking
+     * @param \Rinvex\Bookings\Models\Booking $booking
      *
      * @return int
      */
-    protected function process(FormRequest $request, BookingContract $booking): int
+    protected function process(FormRequest $request, Booking $booking): int
     {
         // Prepare required input fields
         $data = $request->validated();
@@ -131,11 +131,11 @@ class BookingsController extends AuthorizedController
     /**
      * Delete the given booking from storage.
      *
-     * @param \Rinvex\Bookings\Contracts\BookingContract $booking
+     * @param \Rinvex\Bookings\Models\Booking $booking
      *
      * @return int
      */
-    public function delete(BookingContract $booking): int
+    public function delete(Booking $booking): int
     {
         $booking->delete();
 

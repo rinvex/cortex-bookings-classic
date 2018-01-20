@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
-use Cortex\Bookings\Contracts\RoomContract;
+use Cortex\Bookings\Models\Room;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Bookings\DataTables\Managerarea\RoomsDataTable;
@@ -36,11 +36,11 @@ class RoomsController extends AuthorizedController
     /**
      * Get a listing of the resource logs.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Models\Room $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(RoomContract $room)
+    public function logs(Room $room)
     {
         return request()->ajax() && request()->wantsJson()
             ? app(LogsDataTable::class)->with(['resource' => $room])->ajax()
@@ -50,11 +50,11 @@ class RoomsController extends AuthorizedController
     /**
      * Show the form for create/update of the given resource.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Models\Room $room
      *
      * @return \Illuminate\View\View
      */
-    public function form(RoomContract $room)
+    public function form(Room $room)
     {
         $logs = app(LogsDataTable::class)->with(['id' => "managerarea-rooms-{$room->getKey()}-logs-table"])->html()->minifiedAjax(route('managerarea.rooms.logs', ['room' => $room]));
 
@@ -77,11 +77,11 @@ class RoomsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Contracts\RoomContract                    $room
+     * @param \Cortex\Bookings\Models\Room                    $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(RoomFormRequest $request, RoomContract $room)
+    public function update(RoomFormRequest $request, Room $room)
     {
         return $this->process($request, $room);
     }
@@ -90,11 +90,11 @@ class RoomsController extends AuthorizedController
      * Process the form for store/update of the given resource.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Models\Room $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    protected function process(FormRequest $request, RoomContract $room)
+    protected function process(FormRequest $request, Room $room)
     {
         // Prepare required input fields
         $data = $request->validated();
@@ -111,11 +111,11 @@ class RoomsController extends AuthorizedController
     /**
      * Delete the given resource from storage.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Models\Room $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(RoomContract $room)
+    public function delete(Room $room)
     {
         $room->delete();
 

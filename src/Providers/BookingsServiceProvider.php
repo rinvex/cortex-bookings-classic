@@ -6,8 +6,8 @@ namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
-use Cortex\Bookings\Contracts\RoomContract;
-use Rinvex\Bookings\Contracts\BookingContract;
+use Cortex\Bookings\Models\Room;
+use Rinvex\Bookings\Models\Booking;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
@@ -50,7 +50,7 @@ class BookingsServiceProvider extends ServiceProvider
         $this->app->singleton('cortex.bookings.room', function ($app) {
             return new $app['config']['cortex.bookings.models.room']();
         });
-        $this->app->alias('cortex.bookings.room', RoomContract::class);
+        $this->app->alias('cortex.bookings.room', Room::class);
     }
 
     /**
@@ -63,8 +63,8 @@ class BookingsServiceProvider extends ServiceProvider
         // Bind route models and constrains
         $router->pattern('booking', '[0-9]+');
         $router->pattern('room', '[0-9a-z\._-]+');
-        $router->model('room', RoomContract::class);
-        $router->model('booking', BookingContract::class);
+        $router->model('room', Room::class);
+        $router->model('booking', Booking::class);
 
         // Map relations
         Relation::morphMap([

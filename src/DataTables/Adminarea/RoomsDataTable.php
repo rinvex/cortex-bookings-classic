@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\DataTables\Adminarea;
 
-use Cortex\Bookings\Contracts\RoomContract;
+use Cortex\Bookings\Models\Room;
 use Cortex\Foundation\DataTables\AbstractDataTable;
 use Cortex\Bookings\Transformers\Adminarea\RoomTransformer;
 
@@ -13,7 +13,7 @@ class RoomsDataTable extends AbstractDataTable
     /**
      * {@inheritdoc}
      */
-    protected $model = RoomContract::class;
+    protected $model = Room::class;
 
     /**
      * {@inheritdoc}

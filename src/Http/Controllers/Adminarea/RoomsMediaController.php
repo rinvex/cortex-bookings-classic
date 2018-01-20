@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Spatie\MediaLibrary\Models\Media;
-use Cortex\Bookings\Contracts\RoomContract;
+use Cortex\Bookings\Models\Room;
 use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Foundation\Http\Requests\ImageFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -29,11 +29,11 @@ class RoomsMediaController extends AuthorizedController
     /**
      * Get a listing of the resource media.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Models\Room $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function index(RoomContract $room)
+    public function index(Room $room)
     {
         return request()->ajax() && request()->wantsJson()
             ? app(MediaDataTable::class)->with(['resource' => $room])->ajax()
@@ -44,11 +44,11 @@ class RoomsMediaController extends AuthorizedController
      * Store a newly created resource in storage.
      *
      * @param \Cortex\Foundation\Http\Requests\ImageFormRequest $request
-     * @param \Cortex\Bookings\Contracts\RoomContract           $room
+     * @param \Cortex\Bookings\Models\Room           $room
      *
      * @return void
      */
-    public function store(ImageFormRequest $request, RoomContract $room): void
+    public function store(ImageFormRequest $request, Room $room): void
     {
         $room->addMediaFromRequest('file')
              ->sanitizingFileName(function ($fileName) {
@@ -60,12 +60,12 @@ class RoomsMediaController extends AuthorizedController
     /**
      * Delete the given resource from storage.
      *
-     * @param \Cortex\Bookings\Contracts\RoomContract $room
+     * @param \Cortex\Bookings\Models\Room $room
      * @param \Spatie\MediaLibrary\Models\Media       $media
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(RoomContract $room, Media $media)
+    public function delete(Room $room, Media $media)
     {
         $room->media()->where($media->getKeyName(), $media->getKey())->first()->delete();
 

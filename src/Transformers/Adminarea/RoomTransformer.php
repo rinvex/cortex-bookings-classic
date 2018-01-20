@@ -5,14 +5,14 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Transformers\Adminarea;
 
 use League\Fractal\TransformerAbstract;
-use Cortex\Bookings\Contracts\RoomContract;
+use Cortex\Bookings\Models\Room;
 
 class RoomTransformer extends TransformerAbstract
 {
     /**
      * @return array
      */
-    public function transform(RoomContract $room): array
+    public function transform(Room $room): array
     {
         return [
             'name' => (string) $room->name,
