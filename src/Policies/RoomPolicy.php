@@ -15,7 +15,7 @@ class RoomPolicy
     /**
      * Determine whether the user can list rooms.
      *
-     * @param string                              $ability
+     * @param string                   $ability
      * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
@@ -28,7 +28,7 @@ class RoomPolicy
     /**
      * Determine whether the user can create rooms.
      *
-     * @param string                              $ability
+     * @param string                   $ability
      * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
@@ -41,7 +41,7 @@ class RoomPolicy
     /**
      * Determine whether the user can update the room.
      *
-     * @param string                                  $ability
+     * @param string                       $ability
      * @param \Rinvex\Fort\Models\User     $user
      * @param \Cortex\Bookings\Models\Room $room
      *
@@ -55,7 +55,7 @@ class RoomPolicy
     /**
      * Determine whether the user can delete the room.
      *
-     * @param string                                  $ability
+     * @param string                       $ability
      * @param \Rinvex\Fort\Models\User     $user
      * @param \Cortex\Bookings\Models\Room $room
      *

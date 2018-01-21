@@ -15,7 +15,7 @@ class BookingPolicy
     /**
      * Determine whether the user can list bookings.
      *
-     * @param string                              $ability
+     * @param string                   $ability
      * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
@@ -28,7 +28,7 @@ class BookingPolicy
     /**
      * Determine whether the user can create bookings.
      *
-     * @param string                              $ability
+     * @param string                   $ability
      * @param \Rinvex\Fort\Models\User $user
      *
      * @return bool
@@ -41,7 +41,7 @@ class BookingPolicy
     /**
      * Determine whether the user can update the booking.
      *
-     * @param string                                     $ability
+     * @param string                          $ability
      * @param \Rinvex\Fort\Models\User        $user
      * @param \Rinvex\Bookings\Models\Booking $booking
      *
@@ -55,7 +55,7 @@ class BookingPolicy
     /**
      * Determine whether the user can delete the booking.
      *
-     * @param string                                     $ability
+     * @param string                          $ability
      * @param \Rinvex\Fort\Models\User        $user
      * @param \Rinvex\Bookings\Models\Booking $booking
      *

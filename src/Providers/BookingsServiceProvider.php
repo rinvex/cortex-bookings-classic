@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
-use Illuminate\Support\ServiceProvider;
 use Cortex\Bookings\Models\Room;
 use Rinvex\Bookings\Models\Booking;
+use Illuminate\Support\ServiceProvider;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;

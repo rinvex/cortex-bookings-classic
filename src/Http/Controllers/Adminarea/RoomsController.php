@@ -79,7 +79,7 @@ class RoomsController extends AuthorizedController
      * Update the given resource in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Models\Room                  $room
+     * @param \Cortex\Bookings\Models\Room                             $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -92,7 +92,7 @@ class RoomsController extends AuthorizedController
      * Process the form for store/update of the given resource.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Room            $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
