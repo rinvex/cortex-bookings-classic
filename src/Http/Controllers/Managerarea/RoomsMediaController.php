@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
-use Spatie\MediaLibrary\Models\Media;
 use Cortex\Bookings\Models\Room;
+use Spatie\MediaLibrary\Models\Media;
 use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Foundation\Http\Requests\ImageFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -44,7 +44,7 @@ class RoomsMediaController extends AuthorizedController
      * Store a newly created resource in storage.
      *
      * @param \Cortex\Foundation\Http\Requests\ImageFormRequest $request
-     * @param \Cortex\Bookings\Models\Room           $room
+     * @param \Cortex\Bookings\Models\Room                      $room
      *
      * @return void
      */
@@ -60,8 +60,8 @@ class RoomsMediaController extends AuthorizedController
     /**
      * Delete the given resource from storage.
      *
-     * @param \Cortex\Bookings\Models\Room $room
-     * @param \Spatie\MediaLibrary\Models\Media       $media
+     * @param \Cortex\Bookings\Models\Room      $room
+     * @param \Spatie\MediaLibrary\Models\Media $media
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */

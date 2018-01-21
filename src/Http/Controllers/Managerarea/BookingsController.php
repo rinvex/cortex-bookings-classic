@@ -5,8 +5,8 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
 use Illuminate\Support\Facades\DB;
-use Illuminate\Foundation\Http\FormRequest;
 use Rinvex\Bookings\Models\Booking;
+use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest;
 
@@ -100,7 +100,7 @@ class BookingsController extends AuthorizedController
      * Update the given booking in storage.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
-     * @param \Rinvex\Bookings\Models\Booking                    $booking
+     * @param \Rinvex\Bookings\Models\Booking                               $booking
      *
      * @return int
      */
@@ -112,8 +112,8 @@ class BookingsController extends AuthorizedController
     /**
      * Process the form for store/update of the given booking.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest    $request
-     * @param \Rinvex\Bookings\Models\Booking $booking
+     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param \Rinvex\Bookings\Models\Booking         $booking
      *
      * @return int
      */
