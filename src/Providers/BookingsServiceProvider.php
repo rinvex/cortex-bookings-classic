@@ -47,10 +47,8 @@ class BookingsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->registerCommands();
 
         // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.room', function ($app) {
-            return new $app['config']['cortex.bookings.models.room']();
-        });
-        $this->app->alias('cortex.bookings.room', Room::class);
+        $this->app->singleton('cortex.bookings.room', $roomModel = $this->app['config']['cortex.bookings.models.room']);
+        $roomModel === Room::class || $this->app->alias('cortex.bookings.room', Room::class);
     }
 
     /**
@@ -110,9 +108,7 @@ class BookingsServiceProvider extends ServiceProvider
     {
         // Register artisan commands
         foreach ($this->commands as $key => $value) {
-            $this->app->singleton($value, function ($app) use ($key) {
-                return new $key();
-            });
+            $this->app->singleton($value, $key);
         }
 
         $this->commands(array_values($this->commands));
