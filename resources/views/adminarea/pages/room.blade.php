@@ -27,11 +27,7 @@
 
             <div class="nav-tabs-custom">
                 @if($room->exists && $currentUser->can('delete-rooms', $room)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('adminarea.rooms.delete', ['room' => $room]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'room', 'name' => $room->slug]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
-                <ul class="nav nav-tabs">
-                    <li class="active"><a href="#details-tab" data-toggle="tab">{{ trans('cortex/bookings::common.details') }}</a></li>
-                    @if($room->exists) <li><a href="#media-tab" data-toggle="tab">{{ trans('cortex/bookings::common.media') }}</a></li> @endif
-                    @if($room->exists) <li><a href="#logs-tab" data-toggle="tab">{{ trans('cortex/bookings::common.logs') }}</a></li> @endif
-                </ul>
+                {!! Menu::render('adminarea.rooms.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
 
@@ -202,19 +198,6 @@
 
                     </div>
 
-                    @if($room->exists)
-
-                        <div class="tab-pane" id="media-tab">
-                            {{ Form::open(['url' => route('adminarea.rooms.media.store', ['room' => $room]), 'class' => 'dropzone', 'id' => 'media-dropzone']) }} {{ Form::close() }}
-                            {!! $media->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => "adminarea-rooms-{$room->getKey()}-media-table"]) !!}
-                        </div>
-
-                        <div class="tab-pane" id="logs-tab">
-                            {!! $logs->table(['class' => 'table table-striped table-hover responsive dataTableBuilder', 'id' => "adminarea-rooms-{$room->getKey()}-logs-table"]) !!}
-                        </div>
-
-                    @endif
-
                 </div>
 
             </div>
@@ -224,24 +207,3 @@
     </div>
 
 @endsection
-
-@if($room->exists)
-
-    @push('head-elements')
-        <meta name="turbolinks-cache-control" content="no-cache">
-    @endpush
-
-    @push('styles')
-        <link href="{{ mix('css/datatables.css', 'assets') }}" rel="stylesheet">
-    @endpush
-
-    @push('vendor-scripts')
-        <script src="{{ mix('js/datatables.js', 'assets') }}" defer></script>
-    @endpush
-
-    @push('inline-scripts')
-        {!! $media->scripts() !!}
-        {!! $logs->scripts() !!}
-    @endpush
-
-@endif

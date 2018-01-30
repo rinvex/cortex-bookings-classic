@@ -33,11 +33,15 @@ class RoomsMediaController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function index(Room $room)
+    public function index(Room $room, MediaDataTable $mediaDataTable)
     {
-        return request()->ajax() && request()->wantsJson()
-            ? app(MediaDataTable::class)->with(['resource' => $room])->ajax()
-            : intend(['url' => route('adminarea.rooms.edit', ['room' => $room]).'#media-tab']);
+        return $mediaDataTable->with([
+            'resource' => $room,
+            'tabs' => 'adminarea.rooms.tabs',
+            'phrase' => trans('cortex/bookings::common.rooms'),
+            'id' => "adminarea-rooms-{$room->getKey()}-media-table",
+            'url' => route('adminarea.rooms.media.store', ['room' => $room]),
+        ])->render('cortex/foundation::adminarea.pages.datatable-media');
     }
 
     /**

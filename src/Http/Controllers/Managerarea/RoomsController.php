@@ -40,11 +40,14 @@ class RoomsController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(Room $room)
+    public function logs(Room $room, LogsDataTable $logsDataTable)
     {
-        return request()->ajax() && request()->wantsJson()
-            ? app(LogsDataTable::class)->with(['resource' => $room])->ajax()
-            : intend(['url' => route('adminarea.rooms.edit', ['room' => $room]).'#logs-tab']);
+        return $logsDataTable->with([
+            'resource' => $room,
+            'tabs' => 'managerarea.rooms.tabs',
+            'phrase' => trans('cortex/bookings::common.rooms'),
+            'id' => "managerarea-rooms-{$room->getKey()}-logs-table",
+        ])->render('cortex/tenants::managerarea.pages.datatable-logs');
     }
 
     /**
@@ -56,9 +59,7 @@ class RoomsController extends AuthorizedController
      */
     public function form(Room $room)
     {
-        $logs = app(LogsDataTable::class)->with(['id' => "managerarea-rooms-{$room->getKey()}-logs-table"])->html()->minifiedAjax(route('managerarea.rooms.logs', ['room' => $room]));
-
-        return view('cortex/bookings::managerarea.pages.room', compact('room', 'logs'));
+        return view('cortex/bookings::managerarea.pages.room', compact('room'));
     }
 
     /**

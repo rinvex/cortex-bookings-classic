@@ -28,6 +28,12 @@ Breadcrumbs::register('adminarea.rooms.logs', function (BreadcrumbsGenerator $br
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.rooms.logs', ['room' => $room]));
 });
 
+Breadcrumbs::register('adminarea.rooms.media.index', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
+    $breadcrumbs->parent('adminarea.rooms.index');
+    $breadcrumbs->push($room->name, route('adminarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.rooms.media.index', ['room' => $room]));
+});
+
 Breadcrumbs::register('adminarea.bookings.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.adminarea'), route('adminarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('adminarea.bookings.index'));

@@ -41,11 +41,14 @@ class RoomsController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(Room $room)
+    public function logs(Room $room, LogsDataTable $logsDataTable)
     {
-        return request()->ajax() && request()->wantsJson()
-            ? app(LogsDataTable::class)->with(['resource' => $room])->ajax()
-            : intend(['url' => route('adminarea.rooms.edit', ['room' => $room]).'#logs-tab']);
+        return $logsDataTable->with([
+            'resource' => $room,
+            'tabs' => 'adminarea.rooms.tabs',
+            'phrase' => trans('cortex/bookings::common.rooms'),
+            'id' => "adminarea-rooms-{$room->getKey()}-logs-table",
+        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
     }
 
     /**
@@ -57,10 +60,7 @@ class RoomsController extends AuthorizedController
      */
     public function form(Room $room)
     {
-        $logs = app(LogsDataTable::class)->with(['id' => "adminarea-rooms-{$room->getKey()}-logs-table"])->html()->minifiedAjax(route('adminarea.rooms.logs', ['room' => $room]));
-        $media = app(MediaDataTable::class)->with(['id' => "adminarea-rooms-{$room->getKey()}-media-table"])->html()->minifiedAjax(route('adminarea.rooms.media.index', ['room' => $room]));
-
-        return view('cortex/bookings::adminarea.pages.room', compact('room', 'logs', 'media'));
+        return view('cortex/bookings::adminarea.pages.room', compact('room'));
     }
 
     /**
