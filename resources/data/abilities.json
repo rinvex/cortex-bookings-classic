@@ -24,6 +24,24 @@
         "name": "Can Delete Existing Rooms"
     },
     {
+        "action": "list-media",
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@listMedia",
+        "name": "Can List Media for Existing Rooms"
+    },
+    {
+        "action": "create-media",
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@createMedia",
+        "name": "Can Create Media for Existing Rooms"
+    },
+    {
+        "action": "delete-media",
+        "resource": "rooms",
+        "policy": "Cortex\\Bookings\\Policies\\RoomPolicy@deleteMedia",
+        "name": "Can Delete Media for Existing Rooms"
+    },
+    {
         "action": "list",
         "resource": "bookings",
         "policy": "Cortex\\Bookings\\Policies\\BookingPolicy@list",
