@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
+use Cortex\Foundation\Traits\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
@@ -70,6 +71,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Room extends Bookable implements HasMedia
 {
+    use Auditable;
     use HasMediaTrait;
 
     /**
