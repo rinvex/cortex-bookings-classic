@@ -7,7 +7,6 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 use Cortex\Bookings\Models\Room;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
-use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Bookings\DataTables\Adminarea\RoomsDataTable;
 use Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
