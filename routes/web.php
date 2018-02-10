@@ -30,7 +30,7 @@ Route::domain(domain())->group(function () {
         Route::name('bookings.')->prefix('bookings')->group(function () {
             Route::get('/')->name('index')->uses('BookingsController@index');
             Route::post('list')->name('list')->uses('BookingsController@list');
-            Route::post('customers')->name('customers')->uses('BookingsController@customers');
+            Route::post('users')->name('users')->uses('BookingsController@users');
             Route::post('rooms')->name('rooms')->uses('BookingsController@rooms');
             Route::post('store')->name('store')->uses('BookingsController@store');
             Route::put('{booking}')->name('update')->uses('BookingsController@update');
@@ -70,7 +70,7 @@ Route::domain('{subdomain}.'.domain())->group(function () {
             Route::name('bookings.')->prefix('bookings')->group(function () {
                 Route::get('/')->name('index')->uses('BookingsController@index');
                 Route::post('list')->name('list')->uses('BookingsController@list');
-                Route::post('customers')->name('customers')->uses('BookingsController@customers');
+                Route::post('users')->name('users')->uses('BookingsController@users');
                 Route::post('rooms')->name('rooms')->uses('BookingsController@rooms');
                 Route::post('store')->name('store')->uses('BookingsController@store');
                 Route::put('{booking}')->name('update')->uses('BookingsController@update');

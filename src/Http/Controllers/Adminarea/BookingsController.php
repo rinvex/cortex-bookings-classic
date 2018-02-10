@@ -22,7 +22,7 @@ class BookingsController extends AuthorizedController
      */
     protected $resourceMethodsWithoutModels = [
         'list',
-        'customers',
+        'users',
         'rooms',
     ];
 
@@ -57,10 +57,10 @@ class BookingsController extends AuthorizedController
 
             $results[] = [
                 'id' => $booking->getKey(),
-                'customerId' => $booking->customer->getKey(),
+                'userId' => $booking->user->getKey(),
                 'roomId' => $booking->bookable->getKey(),
                 'className' => $booking->bookable->style,
-                'title' => $booking->customer->name.' ('.$booking->bookable->name.')',
+                'title' => $booking->user->name.' ('.$booking->bookable->name.')',
                 'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
                 'end' => $allDay ? $booking->ends_at->toDateString() : $endsAt,
             ];
@@ -74,11 +74,11 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function customers(): array
+    public function users(): array
     {
-        $customers = app('rinvex.fort.user')->withAnyRoles(['member'])->get()->pluck('name', 'id');
+        $users = app('rinvex.fort.user')->withAnyRoles(['member'])->get()->pluck('name', 'id');
 
-        return $customers;
+        return $users;
     }
 
     /**
