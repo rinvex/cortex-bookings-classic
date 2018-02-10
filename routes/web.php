@@ -12,9 +12,9 @@ Route::domain(domain())->group(function () {
         // Rooms Routes
         Route::name('rooms.')->prefix('rooms')->group(function () {
             Route::get('/')->name('index')->uses('RoomsController@index');
-            Route::get('create')->name('create')->uses('RoomsController@form');
+            Route::get('create')->name('create')->uses('RoomsController@create');
             Route::post('create')->name('store')->uses('RoomsController@store');
-            Route::get('{room}')->name('edit')->uses('RoomsController@form');
+            Route::get('{room}')->name('edit')->uses('RoomsController@edit');
             Route::put('{room}')->name('update')->uses('RoomsController@update');
             Route::get('{room}/logs')->name('logs')->uses('RoomsController@logs');
             Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');
@@ -52,9 +52,9 @@ Route::domain('{subdomain}.'.domain())->group(function () {
             // Rooms Routes
             Route::name('rooms.')->prefix('rooms')->group(function () {
                 Route::get('/')->name('index')->uses('RoomsController@index');
-                Route::get('create')->name('create')->uses('RoomsController@form');
+                Route::get('create')->name('create')->uses('RoomsController@create');
                 Route::post('create')->name('store')->uses('RoomsController@store');
-                Route::get('{room}')->name('edit')->uses('RoomsController@form');
+                Route::get('{room}')->name('edit')->uses('RoomsController@edit');
                 Route::put('{room}')->name('update')->uses('RoomsController@update');
                 Route::get('{room}/logs')->name('logs')->uses('RoomsController@logs');
                 Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');

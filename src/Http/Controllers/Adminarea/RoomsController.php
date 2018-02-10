@@ -57,7 +57,31 @@ class RoomsController extends AuthorizedController
      *
      * @return \Illuminate\View\View
      */
-    public function form(Room $room)
+    public function create(Room $room)
+    {
+        return $this->form($room);
+    }
+
+    /**
+     * Edit given room.
+     *
+     * @param \Cortex\Bookings\Models\Room $room
+     *
+     * @return \Illuminate\View\View
+     */
+    public function edit(Room $room)
+    {
+        return $this->form($room);
+    }
+
+    /**
+     * Show room create/edit form.
+     *
+     * @param \Cortex\Bookings\Models\Room $room
+     *
+     * @return \Illuminate\View\View
+     */
+    protected function form(Room $room)
     {
         return view('cortex/bookings::adminarea.pages.room', compact('room'));
     }
