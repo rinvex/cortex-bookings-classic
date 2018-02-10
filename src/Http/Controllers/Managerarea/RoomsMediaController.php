@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
+use Illuminate\Support\Str;
 use Cortex\Bookings\Models\Room;
 use Spatie\MediaLibrary\Models\Media;
 use Cortex\Foundation\DataTables\MediaDataTable;
@@ -15,16 +16,27 @@ class RoomsMediaController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'rooms';
+    protected $resource = 'room';
 
     /**
      * {@inheritdoc}
      */
-    protected $resourceAbilityMap = [
-        'index' => 'list-media',
-        'store' => 'create-media',
-        'delete' => 'delete-media',
-    ];
+    public function authorizeResource($model, $parameter = null, array $options = [], $request = null): void
+    {
+        $middleware = [];
+        $parameter = $parameter ?: Str::snake(class_basename($model));
+
+        foreach ($this->mapResourceAbilities() as $method => $ability) {
+            $modelName = in_array($method, $this->resourceMethodsWithoutModels()) ? $model : $parameter;
+
+            $middleware["can:update,{$modelName}"][] = $method;
+            $middleware["can:{$ability},media"][] = $method;
+        }
+
+        foreach ($middleware as $middlewareName => $methods) {
+            $this->middleware($middlewareName, $options)->only($methods);
+        }
+    }
 
     /**
      * Get a listing of the resource media.

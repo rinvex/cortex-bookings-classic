@@ -15,10 +15,19 @@ class BookingsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'bookings';
+    protected $resource = 'booking';
 
     /**
-     * Display a listing of the booking.
+     * {@inheritdoc}
+     */
+    protected $resourceMethodsWithoutModels = [
+        'list',
+        'customers',
+        'rooms',
+    ];
+
+    /**
+     * List all bookings.
      *
      * @return \Illuminate\View\View
      */
