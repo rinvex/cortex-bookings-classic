@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Requests\Managerarea;
 
+use Carbon\Carbon;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookingFormRequest extends FormRequest
@@ -16,6 +17,33 @@ class BookingFormRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $data = $this->all();
+
+        // Calculate price
+        $room = app('cortex.bookings.room')->find($this->get('room_id'));
+        $endsAt = $this->get('ends_at') ? new Carbon($this->get('ends_at')) : null;
+        $startsAt = $this->get('starts_at') ? new Carbon($this->get('starts_at')) : null;
+        list($price, $priceEquation, $currency) = app('rinvex.bookings.booking')->calculatePrice($room, $startsAt, $endsAt);
+
+        // Fill missing fields
+        $data['ends_at'] = $endsAt;
+        $data['starts_at'] = $startsAt;
+        $data['customer_type'] = 'user';
+        $data['bookable_type'] = 'room';
+        $data['price_equation'] = $priceEquation;
+        $data['currency'] = $currency;
+        $data['price'] = $price;
+
+        $this->replace($data);
     }
 
     /**
