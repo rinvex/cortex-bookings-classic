@@ -87,7 +87,7 @@ class RoomsMediaController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.rooms.media.index', ['room' => $room]),
-            'with' => ['warning' => trans('cortex/bookings::messages.room.media_deleted')],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'media', 'id' => $media->getKey()])],
         ]);
     }
 }
