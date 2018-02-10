@@ -39,9 +39,10 @@ class RoomsMediaController extends AuthorizedController
     }
 
     /**
-     * Get a listing of the resource media.
+     * List room media.
      *
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Room                 $room
+     * @param \Cortex\Foundation\DataTables\MediaDataTable $mediaDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -57,7 +58,7 @@ class RoomsMediaController extends AuthorizedController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store new room media.
      *
      * @param \Cortex\Foundation\Http\Requests\ImageFormRequest $request
      * @param \Cortex\Bookings\Models\Room                      $room
@@ -74,7 +75,7 @@ class RoomsMediaController extends AuthorizedController
     }
 
     /**
-     * Delete the given resource from storage.
+     * Destroy given room media.
      *
      * @param \Cortex\Bookings\Models\Room      $room
      * @param \Spatie\MediaLibrary\Models\Media $media

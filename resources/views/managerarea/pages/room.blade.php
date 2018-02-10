@@ -3,7 +3,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/tenants::common.managerarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.managerarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
 @endsection
 
 @push('inline-scripts')
@@ -36,7 +36,7 @@
                         @if ($room->exists)
                             {{ Form::model($room, ['url' => route('managerarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => "managerarea-rooms-{$room->getKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($room, ['url' => route('managerarea.rooms.store'), 'id' => 'managerarea-rooms-create-form']) }}
+                            {{ Form::model($room, ['url' => route('managerarea.rooms.store'), 'id' => "managerarea-rooms-create-form"]) }}
                         @endif
 
                             <div class="row">
@@ -105,8 +105,8 @@
 
                                     {{-- Active --}}
                                     <div class="form-group{{ $errors->has('is_active') ? ' has-error' : '' }}">
-                                        {{ Form::label('is_active', trans('cortex/fort::common.active'), ['class' => 'control-label']) }}
-                                        {{ Form::select('is_active', [1 => trans('cortex/fort::common.yes'), 0 => trans('cortex/fort::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+                                        {{ Form::label('is_active', trans('cortex/bookings::common.active'), ['class' => 'control-label']) }}
+                                        {{ Form::select('is_active', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('is_active'))
                                             <span class="help-block">{{ $errors->first('is_active') }}</span>

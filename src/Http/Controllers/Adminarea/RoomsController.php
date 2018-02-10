@@ -19,7 +19,7 @@ class RoomsController extends AuthorizedController
     protected $resource = 'room';
 
     /**
-     * Display a listing of the resource.
+     * List all rooms.
      *
      * @param \Cortex\Bookings\DataTables\Adminarea\RoomsDataTable $roomsDataTable
      *
@@ -34,9 +34,10 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Get a listing of the resource logs.
+     * List room logs.
      *
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Room                $room
+     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -51,7 +52,7 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Show the form for create/update of the given resource.
+     * Create new room.
      *
      * @param \Cortex\Bookings\Models\Room $room
      *
@@ -87,19 +88,20 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store new room.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
+     * @param \Cortex\Bookings\Models\Room                             $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(RoomFormRequest $request)
+    public function store(RoomFormRequest $request, Room $room)
     {
-        return $this->process($request, app('cortex.bookings.room'));
+        return $this->process($request, $room);
     }
 
     /**
-     * Update the given resource in storage.
+     * Update given room.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
      * @param \Cortex\Bookings\Models\Room                             $room
@@ -112,7 +114,7 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Process the form for store/update of the given resource.
+     * Process stored/updated room.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Models\Room            $room
@@ -134,7 +136,7 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Delete the given resource from storage.
+     * Destroy given room.
      *
      * @param \Cortex\Bookings\Models\Room $room
      *

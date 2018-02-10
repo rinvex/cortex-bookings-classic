@@ -21,6 +21,9 @@ return [
     'unit_d' => 'Day',
     'logs' => 'Logs',
     'media' => 'Media',
+    'active' => 'Active',
+    'yes' => 'Yes',
+    'no' => 'No',
 
     // Rooms
     'rooms' => 'Rooms',

@@ -35,8 +35,8 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property \Carbon\Carbon                                                                  $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Booking[] $bookings
- * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Bookings\Models\Price[]   $prices
- * @property-read \Illuminate\Database\Eloquent\Collection|\Rinvex\Bookings\Models\Rate[]    $rates
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Price[]   $prices
+ * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Rate[]    $rates
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room ordered($direction = 'asc')

@@ -94,7 +94,7 @@ class BookingsController extends AuthorizedController
     }
 
     /**
-     * Store a newly created booking in storage.
+     * Store new booking.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
      *
@@ -106,10 +106,10 @@ class BookingsController extends AuthorizedController
     }
 
     /**
-     * Update the given booking in storage.
+     * Update given booking.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
-     * @param \Rinvex\Bookings\Models\Booking                             $booking
+     * @param \Cortex\Bookings\Models\Booking                             $booking
      *
      * @return int
      */
@@ -119,10 +119,10 @@ class BookingsController extends AuthorizedController
     }
 
     /**
-     * Process the form for store/update of the given booking.
+     * Process stored/updated booking.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Rinvex\Bookings\Models\Booking         $booking
+     * @param \Cortex\Bookings\Models\Booking         $booking
      *
      * @return int
      */
@@ -138,9 +138,9 @@ class BookingsController extends AuthorizedController
     }
 
     /**
-     * Delete the given booking from storage.
+     * Destroy given booking.
      *
-     * @param \Rinvex\Bookings\Models\Booking $booking
+     * @param \Cortex\Bookings\Models\Booking $booking
      *
      * @return int
      */
