@@ -116,7 +116,7 @@ class RoomsController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(Room $room)
+    public function destroy(Room $room)
     {
         $room->delete();
 

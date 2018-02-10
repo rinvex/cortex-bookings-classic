@@ -17,12 +17,12 @@ Route::domain(domain())->group(function () {
             Route::get('{room}')->name('edit')->uses('RoomsController@form');
             Route::put('{room}')->name('update')->uses('RoomsController@update');
             Route::get('{room}/logs')->name('logs')->uses('RoomsController@logs');
-            Route::delete('{room}')->name('delete')->uses('RoomsController@delete');
+            Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');
 
             Route::name('media.')->prefix('{room}/media')->group(function () {
                 Route::get('/')->name('index')->uses('RoomsMediaController@index');
                 Route::post('/')->name('store')->uses('RoomsMediaController@store');
-                Route::delete('{media}')->name('delete')->uses('RoomsMediaController@delete');
+                Route::delete('{media}')->name('destroy')->uses('RoomsMediaController@destroy');
             });
         });
 
@@ -34,7 +34,7 @@ Route::domain(domain())->group(function () {
             Route::post('rooms')->name('rooms')->uses('BookingsController@rooms');
             Route::post('store')->name('store')->uses('BookingsController@store');
             Route::put('{booking}')->name('update')->uses('BookingsController@update');
-            Route::delete('{booking}')->name('delete')->uses('BookingsController@delete');
+            Route::delete('{booking}')->name('destroy')->uses('BookingsController@destroy');
         });
 
     });
@@ -57,12 +57,12 @@ Route::domain('{subdomain}.'.domain())->group(function () {
                 Route::get('{room}')->name('edit')->uses('RoomsController@form');
                 Route::put('{room}')->name('update')->uses('RoomsController@update');
                 Route::get('{room}/logs')->name('logs')->uses('RoomsController@logs');
-                Route::delete('{room}')->name('delete')->uses('RoomsController@delete');
+                Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');
 
                 Route::name('media.')->prefix('{room}/media')->group(function () {
                     Route::get('/')->name('index')->uses('RoomsMediaController@index');
                     Route::post('/')->name('store')->uses('RoomsMediaController@store');
-                    Route::delete('{media}')->name('delete')->uses('RoomsMediaController@delete');
+                    Route::delete('{media}')->name('destroy')->uses('RoomsMediaController@destroy');
                 });
             });
 
@@ -74,7 +74,7 @@ Route::domain('{subdomain}.'.domain())->group(function () {
                 Route::post('rooms')->name('rooms')->uses('BookingsController@rooms');
                 Route::post('store')->name('store')->uses('BookingsController@store');
                 Route::put('{booking}')->name('update')->uses('BookingsController@update');
-                Route::delete('{booking}')->name('delete')->uses('BookingsController@delete');
+                Route::delete('{booking}')->name('destroy')->uses('BookingsController@destroy');
             });
 
         });

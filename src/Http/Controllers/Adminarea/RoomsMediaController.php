@@ -81,7 +81,7 @@ class RoomsMediaController extends AuthorizedController
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function delete(Room $room, Media $media)
+    public function destroy(Room $room, Media $media)
     {
         $room->media()->where($media->getKeyName(), $media->getKey())->first()->delete();
 

@@ -144,7 +144,7 @@ class BookingsController extends AuthorizedController
      *
      * @return int
      */
-    public function delete(Booking $booking): int
+    public function destroy(Booking $booking): int
     {
         $booking->delete();
 
