@@ -3,7 +3,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.managerarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
+    {{ config('app.name') }} » {{ trans('cortex/tenants::common.managerarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->name : trans('cortex/bookings::common.create_room') }}
 @endsection
 
 @push('inline-scripts')
