@@ -127,26 +127,7 @@ abstract class Bookable extends Model implements Sortable
      *
      * @var array
      */
-    protected static $logAttributes = [
-        'slug',
-        'name',
-        'description',
-        'is_active',
-        'price',
-        'unit',
-        'currency',
-        'style',
-        'sort_order',
-        'multiple_bookings_allowed',
-        'multiple_bookings_bypassed',
-        'multiple_bookings_allocation',
-        'early_booking_limit',
-        'late_booking_limit',
-        'late_cancellation_limit',
-        'maximum_booking_length',
-        'minimum_booking_length',
-        'booking_interval_limit',
-    ];
+    protected static $logFillable = true;
 
     /**
      * The attributes that are ignored on change.
