@@ -91,7 +91,7 @@ class RoomsController extends AuthorizedController
      * Store new room.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Models\Room                             $room
+     * @param \Cortex\Bookings\Models\Room                               $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -104,7 +104,7 @@ class RoomsController extends AuthorizedController
      * Update given room.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Models\Room                             $room
+     * @param \Cortex\Bookings\Models\Room                               $room
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
