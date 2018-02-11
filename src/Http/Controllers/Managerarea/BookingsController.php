@@ -109,7 +109,7 @@ class BookingsController extends AuthorizedController
      * Update given booking.
      *
      * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
-     * @param \Cortex\Bookings\Models\Booking                             $booking
+     * @param \Cortex\Bookings\Models\Booking                               $booking
      *
      * @return int
      */
