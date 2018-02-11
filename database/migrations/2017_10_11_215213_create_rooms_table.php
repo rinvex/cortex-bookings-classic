@@ -27,9 +27,7 @@ class CreateRoomsTable extends Migration
             $table->string('currency', 3);
             $table->string('style')->nullable();
             $table->mediumInteger('sort_order')->unsigned()->default(0);
-            $table->boolean('multiple_bookings_allowed')->default(false);
-            $table->boolean('multiple_bookings_bypassed')->default(false);
-            $table->mediumInteger('multiple_bookings_allocation')->unsigned()->nullable();
+            $table->mediumInteger('capacity')->unsigned()->nullable();
             $table->smallInteger('early_booking_limit')->unsigned()->nullable();
             $table->smallInteger('late_booking_limit')->unsigned()->nullable();
             $table->smallInteger('late_cancellation_limit')->unsigned()->nullable();

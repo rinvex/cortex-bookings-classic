@@ -21,9 +21,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property string                                                                          $currency
  * @property string                                                                          $style
  * @property int                                                                             $sort_order
- * @property bool                                                                            $multiple_bookings_allowed
- * @property bool                                                                            $multiple_bookings_bypassed
- * @property int                                                                             $multiple_bookings_allocation
+ * @property int                                                                             $capacity
  * @property int                                                                             $early_booking_limit
  * @property int                                                                             $late_booking_limit
  * @property int                                                                             $late_cancellation_limit
@@ -94,9 +92,7 @@ class Room extends Bookable implements HasMedia
             'currency' => 'required|string|size:3',
             'style' => 'nullable|string|max:150',
             'sort_order' => 'nullable|integer|max:10000000',
-            'multiple_bookings_allowed' => 'sometimes|boolean',
-            'multiple_bookings_bypassed' => 'sometimes|boolean',
-            'multiple_bookings_allocation' => 'nullable|integer|max:10000000',
+            'capacity' => 'nullable|integer|max:10000000',
             'early_booking_limit' => 'nullable|integer|max:10000',
             'late_booking_limit' => 'nullable|integer|max:10000',
             'late_cancellation_limit' => 'nullable|integer|max:10000',
