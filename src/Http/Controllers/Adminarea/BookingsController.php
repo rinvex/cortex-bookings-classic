@@ -76,7 +76,7 @@ class BookingsController extends AuthorizedController
      */
     public function users(): array
     {
-        return app('cortex.fort.member')->all()->pluck('name', 'id');
+        return app('cortex.auth.member')->all()->pluck('name', 'id');
     }
 
     /**
