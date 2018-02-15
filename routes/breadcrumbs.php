@@ -57,7 +57,7 @@ Breadcrumbs::register('adminarea.bookings.logs', function (BreadcrumbsGenerator 
 
 // Managerarea breadcrumbs
 Breadcrumbs::register('managerarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/tenants::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.managerarea'), route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('managerarea.rooms.index'));
 });
 
@@ -78,7 +78,7 @@ Breadcrumbs::register('managerarea.rooms.logs', function (BreadcrumbsGenerator $
 });
 
 Breadcrumbs::register('managerarea.bookings.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/tenants::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.managerarea'), route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('managerarea.bookings.index'));
 });
 
