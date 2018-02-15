@@ -47,7 +47,7 @@ Route::domain('{subdomain}.'.domain())->group(function () {
     Route::name('managerarea.')
          ->namespace('Cortex\Bookings\Http\Controllers\Managerarea')
          ->middleware(['web', 'nohttpcache', 'can:access-managerarea'])
-         ->prefix(config('cortex.foundation.route.locale_prefix') ? '{locale}/'.config('cortex.tenants.route.prefix.managerarea') : config('cortex.tenants.route.prefix.managerarea'))->group(function () {
+         ->prefix(config('cortex.foundation.route.locale_prefix') ? '{locale}/'.config('cortex.foundation.route.prefix.managerarea') : config('cortex.foundation.route.prefix.managerarea'))->group(function () {
 
             // Rooms Routes
             Route::name('rooms.')->prefix('rooms')->group(function () {
