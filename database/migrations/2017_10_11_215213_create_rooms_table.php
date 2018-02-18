@@ -23,7 +23,7 @@ class CreateRoomsTable extends Migration
             $table->{$this->jsonable()}('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->decimal('price')->default('0.00');
-            $table->char('unit', 1)->default('h');
+            $table->string('unit')->default('hour');
             $table->string('currency', 3);
             $table->string('style')->nullable();
             $table->mediumInteger('sort_order')->unsigned()->default(0);
