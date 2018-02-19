@@ -60,7 +60,7 @@ class BookingsController extends AuthorizedController
                 'userId' => $booking->user->getKey(),
                 'roomId' => $booking->bookable->getKey(),
                 'className' => $booking->bookable->style,
-                'title' => $booking->user->name.' ('.$booking->bookable->name.')',
+                'title' => $booking->user->name.' ('.$booking->bookable->title.')',
                 'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
                 'end' => $allDay ? $booking->ends_at->toDateString() : $endsAt,
             ];
@@ -86,7 +86,7 @@ class BookingsController extends AuthorizedController
      */
     public function rooms(): array
     {
-        $rooms = app('cortex.bookings.room')->all(['id', DB::raw('JSON_EXTRACT(name, "$.en") as name'), 'style']);
+        $rooms = app('cortex.bookings.room')->all(['id', DB::raw('JSON_EXTRACT(title, "$.en") as title'), 'style']);
 
         return $rooms;
     }

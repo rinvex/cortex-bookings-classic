@@ -22,7 +22,7 @@ class RoomsDataTable extends AbstractDataTable
     public function query()
     {
         $locale = app()->getLocale();
-        $query = app($this->model)->query()->orderBy('sort_order', 'ASC')->orderBy("name->\${$locale}", 'ASC');
+        $query = app($this->model)->query()->orderBy('sort_order', 'ASC')->orderBy("title->\${$locale}", 'ASC');
 
         return $this->applyScopes($query);
     }
@@ -35,7 +35,7 @@ class RoomsDataTable extends AbstractDataTable
     public function ajax()
     {
         return datatables($this->query())
-            ->orderColumn('name', 'name->"$.'.app()->getLocale().'" $1')
+            ->orderColumn('title', 'title->"$.'.app()->getLocale().'" $1')
             ->make(true);
     }
 
@@ -51,7 +51,7 @@ class RoomsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.rooms.edit\', {room: full.slug})+"\">"+data+"</a>"';
 
         return [
-            'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
+            'title' => ['title' => trans('cortex/bookings::common.title'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
             'price' => ['title' => trans('cortex/bookings::common.price')],
             'unit' => ['title' => trans('cortex/bookings::common.unit'), 'render' => 'Lang.trans(\'cortex/bookings::common.unit_\'+data)'],
             'currency' => ['title' => trans('cortex/bookings::common.currency')],
