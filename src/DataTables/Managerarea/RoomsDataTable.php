@@ -47,8 +47,8 @@ class RoomsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'managerarea.rooms.edit\', {room: full.slug, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'managerarea.rooms.edit\', {room: full.slug})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'managerarea.rooms.edit\', {room: full.name, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'managerarea.rooms.edit\', {room: full.name})+"\">"+data+"</a>"';
 
         return [
             'title' => ['title' => trans('cortex/bookings::common.title'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],

@@ -18,7 +18,7 @@ class CreateRoomsTable extends Migration
         Schema::create(config('cortex.bookings.tables.rooms'), function (Blueprint $table) {
             // Columns
             $table->increments('id');
-            $table->string('slug');
+            $table->string('name');
             $table->{$this->jsonable()}('title');
             $table->{$this->jsonable()}('description')->nullable();
             $table->boolean('is_active')->default(true);
@@ -38,7 +38,7 @@ class CreateRoomsTable extends Migration
             $table->softDeletes();
 
             // Indexes
-            $table->unique('slug');
+            $table->unique('name');
         });
     }
 

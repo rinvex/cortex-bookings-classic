@@ -12,7 +12,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * Cortex\Bookings\Models\Room.
  *
  * @property int                                                                             $id
- * @property string                                                                          $slug
+ * @property string                                                                          $name
  * @property array                                                                           $title
  * @property array                                                                           $description
  * @property bool                                                                            $is_active
@@ -55,7 +55,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsBypassed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereTitle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room wherePrice($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSlug($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereStyle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUnit($value)
@@ -83,7 +83,7 @@ class Room extends Bookable implements HasMedia
 
         $this->setTable(config('cortex.bookings.tables.rooms'));
         $this->setRules([
-            'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.rooms').',slug',
+            'name' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.rooms').',name',
             'title' => 'required|string|max:150',
             'description' => 'nullable|string|max:10000',
             'is_active' => 'sometimes|boolean',
