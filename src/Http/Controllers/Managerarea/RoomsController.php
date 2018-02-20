@@ -16,7 +16,7 @@ class RoomsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'room';
+    protected $resource = Room::class;
 
     /**
      * List all rooms.

@@ -16,7 +16,7 @@ class RoomsMediaController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'room';
+    protected $resource = Room::class;
 
     /**
      * {@inheritdoc}

@@ -15,7 +15,7 @@ class BookingsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = 'booking';
+    protected $resource = Booking::class;
 
     /**
      * {@inheritdoc}
