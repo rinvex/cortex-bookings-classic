@@ -22,7 +22,7 @@ class BookingsController extends AuthorizedController
      */
     protected $resourceMethodsWithoutModels = [
         'list',
-        'users',
+        'customers',
         'rooms',
     ];
 
@@ -57,10 +57,10 @@ class BookingsController extends AuthorizedController
 
             $results[] = [
                 'id' => $booking->getKey(),
-                'userId' => $booking->user->getKey(),
+                'customerId' => $booking->customer->getKey(),
                 'roomId' => $booking->bookable->getKey(),
                 'className' => $booking->bookable->style,
-                'title' => $booking->user->name.' ('.$booking->bookable->title.')',
+                'title' => $booking->customer->name.' ('.$booking->bookable->title.')',
                 'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
                 'end' => $allDay ? $booking->ends_at->toDateString() : $endsAt,
             ];
@@ -74,7 +74,7 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function users(): array
+    public function customers(): array
     {
         return app('cortex.auth.member')->all()->pluck('name', 'id');
     }

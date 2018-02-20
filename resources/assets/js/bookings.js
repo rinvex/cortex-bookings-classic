@@ -28,8 +28,8 @@ $(function() {
             },
             type: 'POST',
         },
-        users: $.ajax({
-            url: routes.route(window.Accessarea + '.bookings.users'),
+        customers: $.ajax({
+            url: routes.route(window.Accessarea + '.bookings.customers'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
@@ -58,7 +58,7 @@ $(function() {
                     ends_at: calendarEvent.allDay
                         ? calendarEvent.end.format(dateFormat)
                         : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
-                    user_id: calendarEvent.userId,
+                    customer_id: calendarEvent.customerId,
                     room_id: calendarEvent.roomId,
                     _token: window.Laravel.csrfToken,
                 },
@@ -90,7 +90,7 @@ $(function() {
                     ends_at: calendarEvent.allDay
                         ? calendarEvent.end.format(dateFormat)
                         : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
-                    user_id: calendarEvent.userId,
+                    customer_id: calendarEvent.customerId,
                     room_id: calendarEvent.roomId,
                     _token: window.Laravel.csrfToken,
                 },

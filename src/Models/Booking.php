@@ -15,8 +15,8 @@ use Rinvex\Bookings\Models\Booking as BaseBooking;
  * @property int                                                                           $id
  * @property int                                                                           $bookable_id
  * @property string                                                                        $bookable_type
- * @property int                                                                           $user_id
- * @property string                                                                        $user_type
+ * @property int                                                                           $customer_id
+ * @property string                                                                        $customer_type
  * @property \Carbon\Carbon                                                                $starts_at
  * @property \Carbon\Carbon                                                                $ends_at
  * @property float                                                                         $price
@@ -27,7 +27,7 @@ use Rinvex\Bookings\Models\Booking as BaseBooking;
  * @property \Carbon\Carbon|null                                                           $updated_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[] $activity
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                            $bookable
- * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                            $user
+ * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                            $customer
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]      $tenants
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking cancelled()
@@ -40,7 +40,7 @@ use Rinvex\Bookings\Models\Booking as BaseBooking;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking endsBetween($starts, $ends)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking future()
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking ofBookable(\Illuminate\Database\Eloquent\Model $bookable)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking ofUser(\Illuminate\Database\Eloquent\Model $user)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking ofCustomer(\Illuminate\Database\Eloquent\Model $customer)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking past()
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking startsAfter($date)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking startsBefore($date)
@@ -49,8 +49,8 @@ use Rinvex\Bookings\Models\Booking as BaseBooking;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereBookableType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereCancelledAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereUserId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereUserType($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereCustomerId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereCustomerType($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereEndsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereNotes($value)

@@ -37,8 +37,8 @@ class BookingFormRequest extends FormRequest
         // Fill missing fields
         $data['ends_at'] = $endsAt;
         $data['starts_at'] = $startsAt;
-        $data['user_type'] = 'user';
         $data['bookable_type'] = 'room';
+        $data['customer_type'] = 'member';
         $data['price_equation'] = $priceEquation;
         $data['currency'] = $currency;
         $data['price'] = $price;
