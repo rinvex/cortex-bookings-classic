@@ -6,7 +6,6 @@ namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
 use Cortex\Bookings\Models\Room;
-use Rinvex\Bookings\Models\Booking;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
@@ -61,8 +60,8 @@ class BookingsServiceProvider extends ServiceProvider
         // Bind route models and constrains
         $router->pattern('booking', '[0-9]+');
         $router->pattern('room', '[0-9a-z\._-]+');
-        $router->model('room', Room::class);
-        $router->model('booking', Booking::class);
+        $router->model('room', config('cortex.bookings.models.room'));
+        $router->model('booking', config('rinvex.bookings.models.booking'));
 
         // Map relations
         Relation::morphMap([
