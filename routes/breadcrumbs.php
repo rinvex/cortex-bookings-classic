@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 use Cortex\Bookings\Models\Room;
-use Rinvex\Bookings\Models\Booking;
+use Cortex\Bookings\Models\Booking;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 // Adminarea breadcrumbs

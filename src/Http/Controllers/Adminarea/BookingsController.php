@@ -5,7 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Illuminate\Support\Facades\DB;
-use Rinvex\Bookings\Models\Booking;
+use Cortex\Bookings\Models\Booking;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
