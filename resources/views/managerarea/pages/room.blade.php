@@ -1,5 +1,5 @@
 {{-- Master Layout --}}
-@extends('cortex/tenants::managerarea.layouts.default')
+@extends('cortex/foundation::managerarea.layouts.default')
 
 {{-- Page Title --}}
 @section('title')
@@ -188,7 +188,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/tenants::managerarea.partials.timestamps', ['model' => $room])
+                                    @include('cortex/foundation::managerarea.partials.timestamps', ['model' => $room])
 
                                 </div>
 

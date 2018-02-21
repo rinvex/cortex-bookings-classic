@@ -30,7 +30,7 @@ class RoomsController extends AuthorizedController
         return $roomsDataTable->with([
             'id' => 'managerarea-rooms-index-table',
             'phrase' => trans('cortex/bookings::common.rooms'),
-        ])->render('cortex/tenants::managerarea.pages.datatable');
+        ])->render('cortex/foundation::managerarea.pages.datatable');
     }
 
     /**
@@ -48,7 +48,7 @@ class RoomsController extends AuthorizedController
             'tabs' => 'managerarea.rooms.tabs',
             'phrase' => trans('cortex/bookings::common.rooms'),
             'id' => "managerarea-rooms-{$room->getKey()}-logs-table",
-        ])->render('cortex/tenants::managerarea.pages.datatable-logs');
+        ])->render('cortex/foundation::managerarea.pages.datatable-logs');
     }
 
     /**
