@@ -4,8 +4,11 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
+use Rinvex\Bookings\Models\Bookable;
+use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
 /**
@@ -70,7 +73,42 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 class Room extends Bookable implements HasMedia
 {
     use Auditable;
+    use Tenantable;
+    use LogsActivity;
     use HasMediaTrait;
+
+    /**
+     * Whether the model should throw a
+     * ValidationException if it fails validation.
+     *
+     * @var bool
+     */
+    protected $throwValidationExceptions = true;
+
+    /**
+     * Indicates whether to log only dirty attributes or all.
+     *
+     * @var bool
+     */
+    protected static $logOnlyDirty = true;
+
+    /**
+     * The attributes that are logged on change.
+     *
+     * @var array
+     */
+    protected static $logFillable = true;
+
+    /**
+     * The attributes that are ignored on change.
+     *
+     * @var array
+     */
+    protected static $ignoreChangedAttributes = [
+        'created_at',
+        'updated_at',
+        'deleted_at',
+    ];
 
     /**
      * Create a new Eloquent model instance.
@@ -100,5 +138,15 @@ class Room extends Bookable implements HasMedia
             'minimum_booking_length' => 'nullable|integer|max:10000',
             'booking_interval_limit' => 'nullable|integer|max:150',
         ]);
+    }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'name';
     }
 }
