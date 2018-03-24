@@ -23,14 +23,14 @@ Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Room $room,
 });
 
 Menu::register('adminarea.rooms.tabs', function (MenuGenerator $menu, Room $room, Media $media) {
-    $menu->route(['adminarea.rooms.create'], trans('cortex/bookings::common.details'))->ifCan('create', $room)->if(! $room->exists);
+    $menu->route(['adminarea.rooms.create'], trans('cortex/bookings::common.details'))->ifCan('create', $room)->if(Route::is('adminarea.rooms.create'));
     $menu->route(['adminarea.rooms.edit', ['room' => $room]], trans('cortex/bookings::common.details'))->ifCan('update', $room)->if($room->exists);
     $menu->route(['adminarea.rooms.logs', ['room' => $room]], trans('cortex/bookings::common.logs'))->ifCan('audit', $room)->if($room->exists);
     $menu->route(['adminarea.rooms.media.index', ['room' => $room]], trans('cortex/bookings::common.media'))->ifCan('update', $room)->ifCan('list', $media)->if($room->exists);
 });
 
 Menu::register('managerarea.rooms.tabs', function (MenuGenerator $menu, Room $room, Media $media) {
-    $menu->route(['managerarea.rooms.create'], trans('cortex/bookings::common.details'))->ifCan('create', $room)->if(! $room->exists);
+    $menu->route(['managerarea.rooms.create'], trans('cortex/bookings::common.details'))->ifCan('create', $room)->if(Route::is('managerarea.rooms.create'));
     $menu->route(['managerarea.rooms.edit', ['room' => $room]], trans('cortex/bookings::common.details'))->ifCan('update', $room)->if($room->exists);
     $menu->route(['managerarea.rooms.logs', ['room' => $room]], trans('cortex/bookings::common.logs'))->ifCan('audit', $room)->if($room->exists);
     $menu->route(['managerarea.rooms.media.index', ['room' => $room]], trans('cortex/bookings::common.media'))->ifCan('update', $room)->ifCan('list', $media)->if($room->exists);
