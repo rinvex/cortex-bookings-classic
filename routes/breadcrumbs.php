@@ -12,6 +12,17 @@ Breadcrumbs::register('adminarea.rooms.index', function (BreadcrumbsGenerator $b
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('adminarea.rooms.index'));
 });
 
+Breadcrumbs::register('adminarea.rooms.import', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->parent('adminarea.rooms.index');
+    $breadcrumbs->push(trans('cortex/bookings::common.import'), route('adminarea.rooms.import'));
+});
+
+Breadcrumbs::register('adminarea.rooms.import.logs', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->parent('adminarea.rooms.index');
+    $breadcrumbs->push(trans('cortex/bookings::common.import'), route('adminarea.rooms.import'));
+    $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.rooms.import.logs'));
+});
+
 Breadcrumbs::register('adminarea.rooms.create', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->parent('adminarea.rooms.index');
     $breadcrumbs->push(trans('cortex/bookings::common.create_room'), route('adminarea.rooms.create'));
@@ -59,6 +70,17 @@ Breadcrumbs::register('adminarea.bookings.logs', function (BreadcrumbsGenerator 
 Breadcrumbs::register('managerarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.managerarea'), route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('managerarea.rooms.index'));
+});
+
+Breadcrumbs::register('managerarea.rooms.import', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->parent('managerarea.rooms.index');
+    $breadcrumbs->push(trans('cortex/bookings::common.import'), route('managerarea.rooms.import'));
+});
+
+Breadcrumbs::register('managerarea.rooms.import.logs', function (BreadcrumbsGenerator $breadcrumbs) {
+    $breadcrumbs->parent('managerarea.rooms.index');
+    $breadcrumbs->push(trans('cortex/bookings::common.import'), route('managerarea.rooms.import'));
+    $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('managerarea.rooms.import.logs'));
 });
 
 Breadcrumbs::register('managerarea.rooms.create', function (BreadcrumbsGenerator $breadcrumbs) {

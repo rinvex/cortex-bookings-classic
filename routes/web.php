@@ -12,6 +12,9 @@ Route::domain(domain())->group(function () {
         // Rooms Routes
         Route::name('rooms.')->prefix('rooms')->group(function () {
             Route::get('/')->name('index')->uses('RoomsController@index');
+            Route::get('import')->name('import')->uses('RoomsController@import');
+            Route::post('import')->name('hoard')->uses('RoomsController@hoard');
+            Route::get('import/logs')->name('import.logs')->uses('RoomsController@importLogs');
             Route::get('create')->name('create')->uses('RoomsController@create');
             Route::post('create')->name('store')->uses('RoomsController@store');
             Route::get('{room}')->name('edit')->uses('RoomsController@edit');
@@ -52,6 +55,9 @@ Route::domain('{subdomain}.'.domain())->group(function () {
             // Rooms Routes
             Route::name('rooms.')->prefix('rooms')->group(function () {
                 Route::get('/')->name('index')->uses('RoomsController@index');
+                Route::get('import')->name('import')->uses('RoomsController@import');
+                Route::post('import')->name('hoard')->uses('RoomsController@hoard');
+                Route::get('import/logs')->name('import.logs')->uses('RoomsController@importLogs');
                 Route::get('create')->name('create')->uses('RoomsController@create');
                 Route::post('create')->name('store')->uses('RoomsController@store');
                 Route::get('{room}')->name('edit')->uses('RoomsController@edit');

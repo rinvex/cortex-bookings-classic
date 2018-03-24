@@ -5,6 +5,9 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Cortex\Bookings\Models\Room;
+use Cortex\Foundation\DataTables\ImportLogsDataTable;
+use Cortex\Foundation\Http\Requests\ImportFormRequest;
+use Cortex\Foundation\Importers\DefaultImporter;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Bookings\DataTables\Adminarea\RoomsDataTable;
@@ -49,6 +52,53 @@ class RoomsController extends AuthorizedController
             'phrase' => trans('cortex/bookings::common.rooms'),
             'id' => "adminarea-rooms-{$room->getKey()}-logs-table",
         ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+    }
+
+    /**
+     * Import rooms.
+     *
+     * @return \Illuminate\View\View
+     */
+    public function import()
+    {
+        return view('cortex/foundation::adminarea.pages.import', [
+            'id' => 'adminarea-rooms-import',
+            'tabs' => 'adminarea.rooms.tabs',
+            'url' => route('adminarea.rooms.hoard'),
+            'phrase' => trans('cortex/bookings::common.rooms'),
+        ]);
+    }
+
+    /**
+     * Hoard rooms.
+     *
+     * @param \Cortex\Foundation\Http\Requests\ImportFormRequest $request
+     * @param \Cortex\Foundation\Importers\DefaultImporter       $importer
+     *
+     * @return void
+     */
+    public function hoard(ImportFormRequest $request, DefaultImporter $importer)
+    {
+        // Handle the import
+        $importer->config['resource'] = $this->resource;
+        $importer->handleImport();
+    }
+
+    /**
+     * List room import logs.
+     *
+     * @param \Cortex\Foundation\DataTables\ImportLogsDataTable $importLogsDatatable
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     */
+    public function importLogs(ImportLogsDataTable $importLogsDatatable)
+    {
+        return $importLogsDatatable->with([
+            'resource' => 'room',
+            'tabs' => 'adminarea.rooms.tabs',
+            'id' => 'adminarea-rooms-import-logs-table',
+            'phrase' => trans('cortex/rooms::common.rooms'),
+        ])->render('cortex/foundation::adminarea.pages.datatable-import-logs');
     }
 
     /**

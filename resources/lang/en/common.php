@@ -24,6 +24,8 @@ return [
     'active' => 'Active',
     'yes' => 'Yes',
     'no' => 'No',
+    'file' => 'File',
+    'import' => 'Import',
 
     // Rooms
     'rooms' => 'Rooms',
