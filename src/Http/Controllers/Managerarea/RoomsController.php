@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
 use Cortex\Bookings\Models\Room;
-use Cortex\Foundation\DataTables\ImportLogsDataTable;
-use Cortex\Foundation\Http\Requests\ImportFormRequest;
-use Cortex\Foundation\Importers\DefaultImporter;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
+use Cortex\Foundation\Importers\DefaultImporter;
+use Cortex\Foundation\DataTables\ImportLogsDataTable;
+use Cortex\Foundation\Http\Requests\ImportFormRequest;
 use Cortex\Bookings\DataTables\Managerarea\RoomsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest;
