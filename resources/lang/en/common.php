@@ -26,6 +26,7 @@ return [
     'no' => 'No',
     'file' => 'File',
     'import' => 'Import',
+    'tags' => 'Tags',
 
     // Rooms
     'rooms' => 'Rooms',

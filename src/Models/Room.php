@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
+use Rinvex\Tags\Traits\Taggable;
 use Rinvex\Bookings\Models\Bookable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
@@ -72,6 +73,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  */
 class Room extends Bookable implements HasMedia
 {
+    use Taggable;
     use Auditable;
     use Tenantable;
     use LogsActivity;
@@ -137,6 +139,7 @@ class Room extends Bookable implements HasMedia
             'maximum_booking_length' => 'nullable|integer|max:10000',
             'minimum_booking_length' => 'nullable|integer|max:10000',
             'booking_interval_limit' => 'nullable|integer|max:150',
+            'tags' => 'nullable|array',
         ]);
     }
 
