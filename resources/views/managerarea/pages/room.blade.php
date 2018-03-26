@@ -138,7 +138,7 @@
                                     {{-- Unit --}}
                                     <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
                                         {{ Form::label('unit', trans('cortex/bookings::common.unit'), ['class' => 'control-label']) }}
-                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $room->exists ? null : 'hour', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('unit'))
                                             <span class="help-block">{{ $errors->first('unit') }}</span>

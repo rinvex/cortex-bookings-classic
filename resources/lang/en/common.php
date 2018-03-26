@@ -19,6 +19,7 @@ return [
     'unit_minute' => 'Minute',
     'unit_hour' => 'Hour',
     'unit_day' => 'Day',
+    'unit_month' => 'Month',
     'logs' => 'Logs',
     'media' => 'Media',
     'active' => 'Active',

@@ -128,7 +128,7 @@ class Room extends Bookable implements HasMedia
             'description' => 'nullable|string|max:10000',
             'is_active' => 'sometimes|boolean',
             'price' => 'required|numeric',
-            'unit' => 'required|string|in:minute,hour,day',
+            'unit' => 'required|string|in:minute,hour,day,month',
             'currency' => 'required|string|size:3',
             'style' => 'nullable|string|max:150',
             'sort_order' => 'nullable|integer|max:10000000',
