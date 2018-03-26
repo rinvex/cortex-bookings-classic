@@ -29,12 +29,8 @@ class CreateRoomsTable extends Migration
             $table->string('style')->nullable();
             $table->mediumInteger('sort_order')->unsigned()->default(0);
             $table->mediumInteger('capacity')->unsigned()->nullable();
-            $table->smallInteger('early_booking_limit')->unsigned()->nullable();
-            $table->smallInteger('late_booking_limit')->unsigned()->nullable();
-            $table->smallInteger('late_cancellation_limit')->unsigned()->nullable();
-            $table->smallInteger('maximum_booking_length')->unsigned()->nullable();
-            $table->smallInteger('minimum_booking_length')->unsigned()->nullable();
-            $table->tinyInteger('booking_interval_limit')->unsigned()->nullable();
+            $table->smallInteger('maximum_units')->unsigned()->nullable();
+            $table->smallInteger('minimum_units')->unsigned()->nullable();
             $table->auditableAndTimestamps();
             $table->softDeletes();
 

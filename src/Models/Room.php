@@ -27,12 +27,8 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property string                                                                          $style
  * @property int                                                                             $sort_order
  * @property int                                                                             $capacity
- * @property int                                                                             $early_booking_limit
- * @property int                                                                             $late_booking_limit
- * @property int                                                                             $late_cancellation_limit
- * @property int                                                                             $maximum_booking_length
- * @property int                                                                             $minimum_booking_length
- * @property int                                                                             $booking_interval_limit
+ * @property int                                                                             $maximum_units
+ * @property int                                                                             $minimum_units
  * @property \Carbon\Carbon|null                                                             $created_at
  * @property \Carbon\Carbon|null                                                             $updated_at
  * @property \Carbon\Carbon                                                                  $deleted_at
@@ -44,18 +40,14 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room ordered($direction = 'asc')
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereBaseCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereBookingIntervalLimit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCurrency($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereEarlyBookingLimit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereId($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereLateBookingLimit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereLateCancellationLimit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMaximumBookingLength($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMinimumBookingLength($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMaximumUnits($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMinimumUnits($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllowed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsBypassed($value)
@@ -136,12 +128,8 @@ class Room extends Bookable implements HasMedia
             'style' => 'nullable|string|max:150',
             'sort_order' => 'nullable|integer|max:10000000',
             'capacity' => 'nullable|integer|max:10000000',
-            'early_booking_limit' => 'nullable|integer|max:10000',
-            'late_booking_limit' => 'nullable|integer|max:10000',
-            'late_cancellation_limit' => 'nullable|integer|max:10000',
-            'maximum_booking_length' => 'nullable|integer|max:10000',
-            'minimum_booking_length' => 'nullable|integer|max:10000',
-            'booking_interval_limit' => 'nullable|integer|max:150',
+            'maximum_units' => 'nullable|integer|max:10000',
+            'minimum_units' => 'nullable|integer|max:10000',
             'tags' => 'nullable|array',
         ]);
     }
