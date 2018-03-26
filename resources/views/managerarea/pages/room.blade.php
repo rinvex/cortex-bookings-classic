@@ -41,7 +41,7 @@
 
                             <div class="row">
 
-                                <div class="col-md-8">
+                                <div class="col-md-4">
 
                                     {{-- Title --}}
                                     <div class="form-group{{ $errors->has('title') ? ' has-error' : '' }}">
@@ -69,44 +69,12 @@
 
                                 </div>
 
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-4">
-
-                                    {{-- Sort Order --}}
-                                    <div class="form-group{{ $errors->has('sort_order') ? ' has-error' : '' }}">
-                                        {{ Form::label('sort_order', trans('cortex/bookings::common.sort_order'), ['class' => 'control-label']) }}
-                                        {{ Form::number('sort_order', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.sort_order')]) }}
-
-                                        @if ($errors->has('sort_order'))
-                                            <span class="help-block">{{ $errors->first('sort_order') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Style --}}
-                                    <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
-                                        {{ Form::label('style', trans('cortex/tags::common.style'), ['class' => 'control-label']) }}
-                                        {{ Form::text('style', null, ['class' => 'form-control style-picker', 'placeholder' => trans('cortex/tags::common.style'), 'data-placement' => 'bottomRight', 'readonly' => 'readonly']) }}
-
-                                        @if ($errors->has('style'))
-                                            <span class="help-block">{{ $errors->first('style') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
                                 <div class="col-md-4">
 
                                     {{-- Active --}}
                                     <div class="form-group{{ $errors->has('is_active') ? ' has-error' : '' }}">
                                         {{ Form::label('is_active', trans('cortex/bookings::common.active'), ['class' => 'control-label']) }}
-                                        {{ Form::select('is_active', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+                                        {{ Form::select('is_active', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
                                         @if ($errors->has('is_active'))
                                             <span class="help-block">{{ $errors->first('is_active') }}</span>
@@ -121,7 +89,7 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Base_cost --}}
+                                    {{-- Base Cost --}}
                                     <div class="form-group{{ $errors->has('base_cost') ? ' has-error' : '' }}">
                                         {{ Form::label('base_cost', trans('cortex/bookings::common.base_cost'), ['class' => 'control-label']) }}
                                         {{ Form::number('base_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.base_cost'), 'required' => 'required']) }}
@@ -152,7 +120,7 @@
                                     {{-- Unit --}}
                                     <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
                                         {{ Form::label('unit', trans('cortex/bookings::common.unit'), ['class' => 'control-label']) }}
-                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $room->exists ? null : 'hour', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $room->exists ? null : 'hour', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
                                         @if ($errors->has('unit'))
                                             <span class="help-block">{{ $errors->first('unit') }}</span>
@@ -160,6 +128,10 @@
                                     </div>
 
                                 </div>
+
+                            </div>
+
+                            <div class="row">
 
                                 <div class="col-md-4">
 
@@ -170,6 +142,53 @@
 
                                         @if ($errors->has('currency'))
                                             <span class="help-block">{{ $errors->first('currency') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Sort Order --}}
+                                    <div class="form-group{{ $errors->has('sort_order') ? ' has-error' : '' }}">
+                                        {{ Form::label('sort_order', trans('cortex/bookings::common.sort_order'), ['class' => 'control-label']) }}
+                                        {{ Form::number('sort_order', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.sort_order')]) }}
+
+                                        @if ($errors->has('sort_order'))
+                                            <span class="help-block">{{ $errors->first('sort_order') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Style --}}
+                                    <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
+                                        {{ Form::label('style', trans('cortex/tags::common.style'), ['class' => 'control-label']) }}
+                                        {{ Form::text('style', null, ['class' => 'form-control style-picker', 'placeholder' => trans('cortex/tags::common.style'), 'data-placement' => 'bottomRight', 'readonly' => 'readonly']) }}
+
+                                        @if ($errors->has('style'))
+                                            <span class="help-block">{{ $errors->first('style') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    {{-- Tags --}}
+                                    <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">
+                                        {{ Form::label('tags[]', trans('cortex/bookings::common.tags'), ['class' => 'control-label']) }}
+                                        {{ Form::hidden('tags', '') }}
+                                        {{ Form::select('tags[]', $tags, null, ['class' => 'form-control select2', 'multiple' => 'multiple', 'data-width' => '100%', 'data-tags' => 'true']) }}
+
+                                        @if ($errors->has('tags'))
+                                            <span class="help-block">{{ $errors->first('tags') }}</span>
                                         @endif
                                     </div>
 
