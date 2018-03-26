@@ -52,7 +52,8 @@ class RoomsDataTable extends AbstractDataTable
 
         return [
             'title' => ['title' => trans('cortex/bookings::common.title'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
-            'price' => ['title' => trans('cortex/bookings::common.price')],
+            'base_cost' => ['title' => trans('cortex/bookings::common.base_cost')],
+            'unit_cost' => ['title' => trans('cortex/bookings::common.unit_cost')],
             'unit' => ['title' => trans('cortex/bookings::common.unit'), 'render' => 'Lang.trans(\'cortex/bookings::common.unit_\'+data)'],
             'currency' => ['title' => trans('cortex/bookings::common.currency')],
             'sort_order' => ['title' => trans('cortex/bookings::common.sort_order'), 'visible' => false],

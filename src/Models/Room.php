@@ -20,7 +20,8 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property array                                                                           $title
  * @property array                                                                           $description
  * @property bool                                                                            $is_active
- * @property mixed                                                                           $price
+ * @property mixed                                                                           $base_cost
+ * @property mixed                                                                           $unit_cost
  * @property string                                                                          $unit
  * @property string                                                                          $currency
  * @property string                                                                          $style
@@ -42,6 +43,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room ordered($direction = 'asc')
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereBaseCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereBookingIntervalLimit($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCreatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCurrency($value)
@@ -58,11 +60,11 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllowed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsBypassed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room wherePrice($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereStyle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUnit($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUnitCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUpdatedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withAllTenants($tenants, $group = null)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withAnyTenants($tenants, $group = null)
@@ -127,7 +129,8 @@ class Room extends Bookable implements HasMedia
             'title' => 'required|string|max:150',
             'description' => 'nullable|string|max:10000',
             'is_active' => 'sometimes|boolean',
-            'price' => 'required|numeric',
+            'base_cost' => 'required|numeric',
+            'unit_cost' => 'required|numeric',
             'unit' => 'required|string|in:minute,hour,day,month',
             'currency' => 'required|string|size:3',
             'style' => 'nullable|string|max:150',

@@ -22,7 +22,8 @@ class CreateRoomsTable extends Migration
             $table->{$this->jsonable()}('title');
             $table->{$this->jsonable()}('description')->nullable();
             $table->boolean('is_active')->default(true);
-            $table->decimal('price')->default('0.00');
+            $table->decimal('base_cost')->default('0.00');
+            $table->decimal('unit_cost')->default('0.00');
             $table->string('unit')->default('hour');
             $table->string('currency', 3);
             $table->string('style')->nullable();

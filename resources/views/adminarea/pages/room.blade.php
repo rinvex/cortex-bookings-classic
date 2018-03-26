@@ -136,13 +136,27 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Price --}}
-                                    <div class="form-group{{ $errors->has('price') ? ' has-error' : '' }}">
-                                        {{ Form::label('price', trans('cortex/bookings::common.price'), ['class' => 'control-label']) }}
-                                        {{ Form::number('price', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.price'), 'required' => 'required']) }}
+                                    {{-- Base Cost --}}
+                                    <div class="form-group{{ $errors->has('base_cost') ? ' has-error' : '' }}">
+                                        {{ Form::label('base_cost', trans('cortex/bookings::common.base_cost'), ['class' => 'control-label']) }}
+                                        {{ Form::number('base_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.base_cost'), 'required' => 'required']) }}
 
-                                        @if ($errors->has('price'))
-                                            <span class="help-block">{{ $errors->first('price') }}</span>
+                                        @if ($errors->has('base_cost'))
+                                            <span class="help-block">{{ $errors->first('base_cost') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Unit Cost --}}
+                                    <div class="form-group{{ $errors->has('unit_cost') ? ' has-error' : '' }}">
+                                        {{ Form::label('unit_cost', trans('cortex/bookings::common.unit_cost'), ['class' => 'control-label']) }}
+                                        {{ Form::number('unit_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.unit_cost'), 'required' => 'required']) }}
+
+                                        @if ($errors->has('unit_cost'))
+                                            <span class="help-block">{{ $errors->first('unit_cost') }}</span>
                                         @endif
                                     </div>
 
