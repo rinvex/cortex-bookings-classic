@@ -5,8 +5,12 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
+use Cortex\Bookings\Models\Rate;
 use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Addon;
+use Cortex\Bookings\Models\Booking;
 use Illuminate\Support\ServiceProvider;
+use Cortex\Bookings\Models\Availability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
@@ -41,6 +45,19 @@ class BookingsServiceProvider extends ServiceProvider
     public function register(): void
     {
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.bookings');
+
+        // Bind eloquent models to IoC container
+        $this->app['config']['rinvex.bookings.models.addon'] === Addon::class
+        || $this->app->alias('rinvex.bookings.addon', Addon::class);
+
+        $this->app['config']['rinvex.bookings.models.availability'] === Availability::class
+        || $this->app->alias('rinvex.bookings.availability', Availability::class);
+
+        $this->app['config']['rinvex.bookings.models.booking'] === Booking::class
+        || $this->app->alias('rinvex.bookings.booking', Booking::class);
+
+        $this->app['config']['rinvex.bookings.models.rate'] === Rate::class
+        || $this->app->alias('rinvex.bookings.rate', Rate::class);
 
         // Register console commands
         ! $this->app->runningInConsole() || $this->registerCommands();
