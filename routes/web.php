@@ -23,9 +23,29 @@ Route::domain(domain())->group(function () {
             Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');
 
             Route::name('media.')->prefix('{room}/media')->group(function () {
-                Route::get('/')->name('index')->uses('RoomsMediaController@index');
-                Route::post('/')->name('store')->uses('RoomsMediaController@store');
-                Route::delete('{media}')->name('destroy')->uses('RoomsMediaController@destroy');
+                Route::get('/')->name('index')->uses('RoomMediaController@index');
+                Route::post('/')->name('store')->uses('RoomMediaController@store');
+                Route::delete('{media}')->name('destroy')->uses('RoomMediaController@destroy');
+            });
+        });
+
+        // Events Routes
+        Route::name('events.')->prefix('events')->group(function () {
+            Route::get('/')->name('index')->uses('EventsController@index');
+            Route::get('import')->name('import')->uses('EventsController@import');
+            Route::post('import')->name('hoard')->uses('EventsController@hoard');
+            Route::get('import/logs')->name('import.logs')->uses('EventsController@importLogs');
+            Route::get('create')->name('create')->uses('EventsController@create');
+            Route::post('create')->name('store')->uses('EventsController@store');
+            Route::get('{event}')->name('edit')->uses('EventsController@edit');
+            Route::put('{event}')->name('update')->uses('EventsController@update');
+            Route::get('{event}/logs')->name('logs')->uses('EventsController@logs');
+            Route::delete('{event}')->name('destroy')->uses('EventsController@destroy');
+
+            Route::name('media.')->prefix('{event}/media')->group(function () {
+                Route::get('/')->name('index')->uses('EventMediaController@index');
+                Route::post('/')->name('store')->uses('EventMediaController@store');
+                Route::delete('{media}')->name('destroy')->uses('EventMediaController@destroy');
             });
         });
 
@@ -66,9 +86,29 @@ Route::domain('{subdomain}.'.domain())->group(function () {
                 Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');
 
                 Route::name('media.')->prefix('{room}/media')->group(function () {
-                    Route::get('/')->name('index')->uses('RoomsMediaController@index');
-                    Route::post('/')->name('store')->uses('RoomsMediaController@store');
-                    Route::delete('{media}')->name('destroy')->uses('RoomsMediaController@destroy');
+                    Route::get('/')->name('index')->uses('RoomMediaController@index');
+                    Route::post('/')->name('store')->uses('RoomMediaController@store');
+                    Route::delete('{media}')->name('destroy')->uses('RoomMediaController@destroy');
+                });
+            });
+
+            // Events Routes
+            Route::name('events.')->prefix('events')->group(function () {
+                Route::get('/')->name('index')->uses('EventsController@index');
+                Route::get('import')->name('import')->uses('EventsController@import');
+                Route::post('import')->name('hoard')->uses('EventsController@hoard');
+                Route::get('import/logs')->name('import.logs')->uses('EventsController@importLogs');
+                Route::get('create')->name('create')->uses('EventsController@create');
+                Route::post('create')->name('store')->uses('EventsController@store');
+                Route::get('{event}')->name('edit')->uses('EventsController@edit');
+                Route::put('{event}')->name('update')->uses('EventsController@update');
+                Route::get('{event}/logs')->name('logs')->uses('EventsController@logs');
+                Route::delete('{event}')->name('destroy')->uses('EventsController@destroy');
+
+                Route::name('media.')->prefix('{event}/media')->group(function () {
+                    Route::get('/')->name('index')->uses('EventMediaController@index');
+                    Route::post('/')->name('store')->uses('EventMediaController@store');
+                    Route::delete('{media}')->name('destroy')->uses('EventMediaController@destroy');
                 });
             });
 

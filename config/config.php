@@ -12,11 +12,13 @@ return [
     // Bookings database tables
     'tables' => [
         'rooms' => 'rooms',
+        'events' => 'events',
     ],
 
     // Bookings models
     'models' => [
         'room' => \Cortex\Bookings\Models\Room::class,
+        'event' => \Cortex\Bookings\Models\Event::class,
     ],
 
 ];

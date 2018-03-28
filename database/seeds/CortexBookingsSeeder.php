@@ -19,6 +19,12 @@ class CortexBookingsSeeder extends Seeder
         Bouncer::allow('admin')->to('delete', config('cortex.bookings.models.room'));
         Bouncer::allow('admin')->to('audit', config('cortex.bookings.models.room'));
 
+        Bouncer::allow('admin')->to('list', config('cortex.bookings.models.event'));
+        Bouncer::allow('admin')->to('create', config('cortex.bookings.models.event'));
+        Bouncer::allow('admin')->to('update', config('cortex.bookings.models.event'));
+        Bouncer::allow('admin')->to('delete', config('cortex.bookings.models.event'));
+        Bouncer::allow('admin')->to('audit', config('cortex.bookings.models.event'));
+
         Bouncer::allow('admin')->to('list', config('rinvex.bookings.models.booking'));
         Bouncer::allow('admin')->to('create', config('rinvex.bookings.models.booking'));
         Bouncer::allow('admin')->to('update', config('rinvex.bookings.models.booking'));

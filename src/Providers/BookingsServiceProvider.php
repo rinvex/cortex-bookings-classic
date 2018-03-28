@@ -7,6 +7,7 @@ namespace Cortex\Bookings\Providers;
 use Illuminate\Routing\Router;
 use Cortex\Bookings\Models\Rate;
 use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\Addon;
 use Cortex\Bookings\Models\Booking;
 use Illuminate\Support\ServiceProvider;
@@ -65,6 +66,9 @@ class BookingsServiceProvider extends ServiceProvider
         // Bind eloquent models to IoC container
         $this->app->singleton('cortex.bookings.room', $roomModel = $this->app['config']['cortex.bookings.models.room']);
         $roomModel === Room::class || $this->app->alias('cortex.bookings.room', Room::class);
+
+        $this->app->singleton('cortex.bookings.event', $eventModel = $this->app['config']['cortex.bookings.models.event']);
+        $eventModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
     }
 
     /**
@@ -77,12 +81,15 @@ class BookingsServiceProvider extends ServiceProvider
         // Bind route models and constrains
         $router->pattern('booking', '[0-9]+');
         $router->pattern('room', '[0-9a-z\._-]+');
+        $router->pattern('event', '[0-9a-z\._-]+');
         $router->model('room', config('cortex.bookings.models.room'));
+        $router->model('event', config('cortex.bookings.models.event'));
         $router->model('booking', config('rinvex.bookings.models.booking'));
 
         // Map relations
         Relation::morphMap([
             'room' => config('cortex.bookings.models.room'),
+            'event' => config('cortex.bookings.models.event'),
             'booking' => config('rinvex.bookings.models.booking'),
         ]);
 

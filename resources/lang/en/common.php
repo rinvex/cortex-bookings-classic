@@ -34,6 +34,10 @@ return [
     'rooms' => 'Rooms',
     'create_room' => 'Create New Room',
 
+    // Events
+    'events' => 'Events',
+    'create_event' => 'Create New Event',
+
     // Bookings
     'bookings' => 'Bookings',
     'create_booking' => 'Create New Booking',
