@@ -3,17 +3,17 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/bookings::common.rooms') }} » {{ $room->exists ? $room->title : trans('cortex/bookings::common.create_room') }}
+    {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/bookings::common.events') }} » {{ $event->exists ? $event->title : trans('cortex/bookings::common.create_event') }}
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest::class)->selector("#adminarea-rooms-create-form, #adminarea-rooms-{$room->getKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest::class)->selector("#adminarea-events-create-form, #adminarea-events-{$event->getKey()}-update-form") !!}
 @endpush
 
 {{-- Main Content --}}
 @section('content')
 
-    @if($room->exists)
+    @if($event->exists)
         @include('cortex/foundation::common.partials.confirm-deletion')
     @endif
 
@@ -26,17 +26,17 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($room->exists && $currentUser->can('delete', $room)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('adminarea.rooms.destroy', ['room' => $room]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'room', 'name' => $room->name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
-                {!! Menu::render('adminarea.rooms.tabs', 'nav-tab') !!}
+                @if($event->exists && $currentUser->can('delete', $event)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('adminarea.events.destroy', ['event' => $event]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'event', 'name' => $event->name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
+                {!! Menu::render('adminarea.events.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="details-tab">
 
-                        @if ($room->exists)
-                            {{ Form::model($room, ['url' => route('adminarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => "adminarea-rooms-{$room->getKey()}-update-form"]) }}
+                        @if ($event->exists)
+                            {{ Form::model($event, ['url' => route('adminarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "adminarea-events-{$event->getKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($room, ['url' => route('adminarea.rooms.store'), 'id' => "adminarea-rooms-create-form"]) }}
+                            {{ Form::model($event, ['url' => route('adminarea.events.store'), 'id' => "adminarea-events-create-form"]) }}
                         @endif
 
                             <div class="row">
@@ -120,7 +120,7 @@
                                     {{-- Unit --}}
                                     <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
                                         {{ Form::label('unit', trans('cortex/bookings::common.unit'), ['class' => 'control-label']) }}
-                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $room->exists ? null : 'hour', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
+                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $event->exists ? null : 'day', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
                                         @if ($errors->has('unit'))
                                             <span class="help-block">{{ $errors->first('unit') }}</span>
@@ -165,11 +165,93 @@
 
                                     {{-- Style --}}
                                     <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
-                                        {{ Form::label('style', trans('cortex/tags::common.style'), ['class' => 'control-label']) }}
-                                        {{ Form::text('style', null, ['class' => 'form-control style-picker', 'placeholder' => trans('cortex/tags::common.style'), 'data-placement' => 'bottomRight', 'readonly' => 'readonly']) }}
+                                        {{ Form::label('style', trans('cortex/bookings::common.style'), ['class' => 'control-label']) }}
+                                        {{ Form::text('style', null, ['class' => 'form-control style-picker', 'placeholder' => trans('cortex/bookings::common.style'), 'data-placement' => 'bottomRight', 'readonly' => 'readonly']) }}
 
                                         @if ($errors->has('style'))
                                             <span class="help-block">{{ $errors->first('style') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-6">
+
+                                    {{-- Profile Picture --}}
+                                    <div class="form-group has-feedback{{ $errors->has('profile_picture') ? ' has-error' : '' }}">
+                                        {{ Form::label('profile_picture', trans('cortex/bookings::common.profile_picture'), ['class' => 'control-label']) }}
+
+                                        <div class="input-group">
+                                            {{ Form::text('profile_picture', null, ['class' => 'form-control file-name', 'placeholder' => trans('cortex/bookings::common.profile_picture'), 'readonly' => 'readonly']) }}
+
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file">
+                                                    {{ trans('cortex/bookings::common.browse') }}
+                                                    {{ Form::file('profile_picture', ['class' => 'form-control']) }}
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        @if ($event->exists && $event->getMedia('profile_picture')->count())
+                                            <i class="fa fa-paperclip"></i>
+                                            <a href="{{ $event->getFirstMediaUrl('profile_picture') }}" target="_blank">{{ $event->getFirstMedia('profile_picture')->file_name }}</a> ({{ $event->getFirstMedia('profile_picture')->human_readable_size }})
+                                            <a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('adminarea.members.media.destroy', ['member' => $event, 'media' => $event->getFirstMedia('profile_picture')]) }}" data-modal-title="{{ trans('cortex/foundation::messages.delete_confirmation_title') }}" data-modal-body="{{ trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'media', 'name' => $event->getFirstMedia('profile_picture')->file_name]) }}" title="{{ trans('cortex/foundation::common.delete') }}"><i class="fa fa-trash text-danger"></i></a>
+                                        @endif
+
+                                        @if ($errors->has('profile_picture'))
+                                            <span class="help-block">{{ $errors->first('profile_picture') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-6">
+
+                                    {{-- Cover Photo --}}
+                                    <div class="form-group has-feedback{{ $errors->has('cover_photo') ? ' has-error' : '' }}">
+                                        {{ Form::label('cover_photo', trans('cortex/bookings::common.cover_photo'), ['class' => 'control-label']) }}
+
+                                        <div class="input-group">
+                                            {{ Form::text('cover_photo', null, ['class' => 'form-control file-name', 'placeholder' => trans('cortex/bookings::common.cover_photo'), 'readonly' => 'readonly']) }}
+
+                                            <span class="input-group-btn">
+                                                <span class="btn btn-default btn-file">
+                                                    {{ trans('cortex/bookings::common.browse') }}
+                                                    {{ Form::file('cover_photo', ['class' => 'form-control']) }}
+                                                </span>
+                                            </span>
+                                        </div>
+
+                                        @if ($event->exists && $event->getMedia('cover_photo')->count())
+                                            <i class="fa fa-paperclip"></i>
+                                            <a href="{{ $event->getFirstMediaUrl('cover_photo') }}" target="_blank">{{ $event->getFirstMedia('cover_photo')->file_name }}</a> ({{ $event->getFirstMedia('cover_photo')->human_readable_size }})
+                                            <a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('adminarea.members.media.destroy', ['member' => $event, 'media' => $event->getFirstMedia('cover_photo')]) }}" data-modal-title="{{ trans('cortex/foundation::messages.delete_confirmation_title') }}" data-modal-body="{{ trans('cortex/foundation::messages.delete_confirmation_body', ['type' => 'media', 'name' => $event->getFirstMedia('cover_photo')->file_name]) }}" title="{{ trans('cortex/foundation::common.delete') }}"><i class="fa fa-trash text-danger"></i></a>
+                                        @endif
+
+                                        @if ($errors->has('cover_photo'))
+                                            <span class="help-block">{{ $errors->first('cover_photo') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-12">
+
+                                    {{-- Location --}}
+                                    <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                                        {{ Form::label('location', trans('cortex/bookings::common.location'), ['class' => 'control-label']) }}
+                                        {{ Form::text('location', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.location'), 'required' => 'required']) }}
+
+                                        @if ($errors->has('location'))
+                                            <span class="help-block">{{ $errors->first('location') }}</span>
                                         @endif
                                     </div>
 
@@ -221,7 +303,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $room])
+                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $event])
 
                                 </div>
 

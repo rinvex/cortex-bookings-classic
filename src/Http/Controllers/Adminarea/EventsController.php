@@ -178,6 +178,20 @@ class EventsController extends AuthorizedController
         // Prepare required input fields
         $data = $request->validated();
 
+        ! $request->hasFile('profile_picture')
+        || $event->addMediaFromRequest('profile_picture')
+                  ->sanitizingFileName(function ($fileName) {
+                      return md5($fileName).'.'.pathinfo($fileName, PATHINFO_EXTENSION);
+                  })
+                  ->toMediaCollection('profile_picture', config('cortex.auth.media.disk'));
+
+        ! $request->hasFile('cover_photo')
+        || $event->addMediaFromRequest('cover_photo')
+                  ->sanitizingFileName(function ($fileName) {
+                      return md5($fileName).'.'.pathinfo($fileName, PATHINFO_EXTENSION);
+                  })
+                  ->toMediaCollection('cover_photo', config('cortex.auth.media.disk'));
+
         // Save event
         $event->fill($data)->save();
 

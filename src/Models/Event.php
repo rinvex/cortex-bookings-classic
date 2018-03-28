@@ -137,6 +137,17 @@ class Event extends Bookable implements HasMedia
     }
 
     /**
+     * Register media collections.
+     *
+     * @return void
+     */
+    public function registerMediaCollections(): void
+    {
+        $this->addMediaCollection('profile_picture')->singleFile();
+        $this->addMediaCollection('cover_photo')->singleFile();
+    }
+
+    /**
      * Get the route key for the model.
      *
      * @return string

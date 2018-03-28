@@ -61,10 +61,10 @@ class EventsController extends AuthorizedController
      */
     public function import()
     {
-        return view('cortex/foundation::adminarea.pages.import', [
-            'id' => 'adminarea-events-import',
-            'tabs' => 'adminarea.events.tabs',
-            'url' => route('adminarea.events.hoard'),
+        return view('cortex/foundation::managerarea.pages.import', [
+            'id' => 'managerarea-events-import',
+            'tabs' => 'managerarea.events.tabs',
+            'url' => route('managerarea.events.hoard'),
             'phrase' => trans('cortex/bookings::common.events'),
         ]);
     }
@@ -95,10 +95,10 @@ class EventsController extends AuthorizedController
     {
         return $importLogsDatatable->with([
             'resource' => 'event',
-            'tabs' => 'adminarea.events.tabs',
-            'id' => 'adminarea-events-import-logs-table',
+            'tabs' => 'managerarea.events.tabs',
+            'id' => 'managerarea-events-import-logs-table',
             'phrase' => trans('cortex/events::common.events'),
-        ])->render('cortex/foundation::adminarea.pages.datatable-import-logs');
+        ])->render('cortex/foundation::managerarea.pages.datatable-import-logs');
     }
 
     /**
@@ -134,7 +134,9 @@ class EventsController extends AuthorizedController
      */
     protected function form(Event $event)
     {
-        return view('cortex/bookings::managerarea.pages.event', compact('event'));
+        $tags = app('rinvex.tags.tag')->pluck('title', 'id');
+
+        return view('cortex/bookings::managerarea.pages.event', compact('event', 'tags'));
     }
 
     /**
