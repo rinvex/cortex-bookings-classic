@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\Http\Controllers\Managerarea;
+namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Illuminate\Support\Str;
 use Cortex\Bookings\Models\Room;
@@ -11,7 +11,7 @@ use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Foundation\Http\Requests\ImageFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 
-class RoomsMediaController extends AuthorizedController
+class RoomMediaController extends AuthorizedController
 {
     /**
      * {@inheritdoc}
@@ -50,11 +50,11 @@ class RoomsMediaController extends AuthorizedController
     {
         return $mediaDataTable->with([
             'resource' => $room,
-            'tabs' => 'managerarea.rooms.tabs',
+            'tabs' => 'adminarea.rooms.tabs',
             'phrase' => trans('cortex/bookings::common.rooms'),
-            'id' => "managerarea-rooms-{$room->getKey()}-media-table",
-            'url' => route('managerarea.rooms.media.store', ['room' => $room]),
-        ])->render('cortex/foundation::managerarea.pages.datatable-media');
+            'id' => "adminarea-rooms-{$room->getKey()}-media-table",
+            'url' => route('adminarea.rooms.media.store', ['room' => $room]),
+        ])->render('cortex/foundation::adminarea.pages.datatable-media');
     }
 
     /**
@@ -87,7 +87,7 @@ class RoomsMediaController extends AuthorizedController
         $room->media()->where($media->getKeyName(), $media->getKey())->first()->delete();
 
         return intend([
-            'url' => route('managerarea.rooms.media.index', ['room' => $room]),
+            'url' => route('adminarea.rooms.media.index', ['room' => $room]),
             'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'media', 'id' => $media->getKey()])],
         ]);
     }
