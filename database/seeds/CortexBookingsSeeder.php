@@ -24,5 +24,20 @@ class CortexBookingsSeeder extends Seeder
         Bouncer::allow('admin')->to('update', config('rinvex.bookings.models.booking'));
         Bouncer::allow('admin')->to('delete', config('rinvex.bookings.models.booking'));
         Bouncer::allow('admin')->to('audit', config('rinvex.bookings.models.booking'));
+
+        Bouncer::allow('admin')->to('list', config('rinvex.bookings.models.addon'));
+        Bouncer::allow('admin')->to('create', config('rinvex.bookings.models.addon'));
+        Bouncer::allow('admin')->to('update', config('rinvex.bookings.models.addon'));
+        Bouncer::allow('admin')->to('delete', config('rinvex.bookings.models.addon'));
+
+        Bouncer::allow('admin')->to('list', config('rinvex.bookings.models.rate'));
+        Bouncer::allow('admin')->to('create', config('rinvex.bookings.models.rate'));
+        Bouncer::allow('admin')->to('update', config('rinvex.bookings.models.rate'));
+        Bouncer::allow('admin')->to('delete', config('rinvex.bookings.models.rate'));
+
+        Bouncer::allow('admin')->to('list', config('rinvex.bookings.models.availability'));
+        Bouncer::allow('admin')->to('create', config('rinvex.bookings.models.availability'));
+        Bouncer::allow('admin')->to('update', config('rinvex.bookings.models.availability'));
+        Bouncer::allow('admin')->to('delete', config('rinvex.bookings.models.availability'));
     }
 }

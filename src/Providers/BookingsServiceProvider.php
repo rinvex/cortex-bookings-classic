@@ -83,10 +83,7 @@ class BookingsServiceProvider extends ServiceProvider
         // Map relations
         Relation::morphMap([
             'room' => config('cortex.bookings.models.room'),
-            'base_cost' => config('rinvex.bookings.models.base_cost'),
-            'unit_cost' => config('rinvex.bookings.models.unit_cost'),
             'booking' => config('rinvex.bookings.models.booking'),
-            'rate' => config('rinvex.bookings.models.rate'),
         ]);
 
         // Load resources

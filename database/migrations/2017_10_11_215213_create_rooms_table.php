@@ -24,13 +24,14 @@ class CreateRoomsTable extends Migration
             $table->boolean('is_active')->default(true);
             $table->decimal('base_cost')->default('0.00');
             $table->decimal('unit_cost')->default('0.00');
-            $table->string('unit')->default('hour');
             $table->string('currency', 3);
-            $table->string('style')->nullable();
-            $table->mediumInteger('sort_order')->unsigned()->default(0);
-            $table->mediumInteger('capacity')->unsigned()->nullable();
+            $table->string('unit')->default('hour');
             $table->smallInteger('maximum_units')->unsigned()->nullable();
             $table->smallInteger('minimum_units')->unsigned()->nullable();
+            $table->tinyInteger('is_recurring')->unsigned()->default(0);
+            $table->mediumInteger('sort_order')->unsigned()->default(0);
+            $table->mediumInteger('capacity')->unsigned()->nullable();
+            $table->string('style')->nullable();
             $table->auditableAndTimestamps();
             $table->softDeletes();
 

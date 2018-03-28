@@ -22,19 +22,19 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property bool                                                                            $is_active
  * @property mixed                                                                           $base_cost
  * @property mixed                                                                           $unit_cost
- * @property string                                                                          $unit
  * @property string                                                                          $currency
- * @property string                                                                          $style
- * @property int                                                                             $sort_order
- * @property int                                                                             $capacity
+ * @property string                                                                          $unit
  * @property int                                                                             $maximum_units
  * @property int                                                                             $minimum_units
+ * @property boolean                                                                         $is_recurring
+ * @property int                                                                             $sort_order
+ * @property int                                                                             $capacity
+ * @property string                                                                          $style
  * @property \Carbon\Carbon|null                                                             $created_at
  * @property \Carbon\Carbon|null                                                             $updated_at
  * @property \Carbon\Carbon                                                                  $deleted_at
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Booking[] $bookings
- * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Price[]   $prices
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Rate[]    $rates
  * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
  *
@@ -45,6 +45,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereDeletedAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereId($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereIsRecurring($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereIsActive($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMaximumUnits($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMinimumUnits($value)
@@ -123,13 +124,14 @@ class Room extends Bookable implements HasMedia
             'is_active' => 'sometimes|boolean',
             'base_cost' => 'required|numeric',
             'unit_cost' => 'required|numeric',
-            'unit' => 'required|string|in:minute,hour,day,month',
             'currency' => 'required|string|size:3',
-            'style' => 'nullable|string|max:150',
-            'sort_order' => 'nullable|integer|max:10000000',
-            'capacity' => 'nullable|integer|max:10000000',
+            'unit' => 'required|string|in:minute,hour,day,month',
             'maximum_units' => 'nullable|integer|max:10000',
             'minimum_units' => 'nullable|integer|max:10000',
+            'is_recurring' => 'nullable|boolean',
+            'sort_order' => 'nullable|integer|max:10000000',
+            'capacity' => 'nullable|integer|max:10000000',
+            'style' => 'nullable|string|max:150',
             'tags' => 'nullable|array',
         ]);
     }
