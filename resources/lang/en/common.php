@@ -29,6 +29,12 @@ return [
     'file' => 'File',
     'import' => 'Import',
     'tags' => 'Tags',
+    'location' => 'Location',
+    'browse' => 'Browse',
+    'profile_picture' => 'Profile Picture',
+    'cover_photo' => 'Cover Photo',
+    'start_date' => 'Start Date',
+    'start_time' => 'Start Time',
 
     // Rooms
     'rooms' => 'Rooms',

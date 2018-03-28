@@ -61,10 +61,10 @@ class RoomsController extends AuthorizedController
      */
     public function import()
     {
-        return view('cortex/foundation::adminarea.pages.import', [
-            'id' => 'adminarea-rooms-import',
-            'tabs' => 'adminarea.rooms.tabs',
-            'url' => route('adminarea.rooms.hoard'),
+        return view('cortex/foundation::managerarea.pages.import', [
+            'id' => 'managerarea-rooms-import',
+            'tabs' => 'managerarea.rooms.tabs',
+            'url' => route('managerarea.rooms.hoard'),
             'phrase' => trans('cortex/bookings::common.rooms'),
         ]);
     }
@@ -95,10 +95,10 @@ class RoomsController extends AuthorizedController
     {
         return $importLogsDatatable->with([
             'resource' => 'room',
-            'tabs' => 'adminarea.rooms.tabs',
-            'id' => 'adminarea-rooms-import-logs-table',
+            'tabs' => 'managerarea.rooms.tabs',
+            'id' => 'managerarea-rooms-import-logs-table',
             'phrase' => trans('cortex/rooms::common.rooms'),
-        ])->render('cortex/foundation::adminarea.pages.datatable-import-logs');
+        ])->render('cortex/foundation::managerarea.pages.datatable-import-logs');
     }
 
     /**
@@ -134,7 +134,9 @@ class RoomsController extends AuthorizedController
      */
     protected function form(Room $room)
     {
-        return view('cortex/bookings::managerarea.pages.room', compact('room'));
+        $tags = app('rinvex.tags.tag')->pluck('title', 'id');
+
+        return view('cortex/bookings::managerarea.pages.room', compact('room', 'tags'));
     }
 
     /**
