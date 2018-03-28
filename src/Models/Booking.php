@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
-use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\Booking as BaseBooking;
@@ -28,7 +27,6 @@ use Rinvex\Bookings\Models\Booking as BaseBooking;
  * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[] $activity
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                            $bookable
  * @property-read \Illuminate\Database\Eloquent\Model|\Eloquent                            $customer
- * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]      $tenants
  *
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking cancelled()
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking cancelledAfter($date)
@@ -58,16 +56,10 @@ use Rinvex\Bookings\Models\Booking as BaseBooking;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking wherePriceEquation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereStartsAt($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking withAllTenants($tenants, $group = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking withAnyTenants($tenants, $group = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking withTenants($tenants, $group = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking withoutAnyTenants()
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Booking withoutTenants($tenants, $group = null)
  * @mixin \Eloquent
  */
 class Booking extends BaseBooking
 {
     use Auditable;
-    use Tenantable;
     use LogsActivity;
 }
