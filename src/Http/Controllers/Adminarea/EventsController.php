@@ -11,8 +11,8 @@ use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
 use Cortex\Bookings\DataTables\Adminarea\EventsDataTable;
-use Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
+use Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest;
 
 class EventsController extends AuthorizedController
 {
@@ -39,7 +39,7 @@ class EventsController extends AuthorizedController
     /**
      * List event logs.
      *
-     * @param \Cortex\Bookings\Models\Event                $event
+     * @param \Cortex\Bookings\Models\Event               $event
      * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
@@ -169,7 +169,7 @@ class EventsController extends AuthorizedController
      * Process stored/updated event.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Event            $event
+     * @param \Cortex\Bookings\Models\Event           $event
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
