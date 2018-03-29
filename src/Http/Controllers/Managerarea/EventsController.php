@@ -134,7 +134,7 @@ class EventsController extends AuthorizedController
      */
     protected function form(Event $event)
     {
-        $tags = app('rinvex.tags.tag')->pluck('title', 'id');
+        $tags = app('rinvex.tags.tag')->pluck('name', 'id');
 
         return view('cortex/bookings::managerarea.pages.event', compact('event', 'tags'));
     }

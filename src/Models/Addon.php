@@ -15,7 +15,7 @@ use Rinvex\Bookings\Models\Addon as BaseAddon;
  * @property int                                                                           $bookable_id
  * @property string                                                                        $bookable_type
  * @property string                                                                        $slug
- * @property string                                                                        $title
+ * @property string                                                                        $name
  * @property string                                                                        $description
  * @property float                                                                         $base_cost
  * @property string                                                                        $base_cost_modifier
@@ -35,7 +35,7 @@ use Rinvex\Bookings\Models\Addon as BaseAddon;
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereDescription($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon wherePriority($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereUnitCost($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereUnitCostModifier($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Rinvex\Bookings\Models\Addon whereUpdatedAt($value)

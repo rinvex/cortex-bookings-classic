@@ -18,7 +18,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *
  * @property int                                                                             $id
  * @property string                                                                          $slug
- * @property array                                                                           $title
+ * @property array                                                                           $name
  * @property array                                                                           $description
  * @property bool                                                                            $is_active
  * @property mixed                                                                           $base_cost
@@ -53,7 +53,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereMultipleBookingsAllocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereMultipleBookingsAllowed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereMultipleBookingsBypassed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereStyle($value)
@@ -120,7 +120,7 @@ class Event extends Bookable implements HasMedia
         $this->setTable(config('cortex.bookings.tables.events'));
         $this->setRules([
             'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.events').',slug',
-            'title' => 'required|string|max:150',
+            'name' => 'required|string|max:150',
             'description' => 'nullable|string|max:10000',
             'is_active' => 'sometimes|boolean',
             'base_cost' => 'required|numeric',

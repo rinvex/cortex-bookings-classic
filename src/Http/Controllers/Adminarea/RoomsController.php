@@ -134,7 +134,7 @@ class RoomsController extends AuthorizedController
      */
     protected function form(Room $room)
     {
-        $tags = app('rinvex.tags.tag')->pluck('title', 'id');
+        $tags = app('rinvex.tags.tag')->pluck('name', 'id');
 
         return view('cortex/bookings::adminarea.pages.room', compact('room', 'tags'));
     }

@@ -30,24 +30,24 @@ Breadcrumbs::register('adminarea.rooms.create', function (BreadcrumbsGenerator $
 
 Breadcrumbs::register('adminarea.rooms.edit', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('adminarea.rooms.index');
-    $breadcrumbs->push($room->title, route('adminarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('adminarea.rooms.edit', ['room' => $room]));
 });
 
 Breadcrumbs::register('adminarea.rooms.bookings.index', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('adminarea.rooms.index');
-    $breadcrumbs->push($room->title, route('adminarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('adminarea.rooms.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('adminarea.rooms.bookings.index', ['room' => $room]));
 });
 
 Breadcrumbs::register('adminarea.rooms.logs', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('adminarea.rooms.index');
-    $breadcrumbs->push($room->title, route('adminarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('adminarea.rooms.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.rooms.logs', ['room' => $room]));
 });
 
 Breadcrumbs::register('adminarea.rooms.media.index', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('adminarea.rooms.index');
-    $breadcrumbs->push($room->title, route('adminarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('adminarea.rooms.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.rooms.media.index', ['room' => $room]));
 });
 
@@ -74,24 +74,24 @@ Breadcrumbs::register('adminarea.events.create', function (BreadcrumbsGenerator 
 
 Breadcrumbs::register('adminarea.events.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($event->title, route('adminarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push($event->name, route('adminarea.events.edit', ['event' => $event]));
 });
 
 Breadcrumbs::register('adminarea.events.bookings.index', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($room->title, route('adminarea.events.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('adminarea.events.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('adminarea.events.bookings.index', ['room' => $room]));
 });
 
 Breadcrumbs::register('adminarea.events.logs', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($event->title, route('adminarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push($event->name, route('adminarea.events.edit', ['event' => $event]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.events.logs', ['event' => $event]));
 });
 
 Breadcrumbs::register('adminarea.events.media.index', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($event->title, route('adminarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push($event->name, route('adminarea.events.edit', ['event' => $event]));
     $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.events.media.index', ['event' => $event]));
 });
 
@@ -119,18 +119,18 @@ Breadcrumbs::register('managerarea.rooms.create', function (BreadcrumbsGenerator
 
 Breadcrumbs::register('managerarea.rooms.edit', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('managerarea.rooms.index');
-    $breadcrumbs->push($room->title, route('managerarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('managerarea.rooms.edit', ['room' => $room]));
 });
 
 Breadcrumbs::register('managerarea.rooms.bookings.index', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('managerarea.rooms.index');
-    $breadcrumbs->push($room->title, route('managerarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('managerarea.rooms.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('managerarea.rooms.bookings.index', ['room' => $room]));
 });
 
 Breadcrumbs::register('managerarea.rooms.logs', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('managerarea.rooms.index');
-    $breadcrumbs->push($room->title, route('managerarea.rooms.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('managerarea.rooms.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('managerarea.rooms.logs', ['room' => $room]));
 });
 
@@ -157,17 +157,17 @@ Breadcrumbs::register('managerarea.events.create', function (BreadcrumbsGenerato
 
 Breadcrumbs::register('managerarea.events.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('managerarea.events.index');
-    $breadcrumbs->push($event->title, route('managerarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push($event->name, route('managerarea.events.edit', ['event' => $event]));
 });
 
 Breadcrumbs::register('managerarea.events.bookings.index', function (BreadcrumbsGenerator $breadcrumbs, Room $room) {
     $breadcrumbs->parent('managerarea.events.index');
-    $breadcrumbs->push($room->title, route('managerarea.events.edit', ['room' => $room]));
+    $breadcrumbs->push($room->name, route('managerarea.events.edit', ['room' => $room]));
     $breadcrumbs->push(trans('cortex/bookings::common.bookings'), route('managerarea.events.bookings.index', ['room' => $room]));
 });
 
 Breadcrumbs::register('managerarea.events.logs', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('managerarea.events.index');
-    $breadcrumbs->push($event->title, route('managerarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push($event->name, route('managerarea.events.edit', ['event' => $event]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('managerarea.events.logs', ['event' => $event]));
 });

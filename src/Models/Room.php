@@ -18,7 +18,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  *
  * @property int                                                                             $id
  * @property string                                                                          $slug
- * @property array                                                                           $title
+ * @property array                                                                           $name
  * @property array                                                                           $description
  * @property bool                                                                            $is_active
  * @property mixed                                                                           $base_cost
@@ -53,7 +53,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllocation($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllowed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsBypassed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereTitle($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereName($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereStyle($value)
@@ -120,7 +120,7 @@ class Room extends Bookable implements HasMedia
         $this->setTable(config('cortex.bookings.tables.rooms'));
         $this->setRules([
             'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.rooms').',slug',
-            'title' => 'required|string|max:150',
+            'name' => 'required|string|max:150',
             'description' => 'nullable|string|max:10000',
             'is_active' => 'sometimes|boolean',
             'base_cost' => 'required|numeric',
