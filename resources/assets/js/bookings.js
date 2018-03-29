@@ -22,21 +22,21 @@ $(function() {
             right: 'month,agendaWeek,agendaDay,listYear',
         },
         events: {
-            url: routes.route(window.Accessarea + '.bookings.list'),
+            url: routes.route(window.Accessarea + '.events.ajax'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
             type: 'POST',
         },
         customers: $.ajax({
-            url: routes.route(window.Accessarea + '.bookings.customers'),
+            url: routes.route(window.Accessarea + '.members.ajax'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
             type: 'POST',
         }),
         rooms: $.ajax({
-            url: routes.route(window.Accessarea + '.bookings.rooms'),
+            url: routes.route(window.Accessarea + '.rooms.ajax'),
             data: {
                 _token: window.Laravel.csrfToken,
             },

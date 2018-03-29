@@ -2,15 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Cortex\Bookings\Http\Controllers\Managerarea;
+namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
+use Cortex\Bookings\Models\Room;
 use Illuminate\Support\Facades\DB;
 use Cortex\Bookings\Models\Booking;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
-use Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest;
+use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
 
-class BookingsController extends AuthorizedController
+class RoomBookingsController extends AuthorizedController
 {
     /**
      * {@inheritdoc}
@@ -21,10 +22,30 @@ class BookingsController extends AuthorizedController
      * {@inheritdoc}
      */
     protected $resourceMethodsWithoutModels = [
-        'list',
         'customers',
         'rooms',
+        'list',
     ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public function authorizeResource($model, $parameter = null, array $options = [], $request = null): void
+    {
+        $middleware = [];
+        $parameter = $parameter ?: snake_case(class_basename($model));
+
+        foreach ($this->mapResourceAbilities() as $method => $ability) {
+            $modelName = in_array($method, $this->resourceMethodsWithoutModels()) ? $model : $parameter;
+
+            $middleware["can:update,{$modelName}"][] = $method;
+            $middleware["can:{$ability},bookings"][] = $method;
+        }
+
+        foreach ($middleware as $middlewareName => $methods) {
+            $this->middleware($middlewareName, $options)->only($methods);
+        }
+    }
 
     /**
      * List all bookings.
@@ -33,7 +54,7 @@ class BookingsController extends AuthorizedController
      */
     public function index()
     {
-        return view('cortex/bookings::managerarea.pages.bookings');
+        return view('cortex/bookings::adminarea.pages.bookings');
     }
 
     /**
@@ -41,7 +62,7 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function list(): array
+    public function list(Room $room): array
     {
         $results = [];
         $rangeEnds = request()->get('end');
@@ -74,16 +95,6 @@ class BookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function customers(): array
-    {
-        return app('cortex.auth.member')->all()->pluck('name', 'id');
-    }
-
-    /**
-     * List the bookings.
-     *
-     * @return array
-     */
     public function rooms(): array
     {
         $rooms = app('cortex.bookings.room')->all(['id', DB::raw('JSON_EXTRACT(title, "$.en") as title'), 'style']);
@@ -94,7 +105,7 @@ class BookingsController extends AuthorizedController
     /**
      * Store new booking.
      *
-     * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
+     * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
      *
      * @return int
      */
@@ -106,8 +117,8 @@ class BookingsController extends AuthorizedController
     /**
      * Update given booking.
      *
-     * @param \Cortex\Bookings\Http\Requests\Managerarea\BookingFormRequest $request
-     * @param \Cortex\Bookings\Models\Booking                               $booking
+     * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
+     * @param \Cortex\Bookings\Models\Booking                             $booking
      *
      * @return int
      */
@@ -138,13 +149,14 @@ class BookingsController extends AuthorizedController
     /**
      * Destroy given booking.
      *
+     * @param \Cortex\Bookings\Models\Room    $room
      * @param \Cortex\Bookings\Models\Booking $booking
      *
      * @return int
      */
-    public function destroy(Booking $booking): int
+    public function destroy(Room $room, Booking $booking): int
     {
-        $booking->delete();
+        $room->bookings()->where($booking->getKeyName(), $booking->getKey())->first()->delete();
 
         return $booking->getKey();
     }

@@ -27,6 +27,17 @@ Route::domain(domain())->group(function () {
                 Route::post('/')->name('store')->uses('RoomMediaController@store');
                 Route::delete('{media}')->name('destroy')->uses('RoomMediaController@destroy');
             });
+
+            // Bookings Routes
+            Route::get('bookings')->name('bookings')->uses('RoomBookingsController@list');
+            Route::name('bookings.')->prefix('{room}/bookings')->group(function () {
+                Route::get('/')->name('index')->uses('RoomBookingsController@index');
+                Route::post('list')->name('list')->uses('RoomBookingsController@list');
+                Route::post('rooms')->name('rooms')->uses('RoomBookingsController@rooms');
+                Route::post('store')->name('store')->uses('RoomBookingsController@store');
+                Route::put('{booking}')->name('update')->uses('RoomBookingsController@update');
+                Route::delete('{booking}')->name('destroy')->uses('RoomBookingsController@destroy');
+            });
         });
 
         // Events Routes
@@ -47,17 +58,25 @@ Route::domain(domain())->group(function () {
                 Route::post('/')->name('store')->uses('EventMediaController@store');
                 Route::delete('{media}')->name('destroy')->uses('EventMediaController@destroy');
             });
-        });
 
-        // Bookings Routes
-        Route::name('bookings.')->prefix('bookings')->group(function () {
-            Route::get('/')->name('index')->uses('BookingsController@index');
-            Route::post('list')->name('list')->uses('BookingsController@list');
-            Route::post('customers')->name('customers')->uses('BookingsController@customers');
-            Route::post('rooms')->name('rooms')->uses('BookingsController@rooms');
-            Route::post('store')->name('store')->uses('BookingsController@store');
-            Route::put('{booking}')->name('update')->uses('BookingsController@update');
-            Route::delete('{booking}')->name('destroy')->uses('BookingsController@destroy');
+            Route::name('bookings.')->prefix('{event}/bookings')->group(function () {
+                Route::get('/')->name('index')->uses('EventMediaController@index');
+                Route::post('/')->name('store')->uses('EventMediaController@store');
+                Route::delete('{media}')->name('destroy')->uses('EventMediaController@destroy');
+            });
+
+            // Bookings Routes
+            Route::get('bookings')->name('bookings')->uses('EventBookingsController@all');
+            Route::name('bookings.')->prefix('{event}/bookings')->group(function () {
+                Route::get('/')->name('index')->uses('EventBookingsController@index');
+                Route::post('list')->name('list')->uses('EventBookingsController@list');
+                Route::post('customers')->name('customers')->uses('EventBookingsController@customers');
+                Route::post('rooms')->name('rooms')->uses('EventBookingsController@rooms');
+                Route::post('store')->name('store')->uses('EventBookingsController@store');
+                Route::put('{booking}')->name('update')->uses('EventBookingsController@update');
+                Route::delete('{booking}')->name('destroy')->uses('EventBookingsController@destroy');
+            });
+
         });
 
     });
