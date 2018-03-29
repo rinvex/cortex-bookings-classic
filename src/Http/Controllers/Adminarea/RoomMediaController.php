@@ -51,7 +51,7 @@ class RoomMediaController extends AuthorizedController
             'resource' => $room,
             'tabs' => 'adminarea.rooms.tabs',
             'phrase' => trans('cortex/bookings::common.rooms'),
-            'id' => "adminarea-rooms-{$room->getKey()}-media-table",
+            'id' => "adminarea-rooms-{$room->getRouteKey()}-media-table",
             'url' => route('adminarea.rooms.media.store', ['room' => $room]),
         ])->render('cortex/foundation::adminarea.pages.datatable-media');
     }
@@ -87,7 +87,7 @@ class RoomMediaController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.rooms.media.index', ['room' => $room]),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'media', 'id' => $media->getKey()])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'media', 'id' => $media->getRouteKey()])],
         ]);
     }
 }

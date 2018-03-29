@@ -50,7 +50,7 @@ class EventsController extends AuthorizedController
             'resource' => $event,
             'tabs' => 'adminarea.events.tabs',
             'phrase' => trans('cortex/bookings::common.events'),
-            'id' => "adminarea-events-{$event->getKey()}-logs-table",
+            'id' => "adminarea-events-{$event->getRouteKey()}-logs-table",
         ])->render('cortex/foundation::adminarea.pages.datatable-logs');
     }
 

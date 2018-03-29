@@ -50,7 +50,7 @@ class RoomsController extends AuthorizedController
             'resource' => $room,
             'tabs' => 'managerarea.rooms.tabs',
             'phrase' => trans('cortex/bookings::common.rooms'),
-            'id' => "managerarea-rooms-{$room->getKey()}-logs-table",
+            'id' => "managerarea-rooms-{$room->getRouteKey()}-logs-table",
         ])->render('cortex/foundation::managerarea.pages.datatable-logs');
     }
 

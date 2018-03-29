@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Models;
 
 use Rinvex\Tags\Traits\Taggable;
+use Vinkla\Hashids\Facades\Hashids;
 use Rinvex\Bookings\Models\Bookable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
@@ -148,12 +149,25 @@ class Room extends Bookable implements HasMedia
     }
 
     /**
-     * Get the route key for the model.
+     * Get the value of the model's route key.
      *
-     * @return string
+     * @return mixed
      */
-    public function getRouteKeyName(): string
+    public function getRouteKey()
     {
-        return 'name';
+        return Hashids::encode($this->getAttribute($this->getRouteKeyName()));
+    }
+
+    /**
+     * Retrieve the model for a bound value.
+     *
+     * @param  mixed  $value
+     * @return \Illuminate\Database\Eloquent\Model|null
+     */
+    public function resolveRouteBinding($value)
+    {
+        $value = Hashids::decode($value)[0];
+
+        return $this->where($this->getRouteKeyName(), $value)->first();
     }
 }

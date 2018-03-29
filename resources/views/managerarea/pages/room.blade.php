@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest::class)->selector("#managerarea-rooms-create-form, #managerarea-rooms-{$room->getKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Managerarea\RoomFormRequest::class)->selector("#managerarea-rooms-create-form, #managerarea-rooms-{$room->getRouteKey()}-update-form") !!}
 @endpush
 
 {{-- Main Content --}}
@@ -34,7 +34,7 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($room->exists)
-                            {{ Form::model($room, ['url' => route('managerarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => "managerarea-rooms-{$room->getKey()}-update-form"]) }}
+                            {{ Form::model($room, ['url' => route('managerarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => "managerarea-rooms-{$room->getRouteKey()}-update-form"]) }}
                         @else
                             {{ Form::model($room, ['url' => route('managerarea.rooms.store'), 'id' => "managerarea-rooms-create-form"]) }}
                         @endif

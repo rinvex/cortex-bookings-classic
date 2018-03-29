@@ -79,9 +79,9 @@ class BookingsServiceProvider extends ServiceProvider
     public function boot(Router $router): void
     {
         // Bind route models and constrains
-        $router->pattern('booking', '[0-9]+');
-        $router->pattern('room', '[0-9a-z\._-]+');
-        $router->pattern('event', '[0-9a-z\._-]+');
+        $router->pattern('booking', '[a-zA-Z0-9]+');
+        $router->pattern('room', '[a-zA-Z0-9]+');
+        $router->pattern('event', '[a-zA-Z0-9]+');
         $router->model('room', config('cortex.bookings.models.room'));
         $router->model('event', config('cortex.bookings.models.event'));
         $router->model('booking', config('rinvex.bookings.models.booking'));

@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest::class)->selector("#adminarea-events-create-form, #adminarea-events-{$event->getKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest::class)->selector("#adminarea-events-create-form, #adminarea-events-{$event->getRouteKey()}-update-form") !!}
 @endpush
 
 {{-- Main Content --}}
@@ -34,7 +34,7 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($event->exists)
-                            {{ Form::model($event, ['url' => route('adminarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "adminarea-events-{$event->getKey()}-update-form"]) }}
+                            {{ Form::model($event, ['url' => route('adminarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "adminarea-events-{$event->getRouteKey()}-update-form"]) }}
                         @else
                             {{ Form::model($event, ['url' => route('adminarea.events.store'), 'id' => "adminarea-events-create-form"]) }}
                         @endif

@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Managerarea\EventFormRequest::class)->selector("#managerarea-events-create-form, #managerarea-events-{$event->getKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Managerarea\EventFormRequest::class)->selector("#managerarea-events-create-form, #managerarea-events-{$event->getRouteKey()}-update-form") !!}
 @endpush
 
 {{-- Main Content --}}
@@ -34,7 +34,7 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($event->exists)
-                            {{ Form::model($event, ['url' => route('managerarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "managerarea-events-{$event->getKey()}-update-form"]) }}
+                            {{ Form::model($event, ['url' => route('managerarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "managerarea-events-{$event->getRouteKey()}-update-form"]) }}
                         @else
                             {{ Form::model($event, ['url' => route('managerarea.events.store'), 'id' => "managerarea-events-create-form"]) }}
                         @endif

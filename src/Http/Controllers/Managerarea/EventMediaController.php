@@ -51,7 +51,7 @@ class EventMediaController extends AuthorizedController
             'resource' => $event,
             'tabs' => 'managerarea.events.tabs',
             'phrase' => trans('cortex/bookings::common.events'),
-            'id' => "managerarea-events-{$event->getKey()}-media-table",
+            'id' => "managerarea-events-{$event->getRouteKey()}-media-table",
             'url' => route('managerarea.events.media.store', ['event' => $event]),
         ])->render('cortex/foundation::managerarea.pages.datatable-media');
     }
@@ -87,7 +87,7 @@ class EventMediaController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.events.media.index', ['event' => $event]),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'media', 'id' => $media->getKey()])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'media', 'id' => $media->getRouteKey()])],
         ]);
     }
 }
