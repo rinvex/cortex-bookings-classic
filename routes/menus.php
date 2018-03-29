@@ -36,7 +36,6 @@ Menu::register('adminarea.events.tabs', function (MenuGenerator $menu, Event $ev
     $menu->route(['adminarea.events.media.index', ['event' => $event]], trans('cortex/bookings::common.media'))->ifCan('update', $event)->ifCan('list', $media)->if($event->exists);
 });
 
-
 Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Room $room, Event $event, Booking $booking) {
     $menu->dropdown(function (MenuItem $dropdown) use ($room, $event, $booking) {
         $dropdown->route(['managerarea.rooms.index'], trans('cortex/bookings::common.rooms'), null, 'fa fa-cubes')->ifCan('list', $room)->activateOnRoute('managerarea.rooms');

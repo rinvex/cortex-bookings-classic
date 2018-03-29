@@ -40,7 +40,7 @@ class EventMediaController extends AuthorizedController
     /**
      * List event media.
      *
-     * @param \Cortex\Bookings\Models\Event                 $event
+     * @param \Cortex\Bookings\Models\Event                $event
      * @param \Cortex\Foundation\DataTables\MediaDataTable $mediaDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
@@ -60,7 +60,7 @@ class EventMediaController extends AuthorizedController
      * Store new event media.
      *
      * @param \Cortex\Foundation\Http\Requests\ImageFormRequest $request
-     * @param \Cortex\Bookings\Models\Event                      $event
+     * @param \Cortex\Bookings\Models\Event                     $event
      *
      * @return void
      */
@@ -76,7 +76,7 @@ class EventMediaController extends AuthorizedController
     /**
      * Destroy given event media.
      *
-     * @param \Cortex\Bookings\Models\Event      $event
+     * @param \Cortex\Bookings\Models\Event     $event
      * @param \Spatie\MediaLibrary\Models\Media $media
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse

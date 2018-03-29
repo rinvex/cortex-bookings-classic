@@ -26,7 +26,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @property string                                                                          $unit
  * @property int                                                                             $maximum_units
  * @property int                                                                             $minimum_units
- * @property boolean                                                                         $is_recurring
+ * @property bool                                                                         $is_recurring
  * @property int                                                                             $sort_order
  * @property int                                                                             $capacity
  * @property string                                                                          $style
