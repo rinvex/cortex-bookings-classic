@@ -197,7 +197,7 @@ class EventsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.events.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'event', 'id' => $event->name])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'event', 'id' => $event->slug])],
         ]);
     }
 
@@ -214,7 +214,7 @@ class EventsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.events.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'event', 'id' => $event->name])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'event', 'id' => $event->slug])],
         ]);
     }
 }

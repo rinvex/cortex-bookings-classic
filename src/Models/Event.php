@@ -17,7 +17,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * Cortex\Bookings\Models\Event.
  *
  * @property int                                                                             $id
- * @property string                                                                          $name
+ * @property string                                                                          $slug
  * @property array                                                                           $title
  * @property array                                                                           $description
  * @property bool                                                                            $is_active
@@ -54,7 +54,7 @@ use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereMultipleBookingsAllowed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereMultipleBookingsBypassed($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereTitle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereName($value)
+ * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereSlug($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereSortOrder($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereStyle($value)
  * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Event whereUnit($value)
@@ -119,7 +119,7 @@ class Event extends Bookable implements HasMedia
 
         $this->setTable(config('cortex.bookings.tables.events'));
         $this->setRules([
-            'name' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.events').',name',
+            'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.events').',slug',
             'title' => 'required|string|max:150',
             'description' => 'nullable|string|max:10000',
             'is_active' => 'sometimes|boolean',

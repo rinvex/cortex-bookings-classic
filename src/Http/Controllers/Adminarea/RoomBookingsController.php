@@ -81,7 +81,7 @@ class RoomBookingsController extends AuthorizedController
                 'customerId' => $booking->customer->getKey(),
                 'roomId' => $booking->bookable->getKey(),
                 'className' => $booking->bookable->style,
-                'title' => $booking->customer->name.' ('.$booking->bookable->title.')',
+                'title' => $booking->customer->full_name.' ('.$booking->bookable->title.')',
                 'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
                 'end' => $allDay ? $booking->ends_at->toDateString() : $endsAt,
             ];
