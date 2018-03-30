@@ -6,6 +6,7 @@ namespace Cortex\Bookings\DataTables\Adminarea;
 
 use Cortex\Bookings\Models\Event;
 use Cortex\Foundation\DataTables\AbstractDataTable;
+use Cortex\Bookings\Transformers\Adminarea\EventTransformer;
 
 class EventsDataTable extends AbstractDataTable
 {
@@ -13,6 +14,11 @@ class EventsDataTable extends AbstractDataTable
      * {@inheritdoc}
      */
     protected $model = Event::class;
+
+    /**
+     * {@inheritdoc}
+     */
+    protected $transformer = EventTransformer::class;
 
     /**
      * Get the query object to be processed by dataTables.
@@ -28,18 +34,6 @@ class EventsDataTable extends AbstractDataTable
     }
 
     /**
-     * Display ajax response.
-     *
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function ajax()
-    {
-        return datatables($this->query())
-            ->orderColumn('title', 'title->"$.'.app()->getLocale().'" $1')
-            ->make(true);
-    }
-
-    /**
      * Get columns.
      *
      * @return array
@@ -47,8 +41,8 @@ class EventsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: hashids.encode(full.id), locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: hashids.encode(full.id)})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: full.id})+"\">"+data+"</a>"';
 
         return [
             'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
