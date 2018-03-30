@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration
             // Columns
             $table->increments('id');
             $table->string('slug');
-            $table->{$this->jsonable()}('title');
+            $table->{$this->jsonable()}('name');
             $table->{$this->jsonable()}('description')->nullable();
             $table->boolean('is_active')->default(true);
             $table->date('start_date')->nullable();
