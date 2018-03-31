@@ -197,7 +197,7 @@ class RoomsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.rooms.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'room', 'id' => $room->slug])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'room', 'identifier' => $room->slug])],
         ]);
     }
 
@@ -214,7 +214,7 @@ class RoomsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.rooms.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'room', 'id' => $room->slug])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'room', 'identifier' => $room->slug])],
         ]);
     }
 }
