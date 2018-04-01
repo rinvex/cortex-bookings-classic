@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Requests\Managerarea;
 
 use Carbon\Carbon;
+use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookingFormRequest extends FormRequest
 {
+    use Escaper;
+
     /**
      * Determine if the user is authorized to make this request.
      *

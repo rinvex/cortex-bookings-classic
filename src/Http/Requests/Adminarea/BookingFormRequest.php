@@ -5,10 +5,13 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Requests\Adminarea;
 
 use Carbon\Carbon;
+use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;
 
 class BookingFormRequest extends FormRequest
 {
+    use Escaper;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -44,6 +47,19 @@ class BookingFormRequest extends FormRequest
         $data['price'] = $price;
 
         $this->replace($data);
+    }
+
+    /**
+     * Configure the validator instance.
+     *
+     * @param \Illuminate\Validation\Validator $validator
+     *
+     * @return void
+     */
+    public function withValidator($validator): void
+    {
+        // Sanitize input data before submission
+        $this->replace($this->escape($this->all()));
     }
 
     /**
