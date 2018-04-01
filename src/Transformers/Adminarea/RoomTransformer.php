@@ -17,7 +17,7 @@ class RoomTransformer extends TransformerAbstract
      */
     public function transform(Room $room): array
     {
-        return $this->escapeRow([
+        return $this->escape([
             'id' => (string) $room->getRouteKey(),
             'name' => (string) $room->name,
             'base_cost' => (string) $room->base_cost,

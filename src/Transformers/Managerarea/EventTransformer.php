@@ -17,7 +17,7 @@ class EventTransformer extends TransformerAbstract
      */
     public function transform(Event $event): array
     {
-        return $this->escapeRow([
+        return $this->escape([
             'id' => (string) $event->getRouteKey(),
             'name' => (string) $event->name,
             'base_cost' => (string) $event->base_cost,
