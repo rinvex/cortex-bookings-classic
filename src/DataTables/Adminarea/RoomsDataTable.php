@@ -51,8 +51,8 @@ class RoomsDataTable extends AbstractDataTable
             'unit' => ['title' => trans('cortex/bookings::common.unit'), 'render' => 'Lang.trans(\'cortex/bookings::common.unit_\'+data)'],
             'currency' => ['title' => trans('cortex/bookings::common.currency')],
             'sort_order' => ['title' => trans('cortex/bookings::common.sort_order'), 'visible' => false],
-            'created_at' => ['title' => trans('cortex/bookings::common.created_at'), 'render' => "moment(data).format('MMM Do, YYYY')"],
-            'updated_at' => ['title' => trans('cortex/bookings::common.updated_at'), 'render' => "moment(data).format('MMM Do, YYYY')"],
+            'created_at' => ['title' => trans('cortex/bookings::common.created_at'), 'render' => "moment(data).format('MMMM Do YYYY, hh:mm:ss A')"],
+            'updated_at' => ['title' => trans('cortex/bookings::common.updated_at'), 'render' => "moment(data).format('MMMM Do YYYY, hh:mm:ss A')"],
         ];
     }
 }
