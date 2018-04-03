@@ -3,7 +3,7 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.managerarea') }} » {{ trans('cortex/bookings::common.bookings') }}
+    {{ extract_title(Breadcrumbs::render()) }}
 @endsection
 
 @push('styles')

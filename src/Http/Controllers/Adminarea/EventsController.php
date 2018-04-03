@@ -32,7 +32,6 @@ class EventsController extends AuthorizedController
     {
         return $eventsDataTable->with([
             'id' => 'adminarea-events-index-table',
-            'phrase' => trans('cortex/bookings::common.events'),
         ])->render('cortex/foundation::adminarea.pages.datatable');
     }
 
@@ -49,7 +48,6 @@ class EventsController extends AuthorizedController
         return $logsDataTable->with([
             'resource' => $event,
             'tabs' => 'adminarea.events.tabs',
-            'phrase' => trans('cortex/bookings::common.events'),
             'id' => "adminarea-events-{$event->getRouteKey()}-logs-table",
         ])->render('cortex/foundation::adminarea.pages.datatable-logs');
     }
@@ -65,7 +63,6 @@ class EventsController extends AuthorizedController
             'id' => 'adminarea-events-import',
             'tabs' => 'adminarea.events.tabs',
             'url' => route('adminarea.events.hoard'),
-            'phrase' => trans('cortex/bookings::common.events'),
         ]);
     }
 
@@ -97,8 +94,7 @@ class EventsController extends AuthorizedController
             'resource' => 'event',
             'tabs' => 'adminarea.events.tabs',
             'id' => 'adminarea-events-import-logs-table',
-            'phrase' => trans('cortex/events::common.events'),
-        ])->render('cortex/foundation::adminarea.pages.datatable-import-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
     }
 
     /**

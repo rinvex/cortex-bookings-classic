@@ -50,7 +50,6 @@ class RoomMediaController extends AuthorizedController
         return $mediaDataTable->with([
             'resource' => $room,
             'tabs' => 'adminarea.rooms.tabs',
-            'phrase' => trans('cortex/bookings::common.rooms'),
             'id' => "adminarea-rooms-{$room->getRouteKey()}-media-table",
             'url' => route('adminarea.rooms.media.store', ['room' => $room]),
         ])->render('cortex/foundation::adminarea.pages.datatable-media');

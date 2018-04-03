@@ -8,7 +8,7 @@ use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 // Adminarea breadcrumbs
 Breadcrumbs::register('adminarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.adminarea'), route('adminarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('app.name'), route('adminarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('adminarea.rooms.index'));
 });
 
@@ -52,7 +52,7 @@ Breadcrumbs::register('adminarea.rooms.media.index', function (BreadcrumbsGenera
 });
 
 Breadcrumbs::register('adminarea.events.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.adminarea'), route('adminarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('app.name'), route('adminarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.events'), route('adminarea.events.index'));
 });
 
@@ -97,7 +97,7 @@ Breadcrumbs::register('adminarea.events.media.index', function (BreadcrumbsGener
 
 // Managerarea breadcrumbs
 Breadcrumbs::register('managerarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('rinvex.tenants.active')->name, route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('managerarea.rooms.index'));
 });
 
@@ -135,7 +135,7 @@ Breadcrumbs::register('managerarea.rooms.logs', function (BreadcrumbsGenerator $
 });
 
 Breadcrumbs::register('managerarea.events.index', function (BreadcrumbsGenerator $breadcrumbs) {
-    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.trans('cortex/foundation::common.managerarea'), route('managerarea.home'));
+    $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('rinvex.tenants.active')->name, route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.events'), route('managerarea.events.index'));
 });
 

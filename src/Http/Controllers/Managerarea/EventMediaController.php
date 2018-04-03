@@ -50,7 +50,6 @@ class EventMediaController extends AuthorizedController
         return $mediaDataTable->with([
             'resource' => $event,
             'tabs' => 'managerarea.events.tabs',
-            'phrase' => trans('cortex/bookings::common.events'),
             'id' => "managerarea-events-{$event->getRouteKey()}-media-table",
             'url' => route('managerarea.events.media.store', ['event' => $event]),
         ])->render('cortex/foundation::managerarea.pages.datatable-media');
