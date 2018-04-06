@@ -8,7 +8,7 @@ use Cortex\Bookings\Models\Event;
 use Cortex\Foundation\DataTables\AbstractDataTable;
 use Cortex\Bookings\Transformers\Adminarea\EventTransformer;
 
-class EventsDataTable extends AbstractDataTable
+class TicketingDataTable extends AbstractDataTable
 {
     /**
      * {@inheritdoc}

@@ -4,32 +4,25 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
-use Cortex\Auth\Models\Member;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Rinvex\Tags\Traits\Taggable;
 use Spatie\Sluggable\SlugOptions;
 use Rinvex\Support\Traits\HasSlug;
-use Rinvex\Tenants\Traits\Tenantable;
-use Cortex\Foundation\Traits\Auditable;
-use Rinvex\Support\Traits\HashidsTrait;
+use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
+use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Cacheable\CacheableEloquent;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Rinvex\Support\Traits\HasTranslations;
 use Rinvex\Support\Traits\ValidatingTrait;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Event extends Model implements HasMedia
+class Ticket extends Model implements Sortable
 {
     use HasSlug;
-    use Taggable;
     use Auditable;
-    use Tenantable;
-    use HashidsTrait;
     use LogsActivity;
-    use HasMediaTrait;
+    use SortableTrait;
     use HasTranslations;
     use ValidatingTrait;
     use CacheableEloquent;
@@ -38,29 +31,30 @@ class Event extends Model implements HasMedia
      * {@inheritdoc}
      */
     protected $fillable = [
+        'event_id',
         'slug',
         'name',
         'description',
-        'is_public',
-        'starts_at',
-        'ends_at',
-        'timezone',
-        'location',
-        'tags',
+        'is_active',
+        'price',
+        'currency',
+        'quantity',
+        'sort_order',
     ];
 
     /**
      * {@inheritdoc}
      */
     protected $casts = [
+        'event_id' => 'integer',
         'slug' => 'string',
         'name' => 'string',
         'description' => 'string',
-        'is_public' => 'boolean',
-        'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
-        'timezone' => 'string',
-        'location' => 'string',
+        'is_active' => 'boolean',
+        'price' => 'float',
+        'currency' => 'string',
+        'quantity' => 'integer',
+        'sort_order' => 'integer',
         'deleted_at' => 'datetime',
     ];
 
@@ -78,6 +72,13 @@ class Event extends Model implements HasMedia
     public $translatable = [
         'name',
         'description',
+    ];
+
+    /**
+     * {@inheritdoc}
+     */
+    public $sortable = [
+        'order_column_name' => 'sort_order',
     ];
 
     /**
@@ -129,42 +130,42 @@ class Event extends Model implements HasMedia
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('cortex.bookings.tables.events'));
+        $this->setTable(config('cortex.bookings.tables.tickets'));
         $this->setRules([
-            'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.events').',slug',
+            'event_id' => 'required|integer|exists:'.config('cortex.bookings.tables.events').',id',
+            'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.tickets').',slug,NULL,id,event_id,'.($this->event_id ?? 'null'),
             'name' => 'required|string|max:150',
             'description' => 'nullable|string|max:10000',
-            'is_public' => 'sometimes|boolean',
-            'starts_at' => 'required|string',
-            'ends_at' => 'required|string',
-            'timezone' => 'required|string',
-            'location' => 'nullable|string',
-            'tags' => 'nullable|array',
+            'is_active' => 'sometimes|boolean',
+            'price' => 'required|numeric',
+            'currency' => 'required|alpha|size:3',
+            'quantity' => 'nullable|integer|max:10000000',
+            'sort_order' => 'nullable|integer|max:10000000',
         ]);
     }
 
     /**
-     * Get the public resources.
+     * Get the active resources.
      *
      * @param \Illuminate\Database\Eloquent\Builder $builder
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePublic(Builder $builder): Builder
+    public function scopeActive(Builder $builder): Builder
     {
-        return $builder->where('is_public', true);
+        return $builder->where('is_active', true);
     }
 
     /**
-     * Get the private resources.
+     * Get the inactive resources.
      *
      * @param \Illuminate\Database\Eloquent\Builder $builder
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopePrivate(Builder $builder): Builder
+    public function scopeInactive(Builder $builder): Builder
     {
-        return $builder->where('is_public', false);
+        return $builder->where('is_active', false);
     }
 
     /**
@@ -185,9 +186,9 @@ class Event extends Model implements HasMedia
      *
      * @return $this
      */
-    public function makePublic()
+    public function makeActive()
     {
-        $this->update(['is_public' => true]);
+        $this->update(['is_active' => true]);
 
         return $this;
     }
@@ -197,31 +198,20 @@ class Event extends Model implements HasMedia
      *
      * @return $this
      */
-    public function makePrivate()
+    public function makeInactive()
     {
-        $this->update(['is_public' => false]);
+        $this->update(['is_active' => false]);
 
         return $this;
     }
 
     /**
-     * Get all attached tickets to the model.
+     * Relationship to the event.
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
-    public function tickets(): HasMany
+    public function event(): BelongsTo
     {
-        return $this->hasMany(Ticket::class, 'event_id', 'id');
-    }
-
-    /**
-     * Register media collections.
-     *
-     * @return void
-     */
-    public function registerMediaCollections(): void
-    {
-        $this->addMediaCollection('profile_picture')->singleFile();
-        $this->addMediaCollection('cover_photo')->singleFile();
+        return $this->belongsTo(Event::class, 'event_id', 'id');
     }
 }

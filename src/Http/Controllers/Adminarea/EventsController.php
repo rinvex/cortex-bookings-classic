@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
+use Carbon\Carbon;
 use Cortex\Bookings\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
@@ -131,6 +132,7 @@ class EventsController extends AuthorizedController
     protected function form(Event $event)
     {
         $tags = app('rinvex.tags.tag')->pluck('name', 'id');
+        $event->duration = $event->starts_at->format(config('app.date_format')).' - '.$event->ends_at->format(config('app.date_format'));
 
         return view('cortex/bookings::adminarea.pages.event', compact('event', 'tags'));
     }

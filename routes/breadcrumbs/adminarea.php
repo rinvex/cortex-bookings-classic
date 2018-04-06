@@ -6,7 +6,6 @@ use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
-// Adminarea breadcrumbs
 Breadcrumbs::register('adminarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('app.name'), route('adminarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('adminarea.rooms.index'));
@@ -95,7 +94,6 @@ Breadcrumbs::register('adminarea.events.media.index', function (BreadcrumbsGener
     $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.events.media.index', ['event' => $event]));
 });
 
-// Managerarea breadcrumbs
 Breadcrumbs::register('managerarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('rinvex.tenants.active')->name, route('managerarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.rooms'), route('managerarea.rooms.index'));

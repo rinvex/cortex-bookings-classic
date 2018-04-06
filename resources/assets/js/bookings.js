@@ -11,7 +11,7 @@ $(function() {
         views: 'month, week, agendaDay, listYear',
         defaultView: 'agendaWeek',
         dateFormat: 'YYYY-MM-DD',
-        timeFormat: 'hh:mm a',
+        timeFormat: 'hh:mm A',
         firstDay: 0,
         navLinks: true,
         eventLimit: true,

@@ -71,13 +71,13 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Active --}}
-                                    <div class="form-group{{ $errors->has('is_active') ? ' has-error' : '' }}">
-                                        {{ Form::label('is_active', trans('cortex/bookings::common.active'), ['class' => 'control-label']) }}
-                                        {{ Form::select('is_active', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
+                                    {{-- Public --}}
+                                    <div class="form-group{{ $errors->has('is_public') ? ' has-error' : '' }}">
+                                        {{ Form::label('is_public', trans('cortex/bookings::common.is_public'), ['class' => 'control-label']) }}
+                                        {{ Form::select('is_public', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
-                                        @if ($errors->has('is_active'))
-                                            <span class="help-block">{{ $errors->first('is_active') }}</span>
+                                        @if ($errors->has('is_public'))
+                                            <span class="help-block">{{ $errors->first('is_public') }}</span>
                                         @endif
                                     </div>
 
@@ -89,13 +89,14 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Base Cost --}}
-                                    <div class="form-group{{ $errors->has('base_cost') ? ' has-error' : '' }}">
-                                        {{ Form::label('base_cost', trans('cortex/bookings::common.base_cost'), ['class' => 'control-label']) }}
-                                        {{ Form::number('base_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.base_cost'), 'required' => 'required']) }}
+                                    {{-- Duration --}}
+                                    <div class="form-group has-feedback{{ $errors->has('duration') ? ' has-error' : '' }}">
+                                        {{ Form::label('duration', trans('cortex/bookings::common.duration'), ['class' => 'control-label']) }}
+                                        {{ Form::text('duration', null, ['class' => 'form-control datepicker', 'data-locale' => '{"format": "YYYY-MM-DD, hh:mm A"}', 'data-single-date-picker' => 'false', 'data-show-dropdowns' => 'true', 'data-time-picker' => 'true', 'data-time-picker-increment' => '10', 'data-auto-apply' => 'true']) }}
+                                        <span class="fa fa-calendar form-control-feedback"></span>
 
-                                        @if ($errors->has('base_cost'))
-                                            <span class="help-block">{{ $errors->first('base_cost') }}</span>
+                                        @if ($errors->has('duration'))
+                                            <span class="help-block">{{ $errors->first('duration') }}</span>
                                         @endif
                                     </div>
 
@@ -103,13 +104,13 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Unit Cost --}}
-                                    <div class="form-group{{ $errors->has('unit_cost') ? ' has-error' : '' }}">
-                                        {{ Form::label('unit_cost', trans('cortex/bookings::common.unit_cost'), ['class' => 'control-label']) }}
-                                        {{ Form::number('unit_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.unit_cost'), 'required' => 'required']) }}
+                                    {{-- Timezone --}}
+                                    <div class="form-group{{ $errors->has('timezone') ? ' has-error' : '' }}">
+                                        {{ Form::label('timezone', trans('cortex/bookings::common.timezone'), ['class' => 'control-label']) }}
+                                        {{ Form::text('timezone', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.timezone'), 'required' => 'required']) }}
 
-                                        @if ($errors->has('unit_cost'))
-                                            <span class="help-block">{{ $errors->first('unit_cost') }}</span>
+                                        @if ($errors->has('timezone'))
+                                            <span class="help-block">{{ $errors->first('timezone') }}</span>
                                         @endif
                                     </div>
 
@@ -117,13 +118,13 @@
 
                                 <div class="col-md-4">
 
-                                    {{-- Unit --}}
-                                    <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
-                                        {{ Form::label('unit', trans('cortex/bookings::common.unit'), ['class' => 'control-label']) }}
-                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $event->exists ? null : 'day', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
+                                    {{-- Location --}}
+                                    <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
+                                        {{ Form::label('location', trans('cortex/bookings::common.location'), ['class' => 'control-label']) }}
+                                        {{ Form::text('location', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.location')]) }}
 
-                                        @if ($errors->has('unit'))
-                                            <span class="help-block">{{ $errors->first('unit') }}</span>
+                                        @if ($errors->has('location'))
+                                            <span class="help-block">{{ $errors->first('location') }}</span>
                                         @endif
                                     </div>
 
@@ -134,52 +135,6 @@
                             <div class="row">
 
                                 <div class="col-md-4">
-
-                                    {{-- Currency --}}
-                                    <div class="form-group{{ $errors->has('currency') ? ' has-error' : '' }}">
-                                        {{ Form::label('currency', trans('cortex/bookings::common.currency'), ['class' => 'control-label']) }}
-                                        {{ Form::text('currency', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.currency'), 'required' => 'required']) }}
-
-                                        @if ($errors->has('currency'))
-                                            <span class="help-block">{{ $errors->first('currency') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Sort Order --}}
-                                    <div class="form-group{{ $errors->has('sort_order') ? ' has-error' : '' }}">
-                                        {{ Form::label('sort_order', trans('cortex/bookings::common.sort_order'), ['class' => 'control-label']) }}
-                                        {{ Form::number('sort_order', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.sort_order')]) }}
-
-                                        @if ($errors->has('sort_order'))
-                                            <span class="help-block">{{ $errors->first('sort_order') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                                <div class="col-md-4">
-
-                                    {{-- Style --}}
-                                    <div class="form-group{{ $errors->has('style') ? ' has-error' : '' }}">
-                                        {{ Form::label('style', trans('cortex/bookings::common.style'), ['class' => 'control-label']) }}
-                                        {{ Form::text('style', null, ['class' => 'form-control style-picker', 'placeholder' => trans('cortex/bookings::common.style'), 'data-placement' => 'bottomRight', 'readonly' => 'readonly']) }}
-
-                                        @if ($errors->has('style'))
-                                            <span class="help-block">{{ $errors->first('style') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
 
                                     {{-- Profile Picture --}}
                                     <div class="form-group has-feedback{{ $errors->has('profile_picture') ? ' has-error' : '' }}">
@@ -209,7 +164,7 @@
 
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     {{-- Cover Photo --}}
                                     <div class="form-group has-feedback{{ $errors->has('cover_photo') ? ' has-error' : '' }}">
@@ -239,29 +194,7 @@
 
                                 </div>
 
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-12">
-
-                                    {{-- Location --}}
-                                    <div class="form-group{{ $errors->has('location') ? ' has-error' : '' }}">
-                                        {{ Form::label('location', trans('cortex/bookings::common.location'), ['class' => 'control-label']) }}
-                                        {{ Form::text('location', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.location'), 'required' => 'required']) }}
-
-                                        @if ($errors->has('location'))
-                                            <span class="help-block">{{ $errors->first('location') }}</span>
-                                        @endif
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-12">
+                                <div class="col-md-4">
 
                                     {{-- Tags --}}
                                     <div class="form-group{{ $errors->has('tags') ? ' has-error' : '' }}">

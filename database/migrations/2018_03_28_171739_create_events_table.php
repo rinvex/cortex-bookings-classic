@@ -21,22 +21,11 @@ class CreateEventsTable extends Migration
             $table->string('slug');
             $table->{$this->jsonable()}('name');
             $table->{$this->jsonable()}('description')->nullable();
-            $table->boolean('is_active')->default(true);
-            $table->date('start_date')->nullable();
-            $table->time('start_time')->nullable();
-            $table->timestamp('end_date')->nullable();
-            $table->timestamp('end_time')->nullable();
-            $table->decimal('base_cost')->default('0.00');
-            $table->decimal('unit_cost')->default('0.00');
-            $table->string('currency', 3);
-            $table->string('unit')->default('hour');
-            $table->smallInteger('maximum_units')->unsigned()->nullable();
-            $table->smallInteger('minimum_units')->unsigned()->nullable();
-            $table->tinyInteger('is_recurring')->unsigned()->default(0);
-            $table->mediumInteger('sort_order')->unsigned()->default(0);
-            $table->mediumInteger('capacity')->unsigned()->nullable();
+            $table->boolean('is_public')->default(true);
+            $table->timestamp('starts_at');
+            $table->timestamp('ends_at');
+            $table->timestamp('timezone');
             $table->string('location')->nullable();
-            $table->string('style')->nullable();
             $table->auditableAndTimestamps();
             $table->softDeletes();
 

@@ -13,12 +13,16 @@ return [
     'tables' => [
         'rooms' => 'rooms',
         'events' => 'events',
+        'tickets' => 'tickets',
+        'ticketing' => 'ticketing',
     ],
 
     // Bookings models
     'models' => [
         'room' => \Cortex\Bookings\Models\Room::class,
         'event' => \Cortex\Bookings\Models\Event::class,
+        'ticket' => \Cortex\Bookings\Models\Ticket::class,
+        'ticketing' => \Cortex\Bookings\Models\Ticketing::class,
     ],
 
 ];

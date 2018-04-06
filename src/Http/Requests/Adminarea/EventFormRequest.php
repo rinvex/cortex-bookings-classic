@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Requests\Adminarea;
 
+use Carbon\Carbon;
 use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;
 
@@ -19,6 +20,22 @@ class EventFormRequest extends FormRequest
     public function authorize(): bool
     {
         return true;
+    }
+
+    /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $data = $this->all();
+
+        $duration = explode(' - ', $data['duration']);
+        $data['starts_at'] = (new Carbon($duration[0]))->toDateTimeString();
+        $data['ends_at'] = (new Carbon($duration[1]))->toDateTimeString();
+
+        $this->replace($data);
     }
 
     /**
@@ -44,6 +61,8 @@ class EventFormRequest extends FormRequest
         $event = $this->route('event') ?? app('cortex.bookings.event');
         $event->updateRulesUniques();
 
-        return $event->getRules();
+        return array_merge($event->getRules(), [
+            'duration' => 'required',
+        ]);
     }
 }

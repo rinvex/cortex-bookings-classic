@@ -17,14 +17,14 @@ class EventTransformer extends TransformerAbstract
      */
     public function transform(Event $event): array
     {
+        $reservations = 123;
         return $this->escape([
             'id' => (string) $event->getRouteKey(),
             'name' => (string) $event->name,
-            'base_cost' => (string) $event->base_cost,
-            'unit_cost' => (string) $event->unit_cost,
-            'unit' => (string) $event->unit,
+            'is_active' => (string) $event->is_active,
+            'price' => (string) $event->price,
             'currency' => (string) $event->currency,
-            'sort_order' => (string) $event->sort_order,
+            'capacity' => (string) $reservations.' / '.$event->quantity,
             'created_at' => (string) $event->created_at,
             'updated_at' => (string) $event->updated_at,
         ]);

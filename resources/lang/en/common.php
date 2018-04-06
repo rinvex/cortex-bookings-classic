@@ -23,7 +23,7 @@ return [
     'unit_month' => 'Month',
     'logs' => 'Logs',
     'media' => 'Media',
-    'active' => 'Active',
+    'is_public' => 'Is Public',
     'yes' => 'Yes',
     'no' => 'No',
     'file' => 'File',
@@ -33,8 +33,12 @@ return [
     'browse' => 'Browse',
     'profile_picture' => 'Profile Picture',
     'cover_photo' => 'Cover Photo',
-    'start_date' => 'Start Date',
-    'start_time' => 'Start Time',
+    'starts_at' => 'Starts At',
+    'ends_at' => 'Ends At',
+    'price' => 'Price',
+    'capacity' => 'Capacity',
+    'duration' => 'Duration',
+    'timezone' => 'Timezone',
 
     // Rooms
     'rooms' => 'Rooms',
