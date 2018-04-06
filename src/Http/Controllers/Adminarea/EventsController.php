@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Carbon\Carbon;
 use Cortex\Bookings\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;

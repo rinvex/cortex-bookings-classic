@@ -40,7 +40,7 @@ class EventBookingsController extends AuthorizedController
     /**
      * List event ticketing.
      *
-     * @param \Cortex\Bookings\Models\Event                $event
+     * @param \Cortex\Bookings\Models\Event                    $event
      * @param \Cortex\Foundation\DataTables\TicketingDataTable $ticketingDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse

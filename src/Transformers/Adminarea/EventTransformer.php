@@ -18,6 +18,7 @@ class EventTransformer extends TransformerAbstract
     public function transform(Event $event): array
     {
         $reservations = 123;
+
         return $this->escape([
             'id' => (string) $event->getRouteKey(),
             'name' => (string) $event->name,

@@ -4,22 +4,21 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Models;
 
-use Cortex\Auth\Models\Member;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Rinvex\Tags\Traits\Taggable;
 use Spatie\Sluggable\SlugOptions;
 use Rinvex\Support\Traits\HasSlug;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
-use Rinvex\Support\Traits\HashidsTrait;
 use Illuminate\Database\Eloquent\Model;
 use Rinvex\Cacheable\CacheableEloquent;
+use Rinvex\Support\Traits\HashidsTrait;
 use Illuminate\Database\Eloquent\Builder;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Rinvex\Support\Traits\HasTranslations;
 use Rinvex\Support\Traits\ValidatingTrait;
+use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Event extends Model implements HasMedia
 {
