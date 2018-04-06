@@ -6,8 +6,8 @@ namespace Cortex\Bookings\Models;
 
 use Spatie\Sluggable\SlugOptions;
 use Spatie\EloquentSortable\Sortable;
-use Illuminate\Database\Eloquent\Model;
 use Cortex\Foundation\Traits\Auditable;
+use Illuminate\Database\Eloquent\Model;
 use Rinvex\Cacheable\CacheableEloquent;
 use Illuminate\Database\Eloquent\Builder;
 use Rinvex\Support\Traits\ValidatingTrait;
