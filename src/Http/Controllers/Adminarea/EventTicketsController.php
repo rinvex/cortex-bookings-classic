@@ -77,8 +77,8 @@ class EventTicketsController extends AuthorizedController
      * Store new event.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest $request
-     * @param \Cortex\Bookings\Models\Event                             $event
-     * @param \Cortex\Bookings\Models\EventTicket                       $eventTicket
+     * @param \Cortex\Bookings\Models\Event                                   $event
+     * @param \Cortex\Bookings\Models\EventTicket                             $eventTicket
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -91,7 +91,7 @@ class EventTicketsController extends AuthorizedController
      * Update given event.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest $request
-     * @param \Cortex\Bookings\Models\Event                             $event
+     * @param \Cortex\Bookings\Models\Event                                   $event
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */

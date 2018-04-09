@@ -5,10 +5,10 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Models;
 
 use Cortex\Foundation\Traits\Auditable;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Rinvex\Support\Traits\HashidsTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\TicketableTicket;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EventTicket extends TicketableTicket
 {

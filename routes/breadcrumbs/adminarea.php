@@ -89,15 +89,6 @@ Breadcrumbs::register('adminarea.events.media.index', function (BreadcrumbsGener
     $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.events.media.index', ['event' => $event]));
 });
 
-
-
-
-
-
-
-
-
-
 Breadcrumbs::register('adminarea.events.tickets.index', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.edit', $event);
     $breadcrumbs->push(trans('cortex/bookings::common.tickets'), route('adminarea.events.tickets.index', ['event' => $event]));
@@ -112,9 +103,6 @@ Breadcrumbs::register('adminarea.events.tickets.edit', function (BreadcrumbsGene
     $breadcrumbs->parent('adminarea.events.tickets.index', $event);
     $breadcrumbs->push($eventTicket->name, route('adminarea.events.tickets.edit', ['event' => $event, 'ticket' => $eventTicket]));
 });
-
-
-
 
 Breadcrumbs::register('adminarea.events.bookings.index', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.edit', $event);

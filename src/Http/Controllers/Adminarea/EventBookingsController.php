@@ -38,7 +38,7 @@ class EventBookingsController extends AuthorizedController
     /**
      * Create new event.
      *
-     * @param \Cortex\Bookings\Models\Event       $event
+     * @param \Cortex\Bookings\Models\Event        $event
      * @param \Cortex\Bookings\Models\EventBooking $eventBooking
      *
      * @return \Illuminate\View\View
@@ -51,7 +51,7 @@ class EventBookingsController extends AuthorizedController
     /**
      * Edit given event.
      *
-     * @param \Cortex\Bookings\Models\Event       $event
+     * @param \Cortex\Bookings\Models\Event        $event
      * @param \Cortex\Bookings\Models\EventBooking $eventBooking
      *
      * @return \Illuminate\View\View
@@ -64,7 +64,7 @@ class EventBookingsController extends AuthorizedController
     /**
      * Show event create/edit form.
      *
-     * @param \Cortex\Bookings\Models\Event       $event
+     * @param \Cortex\Bookings\Models\Event        $event
      * @param \Cortex\Bookings\Models\EventBooking $eventBooking
      *
      * @return \Illuminate\View\View
@@ -81,8 +81,8 @@ class EventBookingsController extends AuthorizedController
      * Store new event.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\EventBookingFormRequest $request
-     * @param \Cortex\Bookings\Models\Event                             $event
-     * @param \Cortex\Bookings\Models\EventBooking                       $eventBooking
+     * @param \Cortex\Bookings\Models\Event                                    $event
+     * @param \Cortex\Bookings\Models\EventBooking                             $eventBooking
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -95,7 +95,7 @@ class EventBookingsController extends AuthorizedController
      * Update given event.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\EventBookingFormRequest $request
-     * @param \Cortex\Bookings\Models\Event                             $event
+     * @param \Cortex\Bookings\Models\Event                                    $event
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -109,7 +109,7 @@ class EventBookingsController extends AuthorizedController
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Models\Event           $event
-     * @param \Cortex\Bookings\Models\EventBooking     $eventBooking
+     * @param \Cortex\Bookings\Models\EventBooking    $eventBooking
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
@@ -130,7 +130,7 @@ class EventBookingsController extends AuthorizedController
     /**
      * Destroy given event.
      *
-     * @param \Cortex\Bookings\Models\Event       $event
+     * @param \Cortex\Bookings\Models\Event        $event
      * @param \Cortex\Bookings\Models\EventBooking $eventBooking
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
