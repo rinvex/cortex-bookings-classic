@@ -91,7 +91,7 @@ class EventsController extends AuthorizedController
     public function importLogs(ImportLogsDataTable $importLogsDatatable)
     {
         return $importLogsDatatable->with([
-            'resource' => 'event',
+            'resource' => trans('cortex/bookings::common.event'),
             'tabs' => 'adminarea.events.tabs',
             'id' => 'adminarea-events-import-logs-table',
         ])->render('cortex/foundation::adminarea.pages.datatable-logs');
@@ -131,7 +131,7 @@ class EventsController extends AuthorizedController
     protected function form(Event $event)
     {
         $tags = app('rinvex.tags.tag')->pluck('name', 'id');
-        $event->duration = $event->starts_at->format(config('app.date_format')).' - '.$event->ends_at->format(config('app.date_format'));
+        $event->duration = (optional($event->starts_at)->format(config('app.date_format')) ?? date(config('app.date_format'))).' - '.(optional($event->ends_at)->format(config('app.date_format')) ?? date(config('app.date_format')));
 
         return view('cortex/bookings::adminarea.pages.event', compact('event', 'tags'));
     }
@@ -194,7 +194,7 @@ class EventsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.events.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'event', 'identifier' => $event->name])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.event'), 'identifier' => $event->name])],
         ]);
     }
 
@@ -211,7 +211,7 @@ class EventsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.events.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'event', 'identifier' => $event->name])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.event'), 'identifier' => $event->name])],
         ]);
     }
 }

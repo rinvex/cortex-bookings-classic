@@ -5,12 +5,12 @@ declare(strict_types=1);
 use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
 use Rinvex\Menus\Models\MenuItem;
-use Cortex\Bookings\Models\Booking;
+use Cortex\Bookings\Models\BookableBooking;
 use Spatie\MediaLibrary\Models\Media;
 use Rinvex\Menus\Models\MenuGenerator;
 
-Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Room $room, Event $event, Booking $booking) {
-    $menu->dropdown(function (MenuItem $dropdown) use ($room, $event, $booking) {
+Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Room $room, Event $event, BookableBooking $bookableBooking) {
+    $menu->dropdown(function (MenuItem $dropdown) use ($room, $event, $bookableBooking) {
         $dropdown->route(['managerarea.rooms.index'], trans('cortex/bookings::common.rooms'), null, 'fa fa-cubes')->ifCan('list', $room)->activateOnRoute('managerarea.rooms');
         $dropdown->route(['managerarea.events.index'], trans('cortex/bookings::common.events'), null, 'fa fa-cubes')->ifCan('list', $event)->activateOnRoute('managerarea.events');
     }, trans('cortex/bookings::common.space'), 60, 'fa fa-code-fork');

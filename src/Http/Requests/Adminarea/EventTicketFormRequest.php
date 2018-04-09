@@ -4,11 +4,10 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Requests\Adminarea;
 
-use Carbon\Carbon;
 use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;
 
-class BookingFormRequest extends FormRequest
+class EventTicketFormRequest extends FormRequest
 {
     use Escaper;
 
@@ -31,20 +30,8 @@ class BookingFormRequest extends FormRequest
     {
         $data = $this->all();
 
-        // Calculate price
-        $room = app('cortex.bookings.room')->find($this->get('room_id'));
-        $endsAt = $this->get('ends_at') ? new Carbon($this->get('ends_at')) : null;
-        $startsAt = $this->get('starts_at') ? new Carbon($this->get('starts_at')) : null;
-        list($price, $priceEquation, $currency) = app('cortex.bookings.room_booking')->calculatePrice($room, $startsAt, $endsAt);
-
-        // Fill missing fields
-        $data['ends_at'] = $endsAt;
-        $data['starts_at'] = $startsAt;
-        $data['bookable_type'] = 'room';
-        $data['customer_type'] = 'member';
-        $data['price_equation'] = $priceEquation;
-        $data['currency'] = $currency;
-        $data['price'] = $price;
+        $data['ticketable_id'] = optional($this->route('event'))->getKey();
+        $data['ticketable_type'] = optional($this->route('event'))->getMorphClass();
 
         $this->replace($data);
     }
@@ -69,9 +56,9 @@ class BookingFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $bookableBooking = $this->route('booking') ?? app('cortex.bookings.room_booking');
-        $bookableBooking->updateRulesUniques();
+        $eventTicket = $this->route('ticket') ?? app('cortex.bookings.event_ticket');
+        $eventTicket->updateRulesUniques();
 
-        return $bookableBooking->getRules();
+        return $eventTicket->getRules();
     }
 }

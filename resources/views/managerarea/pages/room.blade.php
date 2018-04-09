@@ -26,7 +26,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($room->exists && $currentUser->can('delete', $room)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('managerarea.rooms.destroy', ['room' => $room]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => 'room', 'identifier' => $room->name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
+                @if($room->exists && $currentUser->can('delete', $room)) <div class="pull-right"><a href="#" data-toggle="modal" data-target="#delete-confirmation" data-modal-action="{{ route('managerarea.rooms.destroy', ['room' => $room]) }}" data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}" data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/bookings::common.room'), 'identifier' => $room->name]) !!}" title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i></a></div> @endif
                 {!! Menu::render('managerarea.rooms.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
@@ -73,7 +73,7 @@
 
                                     {{-- Active --}}
                                     <div class="form-group{{ $errors->has('is_active') ? ' has-error' : '' }}">
-                                        {{ Form::label('is_active', trans('cortex/bookings::common.active'), ['class' => 'control-label']) }}
+                                        {{ Form::label('is_active', trans('cortex/bookings::common.is_active'), ['class' => 'control-label']) }}
                                         {{ Form::select('is_active', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
                                         @if ($errors->has('is_active'))

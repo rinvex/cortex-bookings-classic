@@ -22,15 +22,12 @@ class CreateEventsTable extends Migration
             $table->{$this->jsonable()}('name');
             $table->{$this->jsonable()}('description')->nullable();
             $table->boolean('is_public')->default(true);
-            $table->timestamp('starts_at');
-            $table->timestamp('ends_at');
-            $table->timestamp('timezone');
+            $table->dateTime('starts_at')->nullable();
+            $table->dateTime('ends_at')->nullable();
+            $table->string('timezone')->nullable();
             $table->string('location')->nullable();
             $table->auditableAndTimestamps();
             $table->softDeletes();
-
-            // Indexes
-            $table->unique('slug');
         });
     }
 

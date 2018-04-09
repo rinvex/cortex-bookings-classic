@@ -4,14 +4,16 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Providers;
 
+use Cortex\Bookings\Models\EventBooking;
+use Cortex\Bookings\Models\EventTicket;
+use Cortex\Bookings\Models\RoomAddon;
+use Cortex\Bookings\Models\RoomAvailability;
+use Cortex\Bookings\Models\RoomBooking;
+use Cortex\Bookings\Models\RoomRate;
 use Illuminate\Routing\Router;
-use Cortex\Bookings\Models\Rate;
 use Cortex\Bookings\Models\Room;
-use Cortex\Bookings\Models\Addon;
 use Cortex\Bookings\Models\Event;
-use Cortex\Bookings\Models\Booking;
 use Illuminate\Support\ServiceProvider;
-use Cortex\Bookings\Models\Availability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
@@ -47,18 +49,32 @@ class BookingsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.bookings');
 
+
         // Bind eloquent models to IoC container
-        $this->app['config']['rinvex.bookings.models.addon'] === Addon::class
-        || $this->app->alias('rinvex.bookings.addon', Addon::class);
+        $this->app->singleton('cortex.bookings.room', $bookableAddonModel = $this->app['config']['cortex.bookings.models.room']);
+        $bookableAddonModel === Room::class || $this->app->alias('cortex.bookings.room', Room::class);
 
-        $this->app['config']['rinvex.bookings.models.availability'] === Availability::class
-        || $this->app->alias('rinvex.bookings.availability', Availability::class);
+        $this->app->singleton('cortex.bookings.room_addon', $bookableAddonModel = $this->app['config']['cortex.bookings.models.room_addon']);
+        $bookableAddonModel === RoomAddon::class || $this->app->alias('cortex.bookings.room_addon', RoomAddon::class);
 
-        $this->app['config']['rinvex.bookings.models.booking'] === Booking::class
-        || $this->app->alias('rinvex.bookings.booking', Booking::class);
+        $this->app->singleton('cortex.bookings.room_availability', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.room_availability']);
+        $bookableAvailabilityModel === RoomAvailability::class || $this->app->alias('cortex.bookings.room_availability', RoomAvailability::class);
 
-        $this->app['config']['rinvex.bookings.models.rate'] === Rate::class
-        || $this->app->alias('rinvex.bookings.rate', Rate::class);
+        $this->app->singleton('cortex.bookings.room_booking', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.room_booking']);
+        $bookableAvailabilityModel === RoomBooking::class || $this->app->alias('cortex.bookings.room_booking', RoomBooking::class);
+
+        $this->app->singleton('cortex.bookings.room_rate', $bookableRateModel = $this->app['config']['cortex.bookings.models.room_rate']);
+        $bookableRateModel === RoomRate::class || $this->app->alias('cortex.bookings.room_rate', RoomRate::class);
+
+        $this->app->singleton('cortex.bookings.event', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.event']);
+        $bookableAvailabilityModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
+
+        $this->app->singleton('cortex.bookings.event_ticket', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.event_ticket']);
+        $bookableAvailabilityModel === EventTicket::class || $this->app->alias('cortex.bookings.event_ticket', EventTicket::class);
+
+        $this->app->singleton('cortex.bookings.event_booking', $bookableRateModel = $this->app['config']['cortex.bookings.models.event_booking']);
+        $bookableRateModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
+
 
         // Register console commands
         ! $this->app->runningInConsole() || $this->registerCommands();
@@ -79,18 +95,34 @@ class BookingsServiceProvider extends ServiceProvider
     public function boot(Router $router): void
     {
         // Bind route models and constrains
-        $router->pattern('booking', '[a-zA-Z0-9]+');
         $router->pattern('room', '[a-zA-Z0-9]+');
+        $router->pattern('room_rate', '[a-zA-Z0-9]+');
+        $router->pattern('room_addon', '[a-zA-Z0-9]+');
+        $router->pattern('room_booking', '[a-zA-Z0-9]+');
+        $router->pattern('room_availability', '[a-zA-Z0-9]+');
+        $router->pattern('event_booking', '[a-zA-Z0-9]+');
+        $router->pattern('event_ticket', '[a-zA-Z0-9]+');
         $router->pattern('event', '[a-zA-Z0-9]+');
+
         $router->model('room', config('cortex.bookings.models.room'));
+        $router->model('room_rate', config('cortex.bookings.models.room_rate'));
+        $router->model('room_addon', config('cortex.bookings.models.room_addon'));
+        $router->model('room_booking', config('cortex.bookings.models.room_booking'));
+        $router->model('room_availability', config('cortex.bookings.models.room_availability'));
+        $router->model('event_booking', config('cortex.bookings.models.event_booking'));
+        $router->model('event_ticket', config('cortex.bookings.models.event_ticket'));
         $router->model('event', config('cortex.bookings.models.event'));
-        $router->model('booking', config('rinvex.bookings.models.booking'));
 
         // Map relations
         Relation::morphMap([
             'room' => config('cortex.bookings.models.room'),
+            'room_rate' => config('cortex.bookings.models.room_rate'),
+            'room_addon' => config('cortex.bookings.models.room_addon'),
+            'room_booking' => config('cortex.bookings.models.room_booking'),
+            'room_availability' => config('cortex.bookings.models.room_availability'),
+            'event_booking' => config('cortex.bookings.models.event_booking'),
+            'event_ticket' => config('cortex.bookings.models.event_ticket'),
             'event' => config('cortex.bookings.models.event'),
-            'booking' => config('rinvex.bookings.models.booking'),
         ]);
 
         // Load resources

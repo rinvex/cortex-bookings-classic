@@ -6,7 +6,7 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Cortex\Bookings\Models\Room;
 use Illuminate\Support\Facades\DB;
-use Cortex\Bookings\Models\Booking;
+use Cortex\Bookings\Models\BookableBooking;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
@@ -16,7 +16,7 @@ class RoomBookingsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = Booking::class;
+    protected $resource = BookableBooking::class;
 
     /**
      * {@inheritdoc}
@@ -67,23 +67,23 @@ class RoomBookingsController extends AuthorizedController
         $results = [];
         $rangeEnds = request()->get('end');
         $rangeStarts = request()->get('start');
-        $bookings = app('rinvex.bookings.booking')->range($rangeStarts, $rangeEnds)->get();
+        $bookableBookings = app('cortex.bookings.room_booking')->range($rangeStarts, $rangeEnds)->get();
 
-        foreach ($bookings as $booking) {
-            $endTime = $booking->ends_at->toTimeString();
-            $startTime = $booking->starts_at->toTimeString();
-            $endsAt = optional($booking->ends_at)->toDateTimeString();
-            $startsAt = optional($booking->starts_at)->toDateTimeString();
+        foreach ($bookableBookings as $bookableBooking) {
+            $endTime = $bookableBooking->ends_at->toTimeString();
+            $startTime = $bookableBooking->starts_at->toTimeString();
+            $endsAt = optional($bookableBooking->ends_at)->toDateTimeString();
+            $startsAt = optional($bookableBooking->starts_at)->toDateTimeString();
             $allDay = ($startTime === '00:00:00' && $endTime === '00:00:00' ? true : false);
 
             $results[] = [
-                'id' => $booking->getKey(),
-                'customerId' => $booking->customer->getKey(),
-                'roomId' => $booking->bookable->getKey(),
-                'className' => $booking->bookable->style,
-                'title' => $booking->customer->full_name.' ('.$booking->bookable->name.')',
-                'start' => $allDay ? $booking->starts_at->toDateString() : $startsAt,
-                'end' => $allDay ? $booking->ends_at->toDateString() : $endsAt,
+                'id' => $bookableBooking->getKey(),
+                'customerId' => $bookableBooking->customer->getKey(),
+                'roomId' => $bookableBooking->bookable->getKey(),
+                'className' => $bookableBooking->bookable->style,
+                'title' => $bookableBooking->customer->full_name.' ('.$bookableBooking->bookable->name.')',
+                'start' => $allDay ? $bookableBooking->starts_at->toDateString() : $startsAt,
+                'end' => $allDay ? $bookableBooking->ends_at->toDateString() : $endsAt,
             ];
         }
 
@@ -111,53 +111,53 @@ class RoomBookingsController extends AuthorizedController
      */
     public function store(BookingFormRequest $request): int
     {
-        return $this->process($request, app('rinvex.bookings.booking'));
+        return $this->process($request, app('cortex.bookings.room_booking'));
     }
 
     /**
      * Update given booking.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
-     * @param \Cortex\Bookings\Models\Booking                             $booking
+     * @param \Cortex\Bookings\Models\BookableBooking                             $bookableBooking
      *
      * @return int
      */
-    public function update(BookingFormRequest $request, Booking $booking): int
+    public function update(BookingFormRequest $request, BookableBooking $bookableBooking): int
     {
-        return $this->process($request, $booking);
+        return $this->process($request, $bookableBooking);
     }
 
     /**
      * Process stored/updated booking.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Booking         $booking
+     * @param \Cortex\Bookings\Models\BookableBooking         $bookableBooking
      *
      * @return int
      */
-    protected function process(FormRequest $request, Booking $booking): int
+    protected function process(FormRequest $request, BookableBooking $bookableBooking): int
     {
         // Prepare required input fields
         $data = $request->validated();
 
         // Save booking
-        $booking->fill($data)->save();
+        $bookableBooking->fill($data)->save();
 
-        return $booking->getKey();
+        return $bookableBooking->getKey();
     }
 
     /**
      * Destroy given booking.
      *
      * @param \Cortex\Bookings\Models\Room    $room
-     * @param \Cortex\Bookings\Models\Booking $booking
+     * @param \Cortex\Bookings\Models\BookableBookableBooking $bookableBooking
      *
      * @return int
      */
-    public function destroy(Room $room, Booking $booking): int
+    public function destroy(Room $room, BookableBooking $bookableBooking): int
     {
-        $room->bookings()->where($booking->getKeyName(), $booking->getKey())->first()->delete();
+        $room->bookings()->where($bookableBooking->getKeyName(), $bookableBooking->getKey())->first()->delete();
 
-        return $booking->getKey();
+        return $bookableBooking->getKey();
     }
 }

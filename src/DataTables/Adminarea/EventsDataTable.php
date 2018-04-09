@@ -32,10 +32,10 @@ class EventsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: full.id})+"\">"+data+"</a>"';
 
         return [
-            'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
-            'price' => ['title' => trans('cortex/bookings::common.price'), 'render' => 'Lang.trans(\'cortex/bookings::common.unit_\'+data)'],
-            'currency' => ['title' => trans('cortex/bookings::common.currency')],
-            'capacity' => ['title' => trans('cortex/bookings::common.capacity'), 'orderable' => false, 'searchable' => false],
+            'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_public ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
+            'starts_at' => ['title' => trans('cortex/bookings::common.starts_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
+            'ends_at' => ['title' => trans('cortex/bookings::common.ends_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
+            'timezone' => ['title' => trans('cortex/bookings::common.timezone')],
             'created_at' => ['title' => trans('cortex/bookings::common.created_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
             'updated_at' => ['title' => trans('cortex/bookings::common.updated_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
         ];

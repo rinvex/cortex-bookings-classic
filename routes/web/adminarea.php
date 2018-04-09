@@ -34,8 +34,8 @@ Route::domain(domain())->group(function () {
                      Route::post('list')->name('list')->uses('RoomBookingsController@list');
                      Route::post('rooms')->name('rooms')->uses('RoomBookingsController@rooms');
                      Route::post('store')->name('store')->uses('RoomBookingsController@store');
-                     Route::put('{booking}')->name('update')->uses('RoomBookingsController@update');
-                     Route::delete('{booking}')->name('destroy')->uses('RoomBookingsController@destroy');
+                     Route::put('{room_booking}')->name('update')->uses('RoomBookingsController@update');
+                     Route::delete('{room_booking}')->name('destroy')->uses('RoomBookingsController@destroy');
                  });
              });
 
@@ -58,22 +58,24 @@ Route::domain(domain())->group(function () {
                      Route::delete('{media}')->name('destroy')->uses('EventMediaController@destroy');
                  });
 
-                 Route::name('bookings.')->prefix('{event}/bookings')->group(function () {
-                     Route::get('/')->name('index')->uses('EventMediaController@index');
-                     Route::post('/')->name('store')->uses('EventMediaController@store');
-                     Route::delete('{media}')->name('destroy')->uses('EventMediaController@destroy');
+                 // Tickets Routes
+                 Route::name('tickets.')->prefix('{event}/tickets')->group(function () {
+                     Route::get('/')->name('index')->uses('EventTicketsController@index');
+                     Route::get('create')->name('create')->uses('EventTicketsController@create');
+                     Route::post('create')->name('store')->uses('EventTicketsController@store');
+                     Route::get('{event_ticket}')->name('edit')->uses('EventTicketsController@edit');
+                     Route::put('{event_ticket}')->name('update')->uses('EventTicketsController@update');
+                     Route::delete('{event_ticket}')->name('destroy')->uses('EventTicketsController@destroy');
                  });
 
                  // Bookings Routes
-                 Route::get('bookings')->name('bookings')->uses('EventBookingsController@all');
                  Route::name('bookings.')->prefix('{event}/bookings')->group(function () {
                      Route::get('/')->name('index')->uses('EventBookingsController@index');
-                     Route::post('list')->name('list')->uses('EventBookingsController@list');
-                     Route::post('customers')->name('customers')->uses('EventBookingsController@customers');
-                     Route::post('rooms')->name('rooms')->uses('EventBookingsController@rooms');
-                     Route::post('store')->name('store')->uses('EventBookingsController@store');
-                     Route::put('{booking}')->name('update')->uses('EventBookingsController@update');
-                     Route::delete('{booking}')->name('destroy')->uses('EventBookingsController@destroy');
+                     Route::get('create')->name('create')->uses('EventBookingsController@create');
+                     Route::post('create')->name('store')->uses('EventBookingsController@store');
+                     Route::get('{event_booking}')->name('edit')->uses('EventBookingsController@edit');
+                     Route::put('{event_booking}')->name('update')->uses('EventBookingsController@update');
+                     Route::delete('{event_booking}')->name('destroy')->uses('EventBookingsController@destroy');
                  });
              });
          });

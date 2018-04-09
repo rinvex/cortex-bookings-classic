@@ -23,7 +23,7 @@ return [
     'unit_month' => 'Month',
     'logs' => 'Logs',
     'media' => 'Media',
-    'is_public' => 'Is Public',
+    'is_active' => 'Is Active',
     'yes' => 'Yes',
     'no' => 'No',
     'file' => 'File',
@@ -39,10 +39,20 @@ return [
     'capacity' => 'Capacity',
     'duration' => 'Duration',
     'timezone' => 'Timezone',
+    'quantity' => 'Quantity',
+    'event' => 'Event',
+    'ticket' => 'Ticket',
+    'customer' => 'Customer',
+    'paid' => 'Paid',
+    'event_ticket' => 'Event Ticket',
 
     // Rooms
     'rooms' => 'Rooms',
     'create_room' => 'Create New Room',
+
+    // Event Tickets
+    'tickets' => 'Tickets',
+    'create_ticket' => 'Create New Ticket',
 
     // Events
     'events' => 'Events',

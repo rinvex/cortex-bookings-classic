@@ -34,9 +34,6 @@ class CreateRoomsTable extends Migration
             $table->string('style')->nullable();
             $table->auditableAndTimestamps();
             $table->softDeletes();
-
-            // Indexes
-            $table->unique('slug');
         });
     }
 

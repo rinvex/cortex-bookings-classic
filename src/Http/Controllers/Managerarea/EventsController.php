@@ -91,7 +91,7 @@ class EventsController extends AuthorizedController
     public function importLogs(ImportLogsDataTable $importLogsDatatable)
     {
         return $importLogsDatatable->with([
-            'resource' => 'event',
+            'resource' => trans('cortex/bookings::common.event'),
             'tabs' => 'managerarea.events.tabs',
             'id' => 'managerarea-events-import-logs-table',
         ])->render('cortex/foundation::managerarea.pages.datatable-import-logs');
@@ -179,7 +179,7 @@ class EventsController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.events.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => 'event', 'identifier' => $event->name])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.event'), 'identifier' => $event->name])],
         ]);
     }
 
@@ -196,7 +196,7 @@ class EventsController extends AuthorizedController
 
         return intend([
             'url' => route('managerarea.events.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => 'event', 'identifier' => $event->name])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.event'), 'identifier' => $event->name])],
         ]);
     }
 }

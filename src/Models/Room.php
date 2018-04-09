@@ -13,60 +13,6 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-/**
- * Cortex\Bookings\Models\Room.
- *
- * @property int                                                                             $id
- * @property string                                                                          $slug
- * @property array                                                                           $name
- * @property array                                                                           $description
- * @property bool                                                                            $is_active
- * @property mixed                                                                           $base_cost
- * @property mixed                                                                           $unit_cost
- * @property string                                                                          $currency
- * @property string                                                                          $unit
- * @property int                                                                             $maximum_units
- * @property int                                                                             $minimum_units
- * @property bool                                                                         $is_recurring
- * @property int                                                                             $sort_order
- * @property int                                                                             $capacity
- * @property string                                                                          $style
- * @property \Carbon\Carbon|null                                                             $created_at
- * @property \Carbon\Carbon|null                                                             $updated_at
- * @property \Carbon\Carbon                                                                  $deleted_at
- * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Foundation\Models\Log[]   $activity
- * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Booking[] $bookings
- * @property-read \Illuminate\Database\Eloquent\Collection|\Cortex\Bookings\Models\Rate[]    $rates
- * @property \Illuminate\Database\Eloquent\Collection|\Cortex\Tenants\Models\Tenant[]        $tenants
- *
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room ordered($direction = 'asc')
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereBaseCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCreatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereCurrency($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereDeletedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereDescription($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereId($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereIsRecurring($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereIsActive($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMaximumUnits($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMinimumUnits($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllocation($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsAllowed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereMultipleBookingsBypassed($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereName($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSlug($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereSortOrder($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereStyle($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUnit($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUnitCost($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room whereUpdatedAt($value)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withAllTenants($tenants, $group = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withAnyTenants($tenants, $group = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withTenants($tenants, $group = null)
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withoutAnyTenants()
- * @method static \Illuminate\Database\Eloquent\Builder|\Cortex\Bookings\Models\Room withoutTenants($tenants, $group = null)
- * @mixin \Eloquent
- */
 class Room extends Bookable implements HasMedia
 {
     use Taggable;
@@ -77,12 +23,27 @@ class Room extends Bookable implements HasMedia
     use HasMediaTrait;
 
     /**
-     * Whether the model should throw a
-     * ValidationException if it fails validation.
+     * The default rules that the model will validate against.
      *
-     * @var bool
+     * @var array
      */
-    protected $throwValidationExceptions = true;
+    protected $rules = [
+        'slug' => 'required|alpha_dash|max:150',
+        'name' => 'required|string|max:150',
+        'description' => 'nullable|string|max:10000',
+        'is_active' => 'sometimes|boolean',
+        'base_cost' => 'required|numeric',
+        'unit_cost' => 'required|numeric',
+        'currency' => 'required|string|size:3',
+        'unit' => 'required|string|in:minute,hour,day,month',
+        'maximum_units' => 'nullable|integer|max:10000',
+        'minimum_units' => 'nullable|integer|max:10000',
+        'is_recurring' => 'nullable|boolean',
+        'sort_order' => 'nullable|integer|max:10000000',
+        'capacity' => 'nullable|integer|max:10000000',
+        'style' => 'nullable|string|max:150',
+        'tags' => 'nullable|array',
+    ];
 
     /**
      * Indicates whether to log only dirty attributes or all.
@@ -119,23 +80,39 @@ class Room extends Bookable implements HasMedia
         parent::__construct($attributes);
 
         $this->setTable(config('cortex.bookings.tables.rooms'));
-        $this->setRules([
-            'slug' => 'required|alpha_dash|max:150|unique:'.config('cortex.bookings.tables.rooms').',slug',
-            'name' => 'required|string|max:150',
-            'description' => 'nullable|string|max:10000',
-            'is_active' => 'sometimes|boolean',
-            'base_cost' => 'required|numeric',
-            'unit_cost' => 'required|numeric',
-            'currency' => 'required|string|size:3',
-            'unit' => 'required|string|in:minute,hour,day,month',
-            'maximum_units' => 'nullable|integer|max:10000',
-            'minimum_units' => 'nullable|integer|max:10000',
-            'is_recurring' => 'nullable|boolean',
-            'sort_order' => 'nullable|integer|max:10000000',
-            'capacity' => 'nullable|integer|max:10000000',
-            'style' => 'nullable|string|max:150',
-            'tags' => 'nullable|array',
-        ]);
+        $this->setRules();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getBookingModel(): string
+    {
+        return config('cortex.bookings.models.room_booking');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getRateModel(): string
+    {
+        return config('cortex.bookings.models.room_rate');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getAddonModel(): string
+    {
+        return config('cortex.bookings.models.room_addon');
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public static function getAvailabilityModel(): string
+    {
+        return config('cortex.bookings.models.room_availability');
     }
 
     /**

@@ -35,7 +35,7 @@ class BookingFormRequest extends FormRequest
         $room = app('cortex.bookings.room')->find($this->get('room_id'));
         $endsAt = $this->get('ends_at') ? new Carbon($this->get('ends_at')) : null;
         $startsAt = $this->get('starts_at') ? new Carbon($this->get('starts_at')) : null;
-        list($price, $priceEquation, $currency) = app('rinvex.bookings.booking')->calculatePrice($room, $startsAt, $endsAt);
+        list($price, $priceEquation, $currency) = app('cortex.bookings.room_booking')->calculatePrice($room, $startsAt, $endsAt);
 
         // Fill missing fields
         $data['ends_at'] = $endsAt;
@@ -56,9 +56,9 @@ class BookingFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $booking = $this->route('booking') ?? app('rinvex.bookings.booking');
-        $booking->updateRulesUniques();
+        $bookableBooking = $this->route('booking') ?? app('cortex.bookings.room_booking');
+        $bookableBooking->updateRulesUniques();
 
-        return $booking->getRules();
+        return $bookableBooking->getRules();
     }
 }
