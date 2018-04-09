@@ -5,9 +5,9 @@ declare(strict_types=1);
 use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
 use Rinvex\Menus\Models\MenuItem;
-use Cortex\Bookings\Models\BookableBooking;
 use Spatie\MediaLibrary\Models\Media;
 use Rinvex\Menus\Models\MenuGenerator;
+use Cortex\Bookings\Models\BookableBooking;
 
 Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Room $room, Event $event, BookableBooking $bookableBooking) {
     $menu->dropdown(function (MenuItem $dropdown) use ($room, $event, $bookableBooking) {

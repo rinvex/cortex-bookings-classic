@@ -118,7 +118,7 @@ class RoomBookingsController extends AuthorizedController
      * Update given booking.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
-     * @param \Cortex\Bookings\Models\BookableBooking                             $bookableBooking
+     * @param \Cortex\Bookings\Models\BookableBooking                     $bookableBooking
      *
      * @return int
      */
@@ -131,7 +131,7 @@ class RoomBookingsController extends AuthorizedController
      * Process stored/updated booking.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\BookableBooking         $bookableBooking
+     * @param \Cortex\Bookings\Models\BookableBooking $bookableBooking
      *
      * @return int
      */
@@ -149,7 +149,7 @@ class RoomBookingsController extends AuthorizedController
     /**
      * Destroy given booking.
      *
-     * @param \Cortex\Bookings\Models\Room    $room
+     * @param \Cortex\Bookings\Models\Room                    $room
      * @param \Cortex\Bookings\Models\BookableBookableBooking $bookableBooking
      *
      * @return int

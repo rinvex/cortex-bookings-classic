@@ -6,8 +6,8 @@ namespace Cortex\Bookings\Models;
 
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\BookableBooking;
+use Spatie\Activitylog\Traits\LogsActivity;
 
 class RoomBooking extends BookableBooking
 {

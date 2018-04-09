@@ -4,16 +4,16 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Providers;
 
-use Cortex\Bookings\Models\EventBooking;
-use Cortex\Bookings\Models\EventTicket;
-use Cortex\Bookings\Models\RoomAddon;
-use Cortex\Bookings\Models\RoomAvailability;
-use Cortex\Bookings\Models\RoomBooking;
-use Cortex\Bookings\Models\RoomRate;
 use Illuminate\Routing\Router;
 use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
+use Cortex\Bookings\Models\RoomRate;
+use Cortex\Bookings\Models\RoomAddon;
+use Cortex\Bookings\Models\EventTicket;
+use Cortex\Bookings\Models\RoomBooking;
 use Illuminate\Support\ServiceProvider;
+use Cortex\Bookings\Models\EventBooking;
+use Cortex\Bookings\Models\RoomAvailability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
@@ -49,7 +49,6 @@ class BookingsServiceProvider extends ServiceProvider
     {
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.bookings');
 
-
         // Bind eloquent models to IoC container
         $this->app->singleton('cortex.bookings.room', $bookableAddonModel = $this->app['config']['cortex.bookings.models.room']);
         $bookableAddonModel === Room::class || $this->app->alias('cortex.bookings.room', Room::class);
@@ -74,7 +73,6 @@ class BookingsServiceProvider extends ServiceProvider
 
         $this->app->singleton('cortex.bookings.event_booking', $bookableRateModel = $this->app['config']['cortex.bookings.models.event_booking']);
         $bookableRateModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
-
 
         // Register console commands
         ! $this->app->runningInConsole() || $this->registerCommands();
