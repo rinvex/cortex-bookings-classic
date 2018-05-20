@@ -32,7 +32,7 @@ class EventBookingsController extends AuthorizedController
             'resource' => $event,
             'tabs' => 'adminarea.events.tabs',
             'id' => "adminarea-events-{$event->getRouteKey()}-bookings-table",
-        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**

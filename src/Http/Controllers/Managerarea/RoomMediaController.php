@@ -52,7 +52,7 @@ class RoomMediaController extends AuthorizedController
             'tabs' => 'managerarea.rooms.tabs',
             'id' => "managerarea-rooms-{$room->getRouteKey()}-media-table",
             'url' => route('managerarea.rooms.media.store', ['room' => $room]),
-        ])->render('cortex/foundation::managerarea.pages.datatable-media');
+        ])->render('cortex/foundation::managerarea.pages.datatable-dropzone');
     }
 
     /**

@@ -31,7 +31,7 @@ class EventTicketsController extends AuthorizedController
         return $eventsDataTable->with([
             'tabs' => 'adminarea.events.tabs',
             'id' => "adminarea-events-{$event->getRouteKey()}-tickets-table",
-        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**

@@ -32,7 +32,7 @@ class RoomsController extends AuthorizedController
     {
         return $roomsDataTable->with([
             'id' => 'managerarea-rooms-index-table',
-        ])->render('cortex/foundation::managerarea.pages.datatable');
+        ])->render('cortex/foundation::managerarea.pages.datatable-index');
     }
 
     /**
@@ -49,7 +49,7 @@ class RoomsController extends AuthorizedController
             'resource' => $room,
             'tabs' => 'managerarea.rooms.tabs',
             'id' => "managerarea-rooms-{$room->getRouteKey()}-logs-table",
-        ])->render('cortex/foundation::managerarea.pages.datatable-logs');
+        ])->render('cortex/foundation::managerarea.pages.datatable-tab');
     }
 
     /**

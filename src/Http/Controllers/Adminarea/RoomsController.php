@@ -32,7 +32,7 @@ class RoomsController extends AuthorizedController
     {
         return $roomsDataTable->with([
             'id' => 'adminarea-rooms-index-table',
-        ])->render('cortex/foundation::adminarea.pages.datatable');
+        ])->render('cortex/foundation::adminarea.pages.datatable-index');
     }
 
     /**
@@ -49,7 +49,7 @@ class RoomsController extends AuthorizedController
             'resource' => $room,
             'tabs' => 'adminarea.rooms.tabs',
             'id' => "adminarea-rooms-{$room->getRouteKey()}-logs-table",
-        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
@@ -94,7 +94,7 @@ class RoomsController extends AuthorizedController
             'resource' => trans('cortex/bookings::common.room'),
             'tabs' => 'adminarea.rooms.tabs',
             'id' => 'adminarea-rooms-import-logs-table',
-        ])->render('cortex/foundation::adminarea.pages.datatable-logs');
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**

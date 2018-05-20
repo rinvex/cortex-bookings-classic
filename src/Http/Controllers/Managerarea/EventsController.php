@@ -32,7 +32,7 @@ class EventsController extends AuthorizedController
     {
         return $eventsDataTable->with([
             'id' => 'managerarea-events-index-table',
-        ])->render('cortex/foundation::managerarea.pages.datatable');
+        ])->render('cortex/foundation::managerarea.pages.datatable-index');
     }
 
     /**
@@ -49,7 +49,7 @@ class EventsController extends AuthorizedController
             'resource' => $event,
             'tabs' => 'managerarea.events.tabs',
             'id' => "managerarea-events-{$event->getRouteKey()}-logs-table",
-        ])->render('cortex/foundation::managerarea.pages.datatable-logs');
+        ])->render('cortex/foundation::managerarea.pages.datatable-tab');
     }
 
     /**

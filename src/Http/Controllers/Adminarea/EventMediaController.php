@@ -52,7 +52,7 @@ class EventMediaController extends AuthorizedController
             'tabs' => 'adminarea.events.tabs',
             'id' => "adminarea-events-{$event->getRouteKey()}-media-table",
             'url' => route('adminarea.events.media.store', ['event' => $event]),
-        ])->render('cortex/foundation::adminarea.pages.datatable-media');
+        ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
     /**
