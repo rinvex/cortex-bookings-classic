@@ -27,7 +27,7 @@ return [
     'is_public' => 'Is Public',
     'yes' => 'Yes',
     'no' => 'No',
-    'file' => 'File',
+    'records' => 'Records',
     'import' => 'Import',
     'tags' => 'Tags',
     'location' => 'Location',

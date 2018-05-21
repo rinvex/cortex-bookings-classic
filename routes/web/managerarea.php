@@ -12,7 +12,8 @@ Route::domain('{subdomain}.'.domain())->group(function () {
              Route::name('rooms.')->prefix('rooms')->group(function () {
                  Route::get('/')->name('index')->uses('RoomsController@index');
                  Route::get('import')->name('import')->uses('RoomsController@import');
-                 Route::post('import')->name('hoard')->uses('RoomsController@hoard');
+                 Route::post('import')->name('stash')->uses('RoomsController@stash');
+                 Route::post('hoard')->name('hoard')->uses('RoomsController@hoard');
                  Route::get('import/logs')->name('import.logs')->uses('RoomsController@importLogs');
                  Route::get('create')->name('create')->uses('RoomsController@create');
                  Route::post('create')->name('store')->uses('RoomsController@store');
@@ -32,7 +33,8 @@ Route::domain('{subdomain}.'.domain())->group(function () {
              Route::name('events.')->prefix('events')->group(function () {
                  Route::get('/')->name('index')->uses('EventsController@index');
                  Route::get('import')->name('import')->uses('EventsController@import');
-                 Route::post('import')->name('hoard')->uses('EventsController@hoard');
+                 Route::post('import')->name('stash')->uses('EventsController@stash');
+                 Route::post('hoard')->name('hoard')->uses('EventsController@hoard');
                  Route::get('import/logs')->name('import.logs')->uses('EventsController@importLogs');
                  Route::get('create')->name('create')->uses('EventsController@create');
                  Route::post('create')->name('store')->uses('EventsController@store');

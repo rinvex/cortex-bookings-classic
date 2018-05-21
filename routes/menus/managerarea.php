@@ -17,7 +17,7 @@ Menu::register('managerarea.sidebar', function (MenuGenerator $menu, Room $room,
 });
 
 Menu::register('managerarea.rooms.tabs', function (MenuGenerator $menu, Room $room, Media $media) {
-    $menu->route(['managerarea.rooms.import'], trans('cortex/bookings::common.file'))->ifCan('import', $room)->if(Route::is('managerarea.rooms.import*'));
+    $menu->route(['managerarea.rooms.import'], trans('cortex/bookings::common.records'))->ifCan('import', $room)->if(Route::is('managerarea.rooms.import*'));
     $menu->route(['managerarea.rooms.import.logs'], trans('cortex/bookings::common.logs'))->ifCan('import', $room)->if(Route::is('managerarea.rooms.import*'));
     $menu->route(['managerarea.rooms.create'], trans('cortex/bookings::common.details'))->ifCan('create', $room)->if(Route::is('managerarea.rooms.create'));
     $menu->route(['managerarea.rooms.edit', ['room' => $room]], trans('cortex/bookings::common.details'))->ifCan('update', $room)->if($room->exists);
@@ -27,7 +27,7 @@ Menu::register('managerarea.rooms.tabs', function (MenuGenerator $menu, Room $ro
 });
 
 Menu::register('managerarea.events.tabs', function (MenuGenerator $menu, Event $event, Media $media) {
-    $menu->route(['managerarea.events.import'], trans('cortex/bookings::common.file'))->ifCan('import', $event)->if(Route::is('managerarea.events.import*'));
+    $menu->route(['managerarea.events.import'], trans('cortex/bookings::common.records'))->ifCan('import', $event)->if(Route::is('managerarea.events.import*'));
     $menu->route(['managerarea.events.import.logs'], trans('cortex/bookings::common.logs'))->ifCan('import', $event)->if(Route::is('managerarea.events.import*'));
     $menu->route(['managerarea.events.create'], trans('cortex/bookings::common.details'))->ifCan('create', $event)->if(Route::is('managerarea.events.create'));
     $menu->route(['managerarea.events.edit', ['event' => $event]], trans('cortex/bookings::common.details'))->ifCan('update', $event)->if($event->exists);
