@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use Cortex\Bookings\Models\EventBooking;
 use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\EventTicket;
@@ -117,4 +118,9 @@ Breadcrumbs::register('adminarea.events.bookings.create', function (BreadcrumbsG
 Breadcrumbs::register('adminarea.events.bookings.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event, EventBooking $eventBooking) {
     $breadcrumbs->parent('adminarea.events.bookings.index', $event);
     $breadcrumbs->push($eventBooking->name, route('adminarea.events.bookings.edit', ['event' => $event, 'booking' => $eventBooking]));
+});
+
+Breadcrumbs::register('adminarea.events.bookings.import', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
+    $breadcrumbs->parent('adminarea.events.bookings.index', $event);
+    $breadcrumbs->push(trans('cortex/bookings::common.import'), route('adminarea.events.bookings.import', ['event' => $event]));
 });

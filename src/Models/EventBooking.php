@@ -58,6 +58,6 @@ class EventBooking extends TicketableBooking
      */
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(config('cortex.auth.models.member'), 'customer_id', 'id');
+        return $this->belongsTo(config('cortex.contacts.models.contact'), 'customer_id', 'id');
     }
 }

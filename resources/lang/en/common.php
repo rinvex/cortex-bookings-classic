@@ -24,6 +24,7 @@ return [
     'logs' => 'Logs',
     'media' => 'Media',
     'is_active' => 'Is Active',
+    'is_public' => 'Is Public',
     'yes' => 'Yes',
     'no' => 'No',
     'file' => 'File',
@@ -45,6 +46,9 @@ return [
     'customer' => 'Customer',
     'paid' => 'Paid',
     'event_ticket' => 'Event Ticket',
+    'is_approved' => 'Is Approved',
+    'is_attended' => 'Is Attended',
+    'is_confirmed' => 'Is Confirmed',
 
     // Rooms
     'rooms' => 'Rooms',

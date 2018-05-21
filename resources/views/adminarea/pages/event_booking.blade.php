@@ -41,7 +41,7 @@
 
                             <div class="row">
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     {{-- Customer --}}
                                     <div class="form-group{{ $errors->has('customer_id') ? ' has-error' : '' }}">
@@ -55,7 +55,7 @@
 
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-4">
 
                                     {{-- Ticket --}}
                                     <div class="form-group{{ $errors->has('ticket_id') ? ' has-error' : '' }}">
@@ -69,11 +69,7 @@
 
                                 </div>
 
-                            </div>
-
-                            <div class="row">
-
-                                <div class="col-md-6">
+                                <div class="col-md-3">
 
                                     {{-- Paid --}}
                                     <div class="form-group{{ $errors->has('paid') ? ' has-error' : '' }}">
@@ -87,7 +83,7 @@
 
                                 </div>
 
-                                <div class="col-md-6">
+                                <div class="col-md-1">
 
                                     {{-- Currency --}}
                                     <div class="form-group{{ $errors->has('currency') ? ' has-error' : '' }}">
@@ -96,6 +92,52 @@
 
                                         @if ($errors->has('currency'))
                                             <span class="help-block">{{ $errors->first('currency') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                            <div class="row">
+
+                                <div class="col-md-4">
+
+                                    {{-- Approved --}}
+                                    <div class="form-group{{ $errors->has('is_approved') ? ' has-error' : '' }}">
+                                        {{ Form::label('is_approved', trans('cortex/bookings::common.is_approved'), ['class' => 'control-label']) }}
+                                        {{ Form::select('is_approved', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.is_approved'), 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+
+                                        @if ($errors->has('is_approved'))
+                                            <span class="help-block">{{ $errors->first('is_approved') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Confirmed --}}
+                                    <div class="form-group{{ $errors->has('is_confirmed') ? ' has-error' : '' }}">
+                                        {{ Form::label('is_confirmed', trans('cortex/bookings::common.is_confirmed'), ['class' => 'control-label']) }}
+                                        {{ Form::select('is_confirmed', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.is_confirmed'), 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+
+                                        @if ($errors->has('is_confirmed'))
+                                            <span class="help-block">{{ $errors->first('is_confirmed') }}</span>
+                                        @endif
+                                    </div>
+
+                                </div>
+
+                                <div class="col-md-4">
+
+                                    {{-- Attended --}}
+                                    <div class="form-group{{ $errors->has('is_attended') ? ' has-error' : '' }}">
+                                        {{ Form::label('is_attended', trans('cortex/bookings::common.is_attended'), ['class' => 'control-label']) }}
+                                        {{ Form::select('is_attended', [1 => trans('cortex/bookings::common.yes'), 0 => trans('cortex/bookings::common.no')], null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.is_attended'), 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%']) }}
+
+                                        @if ($errors->has('is_attended'))
+                                            <span class="help-block">{{ $errors->first('is_attended') }}</span>
                                         @endif
                                     </div>
 

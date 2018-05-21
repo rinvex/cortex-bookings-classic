@@ -120,7 +120,7 @@
                                     {{-- Quantity --}}
                                     <div class="form-group{{ $errors->has('quantity') ? ' has-error' : '' }}">
                                         {{ Form::label('quantity', trans('cortex/bookings::common.quantity'), ['class' => 'control-label']) }}
-                                        {{ Form::number('quantity', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.quantity'), 'required' => 'required']) }}
+                                        {{ Form::number('quantity', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.quantity')]) }}
 
                                         @if ($errors->has('quantity'))
                                             <span class="help-block">{{ $errors->first('quantity') }}</span>
