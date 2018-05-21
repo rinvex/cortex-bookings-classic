@@ -6,11 +6,10 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\EventBooking;
-use Cortex\Foundation\DataTables\ImportRecordsDataTable;
-use Cortex\Foundation\Models\ImportRecord;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
+use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\DataTables\Adminarea\EventBookingsDataTable;
 use Cortex\Bookings\Http\Requests\Adminarea\EventBookingFormRequest;
@@ -51,7 +50,6 @@ class EventBookingsController extends AuthorizedController
      */
     public function import(Contact $contact, ImportRecordsDataTable $importRecordsDataTable)
     {
-
         return $importRecordsDataTable->with([
             'resource' => $contact,
             'tabs' => 'adminarea.contacts.tabs',

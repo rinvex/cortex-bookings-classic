@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Managerarea;
 
-use Cortex\Bookings\Models\Event;
-use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Exception;
+use Cortex\Bookings\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
+use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Bookings\DataTables\Managerarea\EventsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Managerarea\EventFormRequest;

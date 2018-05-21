@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-use Cortex\Bookings\Models\EventBooking;
 use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\EventTicket;
+use Cortex\Bookings\Models\EventBooking;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 Breadcrumbs::register('adminarea.rooms.index', function (BreadcrumbsGenerator $breadcrumbs) {
