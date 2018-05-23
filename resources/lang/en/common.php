@@ -41,8 +41,6 @@ return [
     'duration' => 'Duration',
     'timezone' => 'Timezone',
     'quantity' => 'Quantity',
-    'event' => 'Event',
-    'ticket' => 'Ticket',
     'customer' => 'Customer',
     'paid' => 'Paid',
     'event_ticket' => 'Event Ticket',
@@ -51,18 +49,22 @@ return [
     'is_confirmed' => 'Is Confirmed',
 
     // Rooms
+    'room' => 'Room',
     'rooms' => 'Rooms',
     'create_room' => 'Create New Room',
 
     // Event Tickets
+    'ticket' => 'Ticket',
     'tickets' => 'Tickets',
     'create_ticket' => 'Create New Ticket',
 
     // Events
+    'event' => 'Event',
     'events' => 'Events',
     'create_event' => 'Create New Event',
 
     // Bookings
+    'booking' => 'Booking',
     'bookings' => 'Bookings',
     'create_booking' => 'Create New Booking',
 
