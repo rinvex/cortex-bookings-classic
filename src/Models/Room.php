@@ -125,4 +125,14 @@ class Room extends Bookable implements HasMedia
         $this->addMediaCollection('profile_picture')->singleFile();
         $this->addMediaCollection('cover_photo')->singleFile();
     }
+
+    /**
+     * Get the route key for the model.
+     *
+     * @return string
+     */
+    public function getRouteKeyName()
+    {
+        return 'slug';
+    }
 }
