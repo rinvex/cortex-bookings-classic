@@ -93,14 +93,14 @@ class BookingsServiceProvider extends ServiceProvider
     public function boot(Router $router): void
     {
         // Bind route models and constrains
-        $router->pattern('room', '[a-zA-Z0-9]+');
-        $router->pattern('room_rate', '[a-zA-Z0-9]+');
-        $router->pattern('room_addon', '[a-zA-Z0-9]+');
-        $router->pattern('room_booking', '[a-zA-Z0-9]+');
-        $router->pattern('room_availability', '[a-zA-Z0-9]+');
-        $router->pattern('event_booking', '[a-zA-Z0-9]+');
-        $router->pattern('event_ticket', '[a-zA-Z0-9]+');
-        $router->pattern('event', '[a-zA-Z0-9]+');
+        $router->pattern('room', '[a-zA-Z0-9-]+');
+        $router->pattern('room_rate', '[a-zA-Z0-9-]+');
+        $router->pattern('room_addon', '[a-zA-Z0-9-]+');
+        $router->pattern('room_booking', '[a-zA-Z0-9-]+');
+        $router->pattern('room_availability', '[a-zA-Z0-9-]+');
+        $router->pattern('event_booking', '[a-zA-Z0-9-]+');
+        $router->pattern('event_ticket', '[a-zA-Z0-9-]+');
+        $router->pattern('event', '[a-zA-Z0-9-]+');
 
         $router->model('room', config('cortex.bookings.models.room'));
         $router->model('room_rate', config('cortex.bookings.models.room_rate'));
