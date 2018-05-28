@@ -71,7 +71,8 @@ class EventBookingsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
 
         return [
-            'full_name' => ['title' => trans('cortex/contacts::common.full_name'), 'render' => $link, 'responsivePriority' => 0],
+            'given_name' => ['title' => trans('cortex/contacts::common.given_name'), 'render' => $link, 'responsivePriority' => 0],
+            'family_name' => ['title' => trans('cortex/contacts::common.family_name')],
             'email' => ['title' => trans('cortex/contacts::common.email')],
             'phone' => ['title' => trans('cortex/contacts::common.phone')],
             'country_code' => ['title' => trans('cortex/contacts::common.country'), 'render' => 'full.country_emoji+" "+data'],
