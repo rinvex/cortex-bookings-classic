@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest::class)->selector("#adminarea-events-tickets-create-form, #adminarea-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form") !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest::class)->selector("#adminarea-events-tickets-create-form, #adminarea-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 @endpush
 
 {{-- Main Content --}}
