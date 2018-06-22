@@ -80,6 +80,11 @@
             "Cortex\\Bookings\\": "src/"
         }
     },
+    "autoload-dev": {
+        "psr-4": {
+            "Cortex\\Bookings\\Tests\\": "tests"
+        }
+    },
     "config": {
         "preferred-install": "dist",
         "sort-packages": true,
