@@ -8,7 +8,6 @@ use Illuminate\Routing\Router;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\ServiceRate;
-use Cortex\Bookings\Models\ServiceAddon;
 use Cortex\Bookings\Models\EventTicket;
 use Cortex\Bookings\Models\ServiceBooking;
 use Illuminate\Support\ServiceProvider;
@@ -50,29 +49,26 @@ class BookingsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.bookings');
 
         // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.service', $bookableAddonModel = $this->app['config']['cortex.bookings.models.service']);
-        $bookableAddonModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
+        $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
+        $serviceModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
 
-        $this->app->singleton('cortex.bookings.service_addon', $bookableAddonModel = $this->app['config']['cortex.bookings.models.service_addon']);
-        $bookableAddonModel === ServiceAddon::class || $this->app->alias('cortex.bookings.service_addon', ServiceAddon::class);
+        $this->app->singleton('cortex.bookings.service_availability', $serviceAvailabilityModel = $this->app['config']['cortex.bookings.models.service_availability']);
+        $serviceAvailabilityModel === ServiceAvailability::class || $this->app->alias('cortex.bookings.service_availability', ServiceAvailability::class);
 
-        $this->app->singleton('cortex.bookings.service_availability', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.service_availability']);
-        $bookableAvailabilityModel === ServiceAvailability::class || $this->app->alias('cortex.bookings.service_availability', ServiceAvailability::class);
+        $this->app->singleton('cortex.bookings.service_booking', $serviceBookingModel = $this->app['config']['cortex.bookings.models.service_booking']);
+        $serviceBookingModel === ServiceBooking::class || $this->app->alias('cortex.bookings.service_booking', ServiceBooking::class);
 
-        $this->app->singleton('cortex.bookings.service_booking', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.service_booking']);
-        $bookableAvailabilityModel === ServiceBooking::class || $this->app->alias('cortex.bookings.service_booking', ServiceBooking::class);
+        $this->app->singleton('cortex.bookings.service_rate', $serviceRateModel = $this->app['config']['cortex.bookings.models.service_rate']);
+        $serviceRateModel === ServiceRate::class || $this->app->alias('cortex.bookings.service_rate', ServiceRate::class);
 
-        $this->app->singleton('cortex.bookings.service_rate', $bookableRateModel = $this->app['config']['cortex.bookings.models.service_rate']);
-        $bookableRateModel === ServiceRate::class || $this->app->alias('cortex.bookings.service_rate', ServiceRate::class);
+        $this->app->singleton('cortex.bookings.event', $serviceAvailabilityModel = $this->app['config']['cortex.bookings.models.event']);
+        $serviceAvailabilityModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
 
-        $this->app->singleton('cortex.bookings.event', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.event']);
-        $bookableAvailabilityModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
+        $this->app->singleton('cortex.bookings.event_ticket', $eventTicketModel = $this->app['config']['cortex.bookings.models.event_ticket']);
+        $eventTicketModel === EventTicket::class || $this->app->alias('cortex.bookings.event_ticket', EventTicket::class);
 
-        $this->app->singleton('cortex.bookings.event_ticket', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.event_ticket']);
-        $bookableAvailabilityModel === EventTicket::class || $this->app->alias('cortex.bookings.event_ticket', EventTicket::class);
-
-        $this->app->singleton('cortex.bookings.event_booking', $bookableRateModel = $this->app['config']['cortex.bookings.models.event_booking']);
-        $bookableRateModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
+        $this->app->singleton('cortex.bookings.event_booking', $eventBookingModel = $this->app['config']['cortex.bookings.models.event_booking']);
+        $eventBookingModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
 
         // Register console commands
         ! $this->app->runningInConsole() || $this->registerCommands();
@@ -95,7 +91,6 @@ class BookingsServiceProvider extends ServiceProvider
         // Bind route models and constrains
         $router->pattern('service', '[a-zA-Z0-9-]+');
         $router->pattern('service_rate', '[a-zA-Z0-9-]+');
-        $router->pattern('service_addon', '[a-zA-Z0-9-]+');
         $router->pattern('service_booking', '[a-zA-Z0-9-]+');
         $router->pattern('service_availability', '[a-zA-Z0-9-]+');
         $router->pattern('event_booking', '[a-zA-Z0-9-]+');
@@ -104,7 +99,6 @@ class BookingsServiceProvider extends ServiceProvider
 
         $router->model('service', config('cortex.bookings.models.service'));
         $router->model('service_rate', config('cortex.bookings.models.service_rate'));
-        $router->model('service_addon', config('cortex.bookings.models.service_addon'));
         $router->model('service_booking', config('cortex.bookings.models.service_booking'));
         $router->model('service_availability', config('cortex.bookings.models.service_availability'));
         $router->model('event_booking', config('cortex.bookings.models.event_booking'));
@@ -115,7 +109,6 @@ class BookingsServiceProvider extends ServiceProvider
         Relation::morphMap([
             'service' => config('cortex.bookings.models.service'),
             'service_rate' => config('cortex.bookings.models.service_rate'),
-            'service_addon' => config('cortex.bookings.models.service_addon'),
             'service_booking' => config('cortex.bookings.models.service_booking'),
             'service_availability' => config('cortex.bookings.models.service_availability'),
             'event_booking' => config('cortex.bookings.models.event_booking'),

@@ -101,14 +101,6 @@ class Service extends Bookable implements HasMedia
     /**
      * {@inheritdoc}
      */
-    public static function getAddonModel(): string
-    {
-        return config('cortex.bookings.models.service_addon');
-    }
-
-    /**
-     * {@inheritdoc}
-     */
     public static function getAvailabilityModel(): string
     {
         return config('cortex.bookings.models.service_availability');

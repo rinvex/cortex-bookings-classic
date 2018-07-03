@@ -19,7 +19,6 @@ return [
     'models' => [
         'service' => \Cortex\Bookings\Models\Service::class,
         'service_rate' => \Cortex\Bookings\Models\ServiceRate::class,
-        'service_addon' => \Cortex\Bookings\Models\ServiceAddon::class,
         'service_booking' => \Cortex\Bookings\Models\ServiceBooking::class,
         'event_booking' => \Cortex\Bookings\Models\EventBooking::class,
         'event_ticket' => \Cortex\Bookings\Models\EventTicket::class,
