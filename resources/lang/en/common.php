@@ -48,10 +48,10 @@ return [
     'is_attended' => 'Is Attended',
     'is_confirmed' => 'Is Confirmed',
 
-    // Rooms
-    'room' => 'Room',
-    'rooms' => 'Rooms',
-    'create_room' => 'Create New Room',
+    // Services
+    'service' => 'Service',
+    'services' => 'Services',
+    'create_service' => 'Create New Service',
 
     // Event Tickets
     'ticket' => 'Ticket',

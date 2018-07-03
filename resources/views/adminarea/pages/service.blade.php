@@ -7,13 +7,13 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest::class)->selector("#adminarea-rooms-create-form, #adminarea-rooms-{$room->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest::class)->selector("#adminarea-services-create-form, #adminarea-services-{$service->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 @endpush
 
 {{-- Main Content --}}
 @section('content')
 
-    @if($room->exists)
+    @if($service->exists)
         @include('cortex/foundation::common.partials.modal', ['id' => 'delete-confirmation'])
     @endif
 
@@ -26,27 +26,27 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($room->exists && $currentUser->can('delete', $room))
+                @if($service->exists && $currentUser->can('delete', $service))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
-                           data-modal-action="{{ route('adminarea.rooms.destroy', ['room' => $room]) }}"
+                           data-modal-action="{{ route('adminarea.services.destroy', ['service' => $service]) }}"
                            data-modal-title="{!! trans('cortex/foundation::messages.delete_confirmation_title') !!}"
                            data-modal-button="<a href='#' class='btn btn-danger' data-form='delete' data-token='{{ csrf_token() }}'><i class='fa fa-trash-o'></i> {{ trans('cortex/foundation::common.delete') }}</a>"
-                           data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/bookings::common.room'), 'identifier' => $room->name]) !!}"
+                           data-modal-body="{!! trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => $service->name]) !!}"
                            title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i>
                         </a>
                     </div>
                 @endif
-                {!! Menu::render('adminarea.rooms.tabs', 'nav-tab') !!}
+                {!! Menu::render('adminarea.services.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
 
                     <div class="tab-pane active" id="details-tab">
 
-                        @if ($room->exists)
-                            {{ Form::model($room, ['url' => route('adminarea.rooms.update', ['room' => $room]), 'method' => 'put', 'id' => "adminarea-rooms-{$room->getRouteKey()}-update-form"]) }}
+                        @if ($service->exists)
+                            {{ Form::model($service, ['url' => route('adminarea.services.update', ['service' => $service]), 'method' => 'put', 'id' => "adminarea-services-{$service->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($room, ['url' => route('adminarea.rooms.store'), 'id' => "adminarea-rooms-create-form"]) }}
+                            {{ Form::model($service, ['url' => route('adminarea.services.store'), 'id' => "adminarea-services-create-form"]) }}
                         @endif
 
                             <div class="row">
@@ -102,7 +102,7 @@
                                     {{-- Base Cost --}}
                                     <div class="form-group{{ $errors->has('base_cost') ? ' has-error' : '' }}">
                                         {{ Form::label('base_cost', trans('cortex/bookings::common.base_cost'), ['class' => 'control-label']) }}
-                                        {{ Form::number('base_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.base_cost'), 'required' => 'required']) }}
+                                        {{ Form::number('base_cost', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.base_cost')]) }}
 
                                         @if ($errors->has('base_cost'))
                                             <span class="help-block">{{ $errors->first('base_cost') }}</span>
@@ -130,7 +130,7 @@
                                     {{-- Unit --}}
                                     <div class="form-group{{ $errors->has('unit') ? ' has-error' : '' }}">
                                         {{ Form::label('unit', trans('cortex/bookings::common.unit'), ['class' => 'control-label']) }}
-                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $room->exists ? null : 'hour', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
+                                        {{ Form::select('unit', ['minute' => trans('cortex/bookings::common.unit_minute'), 'hour' => trans('cortex/bookings::common.unit_hour'), 'day' => trans('cortex/bookings::common.unit_day'), 'month' => trans('cortex/bookings::common.unit_month')], $service->exists ? null : 'hour', ['class' => 'form-control select2', 'data-minimum-results-for-search' => 'Infinity', 'data-width' => '100%', 'required' => 'required']) }}
 
                                         @if ($errors->has('unit'))
                                             <span class="help-block">{{ $errors->first('unit') }}</span>
@@ -231,7 +231,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit']) }}
                                     </div>
 
-                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $room])
+                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $service])
 
                                 </div>
 

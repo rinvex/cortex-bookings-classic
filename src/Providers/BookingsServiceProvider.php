@@ -5,15 +5,15 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
-use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\Event;
-use Cortex\Bookings\Models\RoomRate;
-use Cortex\Bookings\Models\RoomAddon;
+use Cortex\Bookings\Models\ServiceRate;
+use Cortex\Bookings\Models\ServiceAddon;
 use Cortex\Bookings\Models\EventTicket;
-use Cortex\Bookings\Models\RoomBooking;
+use Cortex\Bookings\Models\ServiceBooking;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Bookings\Models\EventBooking;
-use Cortex\Bookings\Models\RoomAvailability;
+use Cortex\Bookings\Models\ServiceAvailability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
@@ -50,20 +50,20 @@ class BookingsServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.bookings');
 
         // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.room', $bookableAddonModel = $this->app['config']['cortex.bookings.models.room']);
-        $bookableAddonModel === Room::class || $this->app->alias('cortex.bookings.room', Room::class);
+        $this->app->singleton('cortex.bookings.service', $bookableAddonModel = $this->app['config']['cortex.bookings.models.service']);
+        $bookableAddonModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
 
-        $this->app->singleton('cortex.bookings.room_addon', $bookableAddonModel = $this->app['config']['cortex.bookings.models.room_addon']);
-        $bookableAddonModel === RoomAddon::class || $this->app->alias('cortex.bookings.room_addon', RoomAddon::class);
+        $this->app->singleton('cortex.bookings.service_addon', $bookableAddonModel = $this->app['config']['cortex.bookings.models.service_addon']);
+        $bookableAddonModel === ServiceAddon::class || $this->app->alias('cortex.bookings.service_addon', ServiceAddon::class);
 
-        $this->app->singleton('cortex.bookings.room_availability', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.room_availability']);
-        $bookableAvailabilityModel === RoomAvailability::class || $this->app->alias('cortex.bookings.room_availability', RoomAvailability::class);
+        $this->app->singleton('cortex.bookings.service_availability', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.service_availability']);
+        $bookableAvailabilityModel === ServiceAvailability::class || $this->app->alias('cortex.bookings.service_availability', ServiceAvailability::class);
 
-        $this->app->singleton('cortex.bookings.room_booking', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.room_booking']);
-        $bookableAvailabilityModel === RoomBooking::class || $this->app->alias('cortex.bookings.room_booking', RoomBooking::class);
+        $this->app->singleton('cortex.bookings.service_booking', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.service_booking']);
+        $bookableAvailabilityModel === ServiceBooking::class || $this->app->alias('cortex.bookings.service_booking', ServiceBooking::class);
 
-        $this->app->singleton('cortex.bookings.room_rate', $bookableRateModel = $this->app['config']['cortex.bookings.models.room_rate']);
-        $bookableRateModel === RoomRate::class || $this->app->alias('cortex.bookings.room_rate', RoomRate::class);
+        $this->app->singleton('cortex.bookings.service_rate', $bookableRateModel = $this->app['config']['cortex.bookings.models.service_rate']);
+        $bookableRateModel === ServiceRate::class || $this->app->alias('cortex.bookings.service_rate', ServiceRate::class);
 
         $this->app->singleton('cortex.bookings.event', $bookableAvailabilityModel = $this->app['config']['cortex.bookings.models.event']);
         $bookableAvailabilityModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
@@ -78,8 +78,8 @@ class BookingsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->registerCommands();
 
         // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.room', $roomModel = $this->app['config']['cortex.bookings.models.room']);
-        $roomModel === Room::class || $this->app->alias('cortex.bookings.room', Room::class);
+        $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
+        $serviceModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
 
         $this->app->singleton('cortex.bookings.event', $eventModel = $this->app['config']['cortex.bookings.models.event']);
         $eventModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
@@ -93,31 +93,31 @@ class BookingsServiceProvider extends ServiceProvider
     public function boot(Router $router): void
     {
         // Bind route models and constrains
-        $router->pattern('room', '[a-zA-Z0-9-]+');
-        $router->pattern('room_rate', '[a-zA-Z0-9-]+');
-        $router->pattern('room_addon', '[a-zA-Z0-9-]+');
-        $router->pattern('room_booking', '[a-zA-Z0-9-]+');
-        $router->pattern('room_availability', '[a-zA-Z0-9-]+');
+        $router->pattern('service', '[a-zA-Z0-9-]+');
+        $router->pattern('service_rate', '[a-zA-Z0-9-]+');
+        $router->pattern('service_addon', '[a-zA-Z0-9-]+');
+        $router->pattern('service_booking', '[a-zA-Z0-9-]+');
+        $router->pattern('service_availability', '[a-zA-Z0-9-]+');
         $router->pattern('event_booking', '[a-zA-Z0-9-]+');
         $router->pattern('event_ticket', '[a-zA-Z0-9-]+');
         $router->pattern('event', '[a-zA-Z0-9-]+');
 
-        $router->model('room', config('cortex.bookings.models.room'));
-        $router->model('room_rate', config('cortex.bookings.models.room_rate'));
-        $router->model('room_addon', config('cortex.bookings.models.room_addon'));
-        $router->model('room_booking', config('cortex.bookings.models.room_booking'));
-        $router->model('room_availability', config('cortex.bookings.models.room_availability'));
+        $router->model('service', config('cortex.bookings.models.service'));
+        $router->model('service_rate', config('cortex.bookings.models.service_rate'));
+        $router->model('service_addon', config('cortex.bookings.models.service_addon'));
+        $router->model('service_booking', config('cortex.bookings.models.service_booking'));
+        $router->model('service_availability', config('cortex.bookings.models.service_availability'));
         $router->model('event_booking', config('cortex.bookings.models.event_booking'));
         $router->model('event_ticket', config('cortex.bookings.models.event_ticket'));
         $router->model('event', config('cortex.bookings.models.event'));
 
         // Map relations
         Relation::morphMap([
-            'room' => config('cortex.bookings.models.room'),
-            'room_rate' => config('cortex.bookings.models.room_rate'),
-            'room_addon' => config('cortex.bookings.models.room_addon'),
-            'room_booking' => config('cortex.bookings.models.room_booking'),
-            'room_availability' => config('cortex.bookings.models.room_availability'),
+            'service' => config('cortex.bookings.models.service'),
+            'service_rate' => config('cortex.bookings.models.service_rate'),
+            'service_addon' => config('cortex.bookings.models.service_addon'),
+            'service_booking' => config('cortex.bookings.models.service_booking'),
+            'service_availability' => config('cortex.bookings.models.service_availability'),
             'event_booking' => config('cortex.bookings.models.event_booking'),
             'event_ticket' => config('cortex.bookings.models.event_ticket'),
             'event' => config('cortex.bookings.models.event'),

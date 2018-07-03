@@ -4,18 +4,18 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Service;
 use Spatie\MediaLibrary\Models\Media;
 use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Foundation\Http\Requests\ImageFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 
-class RoomMediaController extends AuthorizedController
+class ServiceMediaController extends AuthorizedController
 {
     /**
      * {@inheritdoc}
      */
-    protected $resource = Room::class;
+    protected $resource = Service::class;
 
     /**
      * {@inheritdoc}
@@ -38,34 +38,34 @@ class RoomMediaController extends AuthorizedController
     }
 
     /**
-     * List room media.
+     * List service media.
      *
-     * @param \Cortex\Bookings\Models\Room                 $room
+     * @param \Cortex\Bookings\Models\Service                 $service
      * @param \Cortex\Foundation\DataTables\MediaDataTable $mediaDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function index(Room $room, MediaDataTable $mediaDataTable)
+    public function index(Service $service, MediaDataTable $mediaDataTable)
     {
         return $mediaDataTable->with([
-            'resource' => $room,
-            'tabs' => 'adminarea.rooms.tabs',
-            'id' => "adminarea-rooms-{$room->getRouteKey()}-media-table",
-            'url' => route('adminarea.rooms.media.store', ['room' => $room]),
+            'resource' => $service,
+            'tabs' => 'adminarea.services.tabs',
+            'id' => "adminarea-services-{$service->getRouteKey()}-media-table",
+            'url' => route('adminarea.services.media.store', ['service' => $service]),
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
     /**
-     * Store new room media.
+     * Store new service media.
      *
      * @param \Cortex\Foundation\Http\Requests\ImageFormRequest $request
-     * @param \Cortex\Bookings\Models\Room                      $room
+     * @param \Cortex\Bookings\Models\Service                      $service
      *
      * @return void
      */
-    public function store(ImageFormRequest $request, Room $room): void
+    public function store(ImageFormRequest $request, Service $service): void
     {
-        $room->addMediaFromRequest('file')
+        $service->addMediaFromRequest('file')
              ->sanitizingFileName(function ($fileName) {
                  return md5($fileName).'.'.pathinfo($fileName, PATHINFO_EXTENSION);
              })
@@ -73,19 +73,19 @@ class RoomMediaController extends AuthorizedController
     }
 
     /**
-     * Destroy given room media.
+     * Destroy given service media.
      *
-     * @param \Cortex\Bookings\Models\Room      $room
+     * @param \Cortex\Bookings\Models\Service      $service
      * @param \Spatie\MediaLibrary\Models\Media $media
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function destroy(Room $room, Media $media)
+    public function destroy(Service $service, Media $media)
     {
-        $room->media()->where($media->getKeyName(), $media->getKey())->first()->delete();
+        $service->media()->where($media->getKeyName(), $media->getKey())->first()->delete();
 
         return intend([
-            'url' => route('adminarea.rooms.media.index', ['room' => $room]),
+            'url' => route('adminarea.services.media.index', ['service' => $service]),
             'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/foundation::common.media'), 'identifier' => $media->getRouteKey()])],
         ]);
     }

@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateRoomsTable extends Migration
+class CreateServicesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,7 +15,7 @@ class CreateRoomsTable extends Migration
      */
     public function up(): void
     {
-        Schema::create(config('cortex.bookings.tables.rooms'), function (Blueprint $table) {
+        Schema::create(config('cortex.bookings.tables.services'), function (Blueprint $table) {
             // Columns
             $table->increments('id');
             $table->string('slug');
@@ -44,7 +44,7 @@ class CreateRoomsTable extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists(config('cortex.bookings.tables.rooms'));
+        Schema::dropIfExists(config('cortex.bookings.tables.services'));
     }
 
     /**

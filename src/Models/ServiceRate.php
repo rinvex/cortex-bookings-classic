@@ -6,10 +6,10 @@ namespace Cortex\Bookings\Models;
 
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Rinvex\Bookings\Models\BookableBooking;
+use Rinvex\Bookings\Models\BookableRate;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class RoomBooking extends BookableBooking
+class ServiceRate extends BookableRate
 {
     use Auditable;
     use HashidsTrait;

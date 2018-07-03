@@ -7,7 +7,7 @@ namespace Cortex\Bookings\Http\Requests\Adminarea;
 use Rinvex\Support\Traits\Escaper;
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomFormRequest extends FormRequest
+class ServiceFormRequest extends FormRequest
 {
     use Escaper;
 
@@ -35,15 +35,29 @@ class RoomFormRequest extends FormRequest
     }
 
     /**
+     * Prepare the data for validation.
+     *
+     * @return void
+     */
+    protected function prepareForValidation(): void
+    {
+        $data = $this->all();
+
+        $data['base_cost'] = (int) $data['base_cost'];
+
+        $this->replace($data);
+    }
+
+    /**
      * Get the validation rules that apply to the request.
      *
      * @return array
      */
     public function rules(): array
     {
-        $room = $this->route('room') ?? app('cortex.bookings.room');
-        $room->updateRulesUniques();
+        $service = $this->route('service') ?? app('cortex.bookings.service');
+        $service->updateRulesUniques();
 
-        return $room->getRules();
+        return $service->getRules();
     }
 }

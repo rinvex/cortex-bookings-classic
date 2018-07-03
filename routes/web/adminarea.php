@@ -8,35 +8,35 @@ Route::domain(domain())->group(function () {
          ->middleware(['web', 'nohttpcache', 'can:access-adminarea'])
          ->prefix(config('cortex.foundation.route.locale_prefix') ? '{locale}/'.config('cortex.foundation.route.prefix.adminarea') : config('cortex.foundation.route.prefix.adminarea'))->group(function () {
 
-        // Rooms Routes
-             Route::name('rooms.')->prefix('rooms')->group(function () {
-                 Route::get('/')->name('index')->uses('RoomsController@index');
-                 Route::get('import')->name('import')->uses('RoomsController@import');
-                 Route::post('import')->name('stash')->uses('RoomsController@stash');
-                 Route::post('hoard')->name('hoard')->uses('RoomsController@hoard');
-                 Route::get('import/logs')->name('import.logs')->uses('RoomsController@importLogs');
-                 Route::get('create')->name('create')->uses('RoomsController@create');
-                 Route::post('create')->name('store')->uses('RoomsController@store');
-                 Route::get('{room}')->name('edit')->uses('RoomsController@edit');
-                 Route::put('{room}')->name('update')->uses('RoomsController@update');
-                 Route::get('{room}/logs')->name('logs')->uses('RoomsController@logs');
-                 Route::delete('{room}')->name('destroy')->uses('RoomsController@destroy');
+        // Services Routes
+             Route::name('services.')->prefix('services')->group(function () {
+                 Route::get('/')->name('index')->uses('ServicesController@index');
+                 Route::get('import')->name('import')->uses('ServicesController@import');
+                 Route::post('import')->name('stash')->uses('ServicesController@stash');
+                 Route::post('hoard')->name('hoard')->uses('ServicesController@hoard');
+                 Route::get('import/logs')->name('import.logs')->uses('ServicesController@importLogs');
+                 Route::get('create')->name('create')->uses('ServicesController@create');
+                 Route::post('create')->name('store')->uses('ServicesController@store');
+                 Route::get('{service}')->name('edit')->uses('ServicesController@edit');
+                 Route::put('{service}')->name('update')->uses('ServicesController@update');
+                 Route::get('{service}/logs')->name('logs')->uses('ServicesController@logs');
+                 Route::delete('{service}')->name('destroy')->uses('ServicesController@destroy');
 
-                 Route::name('media.')->prefix('{room}/media')->group(function () {
-                     Route::get('/')->name('index')->uses('RoomMediaController@index');
-                     Route::post('/')->name('store')->uses('RoomMediaController@store');
-                     Route::delete('{media}')->name('destroy')->uses('RoomMediaController@destroy');
+                 Route::name('media.')->prefix('{service}/media')->group(function () {
+                     Route::get('/')->name('index')->uses('ServiceMediaController@index');
+                     Route::post('/')->name('store')->uses('ServiceMediaController@store');
+                     Route::delete('{media}')->name('destroy')->uses('ServiceMediaController@destroy');
                  });
 
                  // Bookings Routes
-                 Route::get('bookings')->name('bookings')->uses('RoomBookingsController@list');
-                 Route::name('bookings.')->prefix('{room}/bookings')->group(function () {
-                     Route::get('/')->name('index')->uses('RoomBookingsController@index');
-                     Route::post('list')->name('list')->uses('RoomBookingsController@list');
-                     Route::post('rooms')->name('rooms')->uses('RoomBookingsController@rooms');
-                     Route::post('store')->name('store')->uses('RoomBookingsController@store');
-                     Route::put('{room_booking}')->name('update')->uses('RoomBookingsController@update');
-                     Route::delete('{room_booking}')->name('destroy')->uses('RoomBookingsController@destroy');
+                 Route::get('bookings')->name('bookings')->uses('ServiceBookingsController@list');
+                 Route::name('bookings.')->prefix('{service}/bookings')->group(function () {
+                     Route::get('/')->name('index')->uses('ServiceBookingsController@index');
+                     Route::post('list')->name('list')->uses('ServiceBookingsController@list');
+                     Route::post('services')->name('services')->uses('ServiceBookingsController@services');
+                     Route::post('store')->name('store')->uses('ServiceBookingsController@store');
+                     Route::put('{service_booking}')->name('update')->uses('ServiceBookingsController@update');
+                     Route::delete('{service_booking}')->name('destroy')->uses('ServiceBookingsController@destroy');
                  });
              });
 

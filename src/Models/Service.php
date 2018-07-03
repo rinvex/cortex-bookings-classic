@@ -13,7 +13,7 @@ use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
 
-class Room extends Bookable implements HasMedia
+class Service extends Bookable implements HasMedia
 {
     use Taggable;
     use Auditable;
@@ -32,7 +32,7 @@ class Room extends Bookable implements HasMedia
         'name' => 'required|string|max:150',
         'description' => 'nullable|string|max:10000',
         'is_active' => 'sometimes|boolean',
-        'base_cost' => 'required|numeric',
+        'base_cost' => 'nullable|numeric',
         'unit_cost' => 'required|numeric',
         'currency' => 'required|string|size:3',
         'unit' => 'required|in:minute,hour,day,month',
@@ -79,8 +79,7 @@ class Room extends Bookable implements HasMedia
     {
         parent::__construct($attributes);
 
-        $this->setTable(config('cortex.bookings.tables.rooms'));
-        $this->setRules();
+        $this->setTable(config('cortex.bookings.tables.services'));
     }
 
     /**
@@ -88,7 +87,7 @@ class Room extends Bookable implements HasMedia
      */
     public static function getBookingModel(): string
     {
-        return config('cortex.bookings.models.room_booking');
+        return config('cortex.bookings.models.service_booking');
     }
 
     /**
@@ -96,7 +95,7 @@ class Room extends Bookable implements HasMedia
      */
     public static function getRateModel(): string
     {
-        return config('cortex.bookings.models.room_rate');
+        return config('cortex.bookings.models.service_rate');
     }
 
     /**
@@ -104,7 +103,7 @@ class Room extends Bookable implements HasMedia
      */
     public static function getAddonModel(): string
     {
-        return config('cortex.bookings.models.room_addon');
+        return config('cortex.bookings.models.service_addon');
     }
 
     /**
@@ -112,7 +111,7 @@ class Room extends Bookable implements HasMedia
      */
     public static function getAvailabilityModel(): string
     {
-        return config('cortex.bookings.models.room_availability');
+        return config('cortex.bookings.models.service_availability');
     }
 
     /**

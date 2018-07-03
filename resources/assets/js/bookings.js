@@ -35,8 +35,8 @@ $(function() {
             },
             type: 'POST',
         }),
-        rooms: $.ajax({
-            url: routes.route(window.Accessarea + '.rooms.ajax'),
+        services: $.ajax({
+            url: routes.route(window.Accessarea + '.services.ajax'),
             data: {
                 _token: window.Laravel.csrfToken,
             },
@@ -59,7 +59,7 @@ $(function() {
                         ? calendarEvent.end.format(dateFormat)
                         : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
                     customer_id: calendarEvent.customerId,
-                    room_id: calendarEvent.roomId,
+                    service_id: calendarEvent.serviceId,
                     _token: window.Laravel.csrfToken,
                 },
             }).done(function(response, status, request) {
@@ -91,7 +91,7 @@ $(function() {
                         ? calendarEvent.end.format(dateFormat)
                         : calendarEvent.end.format(dateFormat + ' ' + timeFormat),
                     customer_id: calendarEvent.customerId,
-                    room_id: calendarEvent.roomId,
+                    service_id: calendarEvent.serviceId,
                     _token: window.Laravel.csrfToken,
                 },
             }).done(function(response, status, request) {

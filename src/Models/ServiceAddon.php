@@ -9,7 +9,7 @@ use Rinvex\Support\Traits\HashidsTrait;
 use Rinvex\Bookings\Models\BookableAddon;
 use Spatie\Activitylog\Traits\LogsActivity;
 
-class RoomAddon extends BookableAddon
+class ServiceAddon extends BookableAddon
 {
     use Auditable;
     use HashidsTrait;

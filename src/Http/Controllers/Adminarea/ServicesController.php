@@ -5,75 +5,75 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Exception;
-use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Service;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
-use Cortex\Bookings\DataTables\Adminarea\RoomsDataTable;
+use Cortex\Bookings\DataTables\Adminarea\ServicesDataTable;
 use Cortex\Foundation\DataTables\ImportRecordsDataTable;
-use Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest;
+use Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 
-class RoomsController extends AuthorizedController
+class ServicesController extends AuthorizedController
 {
     /**
      * {@inheritdoc}
      */
-    protected $resource = Room::class;
+    protected $resource = Service::class;
 
     /**
-     * List all rooms.
+     * List all services.
      *
-     * @param \Cortex\Bookings\DataTables\Adminarea\RoomsDataTable $roomsDataTable
+     * @param \Cortex\Bookings\DataTables\Adminarea\ServicesDataTable $servicesDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index(RoomsDataTable $roomsDataTable)
+    public function index(ServicesDataTable $servicesDataTable)
     {
-        return $roomsDataTable->with([
-            'id' => 'adminarea-rooms-index-table',
+        return $servicesDataTable->with([
+            'id' => 'adminarea-services-index-table',
         ])->render('cortex/foundation::adminarea.pages.datatable-index');
     }
 
     /**
-     * List room logs.
+     * List service logs.
      *
-     * @param \Cortex\Bookings\Models\Room                $room
+     * @param \Cortex\Bookings\Models\Service                $service
      * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function logs(Room $room, LogsDataTable $logsDataTable)
+    public function logs(Service $service, LogsDataTable $logsDataTable)
     {
         return $logsDataTable->with([
-            'resource' => $room,
-            'tabs' => 'adminarea.rooms.tabs',
-            'id' => "adminarea-rooms-{$room->getRouteKey()}-logs-table",
+            'resource' => $service,
+            'tabs' => 'adminarea.services.tabs',
+            'id' => "adminarea-services-{$service->getRouteKey()}-logs-table",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
-     * Import rooms.
+     * Import services.
      *
-     * @param \Cortex\Bookings\Models\Room                         $room
+     * @param \Cortex\Bookings\Models\Service                         $service
      * @param \Cortex\Foundation\DataTables\ImportRecordsDataTable $importRecordsDataTable
      *
      * @return \Illuminate\View\View
      */
-    public function import(Room $room, ImportRecordsDataTable $importRecordsDataTable)
+    public function import(Service $service, ImportRecordsDataTable $importRecordsDataTable)
     {
         return $importRecordsDataTable->with([
-            'resource' => $room,
-            'tabs' => 'adminarea.rooms.tabs',
-            'url' => route('adminarea.rooms.stash'),
-            'id' => "adminarea-rooms-{$room->getRouteKey()}-import-table",
+            'resource' => $service,
+            'tabs' => 'adminarea.services.tabs',
+            'url' => route('adminarea.services.stash'),
+            'id' => "adminarea-services-{$service->getRouteKey()}-import-table",
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
     /**
-     * Stash rooms.
+     * Stash services.
      *
      * @param \Cortex\Foundation\Http\Requests\ImportFormRequest $request
      * @param \Cortex\Foundation\Importers\DefaultImporter       $importer
@@ -88,7 +88,7 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * Hoard rooms.
+     * Hoard services.
      *
      * @param \Cortex\Foundation\Http\Requests\ImportFormRequest $request
      *
@@ -100,9 +100,9 @@ class RoomsController extends AuthorizedController
             $record = app('cortex.foundation.import_record')->find($recordId);
 
             try {
-                $fillable = collect($record['data'])->intersectByKeys(array_flip(app('rinvex.bookings.room')->getFillable()))->toArray();
+                $fillable = collect($record['data'])->intersectByKeys(array_flip(app('rinvex.bookings.service')->getFillable()))->toArray();
 
-                tap(app('rinvex.bookings.room')->firstOrNew($fillable), function ($instance) use ($record) {
+                tap(app('rinvex.bookings.service')->firstOrNew($fillable), function ($instance) use ($record) {
                     $instance->save() && $record->delete();
                 });
             } catch (Exception $exception) {
@@ -119,7 +119,7 @@ class RoomsController extends AuthorizedController
     }
 
     /**
-     * List room import logs.
+     * List service import logs.
      *
      * @param \Cortex\Foundation\DataTables\ImportLogsDataTable $importLogsDatatable
      *
@@ -128,126 +128,126 @@ class RoomsController extends AuthorizedController
     public function importLogs(ImportLogsDataTable $importLogsDatatable)
     {
         return $importLogsDatatable->with([
-            'resource' => trans('cortex/bookings::common.room'),
-            'tabs' => 'adminarea.rooms.tabs',
-            'id' => 'adminarea-rooms-import-logs-table',
+            'resource' => trans('cortex/bookings::common.service'),
+            'tabs' => 'adminarea.services.tabs',
+            'id' => 'adminarea-services-import-logs-table',
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
-     * Create new room.
+     * Create new service.
      *
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Service $service
      *
      * @return \Illuminate\View\View
      */
-    public function create(Room $room)
+    public function create(Service $service)
     {
-        return $this->form($room);
+        return $this->form($service);
     }
 
     /**
-     * Edit given room.
+     * Edit given service.
      *
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Service $service
      *
      * @return \Illuminate\View\View
      */
-    public function edit(Room $room)
+    public function edit(Service $service)
     {
-        return $this->form($room);
+        return $this->form($service);
     }
 
     /**
-     * Show room create/edit form.
+     * Show service create/edit form.
      *
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Service $service
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Room $room)
+    protected function form(Service $service)
     {
         $tags = app('rinvex.tags.tag')->pluck('name', 'id');
 
-        return view('cortex/bookings::adminarea.pages.room', compact('room', 'tags'));
+        return view('cortex/bookings::adminarea.pages.service', compact('service', 'tags'));
     }
 
     /**
-     * Store new room.
+     * Store new service.
      *
-     * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Models\Room                             $room
+     * @param \Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest $request
+     * @param \Cortex\Bookings\Models\Service                             $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function store(RoomFormRequest $request, Room $room)
+    public function store(ServiceFormRequest $request, Service $service)
     {
-        return $this->process($request, $room);
+        return $this->process($request, $service);
     }
 
     /**
-     * Update given room.
+     * Update given service.
      *
-     * @param \Cortex\Bookings\Http\Requests\Adminarea\RoomFormRequest $request
-     * @param \Cortex\Bookings\Models\Room                             $room
+     * @param \Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest $request
+     * @param \Cortex\Bookings\Models\Service                             $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function update(RoomFormRequest $request, Room $room)
+    public function update(ServiceFormRequest $request, Service $service)
     {
-        return $this->process($request, $room);
+        return $this->process($request, $service);
     }
 
     /**
-     * Process stored/updated room.
+     * Process stored/updated service.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Room            $room
+     * @param \Cortex\Bookings\Models\Service            $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    protected function process(FormRequest $request, Room $room)
+    protected function process(FormRequest $request, Service $service)
     {
         // Prepare required input fields
         $data = $request->validated();
 
         ! $request->hasFile('profile_picture')
-        || $room->addMediaFromRequest('profile_picture')
+        || $service->addMediaFromRequest('profile_picture')
                   ->sanitizingFileName(function ($fileName) {
                       return md5($fileName).'.'.pathinfo($fileName, PATHINFO_EXTENSION);
                   })
                   ->toMediaCollection('profile_picture', config('cortex.auth.media.disk'));
 
         ! $request->hasFile('cover_photo')
-        || $room->addMediaFromRequest('cover_photo')
+        || $service->addMediaFromRequest('cover_photo')
                   ->sanitizingFileName(function ($fileName) {
                       return md5($fileName).'.'.pathinfo($fileName, PATHINFO_EXTENSION);
                   })
                   ->toMediaCollection('cover_photo', config('cortex.auth.media.disk'));
 
-        // Save room
-        $room->fill($data)->save();
+        // Save service
+        $service->fill($data)->save();
 
         return intend([
-            'url' => route('adminarea.rooms.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.room'), 'identifier' => $room->name])],
+            'url' => route('adminarea.services.index'),
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => $service->name])],
         ]);
     }
 
     /**
-     * Destroy given room.
+     * Destroy given service.
      *
-     * @param \Cortex\Bookings\Models\Room $room
+     * @param \Cortex\Bookings\Models\Service $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function destroy(Room $room)
+    public function destroy(Service $service)
     {
-        $room->delete();
+        $service->delete();
 
         return intend([
-            'url' => route('adminarea.rooms.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.room'), 'identifier' => $room->name])],
+            'url' => route('adminarea.services.index'),
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => $service->name])],
         ]);
     }
 }

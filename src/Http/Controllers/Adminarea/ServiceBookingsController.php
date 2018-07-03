@@ -4,14 +4,14 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Service;
 use Illuminate\Support\Facades\DB;
 use Cortex\Bookings\Models\BookableBooking;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
 
-class RoomBookingsController extends AuthorizedController
+class ServiceBookingsController extends AuthorizedController
 {
     /**
      * {@inheritdoc}
@@ -23,7 +23,7 @@ class RoomBookingsController extends AuthorizedController
      */
     protected $resourceMethodsWithoutModels = [
         'customers',
-        'rooms',
+        'services',
         'list',
     ];
 
@@ -62,12 +62,12 @@ class RoomBookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function list(Room $room): array
+    public function list(Service $service): array
     {
         $results = [];
         $rangeEnds = request()->get('end');
         $rangeStarts = request()->get('start');
-        $bookableBookings = app('cortex.bookings.room_booking')->range($rangeStarts, $rangeEnds)->get();
+        $bookableBookings = app('cortex.bookings.service_booking')->range($rangeStarts, $rangeEnds)->get();
 
         foreach ($bookableBookings as $bookableBooking) {
             $endTime = $bookableBooking->ends_at->toTimeString();
@@ -79,7 +79,7 @@ class RoomBookingsController extends AuthorizedController
             $results[] = [
                 'id' => $bookableBooking->getKey(),
                 'customerId' => $bookableBooking->customer->getKey(),
-                'roomId' => $bookableBooking->bookable->getKey(),
+                'serviceId' => $bookableBooking->bookable->getKey(),
                 'className' => $bookableBooking->bookable->style,
                 'title' => $bookableBooking->customer->full_name.' ('.$bookableBooking->bookable->name.')',
                 'start' => $allDay ? $bookableBooking->starts_at->toDateString() : $startsAt,
@@ -95,11 +95,11 @@ class RoomBookingsController extends AuthorizedController
      *
      * @return array
      */
-    public function rooms(): array
+    public function services(): array
     {
-        $rooms = app('cortex.bookings.room')->all(['id', DB::raw('JSON_EXTRACT(title, "$.en") as title'), 'style']);
+        $services = app('cortex.bookings.service')->all(['id', DB::raw('JSON_EXTRACT(title, "$.en") as title'), 'style']);
 
-        return $rooms;
+        return $services;
     }
 
     /**
@@ -111,7 +111,7 @@ class RoomBookingsController extends AuthorizedController
      */
     public function store(BookingFormRequest $request): int
     {
-        return $this->process($request, app('cortex.bookings.room_booking'));
+        return $this->process($request, app('cortex.bookings.service_booking'));
     }
 
     /**
@@ -149,14 +149,14 @@ class RoomBookingsController extends AuthorizedController
     /**
      * Destroy given booking.
      *
-     * @param \Cortex\Bookings\Models\Room                    $room
+     * @param \Cortex\Bookings\Models\Service                    $service
      * @param \Cortex\Bookings\Models\BookableBookableBooking $bookableBooking
      *
      * @return int
      */
-    public function destroy(Room $room, BookableBooking $bookableBooking): int
+    public function destroy(Service $service, BookableBooking $bookableBooking): int
     {
-        $room->bookings()->where($bookableBooking->getKeyName(), $bookableBooking->getKey())->first()->delete();
+        $service->bookings()->where($bookableBooking->getKeyName(), $bookableBooking->getKey())->first()->delete();
 
         return $bookableBooking->getKey();
     }

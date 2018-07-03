@@ -4,34 +4,29 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\DataTables\Adminarea;
 
-use Cortex\Bookings\Models\Room;
+use Cortex\Bookings\Models\Service;
 use Cortex\Foundation\DataTables\AbstractDataTable;
-use Cortex\Bookings\Transformers\Adminarea\RoomTransformer;
+use Cortex\Bookings\Transformers\Adminarea\ServiceTransformer;
 
-class RoomsDataTable extends AbstractDataTable
+class ServicesDataTable extends AbstractDataTable
 {
     /**
      * {@inheritdoc}
      */
-    protected $model = Room::class;
+    protected $model = Service::class;
 
     /**
      * {@inheritdoc}
      */
-    protected $transformer = RoomTransformer::class;
+    protected $transformer = ServiceTransformer::class;
 
     /**
-     * Get the query object to be processed by dataTables.
-     *
-     * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
+     * {@inheritdoc}
      */
-    public function query()
-    {
-        $locale = app()->getLocale();
-        $query = app($this->model)->query()->orderBy('sort_order', 'ASC')->orderBy("name->\${$locale}", 'ASC');
-
-        return $this->applyScopes($query);
-    }
+    protected $order = [
+        [0, 'asc'],
+        [5, 'asc'],
+    ];
 
     /**
      * Get columns.
@@ -41,8 +36,8 @@ class RoomsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.rooms.edit\', {room: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.rooms.edit\', {room: full.id})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            : '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id})+"\">"+data+"</a>"';
 
         return [
             'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],

@@ -32,15 +32,15 @@ class BookingFormRequest extends FormRequest
         $data = $this->all();
 
         // Calculate price
-        $room = app('cortex.bookings.room')->find($this->get('room_id'));
+        $service = app('cortex.bookings.service')->find($this->get('service_id'));
         $endsAt = $this->get('ends_at') ? new Carbon($this->get('ends_at')) : null;
         $startsAt = $this->get('starts_at') ? new Carbon($this->get('starts_at')) : null;
-        list($price, $priceEquation, $currency) = app('cortex.bookings.room_booking')->calculatePrice($room, $startsAt, $endsAt);
+        list($price, $priceEquation, $currency) = app('cortex.bookings.service_booking')->calculatePrice($service, $startsAt, $endsAt);
 
         // Fill missing fields
         $data['ends_at'] = $endsAt;
         $data['starts_at'] = $startsAt;
-        $data['bookable_type'] = 'room';
+        $data['bookable_type'] = 'service';
         $data['customer_type'] = 'member';
         $data['price_equation'] = $priceEquation;
         $data['currency'] = $currency;
@@ -69,7 +69,7 @@ class BookingFormRequest extends FormRequest
      */
     public function rules(): array
     {
-        $bookableBooking = $this->route('booking') ?? app('cortex.bookings.room_booking');
+        $bookableBooking = $this->route('booking') ?? app('cortex.bookings.service_booking');
         $bookableBooking->updateRulesUniques();
 
         return $bookableBooking->getRules();

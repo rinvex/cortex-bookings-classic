@@ -2,27 +2,27 @@
 
 declare(strict_types=1);
 
-use Cortex\Bookings\Models\Room;
 use Cortex\Bookings\Models\Event;
 use Rinvex\Menus\Models\MenuItem;
+use Cortex\Bookings\Models\Service;
 use Spatie\MediaLibrary\Models\Media;
 use Rinvex\Menus\Models\MenuGenerator;
 
-Menu::register('adminarea.sidebar', function (MenuGenerator $menu, Room $room, Event $event) {
-    $menu->dropdown(function (MenuItem $dropdown) use ($room, $event) {
-        $dropdown->route(['adminarea.rooms.index'], trans('cortex/bookings::common.rooms'), null, 'fa fa-cubes')->ifCan('list', $room)->activateOnRoute('adminarea.rooms');
+Menu::register('adminarea.sidebar', function (MenuGenerator $menu, Service $service, Event $event) {
+    $menu->dropdown(function (MenuItem $dropdown) use ($service, $event) {
+        $dropdown->route(['adminarea.services.index'], trans('cortex/bookings::common.services'), null, 'fa fa-cubes')->ifCan('list', $service)->activateOnRoute('adminarea.services');
         $dropdown->route(['adminarea.events.index'], trans('cortex/bookings::common.events'), null, 'fa fa-cubes')->ifCan('list', $event)->activateOnRoute('adminarea.events');
     }, trans('cortex/bookings::common.space'), 60, 'fa fa-code-fork');
 });
 
-Menu::register('adminarea.rooms.tabs', function (MenuGenerator $menu, Room $room, Media $media) {
-    $menu->route(['adminarea.rooms.import'], trans('cortex/bookings::common.records'))->ifCan('import', $room)->if(Route::is('adminarea.rooms.import*'));
-    $menu->route(['adminarea.rooms.import.logs'], trans('cortex/bookings::common.logs'))->ifCan('import', $room)->if(Route::is('adminarea.rooms.import*'));
-    $menu->route(['adminarea.rooms.create'], trans('cortex/bookings::common.details'))->ifCan('create', $room)->if(Route::is('adminarea.rooms.create'));
-    $menu->route(['adminarea.rooms.edit', ['room' => $room]], trans('cortex/bookings::common.details'))->ifCan('update', $room)->if($room->exists);
-    $menu->route(['adminarea.rooms.bookings.index', ['room' => $room]], trans('cortex/bookings::common.bookings'))->ifCan('book', $room)->if($room->exists);
-    $menu->route(['adminarea.rooms.logs', ['room' => $room]], trans('cortex/bookings::common.logs'))->ifCan('audit', $room)->if($room->exists);
-    $menu->route(['adminarea.rooms.media.index', ['room' => $room]], trans('cortex/bookings::common.media'))->ifCan('update', $room)->ifCan('list', $media)->if($room->exists);
+Menu::register('adminarea.services.tabs', function (MenuGenerator $menu, Service $service, Media $media) {
+    $menu->route(['adminarea.services.import'], trans('cortex/bookings::common.records'))->ifCan('import', $service)->if(Route::is('adminarea.services.import*'));
+    $menu->route(['adminarea.services.import.logs'], trans('cortex/bookings::common.logs'))->ifCan('import', $service)->if(Route::is('adminarea.services.import*'));
+    $menu->route(['adminarea.services.create'], trans('cortex/bookings::common.details'))->ifCan('create', $service)->if(Route::is('adminarea.services.create'));
+    $menu->route(['adminarea.services.edit', ['service' => $service]], trans('cortex/bookings::common.details'))->ifCan('update', $service)->if($service->exists);
+    $menu->route(['adminarea.services.bookings.index', ['service' => $service]], trans('cortex/bookings::common.bookings'))->ifCan('book', $service)->if($service->exists);
+    $menu->route(['adminarea.services.logs', ['service' => $service]], trans('cortex/bookings::common.logs'))->ifCan('audit', $service)->if($service->exists);
+    $menu->route(['adminarea.services.media.index', ['service' => $service]], trans('cortex/bookings::common.media'))->ifCan('update', $service)->ifCan('list', $media)->if($service->exists);
 });
 
 Menu::register('adminarea.events.tabs', function (MenuGenerator $menu, Event $event, Media $media) {
