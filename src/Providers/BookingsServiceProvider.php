@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Providers;
 
 use Illuminate\Routing\Router;
-use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\Event;
-use Cortex\Bookings\Models\ServiceRate;
+use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\EventTicket;
-use Cortex\Bookings\Models\ServiceBooking;
+use Cortex\Bookings\Models\ServiceRate;
 use Illuminate\Support\ServiceProvider;
 use Cortex\Bookings\Models\EventBooking;
+use Cortex\Bookings\Models\ServiceBooking;
 use Cortex\Bookings\Models\ServiceAvailability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;

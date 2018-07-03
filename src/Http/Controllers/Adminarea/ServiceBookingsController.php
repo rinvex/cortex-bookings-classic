@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Cortex\Bookings\Models\Service;
 use Illuminate\Support\Facades\DB;
+use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\BookableBooking;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
@@ -149,7 +149,7 @@ class ServiceBookingsController extends AuthorizedController
     /**
      * Destroy given booking.
      *
-     * @param \Cortex\Bookings\Models\Service                    $service
+     * @param \Cortex\Bookings\Models\Service                 $service
      * @param \Cortex\Bookings\Models\BookableBookableBooking $bookableBooking
      *
      * @return int
