@@ -40,7 +40,7 @@ class ServiceMediaController extends AuthorizedController
     /**
      * List service media.
      *
-     * @param \Cortex\Bookings\Models\Service                 $service
+     * @param \Cortex\Bookings\Models\Service              $service
      * @param \Cortex\Foundation\DataTables\MediaDataTable $mediaDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
@@ -59,7 +59,7 @@ class ServiceMediaController extends AuthorizedController
      * Store new service media.
      *
      * @param \Cortex\Foundation\Http\Requests\ImageFormRequest $request
-     * @param \Cortex\Bookings\Models\Service                      $service
+     * @param \Cortex\Bookings\Models\Service                   $service
      *
      * @return void
      */
@@ -75,7 +75,7 @@ class ServiceMediaController extends AuthorizedController
     /**
      * Destroy given service media.
      *
-     * @param \Cortex\Bookings\Models\Service      $service
+     * @param \Cortex\Bookings\Models\Service   $service
      * @param \Spatie\MediaLibrary\Models\Media $media
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse

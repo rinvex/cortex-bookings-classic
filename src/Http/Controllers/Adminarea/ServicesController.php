@@ -11,10 +11,10 @@ use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
 use Cortex\Foundation\Http\Requests\ImportFormRequest;
-use Cortex\Bookings\DataTables\Adminarea\ServicesDataTable;
 use Cortex\Foundation\DataTables\ImportRecordsDataTable;
-use Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest;
+use Cortex\Bookings\DataTables\Adminarea\ServicesDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
+use Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest;
 
 class ServicesController extends AuthorizedController
 {
@@ -40,7 +40,7 @@ class ServicesController extends AuthorizedController
     /**
      * List service logs.
      *
-     * @param \Cortex\Bookings\Models\Service                $service
+     * @param \Cortex\Bookings\Models\Service             $service
      * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
@@ -57,7 +57,7 @@ class ServicesController extends AuthorizedController
     /**
      * Import services.
      *
-     * @param \Cortex\Bookings\Models\Service                         $service
+     * @param \Cortex\Bookings\Models\Service                      $service
      * @param \Cortex\Foundation\DataTables\ImportRecordsDataTable $importRecordsDataTable
      *
      * @return \Illuminate\View\View
@@ -202,7 +202,7 @@ class ServicesController extends AuthorizedController
      * Process stored/updated service.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Service            $service
+     * @param \Cortex\Bookings\Models\Service         $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */

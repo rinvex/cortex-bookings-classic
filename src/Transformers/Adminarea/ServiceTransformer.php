@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Transformers\Adminarea;
 
-use Cortex\Bookings\Models\Service;
 use Rinvex\Support\Traits\Escaper;
+use Cortex\Bookings\Models\Service;
 use League\Fractal\TransformerAbstract;
 
 class ServiceTransformer extends TransformerAbstract
