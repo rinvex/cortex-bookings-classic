@@ -20,6 +20,7 @@ return [
         'service' => \Cortex\Bookings\Models\Service::class,
         'service_rate' => \Cortex\Bookings\Models\ServiceRate::class,
         'service_booking' => \Cortex\Bookings\Models\ServiceBooking::class,
+        'service_availability' => \Cortex\Bookings\Models\ServiceAvailability::class,
         'event_booking' => \Cortex\Bookings\Models\EventBooking::class,
         'event_ticket' => \Cortex\Bookings\Models\EventTicket::class,
         'event' => \Cortex\Bookings\Models\Event::class,

@@ -28,6 +28,7 @@ class CreateServicesTable extends Migration
             $table->string('unit')->default('hour');
             $table->smallInteger('maximum_units')->unsigned()->nullable();
             $table->smallInteger('minimum_units')->unsigned()->nullable();
+            $table->tinyInteger('is_cancelable')->unsigned()->default(0);
             $table->tinyInteger('is_recurring')->unsigned()->default(0);
             $table->mediumInteger('sort_order')->unsigned()->default(0);
             $table->mediumInteger('capacity')->unsigned()->nullable();

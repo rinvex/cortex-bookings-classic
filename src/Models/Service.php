@@ -38,6 +38,7 @@ class Service extends Bookable implements HasMedia
         'unit' => 'required|in:minute,hour,day,month',
         'maximum_units' => 'nullable|integer|max:10000',
         'minimum_units' => 'nullable|integer|max:10000',
+        'is_cancelable' => 'nullable|boolean',
         'is_recurring' => 'nullable|boolean',
         'sort_order' => 'nullable|integer|max:10000000',
         'capacity' => 'nullable|integer|max:10000000',

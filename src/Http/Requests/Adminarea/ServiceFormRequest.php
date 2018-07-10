@@ -57,7 +57,20 @@ class ServiceFormRequest extends FormRequest
     {
         $service = $this->route('service') ?? app('cortex.bookings.service');
         $service->updateRulesUniques();
+        $rules = $service->getRules();
 
-        return $service->getRules();
+        $rules['availabilities.*.range'] = ['sometimes', 'required', 'string'];
+        $rules['availabilities.*.from'] = ['sometimes', 'required', 'string'];
+        $rules['availabilities.*.to'] = ['sometimes', 'required', 'string'];
+        $rules['availabilities.*.is_bookable'] = ['sometimes', 'boolean'];
+        $rules['availabilities.*.priority'] = ['sometimes', 'nullable', 'integer'];
+
+        $rules['rates.*.range'] = ['sometimes', 'required', 'string'];
+        $rules['rates.*.from'] = ['sometimes', 'required', 'string'];
+        $rules['rates.*.to'] = ['sometimes', 'required', 'string'];
+        $rules['rates.*.base_cost'] = ['sometimes', 'nullable', 'numeric'];
+        $rules['rates.*.unit_cost'] = ['sometimes', 'required', 'numeric'];
+
+        return $rules;
     }
 }

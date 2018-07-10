@@ -169,7 +169,47 @@ class ServicesController extends AuthorizedController
     {
         $tags = app('rinvex.tags.tag')->pluck('name', 'id');
 
-        return view('cortex/bookings::adminarea.pages.service', compact('service', 'tags'));
+        $days = [
+            'sunday' => trans('cortex/bookings::common.sunday'),
+            'monday' => trans('cortex/bookings::common.monday'),
+            'tuesday' => trans('cortex/bookings::common.tuesday'),
+            'wednesday' => trans('cortex/bookings::common.wednesday'),
+            'thursday' => trans('cortex/bookings::common.thursday'),
+            'friday' => trans('cortex/bookings::common.friday'),
+            'saturday' => trans('cortex/bookings::common.saturday'),
+        ];
+
+        $weeks = collect(range(1, 52))->mapWithKeys(function ($asd) {
+            return ['week'.str_pad((string) $asd, 2, '0', STR_PAD_LEFT) => trans('cortex/bookings::common.week').' '.str_pad((string) $asd, 2, '0', STR_PAD_LEFT)];
+        })->toArray();
+
+        $months = [
+            'january' => trans('cortex/bookings::common.january'),
+            'february' => trans('cortex/bookings::common.february'),
+            'march' => trans('cortex/bookings::common.march'),
+            'april' => trans('cortex/bookings::common.april'),
+            'may' => trans('cortex/bookings::common.may'),
+            'june' => trans('cortex/bookings::common.june'),
+            'july' => trans('cortex/bookings::common.july'),
+            'august' => trans('cortex/bookings::common.august'),
+            'september' => trans('cortex/bookings::common.september'),
+            'october' => trans('cortex/bookings::common.october'),
+            'november' => trans('cortex/bookings::common.november'),
+            'december' => trans('cortex/bookings::common.december'),
+        ];
+
+        $ranges = [
+            'datetimes' => trans('cortex/bookings::common.datetimes'),
+            'dates' => trans('cortex/bookings::common.dates'),
+            'months' => trans('cortex/bookings::common.months'),
+            'weeks' => trans('cortex/bookings::common.weeks'),
+            'days' => trans('cortex/bookings::common.days'),
+            trans('cortex/bookings::common.time_range') => array_merge([
+                'times' => trans('cortex/bookings::common.times'),
+            ], $days),
+        ];
+
+        return view('cortex/bookings::adminarea.pages.service', compact('service', 'tags', 'days', 'weeks', 'months', 'ranges'));
     }
 
     /**
@@ -227,6 +267,8 @@ class ServicesController extends AuthorizedController
 
         // Save service
         $service->fill($data)->save();
+        ! array_get($data, 'rates') || $service->rates()->createMany($data['rates']);
+        ! array_get($data, 'availabilities') || $service->availabilities()->createMany($data['availabilities']);
 
         return intend([
             'url' => route('adminarea.services.index'),
