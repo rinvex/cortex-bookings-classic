@@ -202,14 +202,9 @@
                     let uniqueId = inject_range_template('rate', 'rates-container');
 
                     for (let $field in $rates[$rate]) {
-                        if ($field === 'range' && $.inArray($("[name='rates["+uniqueId+"][range]']").val(), ['days', 'weeks', 'months']) === -1) {
-                            setTimeout(function(){
-                                $("select[name*='range']").val('dates').trigger('change');
-                            }, 0);
-
-                        } else {
-                            $("[name='rates["+uniqueId+"]["+$field+"]']").val($rates[$rate][$field]);
-                        }
+                        setTimeout(function(){
+                            $("[name='rates["+uniqueId+"]["+$field+"]']").val($rates[$rate][$field]).trigger('change');
+                        }, 0);
                     }
                 }
             }
@@ -219,14 +214,9 @@
                     let uniqueId = inject_range_template('availability', 'availabilities-container');
 
                     for (let $field in $availabilities[$availability]) {
-                        if ($field === 'range' && $.inArray($("[name='availabilities["+uniqueId+"][range]']").val(), ['days', 'weeks', 'months']) === -1) {
-                            setTimeout(function(){
-                                $("select[name*='range']").val('dates').trigger('change');
-                            }, 0);
-
-                        } else {
-                            $("[name='availabilities["+uniqueId+"]["+$field+"]']").val($availabilities[$availability][$field]);
-                        }
+                        setTimeout(function(){
+                            $("[name='availabilities["+uniqueId+"]["+$field+"]']").val($availabilities[$availability][$field]).trigger('change');
+                        }, 0);
                     }
                 }
             }
