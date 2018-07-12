@@ -12,7 +12,10 @@
 
 @push('vendor-scripts')
     <script src="{{ mix('js/fullcalendar.js', 'assets') }}" defer></script>
-    <script src="{{ mix('js/bookings.js', 'assets') }}" defer></script>
+@endpush
+
+@push('inline-scripts')
+    @include('cortex/bookings::adminarea.partials.service-booking-scripts')
 @endpush
 
 {{-- Main Content --}}

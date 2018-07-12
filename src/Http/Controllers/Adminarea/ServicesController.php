@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
+use Cortex\Bookings\Models\ServiceAvailability;
 use Exception;
 use Cortex\Bookings\Models\Service;
+use Cortex\Bookings\Models\ServiceRate;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
@@ -267,8 +269,28 @@ class ServicesController extends AuthorizedController
 
         // Save service
         $service->fill($data)->save();
-        ! array_get($data, 'rates') || $service->rates()->createMany($data['rates']);
-        ! array_get($data, 'availabilities') || $service->availabilities()->createMany($data['availabilities']);
+
+        list($existingRates, $newRates) = collect($data['rates'])->partition(function ($rate) {
+            return isset($rate['id']);
+        });
+
+        if (array_get($data, 'rates')) {
+            $service->rates()->createMany($newRates->toArray());
+            app('cortex.bookings.service_rate')->findMany($existingRates->pluck('id'))->map(function (ServiceRate $rate) use ($existingRates) {
+                $rate->update($existingRates->where('id', $rate->id)->first());
+            });
+        }
+
+        list($existingAvailabilities, $newAvailabilities) = collect($data['availabilities'])->partition(function ($availability) {
+            return isset($availability['id']);
+        });
+
+        if (array_get($data, 'availabilities')) {
+            $service->availabilities()->createMany($newAvailabilities->toArray());
+            app('cortex.bookings.service_availability')->findMany($existingAvailabilities->pluck('id'))->map(function (ServiceAvailability $availability) use ($existingAvailabilities) {
+                $availability->update($existingAvailabilities->where('id', $availability->id)->first());
+            });
+        }
 
         return intend([
             'url' => route('adminarea.services.index'),

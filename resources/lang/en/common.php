@@ -87,6 +87,7 @@ return [
     'add_rate' => 'Add Rate',
     'add_availability' => 'Add Availability',
     'is_bookable' => 'Is Bookable',
+    'select_range' => 'Select Range',
 
     // Services
     'service' => 'Service',

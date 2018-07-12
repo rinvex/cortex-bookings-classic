@@ -6,10 +6,14 @@
     {{ extract_title(Breadcrumbs::render()) }}
 @endsection
 
+@push('head-elements')
+    <meta name="turbolinks-cache-control" content="no-cache">
+@endpush
+
 @push('inline-scripts')
     {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest::class)->selector("#adminarea-services-create-form, #adminarea-services-{$service->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
-    @include('cortex/bookings::adminarea.partials.templates')
-    @include('cortex/bookings::adminarea.partials.scripts')
+    @include('cortex/bookings::adminarea.partials.service-templates')
+    @include('cortex/bookings::adminarea.partials.service-scripts')
 @endpush
 
 {{-- Main Content --}}

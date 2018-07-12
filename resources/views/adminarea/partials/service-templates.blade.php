@@ -15,6 +15,8 @@
         <div id="UNIQUEID" class="panel-collapse collapse">
             <div class="panel-body">
 
+                {{ Form::hidden('availabilities[UNIQUEID][id]', null, ['class' => 'skip-validation']) }}
+
                 <div class="row">
 
                     <div class="col-md-4">
@@ -33,7 +35,7 @@
                         <div class="form-group">
 
                             {{ Form::label('availabilities[UNIQUEID][from]', trans('cortex/bookings::common.from'), ['class' => 'control-label']) }}
-                            {{ Form::select('availabilities[UNIQUEID][from]', [], null, ['class' => 'form-control select2', 'disabled' => 'disabled', 'id' => 'select-from-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
+                            {{ Form::select('availabilities[UNIQUEID][from]', [], null, ['class' => 'form-control select2', 'style' => 'display: none', 'disabled' => 'disabled', 'id' => 'select-from-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
                             {{ Form::text('availabilities[UNIQUEID][from]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'date-from-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD"}', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('availabilities[UNIQUEID][from]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'datetime-from-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD, hh:mm A"}', 'data-time-picker' => 'true', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('availabilities[UNIQUEID][from]', null, ['class' => 'form-control timepicker time start', 'style' => 'display: none', 'id' => 'time-from-UNIQUEID', 'data-time-format' => 'H:i A', 'data-show-duration' => 'true']) }}
@@ -47,7 +49,7 @@
                         <div class="form-group">
 
                             {{ Form::label('availabilities[UNIQUEID][to]', trans('cortex/bookings::common.to'), ['class' => 'control-label']) }}
-                            {{ Form::select('availabilities[UNIQUEID][to]', [], null, ['class' => 'form-control select2', 'disabled' => 'disabled', 'id' => 'select-to-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
+                            {{ Form::select('availabilities[UNIQUEID][to]', [], null, ['class' => 'form-control select2', 'style' => 'display: none', 'disabled' => 'disabled', 'id' => 'select-to-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
                             {{ Form::text('availabilities[UNIQUEID][to]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'date-to-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD"}', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('availabilities[UNIQUEID][to]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'datetime-to-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD, hh:mm A"}', 'data-time-picker' => 'true', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('availabilities[UNIQUEID][to]', null, ['class' => 'form-control timepicker time end', 'style' => 'display: none', 'id' => 'time-to-UNIQUEID', 'data-time-format' => 'H:i A', 'data-show-duration' => 'true']) }}
@@ -105,6 +107,8 @@
         <div id="UNIQUEID" class="panel-collapse collapse">
             <div class="panel-body">
 
+                {{ Form::hidden('rates[UNIQUEID][id]', null, ['class' => 'skip-validation']) }}
+
                 <div class="row">
 
                     <div class="col-md-4">
@@ -123,7 +127,7 @@
                         <div class="form-group">
 
                             {{ Form::label('rates[UNIQUEID][from]', trans('cortex/bookings::common.from'), ['class' => 'control-label']) }}
-                            {{ Form::select('rates[UNIQUEID][from]', [], null, ['class' => 'form-control select2', 'disabled' => 'disabled', 'id' => 'select-from-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
+                            {{ Form::select('rates[UNIQUEID][from]', [], null, ['class' => 'form-control select2', 'style' => 'display: none', 'disabled' => 'disabled', 'id' => 'select-from-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
                             {{ Form::text('rates[UNIQUEID][from]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'date-from-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD"}', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('rates[UNIQUEID][from]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'datetime-from-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD, hh:mm A"}', 'data-time-picker' => 'true', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('rates[UNIQUEID][from]', null, ['class' => 'form-control timepicker time start', 'style' => 'display: none', 'id' => 'time-from-UNIQUEID', 'data-time-format' => 'H:i A', 'data-show-duration' => 'true']) }}
@@ -137,7 +141,7 @@
                         <div class="form-group">
 
                             {{ Form::label('rates[UNIQUEID][to]', trans('cortex/bookings::common.to'), ['class' => 'control-label']) }}
-                            {{ Form::select('rates[UNIQUEID][to]', [], null, ['class' => 'form-control select2', 'disabled' => 'disabled', 'id' => 'select-to-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
+                            {{ Form::select('rates[UNIQUEID][to]', [], null, ['class' => 'form-control select2', 'style' => 'display: none', 'disabled' => 'disabled', 'id' => 'select-to-UNIQUEID', 'data-width' => '100%', 'required' => 'required']) }}
                             {{ Form::text('rates[UNIQUEID][to]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'date-to-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD"}', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('rates[UNIQUEID][to]', null, ['class' => 'form-control datepicker', 'style' => 'display: none', 'id' => 'datetime-to-UNIQUEID', 'data-locale' => '{"format": "YYYY-MM-DD, hh:mm A"}', 'data-time-picker' => 'true', 'data-single-date-picker' => 'true', 'data-show-dropdowns' => 'true', 'data-auto-apply' => 'true']) }}
                             {{ Form::text('rates[UNIQUEID][to]', null, ['class' => 'form-control timepicker time end', 'style' => 'display: none', 'id' => 'time-to-UNIQUEID', 'data-time-format' => 'H:i A', 'data-show-duration' => 'true']) }}

@@ -19,6 +19,7 @@
     ];
 
     let ranges = [
+        { id: -1, text: "@lang('cortex/bookings::common.select_range')", disabled: true, selected: true },
         @foreach($ranges as $index => $range)
             @if (is_array($range))
                 { text: '{{ $index }}', children: [
@@ -202,9 +203,12 @@
                     let uniqueId = inject_range_template('rate', 'rates-container');
 
                     for (let $field in $rates[$rate]) {
+                        // Cast boolean to int, for select menus!
+                        $rates[$rate][$field] = typeof($rates[$rate][$field]) === 'boolean' ? +$rates[$rate][$field] : $rates[$rate][$field];
+
                         setTimeout(function(){
                             $("[name='rates["+uniqueId+"]["+$field+"]']").val($rates[$rate][$field]).trigger('change');
-                        }, 0);
+                        }, 10);
                     }
                 }
             }
@@ -214,9 +218,12 @@
                     let uniqueId = inject_range_template('availability', 'availabilities-container');
 
                     for (let $field in $availabilities[$availability]) {
+                        // Cast boolean to int, for select menus!
+                        $availabilities[$availability][$field] = typeof($availabilities[$availability][$field]) === 'boolean' ? +$availabilities[$availability][$field] : $availabilities[$availability][$field];
+
                         setTimeout(function(){
                             $("[name='availabilities["+uniqueId+"]["+$field+"]']").val($availabilities[$availability][$field]).trigger('change');
-                        }, 0);
+                        }, 10);
                     }
                 }
             }
