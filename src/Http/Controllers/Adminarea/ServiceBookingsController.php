@@ -118,7 +118,7 @@ class ServiceBookingsController extends AuthorizedController
      * Update given booking.
      *
      * @param \Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest $request
-     * @param \Cortex\Bookings\Models\ServiceBooking                     $serviceBooking
+     * @param \Cortex\Bookings\Models\ServiceBooking                      $serviceBooking
      *
      * @return int
      */
@@ -131,7 +131,7 @@ class ServiceBookingsController extends AuthorizedController
      * Process stored/updated booking.
      *
      * @param \Illuminate\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\ServiceBooking $serviceBooking
+     * @param \Cortex\Bookings\Models\ServiceBooking  $serviceBooking
      *
      * @return int
      */
@@ -149,7 +149,7 @@ class ServiceBookingsController extends AuthorizedController
     /**
      * Destroy given booking.
      *
-     * @param \Cortex\Bookings\Models\Service                 $service
+     * @param \Cortex\Bookings\Models\Service        $service
      * @param \Cortex\Bookings\Models\ServiceBooking $serviceBooking
      *
      * @return int

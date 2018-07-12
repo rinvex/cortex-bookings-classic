@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Cortex\Bookings\Models\ServiceAvailability;
 use Exception;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceRate;
 use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Bookings\Models\ServiceAvailability;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
