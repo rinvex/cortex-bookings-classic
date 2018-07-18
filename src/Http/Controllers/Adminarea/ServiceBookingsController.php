@@ -4,13 +4,13 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Cortex\Bookings\DataTables\Adminarea\ServiceBookingsDataTable;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceBooking;
-use Cortex\Foundation\DataTables\LogsDataTable;
 use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
+use Cortex\Bookings\DataTables\Adminarea\ServiceBookingsDataTable;
 
 class ServiceBookingsController extends AuthorizedController
 {
