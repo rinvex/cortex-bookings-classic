@@ -240,6 +240,8 @@ class EventsController extends AuthorizedController
      *
      * @param \Cortex\Bookings\Models\Event $event
      *
+     * @throws \Exception
+     *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
     public function destroy(Event $event)

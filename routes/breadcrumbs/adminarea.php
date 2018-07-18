@@ -6,6 +6,7 @@ use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\EventTicket;
 use Cortex\Bookings\Models\EventBooking;
+use DaveJamesMiller\Breadcrumbs\Facades\Breadcrumbs;
 use DaveJamesMiller\Breadcrumbs\BreadcrumbsGenerator;
 
 Breadcrumbs::register('adminarea.services.index', function (BreadcrumbsGenerator $breadcrumbs) {
