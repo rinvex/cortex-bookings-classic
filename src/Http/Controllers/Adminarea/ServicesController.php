@@ -270,7 +270,7 @@ class ServicesController extends AuthorizedController
         // Save service
         $service->fill($data)->save();
 
-        list($existingRates, $newRates) = collect($data['rates'])->partition(function ($rate) {
+        [$existingRates, $newRates] = collect($data['rates'])->partition(function ($rate) {
             return isset($rate['id']);
         });
 
@@ -281,7 +281,7 @@ class ServicesController extends AuthorizedController
             });
         }
 
-        list($existingAvailabilities, $newAvailabilities) = collect($data['availabilities'])->partition(function ($availability) {
+        [$existingAvailabilities, $newAvailabilities] = collect($data['availabilities'])->partition(function ($availability) {
             return isset($availability['id']);
         });
 

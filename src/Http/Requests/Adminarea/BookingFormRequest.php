@@ -35,7 +35,7 @@ class BookingFormRequest extends FormRequest
         $service = app('cortex.bookings.service')->find($this->get('service_id'));
         $endsAt = $this->get('ends_at') ? new Carbon($this->get('ends_at')) : null;
         $startsAt = $this->get('starts_at') ? new Carbon($this->get('starts_at')) : null;
-        list($price, $formula, $currency) = app('cortex.bookings.service_booking')->calculatePrice($service, $startsAt, $endsAt);
+        [$price, $formula, $currency] = app('cortex.bookings.service_booking')->calculatePrice($service, $startsAt, $endsAt);
 
         // Fill missing fields
         $data['ends_at'] = $endsAt;
