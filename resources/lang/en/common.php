@@ -21,6 +21,7 @@ return [
     'unit_hour' => 'Hour',
     'unit_day' => 'Day',
     'unit_month' => 'Month',
+    'unit_use' => 'Use',
     'logs' => 'Logs',
     'media' => 'Media',
     'is_active' => 'Is Active',

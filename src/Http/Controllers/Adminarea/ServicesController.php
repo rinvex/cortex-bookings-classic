@@ -304,6 +304,8 @@ class ServicesController extends AuthorizedController
      * @param \Cortex\Bookings\Models\Service $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
+     *
+     * @throws \Exception
      */
     public function destroy(Service $service)
     {

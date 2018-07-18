@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Illuminate\Support\Facades\DB;
+use Cortex\Bookings\DataTables\Adminarea\ServiceBookingsDataTable;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceBooking;
+use Cortex\Foundation\DataTables\LogsDataTable;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
@@ -17,15 +18,6 @@ class ServiceBookingsController extends AuthorizedController
      * {@inheritdoc}
      */
     protected $resource = ServiceBooking::class;
-
-    /**
-     * {@inheritdoc}
-     */
-    protected $resourceMethodsWithoutModels = [
-        'customers',
-        'services',
-        'list',
-    ];
 
     /**
      * {@inheritdoc}
@@ -48,58 +40,37 @@ class ServiceBookingsController extends AuthorizedController
     }
 
     /**
-     * List all bookings.
+     * List all services.
      *
-     * @return \Illuminate\View\View
+     * @param \Cortex\Bookings\Models\Service                         $service
+     * @param \Cortex\Bookings\DataTables\Adminarea\ServicesDataTable $servicesDataTable
+     *
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\View\View
      */
-    public function index()
+    public function index(Service $service, ServiceBookingsDataTable $servicesDataTable)
     {
-        return view('cortex/bookings::adminarea.pages.bookings');
+        return $servicesDataTable->with([
+            'resource' => $service,
+            'tabs' => 'adminarea.services.tabs',
+            'id' => "adminarea-services-{$service->getRouteKey()}-bookings-table",
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
-     * List the bookings.
+     * List service logs.
      *
-     * @return array
-     */
-    public function list(Service $service): array
-    {
-        $results = [];
-        $rangeEnds = request()->get('end');
-        $rangeStarts = request()->get('start');
-        $serviceBookings = app('cortex.bookings.service_booking')->range($rangeStarts, $rangeEnds)->get();
-
-        foreach ($serviceBookings as $serviceBooking) {
-            $endTime = $serviceBooking->ends_at->toTimeString();
-            $startTime = $serviceBooking->starts_at->toTimeString();
-            $endsAt = optional($serviceBooking->ends_at)->toDateTimeString();
-            $startsAt = optional($serviceBooking->starts_at)->toDateTimeString();
-            $allDay = ($startTime === '00:00:00' && $endTime === '00:00:00' ? true : false);
-
-            $results[] = [
-                'id' => $serviceBooking->getKey(),
-                'customerId' => $serviceBooking->customer->getKey(),
-                'serviceId' => $serviceBooking->bookable->getKey(),
-                'className' => $serviceBooking->bookable->style,
-                'title' => $serviceBooking->customer->full_name.' ('.$serviceBooking->bookable->name.')',
-                'start' => $allDay ? $serviceBooking->starts_at->toDateString() : $startsAt,
-                'end' => $allDay ? $serviceBooking->ends_at->toDateString() : $endsAt,
-            ];
-        }
-
-        return $results;
-    }
-
-    /**
-     * List the bookings.
+     * @param \Cortex\Bookings\Models\Service             $service
+     * @param \Cortex\Foundation\DataTables\LogsDataTable $logsDataTable
      *
-     * @return array
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function services(): array
+    public function logs(Service $service, LogsDataTable $logsDataTable)
     {
-        $services = app('cortex.bookings.service')->all(['id', DB::raw('JSON_EXTRACT(title, "$.en") as title'), 'style']);
-
-        return $services;
+        return $logsDataTable->with([
+            'resource' => $service,
+            'tabs' => 'adminarea.services.tabs',
+            'id' => "adminarea-services-{$service->getRouteKey()}-logs-table",
+        ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
     /**
@@ -152,11 +123,21 @@ class ServiceBookingsController extends AuthorizedController
      * @param \Cortex\Bookings\Models\Service        $service
      * @param \Cortex\Bookings\Models\ServiceBooking $serviceBooking
      *
-     * @return int
+     * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
-    public function destroy(Service $service, ServiceBooking $serviceBooking): int
+    public function destroy(Service $service, ServiceBooking $serviceBooking)
     {
         $service->bookings()->where($serviceBooking->getKeyName(), $serviceBooking->getKey())->first()->delete();
+
+        return intend([
+            'url' => route('adminarea.services.bookings.index'),
+            'with' => [
+                'warning' => trans('cortex/foundation::messages.resource_deleted', [
+                    'resource' => trans('cortex/bookings::common.service_booking'),
+                    'identifier' => $service->name.':'.$serviceBooking->id,
+                ]),
+            ],
+        ]);
 
         return $serviceBooking->getKey();
     }

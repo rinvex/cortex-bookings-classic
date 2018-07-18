@@ -29,13 +29,17 @@ Route::domain(domain())->group(function () {
                  });
 
                  // Bookings Routes
-                 Route::get('bookings')->name('bookings')->uses('ServiceBookingsController@list');
                  Route::name('bookings.')->prefix('{service}/bookings')->group(function () {
                      Route::get('/')->name('index')->uses('ServiceBookingsController@index');
-                     Route::post('list')->name('list')->uses('ServiceBookingsController@list');
-                     Route::post('services')->name('services')->uses('ServiceBookingsController@services');
-                     Route::post('store')->name('store')->uses('ServiceBookingsController@store');
+                     Route::get('import')->name('import')->uses('ServiceBookingsController@import');
+                     Route::post('import')->name('stash')->uses('ServiceBookingsController@stash');
+                     Route::post('hoard')->name('hoard')->uses('ServiceBookingsController@hoard');
+                     Route::get('import/logs')->name('import.logs')->uses('ServiceBookingsController@importLogs');
+                     Route::get('create')->name('create')->uses('ServiceBookingsController@create');
+                     Route::post('create')->name('store')->uses('ServiceBookingsController@store');
+                     Route::get('{service_booking}')->name('edit')->uses('ServiceBookingsController@edit');
                      Route::put('{service_booking}')->name('update')->uses('ServiceBookingsController@update');
+                     Route::get('{service_booking}/logs')->name('logs')->uses('ServiceBookingsController@logs');
                      Route::delete('{service_booking}')->name('destroy')->uses('ServiceBookingsController@destroy');
                  });
              });
