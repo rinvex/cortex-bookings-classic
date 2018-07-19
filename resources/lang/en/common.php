@@ -44,6 +44,7 @@ return [
     'quantity' => 'Quantity',
     'customer' => 'Customer',
     'paid' => 'Paid',
+    'total_paid' => 'Total Paid',
     'event_ticket' => 'Event Ticket',
     'is_approved' => 'Is Approved',
     'is_attended' => 'Is Attended',

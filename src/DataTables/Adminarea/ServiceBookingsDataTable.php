@@ -45,16 +45,17 @@ class ServiceBookingsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id})+"\">"+data+"</a>"';
+            ? '"<a href=\""+routes.route(\'adminarea.members.edit\', {member: full.customer.id, locale: \''.$this->request->segment(1).'\'})+"\">"+full.customer.username+"</a>"'
+            : '"<a href=\""+routes.route(\'adminarea.members.edit\', {member: full.customer.id})+"\">"+full.customer.username+"</a>"';
 
         return [
-            'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
-            'base_cost' => ['title' => trans('cortex/bookings::common.base_cost')],
-            'unit_cost' => ['title' => trans('cortex/bookings::common.unit_cost')],
-            'unit' => ['title' => trans('cortex/bookings::common.unit'), 'render' => 'Lang.trans(\'cortex/bookings::common.unit_\'+data)'],
+            'customer' => ['title' => trans('cortex/bookings::common.customer'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
+            'price' => ['title' => trans('cortex/bookings::common.price')],
+            'quantity' => ['title' => trans('cortex/bookings::common.quantity')],
+            'total_paid' => ['title' => trans('cortex/bookings::common.total_paid')],
             'currency' => ['title' => trans('cortex/bookings::common.currency')],
-            'sort_order' => ['title' => trans('cortex/bookings::common.sort_order'), 'visible' => false],
+            'starts_at' => ['title' => trans('cortex/bookings::common.starts_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
+            'ends_at' => ['title' => trans('cortex/bookings::common.ends_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
             'created_at' => ['title' => trans('cortex/bookings::common.created_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
             'updated_at' => ['title' => trans('cortex/bookings::common.updated_at'), 'render' => "moment(data).format('YYYY-MM-DD, hh:mm:ss A')"],
         ];
