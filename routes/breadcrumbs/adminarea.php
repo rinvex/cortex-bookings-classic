@@ -74,21 +74,6 @@ Breadcrumbs::register('adminarea.services.bookings.edit', function (BreadcrumbsG
     $breadcrumbs->push($service->name, route('adminarea.services.bookings.edit', ['service' => $service]));
 });
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 Breadcrumbs::register('adminarea.events.index', function (BreadcrumbsGenerator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('app.name'), route('adminarea.home'));
     $breadcrumbs->push(trans('cortex/bookings::common.events'), route('adminarea.events.index'));
