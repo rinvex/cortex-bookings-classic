@@ -17,8 +17,9 @@ Route::domain(domain())->group(function () {
                  Route::get('import/logs')->name('import.logs')->uses('ServicesController@importLogs');
                  Route::get('create')->name('create')->uses('ServicesController@create');
                  Route::post('create')->name('store')->uses('ServicesController@store');
-                 Route::get('{service}')->name('edit')->uses('ServicesController@edit');
-                 Route::put('{service}')->name('update')->uses('ServicesController@update');
+                 Route::get('{service}')->name('show')->uses('ServicesController@show');
+                 Route::get('{service}/edit')->name('edit')->uses('ServicesController@edit');
+                 Route::put('{service}/edit')->name('update')->uses('ServicesController@update');
                  Route::get('{service}/logs')->name('logs')->uses('ServicesController@logs');
                  Route::delete('{service}')->name('destroy')->uses('ServicesController@destroy');
 
@@ -53,8 +54,9 @@ Route::domain(domain())->group(function () {
                  Route::get('import/logs')->name('import.logs')->uses('EventsController@importLogs');
                  Route::get('create')->name('create')->uses('EventsController@create');
                  Route::post('create')->name('store')->uses('EventsController@store');
-                 Route::get('{event}')->name('edit')->uses('EventsController@edit');
-                 Route::put('{event}')->name('update')->uses('EventsController@update');
+                 Route::get('{event}')->name('show')->uses('EventsController@show');
+                 Route::get('{event}/edit')->name('edit')->uses('EventsController@edit');
+                 Route::put('{event}/edit')->name('update')->uses('EventsController@update');
                  Route::get('{event}/logs')->name('logs')->uses('EventsController@logs');
                  Route::delete('{event}')->name('destroy')->uses('EventsController@destroy');
 
@@ -69,8 +71,9 @@ Route::domain(domain())->group(function () {
                      Route::get('/')->name('index')->uses('EventTicketsController@index');
                      Route::get('create')->name('create')->uses('EventTicketsController@create');
                      Route::post('create')->name('store')->uses('EventTicketsController@store');
-                     Route::get('{event_ticket}')->name('edit')->uses('EventTicketsController@edit');
-                     Route::put('{event_ticket}')->name('update')->uses('EventTicketsController@update');
+                     Route::get('{event_ticket}')->name('show')->uses('EventTicketsController@show');
+                     Route::get('{event_ticket}/edit')->name('edit')->uses('EventTicketsController@edit');
+                     Route::put('{event_ticket}/edit')->name('update')->uses('EventTicketsController@update');
                      Route::delete('{event_ticket}')->name('destroy')->uses('EventTicketsController@destroy');
                  });
 
@@ -82,8 +85,9 @@ Route::domain(domain())->group(function () {
                      Route::post('hoard')->name('hoard')->uses('EventBookingsController@hoard');
                      Route::get('create')->name('create')->uses('EventBookingsController@create');
                      Route::post('create')->name('store')->uses('EventBookingsController@store');
-                     Route::get('{event_booking}')->name('edit')->uses('EventBookingsController@edit');
-                     Route::put('{event_booking}')->name('update')->uses('EventBookingsController@update');
+                     Route::get('{event_booking}')->name('show')->uses('EventBookingsController@show');
+                     Route::get('{event_booking}/edit')->name('edit')->uses('EventBookingsController@edit');
+                     Route::put('{event_booking}/edit')->name('update')->uses('EventBookingsController@update');
                      Route::delete('{event_booking}')->name('destroy')->uses('EventBookingsController@destroy');
                  });
              });
