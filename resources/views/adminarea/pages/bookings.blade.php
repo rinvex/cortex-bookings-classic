@@ -3,16 +3,19 @@
 
 {{-- Page Title --}}
 @section('title')
-    {{ config('app.name') }} » {{ trans('cortex/foundation::common.adminarea') }} » {{ trans('cortex/bookings::common.bookings') }}
-@stop
+    {{ extract_title(Breadcrumbs::render()) }}
+@endsection
 
 @push('styles')
     <link href="{{ mix('css/fullcalendar.css', 'assets') }}" rel="stylesheet">
 @endpush
 
-@push('scripts-vendor')
-    <script src="{{ mix('js/fullcalendar.js', 'assets') }}" type="text/javascript"></script>
-    <script src="{{ mix('js/bookings.js', 'assets') }}" type="text/javascript"></script>
+@push('vendor-scripts')
+    <script src="{{ mix('js/fullcalendar.js', 'assets') }}" defer></script>
+@endpush
+
+@push('inline-scripts')
+    @include('cortex/bookings::adminarea.partials.service-booking-scripts')
 @endpush
 
 {{-- Main Content --}}
@@ -20,12 +23,10 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>{{ trans('cortex/bookings::common.bookings') }}</h1>
-            <!-- Breadcrumbs -->
-            {{ Breadcrumbs::render() }}
+            <h1>{{ Breadcrumbs::render() }}</h1>
         </section>
 
-        <!-- Main content -->
+        {{-- Main content --}}
         <section class="content">
 
             <div class="row">
