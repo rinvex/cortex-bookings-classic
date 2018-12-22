@@ -60,7 +60,7 @@
         "rinvex/laravel-composer": "^1.0.0",
         "rinvex/laravel-menus": "^1.0.0",
         "rinvex/laravel-support": "^1.0.0",
-        "silber/bouncer": "v1.0.0-rc.3",
+        "silber/bouncer": "v1.0.0-rc.4",
         "spatie/laravel-activitylog": "^2.8.0",
         "spatie/laravel-medialibrary": "^7.5.0",
         "yajra/laravel-datatables-buttons": "^4.2.0",
