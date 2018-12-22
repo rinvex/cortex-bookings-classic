@@ -7,11 +7,11 @@
 @endsection
 
 @push('styles')
-    <link href="{{ mix('css/fullcalendar.css', 'assets') }}" rel="stylesheet">
+    <link href="{{ mix('css/fullcalendar.css') }}" rel="stylesheet">
 @endpush
 
 @push('vendor-scripts')
-    <script src="{{ mix('js/fullcalendar.js', 'assets') }}" defer></script>
+    <script src="{{ mix('js/fullcalendar.js') }}" defer></script>
 @endpush
 
 @push('inline-scripts')
