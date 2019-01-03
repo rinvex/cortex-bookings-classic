@@ -35,32 +35,6 @@ class EventTicketsController extends AuthorizedController
     }
 
     /**
-     * Create new event.
-     *
-     * @param \Cortex\Bookings\Models\Event       $event
-     * @param \Cortex\Bookings\Models\EventTicket $eventTicket
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create(Event $event, EventTicket $eventTicket)
-    {
-        return $this->form($event, $eventTicket);
-    }
-
-    /**
-     * Edit given event.
-     *
-     * @param \Cortex\Bookings\Models\Event       $event
-     * @param \Cortex\Bookings\Models\EventTicket $eventTicket
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Event $event, EventTicket $eventTicket)
-    {
-        return $this->form($event, $eventTicket);
-    }
-
-    /**
      * Show event create/edit form.
      *
      * @param \Cortex\Bookings\Models\Event       $event

@@ -154,30 +154,6 @@ class ServiceBookingsController extends AuthorizedController
     }
 
     /**
-     * Create new service.
-     *
-     * @param \Cortex\Bookings\Models\Service $service
-     *
-     * @return \Illuminate\View\View
-     */
-    public function create(Service $service)
-    {
-        return $this->form($service);
-    }
-
-    /**
-     * Edit given service.
-     *
-     * @param \Cortex\Bookings\Models\Service $service
-     *
-     * @return \Illuminate\View\View
-     */
-    public function edit(Service $service)
-    {
-        return $this->form($service);
-    }
-
-    /**
      * Show service create/edit form.
      *
      * @param \Cortex\Bookings\Models\Service $service
