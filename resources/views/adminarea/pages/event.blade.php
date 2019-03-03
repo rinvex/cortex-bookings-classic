@@ -13,9 +13,7 @@
 {{-- Main Content --}}
 @section('content')
 
-    @if($event->exists)
-        @include('cortex/foundation::common.partials.modal', ['id' => 'delete-confirmation'])
-    @endif
+    @includeWhen($event->exists, 'cortex/foundation::common.partials.modal', ['id' => 'delete-confirmation'])
 
     <div class="content-wrapper">
         <section class="content-header">
@@ -165,7 +163,7 @@
                                             <i class="fa fa-paperclip"></i>
                                             <a href="{{ $event->getFirstMediaUrl('profile_picture') }}" target="_blank">{{ $event->getFirstMedia('profile_picture')->file_name }}</a> ({{ $event->getFirstMedia('profile_picture')->human_readable_size }})
                                             <a href="#" data-toggle="modal" data-target="#delete-confirmation"
-                                               data-modal-action="{{ route('adminarea.members.media.destroy', ['member' => $event, 'media' => $event->getFirstMedia('profile_picture')]) }}"
+                                               data-modal-action="{{ route('adminarea.events.media.destroy', ['event' => $event, 'media' => $event->getFirstMedia('profile_picture')]) }}"
                                                data-modal-title="{{ trans('cortex/foundation::messages.delete_confirmation_title') }}"
                                                data-modal-button="<a href='#' class='btn btn-danger' data-form='delete' data-token='{{ csrf_token() }}'><i class='fa fa-trash-o'></i> {{ trans('cortex/foundation::common.delete') }}</a>"
                                                data-modal-body="{{ trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/foundation::common.media'), 'identifier' => $event->getFirstMedia('profile_picture')->file_name]) }}"
@@ -200,7 +198,7 @@
                                             <i class="fa fa-paperclip"></i>
                                             <a href="{{ $event->getFirstMediaUrl('cover_photo') }}" target="_blank">{{ $event->getFirstMedia('cover_photo')->file_name }}</a> ({{ $event->getFirstMedia('cover_photo')->human_readable_size }})
                                             <a href="#" data-toggle="modal" data-target="#delete-confirmation"
-                                               data-modal-action="{{ route('adminarea.members.media.destroy', ['member' => $event, 'media' => $event->getFirstMedia('cover_photo')]) }}"
+                                               data-modal-action="{{ route('adminarea.events.media.destroy', ['event' => $event, 'media' => $event->getFirstMedia('cover_photo')]) }}"
                                                data-modal-title="{{ trans('cortex/foundation::messages.delete_confirmation_title') }}"
                                                data-modal-button="<a href='#' class='btn btn-danger' data-form='delete' data-token='{{ csrf_token() }}'><i class='fa fa-trash-o'></i> {{ trans('cortex/foundation::common.delete') }}</a>"
                                                data-modal-body="{{ trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/foundation::common.media'), 'identifier' => $event->getFirstMedia('cover_photo')->file_name]) }}"
@@ -238,7 +236,7 @@
                                     {{-- Description --}}
                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                         {{ Form::label('description', trans('cortex/bookings::common.description'), ['class' => 'control-label']) }}
-                                        {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.description'), 'rows' => 5]) }}
+                                        {{ Form::textarea('description', null, ['class' => 'form-control tinymce', 'placeholder' => trans('cortex/bookings::common.description'), 'rows' => 5]) }}
 
                                         @if ($errors->has('description'))
                                             <span class="help-block">{{ $errors->first('description') }}</span>

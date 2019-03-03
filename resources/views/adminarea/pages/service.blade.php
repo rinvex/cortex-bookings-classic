@@ -19,9 +19,7 @@
 {{-- Main Content --}}
 @section('content')
 
-    @if($service->exists)
-        @include('cortex/foundation::common.partials.modal', ['id' => 'delete-confirmation'])
-    @endif
+    @includeWhen($service->exists, 'cortex/foundation::common.partials.modal', ['id' => 'delete-confirmation'])
 
     <div class="content-wrapper">
         <section class="content-header">
@@ -234,7 +232,7 @@
                                                     {{-- Description --}}
                                                     <div class="form-group{{ $errors->has('description') ? ' has-error' : '' }}">
                                                         {{ Form::label('description', trans('cortex/bookings::common.description'), ['class' => 'control-label']) }}
-                                                        {{ Form::textarea('description', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.description'), 'rows' => 5]) }}
+                                                        {{ Form::textarea('description', null, ['class' => 'form-control tinymce', 'placeholder' => trans('cortex/bookings::common.description'), 'rows' => 5]) }}
 
                                                         @if ($errors->has('description'))
                                                             <span class="help-block">{{ $errors->first('description') }}</span>
