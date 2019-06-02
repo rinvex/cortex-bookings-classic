@@ -10,6 +10,7 @@ use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\EventTicket;
 use Cortex\Bookings\Models\ServiceRate;
 use Illuminate\Support\ServiceProvider;
+use Rinvex\Support\Traits\ConsoleTools;
 use Cortex\Bookings\Models\EventBooking;
 use Cortex\Bookings\Models\ServiceBooking;
 use Cortex\Bookings\Models\ServiceAvailability;
@@ -22,6 +23,8 @@ use Cortex\Bookings\Console\Commands\RollbackCommand;
 
 class BookingsServiceProvider extends ServiceProvider
 {
+    use ConsoleTools;
+
     /**
      * The commands to be registered.
      *
@@ -71,7 +74,7 @@ class BookingsServiceProvider extends ServiceProvider
         $eventBookingModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
 
         // Register console commands
-        ! $this->app->runningInConsole() || $this->registerCommands();
+        ! $this->app->runningInConsole() || $this->registersCommands();
 
         // Bind eloquent models to IoC container
         $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
@@ -121,40 +124,14 @@ class BookingsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web/adminarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/bookings');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/bookings');
-        ! $this->app->runningInConsole() || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
         $this->app->runningInConsole() || $this->app->afterResolving('blade.compiler', function () {
             require __DIR__.'/../../routes/menus/adminarea.php';
         });
 
         // Publish resources
-        ! $this->app->runningInConsole() || $this->publishResources();
-    }
-
-    /**
-     * Publish resources.
-     *
-     * @return void
-     */
-    protected function publishResources(): void
-    {
-        $this->publishes([realpath(__DIR__.'/../../database/migrations') => database_path('migrations')], 'cortex-bookings-migrations');
-        $this->publishes([realpath(__DIR__.'/../../config/config.php') => config_path('cortex.bookings.php')], 'cortex-bookings-config');
-        $this->publishes([realpath(__DIR__.'/../../resources/lang') => resource_path('lang/vendor/cortex/bookings')], 'cortex-bookings-lang');
-        $this->publishes([realpath(__DIR__.'/../../resources/views') => resource_path('views/vendor/cortex/bookings')], 'cortex-bookings-views');
-    }
-
-    /**
-     * Register console commands.
-     *
-     * @return void
-     */
-    protected function registerCommands(): void
-    {
-        // Register artisan commands
-        foreach ($this->commands as $key => $value) {
-            $this->app->singleton($value, $key);
-        }
-
-        $this->commands(array_values($this->commands));
+        ! $this->app->runningInConsole() || $this->publishesLang('cortex/bookings');
+        ! $this->app->runningInConsole() || $this->publishesViews('cortex/bookings');
+        ! $this->app->runningInConsole() || $this->publishesConfig('cortex/bookings');
+        ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/bookings');
     }
 }
