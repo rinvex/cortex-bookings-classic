@@ -31,8 +31,10 @@ class SeedCommand extends Command
      */
     public function handle(): void
     {
-        $this->warn($this->description);
+        $this->alert($this->description);
 
         $this->call('db:seed', ['--class' => 'CortexBookingsSeeder']);
+
+        $this->line('');
     }
 }
