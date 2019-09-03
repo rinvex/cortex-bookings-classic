@@ -5,6 +5,10 @@ All notable changes to this project will be documented in this file.
 This project adheres to [Semantic Versioning](CONTRIBUTING.md).
 
 
+## [v2.2.2] - 2019-09-03
+- Update media config options
+- Use $_SERVER instead of $_ENV for PHPUnit
+
 ## [v2.2.1] - 2019-08-03
 - Tweak menus & breadcrumbs performance
 
@@ -52,6 +56,7 @@ This project adheres to [Semantic Versioning](CONTRIBUTING.md).
 ## v0.0.1 - 2018-09-22
 - Tag first release
 
+[v2.2.2]: https://github.com/rinvex/cortex-bookings/compare/v2.2.1...v2.2.2
 [v2.2.1]: https://github.com/rinvex/cortex-bookings/compare/v2.2.0...v2.2.1
 [v2.2.0]: https://github.com/rinvex/cortex-bookings/compare/v2.1.2...v2.2.0
 [v2.1.2]: https://github.com/rinvex/cortex-bookings/compare/v2.1.1...v2.1.2
