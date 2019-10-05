@@ -13,6 +13,7 @@ use Illuminate\Support\ServiceProvider;
 use Rinvex\Support\Traits\ConsoleTools;
 use Cortex\Bookings\Models\EventBooking;
 use Cortex\Bookings\Models\ServiceBooking;
+use Illuminate\Contracts\Events\Dispatcher;
 use Cortex\Bookings\Models\ServiceAvailability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
@@ -89,7 +90,7 @@ class BookingsServiceProvider extends ServiceProvider
      *
      * @return void
      */
-    public function boot(Router $router): void
+    public function boot(Router $router, Dispatcher $dispatcher): void
     {
         // Bind route models and constrains
         $router->pattern('service', '[a-zA-Z0-9-]+');
@@ -123,8 +124,8 @@ class BookingsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web/adminarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/bookings');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/bookings');
-        $this->app->runningInConsole() || $this->app->afterResolving('blade.compiler', function () {
-            $accessarea = $this->app['request']->route('accessarea');
+
+        $this->app->runningInConsole() || $dispatcher->listen('controller.constructed', function ($accessarea) {
             ! file_exists($menus = __DIR__."/../../routes/menus/{$accessarea}.php") || require $menus;
             ! file_exists($breadcrumbs = __DIR__."/../../routes/breadcrumbs/{$accessarea}.php") || require $breadcrumbs;
         });
