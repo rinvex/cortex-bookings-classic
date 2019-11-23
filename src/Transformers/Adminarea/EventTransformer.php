@@ -19,6 +19,7 @@ class EventTransformer extends TransformerAbstract
     {
         return $this->escape([
             'id' => (string) $event->getRouteKey(),
+            'DT_RowId' => 'row_'.$event->getRouteKey(),
             'name' => (string) $event->name,
             'is_public' => (bool) $event->is_public,
             'starts_at' => (string) $event->starts_at,
