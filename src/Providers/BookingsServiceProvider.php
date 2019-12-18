@@ -93,13 +93,13 @@ class BookingsServiceProvider extends ServiceProvider
     public function boot(Router $router, Dispatcher $dispatcher): void
     {
         // Bind route models and constrains
-        $router->pattern('service', '[a-zA-Z0-9-]+');
-        $router->pattern('service_rate', '[a-zA-Z0-9-]+');
-        $router->pattern('service_booking', '[a-zA-Z0-9-]+');
-        $router->pattern('service_availability', '[a-zA-Z0-9-]+');
-        $router->pattern('event_booking', '[a-zA-Z0-9-]+');
-        $router->pattern('event_ticket', '[a-zA-Z0-9-]+');
-        $router->pattern('event', '[a-zA-Z0-9-]+');
+        $router->pattern('service', '[a-zA-Z0-9-_]+');
+        $router->pattern('service_rate', '[a-zA-Z0-9-_]+');
+        $router->pattern('service_booking', '[a-zA-Z0-9-_]+');
+        $router->pattern('service_availability', '[a-zA-Z0-9-_]+');
+        $router->pattern('event_booking', '[a-zA-Z0-9-_]+');
+        $router->pattern('event_ticket', '[a-zA-Z0-9-_]+');
+        $router->pattern('event', '[a-zA-Z0-9-_]+');
 
         $router->model('service', config('cortex.bookings.models.service'));
         $router->model('service_rate', config('cortex.bookings.models.service_rate'));
