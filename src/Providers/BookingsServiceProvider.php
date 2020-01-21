@@ -135,5 +135,6 @@ class BookingsServiceProvider extends ServiceProvider
         ! $this->app->runningInConsole() || $this->publishesViews('cortex/bookings', true);
         ! $this->app->runningInConsole() || $this->publishesConfig('cortex/bookings', true);
         ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/bookings', true);
+        ! $this->app['config']['cortex.bookings.autoload_migrations'] || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
