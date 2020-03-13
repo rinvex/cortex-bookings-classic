@@ -131,9 +131,10 @@ class BookingsServiceProvider extends ServiceProvider
         });
 
         // Publish resources
-        ! $this->app->runningInConsole() || $this->publishesLang('cortex/bookings', true);
-        ! $this->app->runningInConsole() || $this->publishesViews('cortex/bookings', true);
-        ! $this->app->runningInConsole() || $this->publishesConfig('cortex/bookings', true);
-        ! $this->app->runningInConsole() || $this->publishesMigrations('cortex/bookings', true);
+        $this->publishesLang('cortex/bookings', true);
+        $this->publishesViews('cortex/bookings', true);
+        $this->publishesConfig('cortex/bookings', true);
+        $this->publishesMigrations('cortex/bookings', true);
+        ! $this->autoloadMigrations('cortex.bookings') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }
