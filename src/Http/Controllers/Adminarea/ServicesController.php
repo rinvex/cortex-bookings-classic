@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Exception;
+use Illuminate\Support\Arr;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceRate;
 use Illuminate\Foundation\Http\FormRequest;
@@ -250,7 +251,7 @@ class ServicesController extends AuthorizedController
             return isset($rate['id']);
         });
 
-        if (array_get($data, 'rates')) {
+        if (Arr::get($data, 'rates')) {
             $service->rates()->createMany($newRates->toArray());
             app('cortex.bookings.service_rate')->findMany($existingRates->pluck('id'))->map(function (ServiceRate $rate) use ($existingRates) {
                 $rate->update($existingRates->where('id', $rate->id)->first());
@@ -261,7 +262,7 @@ class ServicesController extends AuthorizedController
             return isset($availability['id']);
         });
 
-        if (array_get($data, 'availabilities')) {
+        if (Arr::get($data, 'availabilities')) {
             $service->availabilities()->createMany($newAvailabilities->toArray());
             app('cortex.bookings.service_availability')->findMany($existingAvailabilities->pluck('id'))->map(function (ServiceAvailability $availability) use ($existingAvailabilities) {
                 $availability->update($existingAvailabilities->where('id', $availability->id)->first());
