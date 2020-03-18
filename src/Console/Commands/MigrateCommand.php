@@ -13,7 +13,7 @@ class MigrateCommand extends BaseMigrateCommand
      *
      * @var string
      */
-    protected $signature = 'cortex:migrate:bookings {--force : Force the operation to run when in production.}';
+    protected $signature = 'cortex:migrate:bookings {--f|force : Force the operation to run when in production.}';
 
     /**
      * The console command description.

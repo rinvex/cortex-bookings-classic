@@ -13,7 +13,7 @@ class RollbackCommand extends BaseRollbackCommand
      *
      * @var string
      */
-    protected $signature = 'cortex:rollback:bookings {--force : Force the operation to run when in production.}';
+    protected $signature = 'cortex:rollback:bookings {--f|force : Force the operation to run when in production.}';
 
     /**
      * The console command description.
