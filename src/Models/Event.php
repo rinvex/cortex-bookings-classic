@@ -5,11 +5,11 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Models;
 
 use Rinvex\Tags\Traits\Taggable;
+use Spatie\MediaLibrary\HasMedia;
 use Rinvex\Tenants\Traits\Tenantable;
 use Rinvex\Bookings\Models\Ticketable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Spatie\MediaLibrary\HasMedia;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
