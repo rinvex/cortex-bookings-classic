@@ -9,9 +9,9 @@ use Rinvex\Tenants\Traits\Tenantable;
 use Rinvex\Bookings\Models\Ticketable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Event extends Ticketable implements HasMedia
 {
@@ -20,7 +20,7 @@ class Event extends Ticketable implements HasMedia
     use Tenantable;
     use HashidsTrait;
     use LogsActivity;
-    use HasMediaTrait;
+    use InteractsWithMedia;
 
     /**
      * {@inheritdoc}
