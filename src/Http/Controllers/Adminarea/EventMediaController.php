@@ -6,9 +6,9 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Illuminate\Support\Str;
 use Cortex\Bookings\Models\Event;
-use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Cortex\Foundation\DataTables\MediaDataTable;
 use Cortex\Foundation\Http\Requests\ImageFormRequest;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 
 class EventMediaController extends AuthorizedController
@@ -76,7 +76,7 @@ class EventMediaController extends AuthorizedController
     /**
      * Destroy given event media.
      *
-     * @param \Cortex\Bookings\Models\Event     $event
+     * @param \Cortex\Bookings\Models\Event                      $event
      * @param \Spatie\MediaLibrary\MediaCollections\Models\Media $media
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
