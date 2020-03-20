@@ -13,6 +13,12 @@ class ServiceTransformer extends TransformerAbstract
     use Escaper;
 
     /**
+     * Transform service model.
+     *
+     * @param \Cortex\Bookings\Models\Service $service
+     *
+     * @throws \Exception
+     *
      * @return array
      */
     public function transform(Service $service): array

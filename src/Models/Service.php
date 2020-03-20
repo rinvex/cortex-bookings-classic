@@ -5,13 +5,13 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Models;
 
 use Rinvex\Tags\Traits\Taggable;
+use Spatie\MediaLibrary\HasMedia;
 use Rinvex\Bookings\Models\Bookable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Spatie\MediaLibrary\HasMedia\HasMedia;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Spatie\MediaLibrary\HasMedia\HasMediaTrait;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Service extends Bookable implements HasMedia
 {
@@ -20,7 +20,7 @@ class Service extends Bookable implements HasMedia
     use Tenantable;
     use HashidsTrait;
     use LogsActivity;
-    use HasMediaTrait;
+    use InteractsWithMedia;
 
     /**
      * The default rules that the model will validate against.

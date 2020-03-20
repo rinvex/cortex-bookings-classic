@@ -13,6 +13,12 @@ class EventBookingTransformer extends TransformerAbstract
     use Escaper;
 
     /**
+     * Transform event booking model.
+     *
+     * @param \Cortex\Bookings\Models\EventBooking $eventBooking
+     *
+     * @throws \Exception
+     *
      * @return array
      */
     public function transform(EventBooking $eventBooking): array

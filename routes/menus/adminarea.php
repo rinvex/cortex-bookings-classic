@@ -5,8 +5,8 @@ declare(strict_types=1);
 use Cortex\Bookings\Models\Event;
 use Rinvex\Menus\Models\MenuItem;
 use Cortex\Bookings\Models\Service;
-use Spatie\MediaLibrary\Models\Media;
 use Rinvex\Menus\Models\MenuGenerator;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 Menu::register('adminarea.sidebar', function (MenuGenerator $menu, Service $service, Event $event) {
     $menu->dropdown(function (MenuItem $dropdown) use ($service, $event) {
