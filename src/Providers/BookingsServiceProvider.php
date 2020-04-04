@@ -124,6 +124,7 @@ class BookingsServiceProvider extends ServiceProvider
         $this->loadRoutesFrom(__DIR__.'/../../routes/web/adminarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/bookings');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/bookings');
+        ! $this->autoloadMigrations('cortex/bookings') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
 
         $this->app->runningInConsole() || $dispatcher->listen('accessarea.ready', function ($accessarea) {
             ! file_exists($menus = __DIR__."/../../routes/menus/{$accessarea}.php") || require $menus;
@@ -135,6 +136,5 @@ class BookingsServiceProvider extends ServiceProvider
         $this->publishesViews('cortex/bookings', true);
         $this->publishesConfig('cortex/bookings', true);
         $this->publishesMigrations('cortex/bookings', true);
-        ! $this->autoloadMigrations('cortex.bookings') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
     }
 }

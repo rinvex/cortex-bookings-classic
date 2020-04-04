@@ -6,6 +6,7 @@ module.exports = {
     whitelistPatterns: [],
     webpackPlugins: [],
     install: ['fullcalendar'],
+    copy: [],
     mix: {
         css: [
             {input: 'resources/sass/fullcalendar.scss', output: 'public/css/fullcalendar.css'},
