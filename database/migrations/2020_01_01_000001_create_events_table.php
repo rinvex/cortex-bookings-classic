@@ -17,7 +17,7 @@ class CreateEventsTable extends Migration
     {
         Schema::create(config('cortex.bookings.tables.events'), function (Blueprint $table) {
             // Columns
-            $table->bigIncrements('id');
+            $table->increments('id');
             $table->string('slug');
             $table->{$this->jsonable()}('name');
             $table->{$this->jsonable()}('description')->nullable();
