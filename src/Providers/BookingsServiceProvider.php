@@ -75,7 +75,7 @@ class BookingsServiceProvider extends ServiceProvider
         $eventBookingModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
 
         // Register console commands
-        ! $this->app->runningInConsole() || $this->registerCommands();
+        $this->registerCommands();
 
         // Bind eloquent models to IoC container
         $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
