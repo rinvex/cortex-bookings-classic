@@ -59,13 +59,13 @@ class Event extends Ticketable implements HasMedia
      */
     protected $rules = [
         'slug' => 'required|alpha_dash|max:150',
-        'name' => 'required|string|max:150',
-        'description' => 'nullable|string|max:10000',
+        'name' => 'required|string|strip_tags|max:150',
+        'description' => 'nullable|string|strip_tags|max:10000',
         'is_public' => 'sometimes|boolean',
-        'starts_at' => 'required|string',
-        'ends_at' => 'required|string',
-        'timezone' => 'required|string|timezone',
-        'location' => 'nullable|string',
+        'starts_at' => 'required|string|max:150',
+        'ends_at' => 'required|string|max:150',
+        'timezone' => 'required|string|max:150|timezone',
+        'location' => 'nullable|string|max:150',
         'tags' => 'nullable|array',
     ];
 

@@ -29,8 +29,8 @@ class Service extends Bookable implements HasMedia
      */
     protected $rules = [
         'slug' => 'required|alpha_dash|max:150',
-        'name' => 'required|string|max:150',
-        'description' => 'nullable|string|max:10000',
+        'name' => 'required|string|strip_tags|max:150',
+        'description' => 'nullable|string|strip_tags|max:10000',
         'is_active' => 'sometimes|boolean',
         'base_cost' => 'nullable|numeric',
         'unit_cost' => 'required|numeric',
@@ -40,9 +40,9 @@ class Service extends Bookable implements HasMedia
         'minimum_units' => 'nullable|integer|max:10000',
         'is_cancelable' => 'nullable|boolean',
         'is_recurring' => 'nullable|boolean',
-        'sort_order' => 'nullable|integer|max:10000000',
-        'capacity' => 'nullable|integer|max:10000000',
-        'style' => 'nullable|string|max:150',
+        'sort_order' => 'nullable|integer|max:10000',
+        'capacity' => 'nullable|integer|max:10000',
+        'style' => 'nullable|string|strip_tags|max:150',
         'tags' => 'nullable|array',
     ];
 
