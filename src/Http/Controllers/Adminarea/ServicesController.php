@@ -271,7 +271,7 @@ class ServicesController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.services.index'),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => $service->name])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => strip_tags($service->name)])],
         ]);
     }
 
@@ -290,7 +290,7 @@ class ServicesController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.services.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => $service->name])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => strip_tags($service->name)])],
         ]);
     }
 }

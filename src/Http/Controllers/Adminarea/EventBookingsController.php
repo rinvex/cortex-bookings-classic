@@ -169,7 +169,7 @@ class EventBookingsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.events.bookings.index', ['event' => $event]),
-            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.event_booking'), 'identifier' => $eventBooking->name])],
+            'with' => ['success' => trans('cortex/foundation::messages.resource_saved', ['resource' => trans('cortex/bookings::common.event_booking'), 'identifier' => strip_tags($eventBooking->name)])],
         ]);
     }
 
@@ -189,7 +189,7 @@ class EventBookingsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.events.bookings.index', ['event' => $event]),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.event_booking'), 'identifier' => $eventBooking->name])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.event_booking'), 'identifier' => strip_tags($eventBooking->name)])],
         ]);
     }
 }
