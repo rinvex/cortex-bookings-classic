@@ -30,7 +30,7 @@ class Service extends Bookable implements HasMedia
     protected $rules = [
         'slug' => 'required|alpha_dash|max:150',
         'name' => 'required|string|strip_tags|max:150',
-        'description' => 'nullable|string|strip_tags|max:10000',
+        'description' => 'nullable|string|max:10000',
         'is_active' => 'sometimes|boolean',
         'base_cost' => 'nullable|numeric',
         'unit_cost' => 'required|numeric',
