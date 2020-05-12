@@ -33,18 +33,18 @@ Breadcrumbs::register('adminarea.services.create', function (BreadcrumbsGenerato
 
 Breadcrumbs::register('adminarea.services.edit', function (BreadcrumbsGenerator $breadcrumbs, Service $service) {
     $breadcrumbs->parent('adminarea.services.index');
-    $breadcrumbs->push($service->name, route('adminarea.services.edit', ['service' => $service]));
+    $breadcrumbs->push(strip_tags($service->name), route('adminarea.services.edit', ['service' => $service]));
 });
 
 Breadcrumbs::register('adminarea.services.logs', function (BreadcrumbsGenerator $breadcrumbs, Service $service) {
     $breadcrumbs->parent('adminarea.services.index');
-    $breadcrumbs->push($service->name, route('adminarea.services.edit', ['service' => $service]));
+    $breadcrumbs->push(strip_tags($service->name), route('adminarea.services.edit', ['service' => $service]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.services.logs', ['service' => $service]));
 });
 
 Breadcrumbs::register('adminarea.services.media.index', function (BreadcrumbsGenerator $breadcrumbs, Service $service) {
     $breadcrumbs->parent('adminarea.services.index');
-    $breadcrumbs->push($service->name, route('adminarea.services.edit', ['service' => $service]));
+    $breadcrumbs->push(strip_tags($service->name), route('adminarea.services.edit', ['service' => $service]));
     $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.services.media.index', ['service' => $service]));
 });
 
@@ -71,7 +71,7 @@ Breadcrumbs::register('adminarea.services.bookings.create', function (Breadcrumb
 
 Breadcrumbs::register('adminarea.services.bookings.edit', function (BreadcrumbsGenerator $breadcrumbs, Service $service, ServiceBooking $serviceBooking) {
     $breadcrumbs->parent('adminarea.services.edit');
-    $breadcrumbs->push($service->name, route('adminarea.services.bookings.edit', ['service' => $service]));
+    $breadcrumbs->push(strip_tags($service->name), route('adminarea.services.bookings.edit', ['service' => $service]));
 });
 
 Breadcrumbs::register('adminarea.events.index', function (BreadcrumbsGenerator $breadcrumbs) {
@@ -97,18 +97,18 @@ Breadcrumbs::register('adminarea.events.create', function (BreadcrumbsGenerator 
 
 Breadcrumbs::register('adminarea.events.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($event->name, route('adminarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push(strip_tags($event->name), route('adminarea.events.edit', ['event' => $event]));
 });
 
 Breadcrumbs::register('adminarea.events.logs', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($event->name, route('adminarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push(strip_tags($event->name), route('adminarea.events.edit', ['event' => $event]));
     $breadcrumbs->push(trans('cortex/bookings::common.logs'), route('adminarea.events.logs', ['event' => $event]));
 });
 
 Breadcrumbs::register('adminarea.events.media.index', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
     $breadcrumbs->parent('adminarea.events.index');
-    $breadcrumbs->push($event->name, route('adminarea.events.edit', ['event' => $event]));
+    $breadcrumbs->push(strip_tags($event->name), route('adminarea.events.edit', ['event' => $event]));
     $breadcrumbs->push(trans('cortex/bookings::common.media'), route('adminarea.events.media.index', ['event' => $event]));
 });
 
@@ -124,7 +124,7 @@ Breadcrumbs::register('adminarea.events.tickets.create', function (BreadcrumbsGe
 
 Breadcrumbs::register('adminarea.events.tickets.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event, EventTicket $eventTicket) {
     $breadcrumbs->parent('adminarea.events.tickets.index', $event);
-    $breadcrumbs->push($eventTicket->name, route('adminarea.events.tickets.edit', ['event' => $event, 'ticket' => $eventTicket]));
+    $breadcrumbs->push(strip_tags($eventTicket->name), route('adminarea.events.tickets.edit', ['event' => $event, 'ticket' => $eventTicket]));
 });
 
 Breadcrumbs::register('adminarea.events.bookings.index', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
@@ -139,7 +139,7 @@ Breadcrumbs::register('adminarea.events.bookings.create', function (BreadcrumbsG
 
 Breadcrumbs::register('adminarea.events.bookings.edit', function (BreadcrumbsGenerator $breadcrumbs, Event $event, EventBooking $eventBooking) {
     $breadcrumbs->parent('adminarea.events.bookings.index', $event);
-    $breadcrumbs->push($eventBooking->name, route('adminarea.events.bookings.edit', ['event' => $event, 'booking' => $eventBooking]));
+    $breadcrumbs->push(strip_tags($eventBooking->name), route('adminarea.events.bookings.edit', ['event' => $event, 'booking' => $eventBooking]));
 });
 
 Breadcrumbs::register('adminarea.events.bookings.import', function (BreadcrumbsGenerator $breadcrumbs, Event $event) {
