@@ -12,6 +12,8 @@ use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Cortex\Foundation\Events\CrudPerformed;
+use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 class Service extends Bookable implements HasMedia
 {
@@ -21,6 +23,19 @@ class Service extends Bookable implements HasMedia
     use HashidsTrait;
     use LogsActivity;
     use InteractsWithMedia;
+    use FiresCustomModelEvent;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => CrudPerformed::class,
+        'deleted' => CrudPerformed::class,
+        'restored' => CrudPerformed::class,
+        'updated' => CrudPerformed::class,
+    ];
 
     /**
      * The default rules that the model will validate against.

@@ -8,6 +8,8 @@ use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\TicketableTicket;
+use Cortex\Foundation\Events\CrudPerformed;
+use Cortex\Foundation\Traits\FiresCustomModelEvent;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class EventTicket extends TicketableTicket
@@ -15,6 +17,19 @@ class EventTicket extends TicketableTicket
     use Auditable;
     use HashidsTrait;
     use LogsActivity;
+    use FiresCustomModelEvent;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => CrudPerformed::class,
+        'deleted' => CrudPerformed::class,
+        'restored' => CrudPerformed::class,
+        'updated' => CrudPerformed::class,
+    ];
 
     /**
      * Indicates whether to log only dirty attributes or all.
