@@ -6,9 +6,9 @@ namespace Cortex\Bookings\Models;
 
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Foundation\Events\CrudPerformed;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\TicketableTicket;
-use Cortex\Foundation\Events\CrudPerformed;
 use Cortex\Foundation\Traits\FiresCustomModelEvent;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
