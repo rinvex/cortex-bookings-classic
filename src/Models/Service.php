@@ -10,9 +10,9 @@ use Rinvex\Bookings\Models\Bookable;
 use Rinvex\Tenants\Traits\Tenantable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Foundation\Events\CrudPerformed;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Cortex\Foundation\Events\CrudPerformed;
 use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 class Service extends Bookable implements HasMedia

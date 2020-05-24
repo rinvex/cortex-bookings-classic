@@ -6,9 +6,9 @@ namespace Cortex\Bookings\Models;
 
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Foundation\Events\CrudPerformed;
 use Rinvex\Bookings\Models\BookableBooking;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Cortex\Foundation\Events\CrudPerformed;
 use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 class ServiceBooking extends BookableBooking
