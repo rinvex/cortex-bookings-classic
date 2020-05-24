@@ -51,7 +51,7 @@ class ServiceMediaController extends AuthorizedController
         return $mediaDataTable->with([
             'resource' => $service,
             'tabs' => 'adminarea.services.tabs',
-            'id' => "adminarea-services-{$service->getRouteKey()}-media-table",
+            'id' => "adminarea-services-{$service->getRouteKey()}-media",
             'url' => route('adminarea.services.media.store', ['service' => $service]),
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }

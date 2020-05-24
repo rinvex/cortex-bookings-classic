@@ -53,7 +53,7 @@ class ServiceBookingsController extends AuthorizedController
         return $servicesDataTable->with([
             'resource' => $service,
             'tabs' => 'adminarea.services.tabs',
-            'id' => "adminarea-services-{$service->getRouteKey()}-bookings-table",
+            'id' => "adminarea-services-{$service->getRouteKey()}-bookings",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
@@ -70,7 +70,7 @@ class ServiceBookingsController extends AuthorizedController
         return $logsDataTable->with([
             'resource' => $service,
             'tabs' => 'adminarea.services.tabs',
-            'id' => "adminarea-services-{$service->getRouteKey()}-logs-table",
+            'id' => "adminarea-services-{$service->getRouteKey()}-logs",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
@@ -88,7 +88,7 @@ class ServiceBookingsController extends AuthorizedController
             'resource' => $service,
             'tabs' => 'adminarea.services.tabs',
             'url' => route('adminarea.services.stash'),
-            'id' => "adminarea-services-{$service->getRouteKey()}-import-table",
+            'id' => "adminarea-services-{$service->getRouteKey()}-import",
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
@@ -150,7 +150,7 @@ class ServiceBookingsController extends AuthorizedController
         return $importLogsDatatable->with([
             'resource' => trans('cortex/bookings::common.service'),
             'tabs' => 'adminarea.services.tabs',
-            'id' => 'adminarea-services-import-logs-table',
+            'id' => 'adminarea-services-import-logs',
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 

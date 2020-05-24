@@ -36,7 +36,7 @@ class ServicesController extends AuthorizedController
     public function index(ServicesDataTable $servicesDataTable)
     {
         return $servicesDataTable->with([
-            'id' => 'adminarea-services-index-table',
+            'id' => 'adminarea-services-index',
         ])->render('cortex/foundation::adminarea.pages.datatable-index');
     }
 
@@ -53,7 +53,7 @@ class ServicesController extends AuthorizedController
         return $logsDataTable->with([
             'resource' => $service,
             'tabs' => 'adminarea.services.tabs',
-            'id' => "adminarea-services-{$service->getRouteKey()}-logs-table",
+            'id' => "adminarea-services-{$service->getRouteKey()}-logs",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
@@ -71,7 +71,7 @@ class ServicesController extends AuthorizedController
             'resource' => $service,
             'tabs' => 'adminarea.services.tabs',
             'url' => route('adminarea.services.stash'),
-            'id' => "adminarea-services-{$service->getRouteKey()}-import-table",
+            'id' => "adminarea-services-{$service->getRouteKey()}-import",
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 
@@ -133,7 +133,7 @@ class ServicesController extends AuthorizedController
         return $importLogsDatatable->with([
             'resource' => trans('cortex/bookings::common.service'),
             'tabs' => 'adminarea.services.tabs',
-            'id' => 'adminarea-services-import-logs-table',
+            'id' => 'adminarea-services-import-logs',
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
