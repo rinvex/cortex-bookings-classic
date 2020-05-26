@@ -25,7 +25,6 @@ class EventBookingTransformer extends TransformerAbstract
     {
         return $this->escape([
             'id' => (string) $eventBooking->getRouteKey(),
-            'DT_RowId' => 'row_'.$eventBooking->getRouteKey(),
             'event_id' => (string) $eventBooking->bookable->getRouteKey(),
             'name' => (string) $eventBooking->name,
             'is_active' => (bool) $eventBooking->is_active,

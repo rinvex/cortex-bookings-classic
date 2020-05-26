@@ -25,7 +25,6 @@ class ServiceBookingTransformer extends TransformerAbstract
     {
         return $this->escape([
             'id' => (string) $serviceBooking->getRouteKey(),
-            'DT_RowId' => 'row_'.$serviceBooking->getRouteKey(),
             'customer' => (object) $serviceBooking->customer,
             'price' => (float) $serviceBooking->price,
             'quantity' => (float) $serviceBooking->quantity,
