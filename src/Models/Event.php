@@ -10,10 +10,13 @@ use Rinvex\Tenants\Traits\Tenantable;
 use Rinvex\Bookings\Models\Ticketable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
-use Cortex\Foundation\Events\CrudPerformed;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Cortex\Foundation\Traits\FiresCustomModelEvent;
+use Cortex\Foundation\Events\ModelDeleted;
+use Cortex\Foundation\Events\ModelCreated;
+use Cortex\Foundation\Events\ModelUpdated;
+use Cortex\Foundation\Events\ModelRestored;
 
 class Event extends Ticketable implements HasMedia
 {
@@ -31,10 +34,10 @@ class Event extends Ticketable implements HasMedia
      * @var array
      */
     protected $dispatchesEvents = [
-        'created' => CrudPerformed::class,
-        'deleted' => CrudPerformed::class,
-        'restored' => CrudPerformed::class,
-        'updated' => CrudPerformed::class,
+        'created' => ModelCreated::class,
+        'deleted' => ModelDeleted::class,
+        'restored' => ModelRestored::class,
+        'updated' => ModelUpdated::class,
     ];
 
     /**
