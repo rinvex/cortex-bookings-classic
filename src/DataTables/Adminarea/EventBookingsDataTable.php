@@ -24,6 +24,8 @@ class EventBookingsDataTable extends AbstractDataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @TODO: Apply row selection and bulk actions, check parent::query() for reference.
+     *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
     public function query()
