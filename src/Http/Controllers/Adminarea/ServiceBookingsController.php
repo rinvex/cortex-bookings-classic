@@ -268,7 +268,7 @@ class ServiceBookingsController extends AuthorizedController
 
         return intend([
             'url' => route('adminarea.services.bookings.index'),
-            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.service_booking'), 'identifier' => strip_tags($service->name.':'.$serviceBooking->id)])],
+            'with' => ['warning' => trans('cortex/foundation::messages.resource_deleted', ['resource' => trans('cortex/bookings::common.service_booking'), 'identifier' => $service->getRouteKey().':'.$serviceBooking->getRouteKey()])],
         ]);
 
         return $serviceBooking->getKey();
