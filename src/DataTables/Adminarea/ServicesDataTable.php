@@ -40,6 +40,7 @@ class ServicesDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id})+"\">"+data+"</a>"';
 
         return [
+            'id' => ['checkboxes' => '{"selectRow": true}', 'exportable' => false, 'printable' => false],
             'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
             'base_cost' => ['title' => trans('cortex/bookings::common.base_cost')],
             'unit_cost' => ['title' => trans('cortex/bookings::common.unit_cost')],

@@ -46,6 +46,7 @@ class EventTicketsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.events.tickets.edit\', {event: full.event_id, ticket: full.id})+"\">"+data+"</a>"';
 
         return [
+            'id' => ['checkboxes' => '{"selectRow": true}', 'exportable' => false, 'printable' => false],
             'name' => ['title' => trans('cortex/bookings::common.name'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
             'price' => ['title' => trans('cortex/bookings::common.price')],
             'currency' => ['title' => trans('cortex/bookings::common.currency')],
