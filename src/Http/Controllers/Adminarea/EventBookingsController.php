@@ -34,7 +34,7 @@ class EventBookingsController extends AuthorizedController
         return $eventsDataTable->with([
             'resource' => $event,
             'tabs' => 'adminarea.events.tabs',
-            'id' => "adminarea-events-{$event->getRouteKey()}-bookings-table",
+            'id' => "adminarea-events-{$event->getRouteKey()}-bookings",
         ])->render('cortex/foundation::adminarea.pages.datatable-tab');
     }
 
@@ -54,7 +54,7 @@ class EventBookingsController extends AuthorizedController
             'resource' => $contact,
             'tabs' => 'adminarea.contacts.tabs',
             'url' => route('adminarea.contacts.stash'),
-            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import-table",
+            'id' => "adminarea-contacts-{$contact->getRouteKey()}-import",
         ])->render('cortex/foundation::adminarea.pages.datatable-dropzone');
     }
 

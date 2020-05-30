@@ -24,6 +24,8 @@ class EventBookingsDataTable extends AbstractDataTable
     /**
      * Get the query object to be processed by dataTables.
      *
+     * @TODO: Apply row selection and bulk actions, check parent::query() for reference.
+     *
      * @return \Illuminate\Database\Eloquent\Builder|\Illuminate\Database\Query\Builder|\Illuminate\Support\Collection
      */
     public function query()
@@ -71,6 +73,7 @@ class EventBookingsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.contacts.edit\', {contact: full.id})+"\">"+data+"</a>"';
 
         return [
+            'id' => ['checkboxes' => '{"selectRow": true}', 'exportable' => false, 'printable' => false],
             'given_name' => ['title' => trans('cortex/contacts::common.given_name'), 'render' => $link, 'responsivePriority' => 0],
             'family_name' => ['title' => trans('cortex/contacts::common.family_name')],
             'email' => ['title' => trans('cortex/contacts::common.email')],

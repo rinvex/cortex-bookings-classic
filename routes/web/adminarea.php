@@ -10,7 +10,7 @@ Route::domain(domain())->group(function () {
 
         // Services Routes
              Route::name('services.')->prefix('services')->group(function () {
-                 Route::get('/')->name('index')->uses('ServicesController@index');
+                 Route::match(['get', 'post'], '/')->name('index')->uses('ServicesController@index');
                  Route::get('import')->name('import')->uses('ServicesController@import');
                  Route::post('import')->name('stash')->uses('ServicesController@stash');
                  Route::post('hoard')->name('hoard')->uses('ServicesController@hoard');
@@ -31,7 +31,7 @@ Route::domain(domain())->group(function () {
 
                  // Bookings Routes
                  Route::name('bookings.')->prefix('{service}/bookings')->group(function () {
-                     Route::get('/')->name('index')->uses('ServiceBookingsController@index');
+                     Route::match(['get', 'post'], '/')->name('index')->uses('ServiceBookingsController@index');
                      Route::get('import')->name('import')->uses('ServiceBookingsController@import');
                      Route::post('import')->name('stash')->uses('ServiceBookingsController@stash');
                      Route::post('hoard')->name('hoard')->uses('ServiceBookingsController@hoard');
@@ -47,7 +47,7 @@ Route::domain(domain())->group(function () {
 
              // Events Routes
              Route::name('events.')->prefix('events')->group(function () {
-                 Route::get('/')->name('index')->uses('EventsController@index');
+                 Route::match(['get', 'post'], '/')->name('index')->uses('EventsController@index');
                  Route::get('import')->name('import')->uses('EventsController@import');
                  Route::post('import')->name('stash')->uses('EventsController@stash');
                  Route::post('hoard')->name('hoard')->uses('EventsController@hoard');
@@ -68,7 +68,7 @@ Route::domain(domain())->group(function () {
 
                  // Tickets Routes
                  Route::name('tickets.')->prefix('{event}/tickets')->group(function () {
-                     Route::get('/')->name('index')->uses('EventTicketsController@index');
+                     Route::match(['get', 'post'], '/')->name('index')->uses('EventTicketsController@index');
                      Route::get('create')->name('create')->uses('EventTicketsController@form');
                      Route::post('create')->name('store')->uses('EventTicketsController@store');
                      Route::get('{event_ticket}')->name('show')->uses('EventTicketsController@show');
@@ -79,7 +79,7 @@ Route::domain(domain())->group(function () {
 
                  // Bookings Routes
                  Route::name('bookings.')->prefix('{event}/bookings')->group(function () {
-                     Route::get('/')->name('index')->uses('EventBookingsController@index');
+                     Route::match(['get', 'post'], '/')->name('index')->uses('EventBookingsController@index');
                      Route::get('import')->name('import')->uses('EventBookingsController@import');
                      Route::post('import')->name('stash')->uses('EventBookingsController@stash');
                      Route::post('hoard')->name('hoard')->uses('EventBookingsController@hoard');

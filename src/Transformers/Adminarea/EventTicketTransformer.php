@@ -25,7 +25,6 @@ class EventTicketTransformer extends TransformerAbstract
     {
         return $this->escape([
             'id' => (string) $eventTicket->getRouteKey(),
-            'DT_RowId' => 'row_'.$eventTicket->getRouteKey(),
             'event_id' => (string) $eventTicket->ticketable->getRouteKey(),
             'name' => (string) $eventTicket->name,
             'is_active' => (bool) $eventTicket->is_active,

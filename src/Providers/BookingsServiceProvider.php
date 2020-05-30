@@ -121,7 +121,6 @@ class BookingsServiceProvider extends ServiceProvider
         ]);
 
         // Load resources
-        $this->loadRoutesFrom(__DIR__.'/../../routes/web/adminarea.php');
         $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/bookings');
         $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/bookings');
         ! $this->autoloadMigrations('cortex/bookings') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');

@@ -49,6 +49,7 @@ class ServiceBookingsDataTable extends AbstractDataTable
             : '"<a href=\""+routes.route(\'adminarea.members.edit\', {member: full.customer.id})+"\">"+full.customer.username+"</a>"';
 
         return [
+            'id' => ['checkboxes' => '{"selectRow": true}', 'exportable' => false, 'printable' => false],
             'customer' => ['title' => trans('cortex/bookings::common.customer'), 'render' => $link.'+(full.is_active ? " <i class=\"text-success fa fa-check\"></i>" : " <i class=\"text-danger fa fa-close\"></i>")', 'responsivePriority' => 0],
             'price' => ['title' => trans('cortex/bookings::common.price')],
             'quantity' => ['title' => trans('cortex/bookings::common.quantity')],

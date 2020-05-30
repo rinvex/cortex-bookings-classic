@@ -25,7 +25,6 @@ class ServiceTransformer extends TransformerAbstract
     {
         return $this->escape([
             'id' => (string) $service->getRouteKey(),
-            'DT_RowId' => 'row_'.$service->getRouteKey(),
             'name' => (string) $service->name,
             'base_cost' => (float) $service->base_cost,
             'unit_cost' => (float) $service->unit_cost,

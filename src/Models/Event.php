@@ -10,8 +10,13 @@ use Rinvex\Tenants\Traits\Tenantable;
 use Rinvex\Bookings\Models\Ticketable;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Foundation\Events\ModelCreated;
+use Cortex\Foundation\Events\ModelDeleted;
+use Cortex\Foundation\Events\ModelUpdated;
+use Cortex\Foundation\Events\ModelRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 class Event extends Ticketable implements HasMedia
 {
@@ -21,6 +26,19 @@ class Event extends Ticketable implements HasMedia
     use HashidsTrait;
     use LogsActivity;
     use InteractsWithMedia;
+    use FiresCustomModelEvent;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ModelCreated::class,
+        'deleted' => ModelDeleted::class,
+        'restored' => ModelRestored::class,
+        'updated' => ModelUpdated::class,
+    ];
 
     /**
      * {@inheritdoc}
@@ -59,13 +77,13 @@ class Event extends Ticketable implements HasMedia
      */
     protected $rules = [
         'slug' => 'required|alpha_dash|max:150',
-        'name' => 'required|string|max:150',
+        'name' => 'required|string|strip_tags|max:150',
         'description' => 'nullable|string|max:10000',
         'is_public' => 'sometimes|boolean',
-        'starts_at' => 'required|string',
-        'ends_at' => 'required|string',
-        'timezone' => 'required|string|timezone',
-        'location' => 'nullable|string',
+        'starts_at' => 'required|date',
+        'ends_at' => 'required|date',
+        'timezone' => 'required|string|max:150|timezone',
+        'location' => 'nullable|string|strip_tags|max:1500',
         'tags' => 'nullable|array',
     ];
 

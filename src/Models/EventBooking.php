@@ -6,8 +6,13 @@ namespace Cortex\Bookings\Models;
 
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
+use Cortex\Foundation\Events\ModelCreated;
+use Cortex\Foundation\Events\ModelDeleted;
+use Cortex\Foundation\Events\ModelUpdated;
+use Cortex\Foundation\Events\ModelRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
 use Rinvex\Bookings\Models\TicketableBooking;
+use Cortex\Foundation\Traits\FiresCustomModelEvent;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class EventBooking extends TicketableBooking
@@ -15,6 +20,19 @@ class EventBooking extends TicketableBooking
     use Auditable;
     use HashidsTrait;
     use LogsActivity;
+    use FiresCustomModelEvent;
+
+    /**
+     * The event map for the model.
+     *
+     * @var array
+     */
+    protected $dispatchesEvents = [
+        'created' => ModelCreated::class,
+        'deleted' => ModelDeleted::class,
+        'restored' => ModelRestored::class,
+        'updated' => ModelUpdated::class,
+    ];
 
     /**
      * Indicates whether to log only dirty attributes or all.
@@ -48,7 +66,7 @@ class EventBooking extends TicketableBooking
      */
     public function ticket(): BelongsTo
     {
-        return $this->belongsTo(config('cortex.bookings.models.event_ticket'), 'ticket_id', 'id');
+        return $this->belongsTo(config('cortex.bookings.models.event_ticket'), 'ticket_id', 'id', 'ticket');
     }
 
     /**
@@ -58,6 +76,6 @@ class EventBooking extends TicketableBooking
      */
     public function customer(): BelongsTo
     {
-        return $this->belongsTo(config('cortex.contacts.models.contact'), 'customer_id', 'id');
+        return $this->belongsTo(config('cortex.contacts.models.contact'), 'customer_id', 'id', 'customer');
     }
 }
