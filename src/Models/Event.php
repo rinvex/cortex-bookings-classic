@@ -41,53 +41,6 @@ class Event extends Ticketable implements HasMedia
     ];
 
     /**
-     * {@inheritdoc}
-     */
-    protected $fillable = [
-        'slug',
-        'name',
-        'description',
-        'is_public',
-        'starts_at',
-        'ends_at',
-        'timezone',
-        'location',
-        'tags',
-    ];
-
-    /**
-     * {@inheritdoc}
-     */
-    protected $casts = [
-        'slug' => 'string',
-        'name' => 'string',
-        'description' => 'string',
-        'is_public' => 'boolean',
-        'starts_at' => 'datetime',
-        'ends_at' => 'datetime',
-        'timezone' => 'string',
-        'location' => 'string',
-        'deleted_at' => 'datetime',
-    ];
-
-    /**
-     * The default rules that the model will validate against.
-     *
-     * @var array
-     */
-    protected $rules = [
-        'slug' => 'required|alpha_dash|max:150',
-        'name' => 'required|string|strip_tags|max:150',
-        'description' => 'nullable|string|max:10000',
-        'is_public' => 'sometimes|boolean',
-        'starts_at' => 'required|date',
-        'ends_at' => 'required|date',
-        'timezone' => 'required|string|max:150|timezone',
-        'location' => 'nullable|string|strip_tags|max:1500',
-        'tags' => 'nullable|array',
-    ];
-
-    /**
      * Indicates whether to log only dirty attributes or all.
      *
      * @var bool
@@ -120,6 +73,12 @@ class Event extends Ticketable implements HasMedia
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+
+        $this->mergeFillable(['tags']);
+
+        $this->mergeCasts(['tags' => 'array']);
+
+        $this->mergeRules(['tags' => 'nullable|array']);
 
         $this->setTable(config('cortex.bookings.tables.events'));
     }
