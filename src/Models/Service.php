@@ -41,30 +41,6 @@ class Service extends Bookable implements HasMedia
     ];
 
     /**
-     * The default rules that the model will validate against.
-     *
-     * @var array
-     */
-    protected $rules = [
-        'slug' => 'required|alpha_dash|max:150',
-        'name' => 'required|string|strip_tags|max:150',
-        'description' => 'nullable|string|max:10000',
-        'is_active' => 'sometimes|boolean',
-        'base_cost' => 'nullable|numeric',
-        'unit_cost' => 'required|numeric',
-        'currency' => 'required|string|size:3',
-        'unit' => 'required|in:minute,hour,day,month',
-        'maximum_units' => 'nullable|integer|max:10000',
-        'minimum_units' => 'nullable|integer|max:10000',
-        'is_cancelable' => 'nullable|boolean',
-        'is_recurring' => 'nullable|boolean',
-        'sort_order' => 'nullable|integer|max:10000',
-        'capacity' => 'nullable|integer|max:10000',
-        'style' => 'nullable|string|strip_tags|max:150',
-        'tags' => 'nullable|array',
-    ];
-
-    /**
      * Indicates whether to log only dirty attributes or all.
      *
      * @var bool
@@ -97,6 +73,12 @@ class Service extends Bookable implements HasMedia
     public function __construct(array $attributes = [])
     {
         parent::__construct($attributes);
+
+        $this->mergeFillable(['tags']);
+
+        $this->mergeCasts(['tags' => 'array']);
+
+        $this->mergeRules(['tags' => 'nullable|array']);
 
         $this->setTable(config('cortex.bookings.tables.services'));
     }

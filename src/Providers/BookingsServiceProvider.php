@@ -50,8 +50,6 @@ class BookingsServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        $this->mergeConfigFrom(realpath(__DIR__.'/../../config/config.php'), 'cortex.bookings');
-
         // Bind eloquent models to IoC container
         $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
         $serviceModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
@@ -119,21 +117,5 @@ class BookingsServiceProvider extends ServiceProvider
             'event_ticket' => config('cortex.bookings.models.event_ticket'),
             'event' => config('cortex.bookings.models.event'),
         ]);
-
-        // Load resources
-        $this->loadViewsFrom(__DIR__.'/../../resources/views', 'cortex/bookings');
-        $this->loadTranslationsFrom(__DIR__.'/../../resources/lang', 'cortex/bookings');
-        ! $this->autoloadMigrations('cortex/bookings') || $this->loadMigrationsFrom(__DIR__.'/../../database/migrations');
-
-        $this->app->runningInConsole() || $dispatcher->listen('accessarea.ready', function ($accessarea) {
-            ! file_exists($menus = __DIR__."/../../routes/menus/{$accessarea}.php") || require $menus;
-            ! file_exists($breadcrumbs = __DIR__."/../../routes/breadcrumbs/{$accessarea}.php") || require $breadcrumbs;
-        });
-
-        // Publish resources
-        $this->publishesLang('cortex/bookings', true);
-        $this->publishesViews('cortex/bookings', true);
-        $this->publishesConfig('cortex/bookings', true);
-        $this->publishesMigrations('cortex/bookings', true);
     }
 }
