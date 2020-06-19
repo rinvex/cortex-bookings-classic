@@ -76,8 +76,6 @@ class Event extends Ticketable implements HasMedia
 
         $this->mergeFillable(['tags']);
 
-        $this->mergeCasts(['tags' => 'array']);
-
         $this->mergeRules(['tags' => 'nullable|array']);
 
         $this->setTable(config('cortex.bookings.tables.events'));
