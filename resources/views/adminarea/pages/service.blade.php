@@ -30,7 +30,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($service->exists && $currentUser->can('delete', $service))
+                @if($service->exists && app('request.user')->can('delete', $service))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.services.destroy', ['service' => $service]) }}"

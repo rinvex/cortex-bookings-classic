@@ -24,7 +24,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($event->exists && $currentUser->can('delete', $event))
+                @if($event->exists && app('request.user')->can('delete', $event))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.events.destroy', ['event' => $event]) }}"
