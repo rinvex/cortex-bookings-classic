@@ -15,6 +15,7 @@ return [
     'description' => 'Description',
     'unit' => 'Unit',
     'currency' => 'Currency',
+    'select_currency' => 'Select Currency',
     'created_at' => 'Created At',
     'updated_at' => 'Updated At',
     'unit_minute' => 'Minute',

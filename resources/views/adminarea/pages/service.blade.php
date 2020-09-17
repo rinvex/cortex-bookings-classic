@@ -167,7 +167,8 @@
                                                     {{-- Currency --}}
                                                     <div class="form-group{{ $errors->has('currency') ? ' has-error' : '' }}">
                                                         {{ Form::label('currency', trans('cortex/bookings::common.currency'), ['class' => 'control-label']) }}
-                                                        {{ Form::text('currency', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.currency'), 'required' => 'required']) }}
+                                                        {{ Form::hidden('currency', '', ['class' => 'skip-validation', 'id' => 'currency_hidden']) }}
+                                                        {{ Form::select('currency', currencies(), null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.select_currency'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                                         @if ($errors->has('currency'))
                                                             <span class="help-block">{{ $errors->first('currency') }}</span>
