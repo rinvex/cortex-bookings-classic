@@ -29,6 +29,19 @@ class ServicesDataTable extends AbstractDataTable
     ];
 
     /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
+    {
+        return datatables($this->query())
+            ->setTransformer(app($this->transformer))
+            ->orderColumn('name', 'name->"$.'.app()->getLocale().'" $1')
+            ->make(true);
+    }
+
+    /**
      * Get columns.
      *
      * @return array
