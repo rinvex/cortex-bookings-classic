@@ -31,7 +31,7 @@ class EventTicketsDataTable extends AbstractDataTable
     {
         $query = app($this->model)->query()->with(['ticketable']);
 
-        return $this->applyScopes($query);
+        return $this->scope()->applyScopes($query);
     }
 
     /**
