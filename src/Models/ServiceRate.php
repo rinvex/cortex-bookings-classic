@@ -7,19 +7,13 @@ namespace Cortex\Bookings\Models;
 use Cortex\Foundation\Traits\Auditable;
 use Rinvex\Support\Traits\HashidsTrait;
 use Rinvex\Bookings\Models\BookableRate;
-use Cortex\Foundation\Events\ModelCreated;
-use Cortex\Foundation\Events\ModelDeleted;
-use Cortex\Foundation\Events\ModelUpdated;
-use Cortex\Foundation\Events\ModelRestored;
 use Spatie\Activitylog\Traits\LogsActivity;
-use Cortex\Foundation\Traits\FiresCustomModelEvent;
 
 class ServiceRate extends BookableRate
 {
     use Auditable;
     use HashidsTrait;
     use LogsActivity;
-    use FiresCustomModelEvent;
 
     /**
      * The event map for the model.
