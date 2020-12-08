@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest::class)->selector("#adminarea-events-tickets-create-form, #adminarea-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest::class)->selector("#adminarea-cortex-bookings-events-tickets-create-form, #adminarea-cortex-bookings-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 @endpush
 
 {{-- Main Content --}}
@@ -42,9 +42,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($eventTicket->exists)
-                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.update', ['event' => $event, 'ticket' => $eventTicket]), 'method' => 'put', 'id' => "adminarea-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form"]) }}
+                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.update', ['event' => $event, 'ticket' => $eventTicket]), 'method' => 'put', 'id' => "adminarea-cortex-bookings-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.store', ['event' => $event]), 'id' => 'adminarea-events-tickets-create-form']) }}
+                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.store', ['event' => $event]), 'id' => 'adminarea-cortex-bookings-events-tickets-create-form']) }}
                         @endif
 
                             <div class="row">

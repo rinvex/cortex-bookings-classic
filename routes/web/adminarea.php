@@ -9,7 +9,7 @@ Route::domain(domain())->group(function () {
          ->prefix(config('cortex.foundation.route.locale_prefix') ? '{locale}/'.config('cortex.foundation.route.prefix.adminarea') : config('cortex.foundation.route.prefix.adminarea'))->group(function () {
 
         // Services Routes
-             Route::name('services.')->prefix('services')->group(function () {
+             Route::name('cortex.bookings.services.')->prefix('services')->group(function () {
                  Route::match(['get', 'post'], '/')->name('index')->uses('ServicesController@index');
                  Route::get('import')->name('import')->uses('ServicesController@import');
                  Route::post('import')->name('stash')->uses('ServicesController@stash');
@@ -30,7 +30,7 @@ Route::domain(domain())->group(function () {
                  });
 
                  // Bookings Routes
-                 Route::name('bookings.')->prefix('{service}/bookings')->group(function () {
+                 Route::name('cortex.bookings.bookings.')->prefix('{service}/bookings')->group(function () {
                      Route::match(['get', 'post'], '/')->name('index')->uses('ServiceBookingsController@index');
                      Route::get('import')->name('import')->uses('ServiceBookingsController@import');
                      Route::post('import')->name('stash')->uses('ServiceBookingsController@stash');
@@ -46,7 +46,7 @@ Route::domain(domain())->group(function () {
              });
 
              // Events Routes
-             Route::name('events.')->prefix('events')->group(function () {
+             Route::name('cortex.bookings.events.')->prefix('events')->group(function () {
                  Route::match(['get', 'post'], '/')->name('index')->uses('EventsController@index');
                  Route::get('import')->name('import')->uses('EventsController@import');
                  Route::post('import')->name('stash')->uses('EventsController@stash');
@@ -67,7 +67,7 @@ Route::domain(domain())->group(function () {
                  });
 
                  // Tickets Routes
-                 Route::name('tickets.')->prefix('{event}/tickets')->group(function () {
+                 Route::name('cortex.bookings.tickets.')->prefix('{event}/tickets')->group(function () {
                      Route::match(['get', 'post'], '/')->name('index')->uses('EventTicketsController@index');
                      Route::get('create')->name('create')->uses('EventTicketsController@create');
                      Route::post('create')->name('store')->uses('EventTicketsController@store');
@@ -78,7 +78,7 @@ Route::domain(domain())->group(function () {
                  });
 
                  // Bookings Routes
-                 Route::name('bookings.')->prefix('{event}/bookings')->group(function () {
+                 Route::name('cortex.bookings.bookings.')->prefix('{event}/bookings')->group(function () {
                      Route::match(['get', 'post'], '/')->name('index')->uses('EventBookingsController@index');
                      Route::get('import')->name('import')->uses('EventBookingsController@import');
                      Route::post('import')->name('stash')->uses('EventBookingsController@stash');

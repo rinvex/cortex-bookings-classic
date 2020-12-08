@@ -11,7 +11,7 @@
 @endpush
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest::class)->selector("#adminarea-services-create-form, #adminarea-services-{$service->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest::class)->selector("#adminarea-cortex-bookings-services-create-form, #adminarea-cortex-bookings-services-{$service->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
     @include('cortex/bookings::adminarea.partials.service-templates')
     @include('cortex/bookings::adminarea.partials.service-scripts')
 @endpush
@@ -48,9 +48,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($service->exists)
-                            {{ Form::model($service, ['url' => route('adminarea.services.update', ['service' => $service]), 'method' => 'put', 'id' => "adminarea-services-{$service->getRouteKey()}-update-form"]) }}
+                            {{ Form::model($service, ['url' => route('adminarea.services.update', ['service' => $service]), 'method' => 'put', 'id' => "adminarea-cortex-bookings-services-{$service->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($service, ['url' => route('adminarea.services.store'), 'id' => "adminarea-services-create-form"]) }}
+                            {{ Form::model($service, ['url' => route('adminarea.services.store'), 'id' => "adminarea-cortex-bookings-services-create-form"]) }}
                         @endif
 
                             <div class="box-group" id="accordion">
