@@ -10,8 +10,8 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 
 Menu::register('adminarea.sidebar', function (MenuGenerator $menu, Service $service, Event $event) {
     $menu->dropdown(function (MenuItem $dropdown) use ($service, $event) {
-        $dropdown->route(['adminarea.services.index'], trans('cortex/bookings::common.services'), null, 'fa fa-cubes')->ifCan('list', $service)->activateOnRoute('adminarea.services');
-        $dropdown->route(['adminarea.events.index'], trans('cortex/bookings::common.events'), null, 'fa fa-cubes')->ifCan('list', $event)->activateOnRoute('adminarea.events');
+        $dropdown->route(['adminarea.cortex.bookings.services.index'], trans('cortex/bookings::common.services'), null, 'fa fa-cubes')->ifCan('list', $service)->activateOnRoute('adminarea.services');
+        $dropdown->route(['adminarea.cortex.bookings.events.index'], trans('cortex/bookings::common.events'), null, 'fa fa-cubes')->ifCan('list', $event)->activateOnRoute('adminarea.events');
     }, trans('cortex/bookings::common.space'), 60, 'fa fa-code-fork');
 });
 

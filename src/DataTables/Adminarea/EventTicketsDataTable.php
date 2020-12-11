@@ -31,7 +31,20 @@ class EventTicketsDataTable extends AbstractDataTable
     {
         $query = app($this->model)->query()->with(['ticketable']);
 
-        return $this->applyScopes($query);
+        return $this->scope()->applyScopes($query);
+    }
+
+    /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
+    {
+        return datatables($this->query())
+            ->setTransformer(app($this->transformer))
+            ->orderColumn('name', 'name->"$.'.app()->getLocale().'" $1')
+            ->make(true);
     }
 
     /**
@@ -42,7 +55,7 @@ class EventTicketsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.events.tickets.edit\', {event: full.event_id, ticket: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            ? '"<a href=\""+routes.route(\'adminarea.events.tickets.edit\', {event: full.event_id, ticket: full.id, locale: \''.$this->request()->segment(1).'\'})+"\">"+data+"</a>"'
             : '"<a href=\""+routes.route(\'adminarea.events.tickets.edit\', {event: full.event_id, ticket: full.id})+"\">"+data+"</a>"';
 
         return [

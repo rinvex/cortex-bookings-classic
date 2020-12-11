@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest::class)->selector("#adminarea-events-tickets-create-form, #adminarea-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest::class)->selector("#adminarea-cortex-bookings-events-tickets-create-form, #adminarea-cortex-bookings-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 @endpush
 
 {{-- Main Content --}}
@@ -24,7 +24,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($eventTicket->exists && $currentUser->can('delete', $eventTicket))
+                @if($eventTicket->exists && app('request.user')->can('delete', $eventTicket))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.events.tickets.destroy', ['event' => $event, 'ticket' => $eventTicket]) }}"
@@ -42,9 +42,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($eventTicket->exists)
-                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.update', ['event' => $event, 'ticket' => $eventTicket]), 'method' => 'put', 'id' => "adminarea-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form"]) }}
+                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.update', ['event' => $event, 'ticket' => $eventTicket]), 'method' => 'put', 'id' => "adminarea-cortex-bookings-events-{$event->getRouteKey()}-tickets-{$eventTicket->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.store', ['event' => $event]), 'id' => 'adminarea-events-tickets-create-form']) }}
+                            {{ Form::model($eventTicket, ['url' => route('adminarea.events.tickets.store', ['event' => $event]), 'id' => 'adminarea-cortex-bookings-events-tickets-create-form']) }}
                         @endif
 
                             <div class="row">
@@ -114,7 +114,8 @@
                                     {{-- Currency --}}
                                     <div class="form-group{{ $errors->has('currency') ? ' has-error' : '' }}">
                                         {{ Form::label('currency', trans('cortex/bookings::common.currency'), ['class' => 'control-label']) }}
-                                        {{ Form::text('currency', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.currency'), 'required' => 'required']) }}
+                                        {{ Form::hidden('currency', '', ['class' => 'skip-validation', 'id' => 'currency_hidden']) }}
+                                        {{ Form::select('currency', currencies(), null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.select_currency'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('currency'))
                                             <span class="help-block">{{ $errors->first('currency') }}</span>

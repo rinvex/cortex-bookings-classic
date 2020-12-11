@@ -29,6 +29,19 @@ class ServicesDataTable extends AbstractDataTable
     ];
 
     /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
+    {
+        return datatables($this->query())
+            ->setTransformer(app($this->transformer))
+            ->orderColumn('name', 'name->"$.'.app()->getLocale().'" $1')
+            ->make(true);
+    }
+
+    /**
      * Get columns.
      *
      * @return array
@@ -36,7 +49,7 @@ class ServicesDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            ? '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id, locale: \''.$this->request()->segment(1).'\'})+"\">"+data+"</a>"'
             : '"<a href=\""+routes.route(\'adminarea.services.edit\', {service: full.id})+"\">"+data+"</a>"';
 
         return [

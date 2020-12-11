@@ -11,7 +11,7 @@
 @endpush
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest::class)->selector("#adminarea-services-create-form, #adminarea-services-{$service->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\ServiceFormRequest::class)->selector("#adminarea-cortex-bookings-services-create-form, #adminarea-cortex-bookings-services-{$service->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
     @include('cortex/bookings::adminarea.partials.service-templates')
     @include('cortex/bookings::adminarea.partials.service-scripts')
 @endpush
@@ -30,7 +30,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($service->exists && $currentUser->can('delete', $service))
+                @if($service->exists && app('request.user')->can('delete', $service))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.services.destroy', ['service' => $service]) }}"
@@ -48,9 +48,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($service->exists)
-                            {{ Form::model($service, ['url' => route('adminarea.services.update', ['service' => $service]), 'method' => 'put', 'id' => "adminarea-services-{$service->getRouteKey()}-update-form"]) }}
+                            {{ Form::model($service, ['url' => route('adminarea.services.update', ['service' => $service]), 'method' => 'put', 'id' => "adminarea-cortex-bookings-services-{$service->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($service, ['url' => route('adminarea.services.store'), 'id' => "adminarea-services-create-form"]) }}
+                            {{ Form::model($service, ['url' => route('adminarea.services.store'), 'id' => "adminarea-cortex-bookings-services-create-form"]) }}
                         @endif
 
                             <div class="box-group" id="accordion">
@@ -167,7 +167,8 @@
                                                     {{-- Currency --}}
                                                     <div class="form-group{{ $errors->has('currency') ? ' has-error' : '' }}">
                                                         {{ Form::label('currency', trans('cortex/bookings::common.currency'), ['class' => 'control-label']) }}
-                                                        {{ Form::text('currency', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.currency'), 'required' => 'required']) }}
+                                                        {{ Form::hidden('currency', '', ['class' => 'skip-validation', 'id' => 'currency_hidden']) }}
+                                                        {{ Form::select('currency', currencies(), null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.select_currency'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                                         @if ($errors->has('currency'))
                                                             <span class="help-block">{{ $errors->first('currency') }}</span>

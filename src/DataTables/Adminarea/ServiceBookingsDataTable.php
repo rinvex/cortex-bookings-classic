@@ -38,6 +38,19 @@ class ServiceBookingsDataTable extends AbstractDataTable
     ];
 
     /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
+    {
+        return datatables($this->query())
+            ->setTransformer(app($this->transformer))
+            ->orderColumn('name', 'name->"$.'.app()->getLocale().'" $1')
+            ->make(true);
+    }
+
+    /**
      * Get columns.
      *
      * @return array
@@ -45,8 +58,8 @@ class ServiceBookingsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.members.edit\', {member: full.customer.id, locale: \''.$this->request->segment(1).'\'})+"\">"+full.customer.username+"</a>"'
-            : '"<a href=\""+routes.route(\'adminarea.members.edit\', {member: full.customer.id})+"\">"+full.customer.username+"</a>"';
+            ? '"<a href=\""+routes.route(\'adminarea.cortex.auth.members.edit\', {member: full.customer.id, locale: \''.$this->request()->segment(1).'\'})+"\">"+full.customer.username+"</a>"'
+            : '"<a href=\""+routes.route(\'adminarea.cortex.auth.members.edit\', {member: full.customer.id})+"\">"+full.customer.username+"</a>"';
 
         return [
             'id' => ['checkboxes' => '{"selectRow": true}', 'exportable' => false, 'printable' => false],

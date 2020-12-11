@@ -21,6 +21,19 @@ class EventsDataTable extends AbstractDataTable
     protected $transformer = EventTransformer::class;
 
     /**
+     * Display ajax response.
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function ajax()
+    {
+        return datatables($this->query())
+            ->setTransformer(app($this->transformer))
+            ->orderColumn('name', 'name->"$.'.app()->getLocale().'" $1')
+            ->make(true);
+    }
+
+    /**
      * Get columns.
      *
      * @return array
@@ -28,7 +41,7 @@ class EventsDataTable extends AbstractDataTable
     protected function getColumns(): array
     {
         $link = config('cortex.foundation.route.locale_prefix')
-            ? '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: full.id, locale: \''.$this->request->segment(1).'\'})+"\">"+data+"</a>"'
+            ? '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: full.id, locale: \''.$this->request()->segment(1).'\'})+"\">"+data+"</a>"'
             : '"<a href=\""+routes.route(\'adminarea.events.edit\', {event: full.id})+"\">"+data+"</a>"';
 
         return [

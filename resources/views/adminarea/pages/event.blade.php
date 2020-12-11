@@ -7,7 +7,7 @@
 @endsection
 
 @push('inline-scripts')
-    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest::class)->selector("#adminarea-events-create-form, #adminarea-events-{$event->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
+    {!! JsValidator::formRequest(Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest::class)->selector("#adminarea-cortex-bookings-events-create-form, #adminarea-cortex-bookings-events-{$event->getRouteKey()}-update-form")->ignore('.skip-validation') !!}
 @endpush
 
 {{-- Main Content --}}
@@ -24,7 +24,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($event->exists && $currentUser->can('delete', $event))
+                @if($event->exists && app('request.user')->can('delete', $event))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.events.destroy', ['event' => $event]) }}"
@@ -42,9 +42,9 @@
                     <div class="tab-pane active" id="details-tab">
 
                         @if ($event->exists)
-                            {{ Form::model($event, ['url' => route('adminarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "adminarea-events-{$event->getRouteKey()}-update-form"]) }}
+                            {{ Form::model($event, ['url' => route('adminarea.events.update', ['event' => $event]), 'method' => 'put', 'id' => "adminarea-cortex-bookings-events-{$event->getRouteKey()}-update-form"]) }}
                         @else
-                            {{ Form::model($event, ['url' => route('adminarea.events.store'), 'id' => "adminarea-events-create-form"]) }}
+                            {{ Form::model($event, ['url' => route('adminarea.events.store'), 'id' => "adminarea-cortex-bookings-events-create-form"]) }}
                         @endif
 
                             <div class="row">
@@ -115,7 +115,8 @@
                                     {{-- Timezone --}}
                                     <div class="form-group{{ $errors->has('timezone') ? ' has-error' : '' }}">
                                         {{ Form::label('timezone', trans('cortex/bookings::common.timezone'), ['class' => 'control-label']) }}
-                                        {{ Form::text('timezone', null, ['class' => 'form-control', 'placeholder' => trans('cortex/bookings::common.timezone'), 'required' => 'required']) }}
+                                        {{ Form::hidden('timezone', '', ['class' => 'skip-validation', 'id' => 'timezone_hidden']) }}
+                                        {{ Form::select('timezone', timezones(), null, ['class' => 'form-control select2', 'placeholder' => trans('cortex/bookings::common.select_timezone'), 'data-allow-clear' => 'true', 'data-width' => '100%']) }}
 
                                         @if ($errors->has('timezone'))
                                             <span class="help-block">{{ $errors->first('timezone') }}</span>
