@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Console\Commands;
 
 use Illuminate\Console\Command;
+use Cortex\Bookings\Database\Seeders\CortexBookingsSeeder;
 
 class SeedCommand extends Command
 {
@@ -33,7 +34,7 @@ class SeedCommand extends Command
     {
         $this->alert($this->description);
 
-        $this->call('db:seed', ['--class' => 'CortexBookingsSeeder']);
+        $this->call('db:seed', ['--class' => CortexBookingsSeeder::class]);
 
         $this->line('');
     }
