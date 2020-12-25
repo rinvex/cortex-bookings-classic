@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\Service;
+use Diglactic\Breadcrumbs\Generator;
+use Diglactic\Breadcrumbs\Breadcrumbs;
 use Cortex\Bookings\Models\EventTicket;
 use Cortex\Bookings\Models\EventBooking;
 use Cortex\Bookings\Models\ServiceBooking;
-use Diglactic\Breadcrumbs\Breadcrumbs;
-use Diglactic\Breadcrumbs\Generator;
 
 Breadcrumbs::register('adminarea.services.index', function (Generator $breadcrumbs) {
     $breadcrumbs->push('<i class="fa fa-dashboard"></i> '.config('app.name'), route('adminarea.home'));
