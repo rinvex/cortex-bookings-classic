@@ -21,9 +21,9 @@ use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
 use Cortex\Bookings\Console\Commands\PublishCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Cortex\Bookings\Console\Commands\RollbackCommand;
 use Cortex\Bookings\Console\Commands\ActivateCommand;
 use Cortex\Bookings\Console\Commands\AutoloadCommand;
+use Cortex\Bookings\Console\Commands\RollbackCommand;
 use Cortex\Bookings\Console\Commands\DeactivateCommand;
 
 class BookingsServiceProvider extends ServiceProvider
