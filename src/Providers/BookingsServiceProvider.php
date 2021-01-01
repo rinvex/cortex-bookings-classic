@@ -16,15 +16,11 @@ use Cortex\Bookings\Models\ServiceBooking;
 use Illuminate\Contracts\Events\Dispatcher;
 use Cortex\Bookings\Models\ServiceAvailability;
 use Cortex\Bookings\Console\Commands\SeedCommand;
-use Cortex\Bookings\Console\Commands\UnloadCommand;
 use Cortex\Bookings\Console\Commands\InstallCommand;
 use Cortex\Bookings\Console\Commands\MigrateCommand;
 use Cortex\Bookings\Console\Commands\PublishCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Cortex\Bookings\Console\Commands\ActivateCommand;
-use Cortex\Bookings\Console\Commands\AutoloadCommand;
 use Cortex\Bookings\Console\Commands\RollbackCommand;
-use Cortex\Bookings\Console\Commands\DeactivateCommand;
 
 class BookingsServiceProvider extends ServiceProvider
 {
@@ -36,11 +32,6 @@ class BookingsServiceProvider extends ServiceProvider
      * @var array
      */
     protected $commands = [
-        ActivateCommand::class => 'command.cortex.bookings.activate',
-        DeactivateCommand::class => 'command.cortex.bookings.deactivate',
-        AutoloadCommand::class => 'command.cortex.bookings.autoload',
-        UnloadCommand::class => 'command.cortex.bookings.unload',
-
         SeedCommand::class => 'command.cortex.bookings.seed',
         InstallCommand::class => 'command.cortex.bookings.install',
         MigrateCommand::class => 'command.cortex.bookings.migrate',
