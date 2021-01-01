@@ -34,8 +34,5 @@ class InstallCommand extends Command
         $this->call('cortex:publish:bookings', ['--force' => $this->option('force'), '--resource' => $this->option('resource')]);
         $this->call('cortex:migrate:bookings', ['--force' => $this->option('force')]);
         $this->call('cortex:seed:bookings');
-
-        $this->call('cortex:autoload:bookings', ['--force' => $this->option('force')]);
-        $this->call('cortex:activate:bookings', ['--force' => $this->option('force')]);
     }
 }
