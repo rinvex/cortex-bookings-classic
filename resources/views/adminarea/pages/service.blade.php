@@ -30,17 +30,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($service->exists && app('request.user')->can('delete', $service))
-                    <div class="pull-right">
-                        <a href="#" data-toggle="modal" data-target="#delete-confirmation"
-                           data-modal-action="{{ route('adminarea.services.destroy', ['service' => $service]) }}"
-                           data-modal-title="{{ trans('cortex/foundation::messages.delete_confirmation_title') }}"
-                           data-modal-button="<a href='#' class='btn btn-danger' data-form='delete' data-token='{{ csrf_token() }}'><i class='fa fa-trash-o'></i> {{ trans('cortex/foundation::common.delete') }}</a>"
-                           data-modal-body="{{ trans('cortex/foundation::messages.delete_confirmation_body', ['resource' => trans('cortex/bookings::common.service'), 'identifier' => $service->getRouteKey()]) }}"
-                           title="{{ trans('cortex/foundation::common.delete') }}" class="btn btn-default" style="margin: 4px"><i class="fa fa-trash text-danger"></i>
-                        </a>
-                    </div>
-                @endif
+                @includeWhen($service->exists, 'cortex/foundation::common.partials.actions', ['name' => 'service', 'model' => $service, 'resource' => trans('cortex/services::common.service'), 'routePrefix' => 'adminarea.cortex.services.services.'])
                 {!! Menu::render('adminarea.services.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">

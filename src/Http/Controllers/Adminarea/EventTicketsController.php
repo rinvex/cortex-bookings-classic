@@ -10,6 +10,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\DataTables\Adminarea\EventTicketsDataTable;
 use Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest;
+use Illuminate\Http\Request;
 
 class EventTicketsController extends AuthorizedController
 {
@@ -42,8 +43,12 @@ class EventTicketsController extends AuthorizedController
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Event $event, EventTicket $eventTicket)
+    protected function form(Request $request, Event $event, EventTicket $eventTicket)
     {
+        if(! $eventTicket->exists && $request->has('replicate') && $replicated = $eventTicket->resolveRouteBinding($request->get('replicate'))){
+            $eventTicket = $replicated->replicate();
+        }
+
         return view('cortex/bookings::adminarea.pages.event_ticket', compact('event', 'eventTicket'));
     }
 

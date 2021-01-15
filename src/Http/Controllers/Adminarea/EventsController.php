@@ -15,6 +15,7 @@ use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Bookings\DataTables\Adminarea\EventsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest;
+use Illuminate\Http\Request;
 
 class EventsController extends AuthorizedController
 {
@@ -141,8 +142,12 @@ class EventsController extends AuthorizedController
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Event $event)
+    protected function form(Request $request, Event $event)
     {
+        if(! $event->exists && $request->has('replicate') && $replicated = $event->resolveRouteBinding($request->get('replicate'))){
+            $event = $replicated->replicate();
+        }
+
         $tags = app('rinvex.tags.tag')->pluck('name', 'id');
         $event->duration = (optional($event->starts_at)->format(config('app.date_format')) ?? date(config('app.date_format'))).' - '.(optional($event->ends_at)->format(config('app.date_format')) ?? date(config('app.date_format')));
 

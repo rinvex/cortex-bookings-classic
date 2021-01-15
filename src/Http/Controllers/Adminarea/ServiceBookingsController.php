@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceBooking;
@@ -161,8 +162,12 @@ class ServiceBookingsController extends AuthorizedController
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Service $service)
+    protected function form(Request $request, Service $service)
     {
+        if(! $service->exists && $request->has('replicate') && $replicated = $service->resolveRouteBinding($request->get('replicate'))){
+            $service = $replicated->replicate();
+        }
+
         $tags = app('rinvex.tags.tag')->pluck('name', 'id');
 
         $days = [

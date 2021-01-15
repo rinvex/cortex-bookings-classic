@@ -13,6 +13,7 @@ use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\DataTables\Adminarea\EventBookingsDataTable;
 use Cortex\Bookings\Http\Requests\Adminarea\EventBookingFormRequest;
+use Illuminate\Http\Request;
 
 class EventBookingsController extends AuthorizedController
 {
@@ -115,8 +116,12 @@ class EventBookingsController extends AuthorizedController
      *
      * @return \Illuminate\View\View
      */
-    protected function form(Event $event, EventBooking $eventBooking)
+    protected function form(Request $request, Event $event, EventBooking $eventBooking)
     {
+        if(! $eventBooking->exists && $request->has('replicate') && $replicated = $eventBooking->resolveRouteBinding($request->get('replicate'))){
+            $eventBooking = $replicated->replicate();
+        }
+
         $tickets = $event->tickets->pluck('name', 'id');
         $customers = app('rinvex.contacts.contact')->all()->pluck('full_name', 'id');
 

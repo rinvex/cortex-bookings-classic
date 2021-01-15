@@ -24,7 +24,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @if($eventTicket->exists && app('request.user')->can('delete', $eventTicket))
+                @if($eventTicket->exists && (app('request.user')->can('delete', $eventTicket) || app('request.user')->can('create', $eventTicket)))
                     <div class="pull-right">
                         <a href="#" data-toggle="modal" data-target="#delete-confirmation"
                            data-modal-action="{{ route('adminarea.events.tickets.destroy', ['event' => $event, 'ticket' => $eventTicket]) }}"
