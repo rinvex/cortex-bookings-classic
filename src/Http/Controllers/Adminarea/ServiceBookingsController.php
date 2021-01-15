@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Http\Request;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceBooking;
 use Illuminate\Foundation\Http\FormRequest;
@@ -164,7 +164,7 @@ class ServiceBookingsController extends AuthorizedController
      */
     protected function form(Request $request, Service $service)
     {
-        if(! $service->exists && $request->has('replicate') && $replicated = $service->resolveRouteBinding($request->get('replicate'))){
+        if (! $service->exists && $request->has('replicate') && $replicated = $service->resolveRouteBinding($request->get('replicate'))) {
             $service = $replicated->replicate();
         }
 
