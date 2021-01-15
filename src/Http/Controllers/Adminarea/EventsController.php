@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cortex\Bookings\Http\Controllers\Adminarea;
 
 use Exception;
+use Illuminate\Http\Request;
 use Cortex\Bookings\Models\Event;
 use Illuminate\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
@@ -15,7 +16,6 @@ use Cortex\Foundation\DataTables\ImportRecordsDataTable;
 use Cortex\Bookings\DataTables\Adminarea\EventsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\EventFormRequest;
-use Illuminate\Http\Request;
 
 class EventsController extends AuthorizedController
 {
@@ -144,7 +144,7 @@ class EventsController extends AuthorizedController
      */
     protected function form(Request $request, Event $event)
     {
-        if(! $event->exists && $request->has('replicate') && $replicated = $event->resolveRouteBinding($request->get('replicate'))){
+        if (! $event->exists && $request->has('replicate') && $replicated = $event->resolveRouteBinding($request->get('replicate'))) {
             $event = $replicated->replicate();
         }
 
