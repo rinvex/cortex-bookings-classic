@@ -51,36 +51,18 @@ class BookingsServiceProvider extends ServiceProvider
     public function register(): void
     {
         // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
-        $serviceModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
-
-        $this->app->singleton('cortex.bookings.service_availability', $serviceAvailabilityModel = $this->app['config']['cortex.bookings.models.service_availability']);
-        $serviceAvailabilityModel === ServiceAvailability::class || $this->app->alias('cortex.bookings.service_availability', ServiceAvailability::class);
-
-        $this->app->singleton('cortex.bookings.service_booking', $serviceBookingModel = $this->app['config']['cortex.bookings.models.service_booking']);
-        $serviceBookingModel === ServiceBooking::class || $this->app->alias('cortex.bookings.service_booking', ServiceBooking::class);
-
-        $this->app->singleton('cortex.bookings.service_rate', $serviceRateModel = $this->app['config']['cortex.bookings.models.service_rate']);
-        $serviceRateModel === ServiceRate::class || $this->app->alias('cortex.bookings.service_rate', ServiceRate::class);
-
-        $this->app->singleton('cortex.bookings.event', $serviceAvailabilityModel = $this->app['config']['cortex.bookings.models.event']);
-        $serviceAvailabilityModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
-
-        $this->app->singleton('cortex.bookings.event_ticket', $eventTicketModel = $this->app['config']['cortex.bookings.models.event_ticket']);
-        $eventTicketModel === EventTicket::class || $this->app->alias('cortex.bookings.event_ticket', EventTicket::class);
-
-        $this->app->singleton('cortex.bookings.event_booking', $eventBookingModel = $this->app['config']['cortex.bookings.models.event_booking']);
-        $eventBookingModel === EventBooking::class || $this->app->alias('cortex.bookings.event_booking', EventBooking::class);
+        $this->registerModels([
+            'cortex.bookings.service' => Service::class,
+            'cortex.bookings.service_availability' => ServiceAvailability::class,
+            'cortex.bookings.service_booking' => ServiceBooking::class,
+            'cortex.bookings.service_rate' => ServiceRate::class,
+            'cortex.bookings.event' => Event::class,
+            'cortex.bookings.event_ticket' => EventTicket::class,
+            'cortex.bookings.event_booking' => EventBooking::class,
+        ]);
 
         // Register console commands
         $this->registerCommands($this->commands);
-
-        // Bind eloquent models to IoC container
-        $this->app->singleton('cortex.bookings.service', $serviceModel = $this->app['config']['cortex.bookings.models.service']);
-        $serviceModel === Service::class || $this->app->alias('cortex.bookings.service', Service::class);
-
-        $this->app->singleton('cortex.bookings.event', $eventModel = $this->app['config']['cortex.bookings.models.event']);
-        $eventModel === Event::class || $this->app->alias('cortex.bookings.event', Event::class);
     }
 
     /**
