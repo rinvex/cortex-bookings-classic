@@ -22,7 +22,7 @@ class EventsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = Event::class;
+    protected $resource = 'cortex.bookings.models.event';
 
     /**
      * List all events.

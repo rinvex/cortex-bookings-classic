@@ -16,7 +16,7 @@ class EventMediaController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = Event::class;
+    protected $resource = 'cortex.bookings.models.event';
 
     /**
      * {@inheritdoc}

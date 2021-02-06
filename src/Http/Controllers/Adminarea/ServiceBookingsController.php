@@ -19,7 +19,7 @@ class ServiceBookingsController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = ServiceBooking::class;
+    protected $resource = 'cortex.bookings.models.service_booking';
 
     /**
      * {@inheritdoc}

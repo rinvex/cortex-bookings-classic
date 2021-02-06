@@ -25,7 +25,7 @@ class ServicesController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = Service::class;
+    protected $resource = 'cortex.bookings.models.service';
 
     /**
      * List all services.

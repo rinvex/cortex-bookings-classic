@@ -16,7 +16,7 @@ class ServiceMediaController extends AuthorizedController
     /**
      * {@inheritdoc}
      */
-    protected $resource = Service::class;
+    protected $resource = 'cortex.bookings.models.service';
 
     /**
      * {@inheritdoc}
