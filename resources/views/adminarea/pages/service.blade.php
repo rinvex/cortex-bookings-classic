@@ -328,7 +328,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit', 'id' => 'service-submit-button']) }}
                                     </div>
 
-                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $service])
+                                    @include('cortex/foundation::common.partials.timestamps', ['model' => $service])
 
                                 </div>
 
