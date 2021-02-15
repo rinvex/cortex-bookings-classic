@@ -45,7 +45,7 @@ class EventTicketsController extends AuthorizedController
      */
     protected function form(Request $request, Event $event, EventTicket $eventTicket)
     {
-        if (! $eventTicket->exists && $request->has('replicate') && $replicated = $eventTicket->resolveRouteBinding($request->get('replicate'))) {
+        if (! $eventTicket->exists && $request->has('replicate') && $replicated = $eventTicket->resolveRouteBinding($request->input('replicate'))) {
             $eventTicket = $replicated->replicate();
         }
 

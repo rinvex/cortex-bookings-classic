@@ -97,7 +97,7 @@ class EventsController extends AuthorizedController
      */
     public function hoard(ImportFormRequest $request)
     {
-        foreach ((array) $request->get('selected_ids') as $recordId) {
+        foreach ((array) $request->input('selected_ids') as $recordId) {
             $record = app('cortex.foundation.import_record')->find($recordId);
 
             try {
@@ -144,7 +144,7 @@ class EventsController extends AuthorizedController
      */
     protected function form(Request $request, Event $event)
     {
-        if (! $event->exists && $request->has('replicate') && $replicated = $event->resolveRouteBinding($request->get('replicate'))) {
+        if (! $event->exists && $request->has('replicate') && $replicated = $event->resolveRouteBinding($request->input('replicate'))) {
             $event = $replicated->replicate();
         }
 

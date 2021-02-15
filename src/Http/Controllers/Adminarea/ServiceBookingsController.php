@@ -117,7 +117,7 @@ class ServiceBookingsController extends AuthorizedController
      */
     public function hoard(ImportFormRequest $request)
     {
-        foreach ((array) $request->get('selected_ids') as $recordId) {
+        foreach ((array) $request->input('selected_ids') as $recordId) {
             $record = app('cortex.foundation.import_record')->find($recordId);
 
             try {
@@ -164,7 +164,7 @@ class ServiceBookingsController extends AuthorizedController
      */
     protected function form(Request $request, Service $service)
     {
-        if (! $service->exists && $request->has('replicate') && $replicated = $service->resolveRouteBinding($request->get('replicate'))) {
+        if (! $service->exists && $request->has('replicate') && $replicated = $service->resolveRouteBinding($request->input('replicate'))) {
             $service = $replicated->replicate();
         }
 
