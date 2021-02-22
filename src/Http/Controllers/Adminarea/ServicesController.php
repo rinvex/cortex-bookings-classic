@@ -9,7 +9,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Http\Request;
 use Cortex\Bookings\Models\Service;
 use Cortex\Bookings\Models\ServiceRate;
-use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Foundation\Http\FormRequest;
 use Cortex\Bookings\Models\ServiceAvailability;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
@@ -225,7 +225,7 @@ class ServicesController extends AuthorizedController
     /**
      * Process stored/updated service.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param \Cortex\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Models\Service         $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse

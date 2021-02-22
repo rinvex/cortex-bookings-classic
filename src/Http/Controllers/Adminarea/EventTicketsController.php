@@ -7,7 +7,7 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 use Illuminate\Http\Request;
 use Cortex\Bookings\Models\Event;
 use Cortex\Bookings\Models\EventTicket;
-use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Foundation\Http\FormRequest;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\DataTables\Adminarea\EventTicketsDataTable;
 use Cortex\Bookings\Http\Requests\Adminarea\EventTicketFormRequest;
@@ -82,7 +82,7 @@ class EventTicketsController extends AuthorizedController
     /**
      * Process stored/updated event.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param \Cortex\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Models\Event           $event
      * @param \Cortex\Bookings\Models\EventTicket     $eventTicket
      *

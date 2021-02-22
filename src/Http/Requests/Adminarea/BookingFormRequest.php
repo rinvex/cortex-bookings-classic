@@ -6,7 +6,7 @@ namespace Cortex\Bookings\Http\Requests\Adminarea;
 
 use Carbon\Carbon;
 use Rinvex\Support\Traits\Escaper;
-use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Foundation\Http\FormRequest;
 
 class BookingFormRequest extends FormRequest
 {

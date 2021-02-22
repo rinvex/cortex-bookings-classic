@@ -7,7 +7,7 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 use Exception;
 use Illuminate\Http\Request;
 use Cortex\Bookings\Models\Event;
-use Illuminate\Foundation\Http\FormRequest;
+use Cortex\Foundation\Http\FormRequest;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Importers\DefaultImporter;
 use Cortex\Foundation\DataTables\ImportLogsDataTable;
@@ -183,7 +183,7 @@ class EventsController extends AuthorizedController
     /**
      * Process stored/updated event.
      *
-     * @param \Illuminate\Foundation\Http\FormRequest $request
+     * @param \Cortex\Foundation\Http\FormRequest $request
      * @param \Cortex\Bookings\Models\Event           $event
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
