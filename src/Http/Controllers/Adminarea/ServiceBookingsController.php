@@ -7,8 +7,8 @@ namespace Cortex\Bookings\Http\Controllers\Adminarea;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Cortex\Bookings\Models\Service;
-use Cortex\Bookings\Models\ServiceBooking;
 use Cortex\Foundation\Http\FormRequest;
+use Cortex\Bookings\Models\ServiceBooking;
 use Cortex\Foundation\DataTables\LogsDataTable;
 use Cortex\Foundation\Http\Controllers\AuthorizedController;
 use Cortex\Bookings\Http\Requests\Adminarea\BookingFormRequest;
@@ -241,8 +241,8 @@ class ServiceBookingsController extends AuthorizedController
     /**
      * Process stored/updated booking.
      *
-     * @param \Cortex\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\ServiceBooking  $serviceBooking
+     * @param \Cortex\Foundation\Http\FormRequest    $request
+     * @param \Cortex\Bookings\Models\ServiceBooking $serviceBooking
      *
      * @return int
      */

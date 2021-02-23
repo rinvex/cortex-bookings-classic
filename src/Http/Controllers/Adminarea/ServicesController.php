@@ -226,7 +226,7 @@ class ServicesController extends AuthorizedController
      * Process stored/updated service.
      *
      * @param \Cortex\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Service         $service
+     * @param \Cortex\Bookings\Models\Service     $service
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
