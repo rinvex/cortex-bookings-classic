@@ -184,7 +184,7 @@ class EventsController extends AuthorizedController
      * Process stored/updated event.
      *
      * @param \Cortex\Foundation\Http\FormRequest $request
-     * @param \Cortex\Bookings\Models\Event           $event
+     * @param \Cortex\Bookings\Models\Event       $event
      *
      * @return \Illuminate\Http\JsonResponse|\Illuminate\Http\RedirectResponse
      */
