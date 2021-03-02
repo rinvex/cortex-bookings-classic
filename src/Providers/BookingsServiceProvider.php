@@ -15,29 +15,11 @@ use Cortex\Bookings\Models\EventBooking;
 use Cortex\Bookings\Models\ServiceBooking;
 use Illuminate\Contracts\Events\Dispatcher;
 use Cortex\Bookings\Models\ServiceAvailability;
-use Cortex\Bookings\Console\Commands\SeedCommand;
-use Cortex\Bookings\Console\Commands\InstallCommand;
-use Cortex\Bookings\Console\Commands\MigrateCommand;
-use Cortex\Bookings\Console\Commands\PublishCommand;
 use Illuminate\Database\Eloquent\Relations\Relation;
-use Cortex\Bookings\Console\Commands\RollbackCommand;
 
 class BookingsServiceProvider extends ServiceProvider
 {
     use ConsoleTools;
-
-    /**
-     * The commands to be registered.
-     *
-     * @var array
-     */
-    protected $commands = [
-        SeedCommand::class => 'command.cortex.bookings.seed',
-        InstallCommand::class => 'command.cortex.bookings.install',
-        MigrateCommand::class => 'command.cortex.bookings.migrate',
-        PublishCommand::class => 'command.cortex.bookings.publish',
-        RollbackCommand::class => 'command.cortex.bookings.rollback',
-    ];
 
     /**
      * Register any application services.
@@ -60,9 +42,6 @@ class BookingsServiceProvider extends ServiceProvider
             'cortex.bookings.event_ticket' => EventTicket::class,
             'cortex.bookings.event_booking' => EventBooking::class,
         ]);
-
-        // Register console commands
-        $this->registerCommands($this->commands);
     }
 
     /**
