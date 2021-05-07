@@ -19,8 +19,8 @@ class CreateEventsTable extends Migration
             // Columns
             $table->increments('id');
             $table->string('slug');
-            $table->{$this->jsonable()}('name');
-            $table->{$this->jsonable()}('description')->nullable();
+            $table->json('name');
+            $table->json('description')->nullable();
             $table->boolean('is_public')->default(true);
             $table->dateTime('starts_at')->nullable();
             $table->dateTime('ends_at')->nullable();
@@ -39,19 +39,5 @@ class CreateEventsTable extends Migration
     public function down(): void
     {
         Schema::dropIfExists(config('cortex.bookings.tables.events'));
-    }
-
-    /**
-     * Get jsonable column data type.
-     *
-     * @return string
-     */
-    protected function jsonable(): string
-    {
-        $driverName = DB::connection()->getPdo()->getAttribute(PDO::ATTR_DRIVER_NAME);
-        $dbVersion = DB::connection()->getPdo()->getAttribute(PDO::ATTR_SERVER_VERSION);
-        $isOldVersion = version_compare($dbVersion, '5.7.8', 'lt');
-
-        return $driverName === 'mysql' && $isOldVersion ? 'text' : 'json';
     }
 }
