@@ -66,13 +66,13 @@ class Service extends Bookable implements HasMedia
      */
     public function __construct(array $attributes = [])
     {
-        parent::__construct($attributes);
-
         $this->mergeFillable(['tags']);
 
         $this->mergeRules(['tags' => 'nullable|array']);
 
         $this->setTable(config('cortex.bookings.tables.services'));
+
+        parent::__construct($attributes);
     }
 
     /**
