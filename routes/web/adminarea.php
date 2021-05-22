@@ -20,7 +20,7 @@ Route::domain(domain())->group(function () {
                  Route::get('{service}')->name('show')->uses('ServicesController@show');
                  Route::get('{service}/edit')->name('edit')->uses('ServicesController@edit');
                  Route::put('{service}/edit')->name('update')->uses('ServicesController@update');
-                 Route::get('{service}/logs')->name('logs')->uses('ServicesController@logs');
+                 Route::match(['get', 'post'], '{service}/logs')->name('logs')->uses('ServicesController@logs');
                  Route::delete('{service}')->name('destroy')->uses('ServicesController@destroy');
 
                  Route::name('media.')->prefix('{service}/media')->group(function () {
@@ -57,7 +57,7 @@ Route::domain(domain())->group(function () {
                  Route::get('{event}')->name('show')->uses('EventsController@show');
                  Route::get('{event}/edit')->name('edit')->uses('EventsController@edit');
                  Route::put('{event}/edit')->name('update')->uses('EventsController@update');
-                 Route::get('{event}/logs')->name('logs')->uses('EventsController@logs');
+                 Route::match(['get', 'post'], '{event}/logs')->name('logs')->uses('EventsController@logs');
                  Route::delete('{event}')->name('destroy')->uses('EventsController@destroy');
 
                  Route::name('media.')->prefix('{event}/media')->group(function () {
