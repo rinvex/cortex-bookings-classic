@@ -19,7 +19,7 @@
 {{-- Main Content --}}
 @section('content')
 
-    @includeWhen($service->exists, 'cortex/foundation::common.partials.modal', ['id' => 'delete-confirmation'])
+    @includeWhen($service->exists, 'cortex/foundation::adminarea.partials.modal', ['id' => 'delete-confirmation'])
 
     <div class="content-wrapper">
         <section class="content-header">
@@ -30,7 +30,7 @@
         <section class="content">
 
             <div class="nav-tabs-custom">
-                @includeWhen($service->exists, 'cortex/foundation::common.partials.actions', ['name' => 'service', 'model' => $service, 'resource' => trans('cortex/services::common.service'), 'routePrefix' => 'adminarea.cortex.services.services.'])
+                @includeWhen($service->exists, 'cortex/foundation::adminarea.partials.actions', ['name' => 'service', 'model' => $service, 'resource' => trans('cortex/services::common.service'), 'routePrefix' => 'adminarea.cortex.services.services.'])
                 {!! Menu::render('adminarea.services.tabs', 'nav-tab') !!}
 
                 <div class="tab-content">
@@ -328,7 +328,7 @@
                                         {{ Form::button(trans('cortex/bookings::common.submit'), ['class' => 'btn btn-primary btn-flat', 'type' => 'submit', 'id' => 'service-submit-button']) }}
                                     </div>
 
-                                    @include('cortex/foundation::common.partials.timestamps', ['model' => $service])
+                                    @include('cortex/foundation::adminarea.partials.timestamps', ['model' => $service])
 
                                 </div>
 
