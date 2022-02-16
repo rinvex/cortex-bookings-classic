@@ -1,7 +1,10 @@
 # Cortex Bookings
 
-This package is NOT actively maintained! Want to jump in as a maintainer? Ping me [@omranic](https://twitter.com/omranic)
+⚠️ This package is abandoned and no longer maintained. No replacement package was suggested. ⚠️
 
+👉 If you are interested to step on as the main maintainer of this package, please [reach out to me](https://twitter.com/omranic)!
+
+---
 
 **Cortex Bookings** is a front layer of a generic resource booking system for Laravel, with the required tools to run your SAAS like services efficiently. It's simple architecture, accompanied by powerful underlying to afford solid platform for your business.
 
